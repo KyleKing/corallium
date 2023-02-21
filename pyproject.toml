@@ -1,0 +1,48 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+[tool.commitizen]
+version = "0.0.1"
+version_files = ["pyproject.toml", "corallium/__init__.py"]
+
+[tool.poetry]
+authors = ["Kyle King <dev.act.kyle@gmail.com>"]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+] # https://pypi.org/classifiers/
+description = "TBD"
+documentation = "https://corallium.kyleking.me"
+include = ["LICENSE.md"]
+keywords = []
+license = "MIT"
+maintainers = []
+name = "corallium"
+readme = "docs/README.md"
+repository = "https://github.com/kyleking/corallium"
+version = "0.0.1"
+
+[tool.poetry.dependencies]
+python = "^3.8.12"
+
+[tool.poetry.group.dev.dependencies]
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0rc0"}
+
+[tool.poetry.scripts]
+corallium = "corallium.scripts:start"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/kyleking/corallium/issues"
+"Changelog" = "https://github.com/kyleking/corallium/blob/main/docs/docs/CHANGELOG.md"
+
+[tool.pyright]
+include = ["corallium"]
+pythonVersion = "3.8"
+venv = ".venv"
+venvPath = "."
