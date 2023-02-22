@@ -3,12 +3,7 @@
 from pathlib import Path
 
 from corallium import __version__
-
-# PLANNED: Move to the shared package
-try:
-    import tomllib  # pyright: ignore[reportMissingImports]
-except ModuleNotFoundError:  # pragma: no cover
-    import tomli as tomllib  # type: ignore[no-redef]
+from corallium.tomllib import tomllib
 
 
 def test_version():

@@ -5,7 +5,7 @@
 ```sh
 git clone https://github.com/kyleking/corallium.git
 cd corallium
-poetry install --sync 
+poetry install --sync
 
 # See the available tasks
 poetry run calcipy
@@ -44,5 +44,16 @@ poetry config pypi-token.pypi ...
 ## Current Status
 
 <!-- {cts} COVERAGE -->
+| File                          |   Statements |   Missing |   Excluded | Coverage   |
+|-------------------------------|--------------|-----------|------------|------------|
+| `corallium/__init__.py`       |            7 |         1 |          0 | 85.7%      |
+| `corallium/file_helpers.py`   |          116 |        62 |          8 | 46.6%      |
+| `corallium/log.py`            |           80 |        22 |          0 | 72.5%      |
+| `corallium/pretty_process.py` |           59 |        59 |          0 | 0.0%       |
+| `corallium/scripts.py`        |            7 |         7 |          0 | 0.0%       |
+| `corallium/shell.py`          |           33 |         2 |          0 | 93.9%      |
+| `corallium/tomllib.py`        |            2 |         0 |          2 | 100.0%     |
+| **Totals**                    |          304 |       153 |         10 | 49.7%      |
 
+Generated on: 2023-02-21
 <!-- {cte} -->

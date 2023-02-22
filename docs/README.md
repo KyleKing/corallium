@@ -1,6 +1,6 @@
 # corallium
 
-TBD
+Shared functionality for calcipy-ecosystem
 
 ## Installation
 
@@ -8,11 +8,11 @@ TBD
 
 1. ...
 
-   ```sh
-   import 
+    ```sh
+    import
 
-   # < TODO: Add example code here >
-   ```
+    # < TODO: Add example code here >
+    ```
 
 1. ...
 

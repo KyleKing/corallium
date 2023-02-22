@@ -4,12 +4,12 @@ requires = ["poetry-core"]
 
 [tool.commitizen]
 version = "0.0.1"
-version_files = ["pyproject.toml", "corallium/__init__.py"]
+version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
 
 [tool.poetry]
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]
 classifiers = [
-  "Development Status :: 1 - Planning",
+  "Development Status :: 4 - Beta",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3.10",
@@ -17,7 +17,7 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
 ] # https://pypi.org/classifiers/
-description = "TBD"
+description = "Shared functionality for calcipy-ecosystem"
 documentation = "https://corallium.kyleking.me"
 include = ["LICENSE.md"]
 keywords = []
@@ -30,12 +30,15 @@ version = "0.0.1"
 
 [tool.poetry.dependencies]
 python = "^3.8.12"
+beartype = ">=0.12.0"
+pydantic = ">=1.10.4"
+rich = ">=12.6.0"
+tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0rc0"}
-
-[tool.poetry.scripts]
-corallium = "corallium.scripts:start"
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0rc1"}
+pytest-subprocess = ">=1.4.1"
+types-pyyaml = ">=6.0.12.8"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/corallium/issues"
@@ -44,5 +47,3 @@ corallium = "corallium.scripts:start"
 [tool.pyright]
 include = ["corallium"]
 pythonVersion = "3.8"
-venv = ".venv"
-venvPath = "."
