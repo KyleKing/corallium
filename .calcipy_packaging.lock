@@ -88,12 +88,12 @@
         "version": "2.3.post1"
     },
     "calcipy": {
-        "datetime": "2023-02-22T00:09:48.156632+00:00",
+        "datetime": "2023-02-22T14:11:09.313323+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-22T00:09:48.156632+00:00",
-        "latest_version": "1.0.0rc1",
+        "latest_datetime": "2023-02-22T14:11:09.313323+00:00",
+        "latest_version": "1.0.0rc4",
         "name": "calcipy",
-        "version": "1.0.0rc1"
+        "version": "1.0.0rc4"
     },
     "certifi": {
         "datetime": "2022-12-07T20:13:19.428014+00:00",
@@ -344,12 +344,12 @@
         "version": "3.3.7"
     },
     "markdown-it-py": {
-        "datetime": "2022-04-16T13:53:33.268011+00:00",
+        "datetime": "2023-02-22T05:54:29.508565+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2022-04-16T13:53:33.268011+00:00",
-        "latest_version": "2.1.0",
+        "latest_datetime": "2023-02-22T05:54:29.508565+00:00",
+        "latest_version": "2.2.0",
         "name": "markdown-it-py",
-        "version": "2.1.0"
+        "version": "2.2.0"
     },
     "markupsafe": {
         "datetime": "2023-01-17T18:22:52.787182+00:00",
@@ -814,14 +814,6 @@
         "latest_version": "1.12.1",
         "name": "semgrep",
         "version": "1.12.1"
-    },
-    "shoal": {
-        "datetime": "2023-02-21T23:58:05.332730+00:00",
-        "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-21T23:58:05.332730+00:00",
-        "latest_version": "1.0.0rc0",
-        "name": "shoal",
-        "version": "1.0.0rc0"
     },
     "six": {
         "datetime": "2021-05-05T14:18:17.237677+00:00",

@@ -47,13 +47,13 @@ poetry config pypi-token.pypi ...
 | File                          |   Statements |   Missing |   Excluded | Coverage   |
 |-------------------------------|--------------|-----------|------------|------------|
 | `corallium/__init__.py`       |            7 |         1 |          0 | 85.7%      |
-| `corallium/file_helpers.py`   |          116 |        62 |          8 | 46.6%      |
+| `corallium/file_helpers.py`   |          115 |        62 |          6 | 46.1%      |
 | `corallium/log.py`            |           80 |        22 |          0 | 72.5%      |
 | `corallium/pretty_process.py` |           59 |        59 |          0 | 0.0%       |
 | `corallium/scripts.py`        |            7 |         7 |          0 | 0.0%       |
 | `corallium/shell.py`          |           33 |         2 |          0 | 93.9%      |
 | `corallium/tomllib.py`        |            2 |         0 |          2 | 100.0%     |
-| **Totals**                    |          304 |       153 |         10 | 49.7%      |
+| **Totals**                    |          303 |       153 |          8 | 49.5%      |
 
-Generated on: 2023-02-21
+Generated on: 2023-02-22
 <!-- {cte} -->
