@@ -88,12 +88,12 @@
         "version": "2.3.post1"
     },
     "calcipy": {
-        "datetime": "2023-02-22T14:11:09.313323+00:00",
+        "datetime": "2023-02-23T03:06:35.715250+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-22T14:11:09.313323+00:00",
-        "latest_version": "1.0.0rc4",
+        "latest_datetime": "2023-02-23T03:06:35.715250+00:00",
+        "latest_version": "1.0.0rc6",
         "name": "calcipy",
-        "version": "1.0.0rc4"
+        "version": "1.0.0rc6"
     },
     "certifi": {
         "datetime": "2022-12-07T20:13:19.428014+00:00",
@@ -152,12 +152,12 @@
         "version": "2.42.0"
     },
     "coverage": {
-        "datetime": "2023-01-25T01:23:51.164157+00:00",
+        "datetime": "2023-02-23T00:58:22.324289+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-01-25T01:23:51.164157+00:00",
-        "latest_version": "7.1.0",
+        "latest_datetime": "2023-02-23T00:58:22.324289+00:00",
+        "latest_version": "7.2.0",
         "name": "coverage",
-        "version": "7.1.0"
+        "version": "7.2.0"
     },
     "decli": {
         "datetime": "2020-07-26T08:29:41.079082+00:00",
@@ -800,12 +800,12 @@
         "version": "0.2.7"
     },
     "ruff": {
-        "datetime": "2023-02-21T23:39:18.607038+00:00",
+        "datetime": "2023-02-22T20:20:24.990756+00:00",
         "domain": "https://pypi.org/pypi/{name}/json",
-        "latest_datetime": "2023-02-21T23:39:18.607038+00:00",
-        "latest_version": "0.0.251",
+        "latest_datetime": "2023-02-22T20:20:24.990756+00:00",
+        "latest_version": "0.0.252",
         "name": "ruff",
-        "version": "0.0.251"
+        "version": "0.0.252"
     },
     "semgrep": {
         "datetime": "2023-02-17T01:12:32.760436+00:00",
