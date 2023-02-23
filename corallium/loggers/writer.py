@@ -1,20 +1,18 @@
 """Generic Log Writer."""
 
-
 from beartype import beartype
 from beartype.typing import Any
 
 
 @beartype
 def writer(
-    message: str,
+    message: str,  # noqa: ARG001
     *,
     is_header: bool,  # noqa: ARG001
     _this_level: int,
     _is_text: bool,
     # Logger-specific parameters that need to be initialized with partial(...)
-    **kwargs: Any,
+    **kwargs: Any,  # noqa: ARG001
 ) -> None:
     """Generic log writer.."""
-    print(message, **kwargs)  # noqa: T201
     raise NotImplementedError('The writer is for testing hot-swapping and has not yet been implemented')

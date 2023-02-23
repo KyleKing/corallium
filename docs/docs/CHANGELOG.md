@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Fix
+
+- resolve issue with log setup
+
 ### Refactor
 
 - move loggers into submodule for reuse and interchangeability
