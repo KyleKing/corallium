@@ -1,6 +1,4 @@
 #!/bin/bash -e
 
 # shellcheck disable=SC2048
-poetry run calcipy $*
-
-# NOTE: The above command must be calcipy because shoal doesn't provide a CLI
+poetry run corallium $*
