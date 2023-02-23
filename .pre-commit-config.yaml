@@ -85,6 +85,7 @@ repos:
       - id: lint-fix
       - id: tags
       - id: types
+        additional_dependencies: ['.[types]', 'types-PyYaml']
   - repo: local
     hooks:
       - id: copier-forbidden-files

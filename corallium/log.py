@@ -6,7 +6,7 @@ from functools import cached_property, partial
 from typing import runtime_checkable
 
 from beartype import beartype
-from beartype.typing import Any, Dict, Protocol
+from beartype.typing import Any, Dict, List, Optional, Protocol
 from pydantic import BaseModel
 from rich.console import Console
 from rich.text import Text
@@ -29,8 +29,9 @@ class _Styles:
     level_info: str = 'green'  # #b9f27c
     level_debug: str = 'dim blue'
 
-    key: str = '#41919f'  # or '#af2ab4'
+    key: str = '#02bcce'
     value: str = '#ab8ce3'
+    value_own_line: str = ''
 
     @cached_property
     def level_lookup(self) -> Dict[int, str]:
@@ -78,7 +79,7 @@ class _LogCallable(Protocol):
 
 
 @beartype
-def _log(
+def _rich_printer(
     message: str,
     *,
     _this_level: int,
@@ -86,6 +87,7 @@ def _log(
     _log_level: int = _DEF_LEVEL,
     is_header: bool = False,
     _is_text: bool = False,
+    _keys_on_own_line: Optional[List[str]] = None,
     **kwargs: Any,
 ) -> None:
     """Default log function."""
@@ -99,16 +101,28 @@ def _log(
         mesage_style = ('underline2 ' if is_header else '') + _STYLES.message
         text.append(f'{message}', style=mesage_style)
     else:
-        text.append(f'{datetime.now()} ', style=_STYLES.timestamp)  # noqa: DTZ005
+        timestamp = kwargs.pop('timestamp', datetime.now())  # noqa: DTZ005
+        text.append(f'{timestamp: <28} ', style=_STYLES.timestamp)
         text.append('[', style=_STYLES.timestamp)
         level_style = _STYLES.level_lookup.get(_this_level)
         text.append(f"{_LEVEL_TO_NAME.get(_this_level, ''): <7}", style=level_style)
         text.append(']', style=_STYLES.timestamp)
         text.append(f' {message}', style=_STYLES.message)
+
+    full_lines = []
+    for key in _keys_on_own_line or []:
+        line = kwargs.pop(key, None)
+        if line:
+            full_lines.append((key, line))
     for key, value in kwargs.items():
         text.append(f' {key}=', style=_STYLES.key)
         text.append(f'{str(value)}', style=_STYLES.value)
     _console.print(text)
+    for key, line in full_lines:
+        new_text = Text()
+        new_text.append(f' ∟ {key}', style=_STYLES.key)
+        new_text.append(f': {line}', style=_STYLES.value_own_line)
+        _console.print(new_text)
 
     if _this_level == logging.CRITICAL:
         _console.print_exception(show_locals=True)
@@ -124,7 +138,7 @@ class _LogSingleton(BaseModel):
         arbitrary_types_allowed = True
 
 
-_LOG_SINGLETON = _LogSingleton(log=partial(_log, _console=Console()))
+_LOG_SINGLETON = _LogSingleton(log=partial(_rich_printer, _console=Console()))
 
 
 class _Logger:
@@ -167,7 +181,7 @@ class _Logger:
 @beartype
 def configure_logger(log_level: int = _DEF_LEVEL) -> None:
     """Configure global logger."""
-    _LOG_SINGLETON.log = partial(_log, _log_level=log_level, _console=Console())
+    _LOG_SINGLETON.log = partial(_rich_printer, _log_level=log_level, _console=Console())
 
 
 @beartype
