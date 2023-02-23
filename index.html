@@ -574,6 +574,88 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="reference/corallium/loggers/">loggers</a>
+          
+            <label for="__nav_4_1_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          loggers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/corallium/loggers/rich_printer/" class="md-nav__link">
+        rich_printer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/corallium/loggers/styles/" class="md-nav__link">
+        styles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/corallium/loggers/writer/" class="md-nav__link">
+        writer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="reference/corallium/pretty_process/" class="md-nav__link">
         pretty_process
@@ -745,25 +827,31 @@
 
 
 <h1 id="corallium">corallium<a class="headerlink" href="#corallium" title="Permanent link">⚓︎</a></h1>
-<p>Shared functionality for calcipy-ecosystem</p>
+<p>Shared functionality for the calcipy-ecosystem.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">⚓︎</a></h2>
 <ol>
 <li>
-<p><code>poetry add</code></p>
+<p><code>poetry add corallium</code></p>
 </li>
 <li>
-<p>&hellip;</p>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>import
+<p>Take advantage of the logger or other common functionality</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>form<span class="w"> </span>corallium.log<span class="w"> </span>import<span class="w"> </span>logger
 <span class="linenos" data-linenos="2 "></span>
-<span class="linenos" data-linenos="3 "></span><span class="c1"># &lt; TODO: Add example code here &gt;</span>
+<span class="linenos" data-linenos="3 "></span>logger.info<span class="o">(</span><span class="s1">&#39;Hello!&#39;</span><span class="o">)</span>
 </code></pre></div>
-</li>
-<li>
-<p>&hellip;</p>
 </li>
 </ol>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">⚓︎</a></h2>
-<!-- < TODO: Show an example (screenshots, terminal recording, etc.) > -->
+<!-- < TODO: Show an example (screenshots, terminal recording, etc.) >
+
+- **log**: TBD
+- **pretty_process**: TBD
+- **shell**: TBD
+- **file_helpers**: TBD
+- **tomllib**: This is a lightweight wrapper to backport `tomli` in place of `tomllib` until we can use Python >3.11. Use with `from corallium.tomllib import tomllib`
+- **dot_dict**: has one function `ddict`, which is a light-weight wrapper around whatever is the most [maintained dotted-dictionary package in Python](https://pypi.org/search/?q=dot+accessible+dictionary&o=). Dotted dictionaries can sometimes improve code readability, but they aren't a one-size fits all solution. Sometimes `attr.s` or `dataclass` are more appropriate.
+    - The benefit of this wrapper is a stable interface that can be replaced with better internal implementations, such [Bunch](https://pypi.org/project/bunch/), [Chunk](https://pypi.org/project/chunk/), [Munch](https://pypi.org/project/munch/), [flexible-dotdict](https://pypi.org/project/flexible-dotdict/), [classy-json](https://pypi.org/project/classy-json/), and now [Python-Box](https://pypi.org/project/python-box/)
+ -->
 
 <p>For more example code, see the <a href="https://github.com/kyleking/corallium/scripts">scripts</a> directory or the <a href="https://github.com/kyleking/corallium/tests">tests</a>.</p>
 <h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">⚓︎</a></h2>
@@ -788,7 +876,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 22, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 23, 2023</span>
       
         <br>
         Created:

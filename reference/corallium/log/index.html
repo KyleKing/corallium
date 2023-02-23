@@ -18,7 +18,7 @@
         <link rel="prev" href="../file_helpers/">
       
       
-        <link rel="next" href="../pretty_process/">
+        <link rel="next" href="../loggers/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
@@ -508,6 +508,52 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#corallium.log-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corallium.log.LogCallable" class="md-nav__link">
+    LogCallable
+  </a>
+  
+    <nav class="md-nav" aria-label="LogCallable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corallium.log.LogCallable-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corallium.log.LogCallable.__call__" class="md-nav__link">
+    __call__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#corallium.log-functions" class="md-nav__link">
     Functions
   </a>
@@ -538,6 +584,88 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../loggers/">loggers</a>
+          
+            <label for="__nav_4_1_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          loggers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loggers/rich_printer/" class="md-nav__link">
+        rich_printer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loggers/styles/" class="md-nav__link">
+        styles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loggers/writer/" class="md-nav__link">
+        writer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -644,6 +772,52 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#corallium.log-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corallium.log.LogCallable" class="md-nav__link">
+    LogCallable
+  </a>
+  
+    <nav class="md-nav" aria-label="LogCallable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corallium.log.LogCallable-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corallium.log.LogCallable.__call__" class="md-nav__link">
+    __call__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#corallium.log-functions" class="md-nav__link">
     Functions
   </a>
@@ -707,7 +881,99 @@
 
 
 
+<h2 id="corallium.log-classes">Classes<a href="#corallium.log-classes" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="corallium.log.LogCallable" class="doc doc-heading">
+        <span class="doc doc-object-name doc-class-name">LogCallable</span>
+
+
+<a href="#corallium.log.LogCallable" class="headerlink" title="Permanent link">⚓︎</a></h3>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><span title="beartype.typing.Protocol">Protocol</span></code></p>
+
+  
+      <p>Defined the kwargs accepted for a delegated task.</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>corallium/log.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="16 "></span><span class="nd">@runtime_checkable</span>
+<span class="linenos" data-linenos="17 "></span><span class="k">class</span> <span class="nc">LogCallable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="linenos" data-linenos="18 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Defined the kwargs accepted for a delegated task.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span>    <span class="nd">@beartype</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="bp">self</span><span class="p">,</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="24 "></span>        <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="25 "></span>        <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="29 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Type-checked arguments.&quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h4 id="corallium.log.LogCallable-functions">Functions<a href="#corallium.log.LogCallable-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h5 id="corallium.log.LogCallable.__call__" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">__call__</span>
+
+
+<a href="#corallium.log.LogCallable.__call__" class="headerlink" title="Permanent link">⚓︎</a></h5>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="fm">__call__</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">is_header</span><span class="p">,</span> <span class="n">_this_level</span><span class="p">,</span> <span class="n">_is_text</span><span class="p">)</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Type-checked arguments.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>corallium/log.py</code></summary>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="20 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="21 "></span><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+<span class="linenos" data-linenos="22 "></span>    <span class="bp">self</span><span class="p">,</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="28 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="29 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Type-checked arguments.&quot;&quot;&quot;</span>
+</code></pre></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 <h2 id="corallium.log-functions">Functions<a href="#corallium.log-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
 <div class="doc doc-object doc-function">
@@ -719,19 +985,19 @@
 
 
 <a href="#corallium.log.configure_logger" class="headerlink" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">configure_logger</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="n">_DEF_LEVEL</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">configure_logger</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">DEF_LEVEL</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
   <div class="doc doc-contents ">
   
-      <p>Configure global logger.</p>
+      <p>Configure the global log level or replace the logger.</p>
 
       <details class="quote">
         <summary>Source code in <code>corallium/log.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="158 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="159 "></span><span class="k">def</span> <span class="nf">configure_logger</span><span class="p">(</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_DEF_LEVEL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="160 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure global logger.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="161 "></span>    <span class="n">_LOG_SINGLETON</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_log</span><span class="p">,</span> <span class="n">_log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">,</span> <span class="n">_console</span><span class="o">=</span><span class="n">Console</span><span class="p">())</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="104 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="105 "></span><span class="k">def</span> <span class="nf">configure_logger</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEF_LEVEL</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LogCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="106 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the global log level or replace the logger.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="107 "></span>    <span class="n">_LOG_SINGLETON</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -756,10 +1022,10 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/log.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="164 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="165 "></span><span class="k">def</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_Logger</span><span class="p">:</span>
-<span class="linenos" data-linenos="166 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve global logger.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="167 "></span>    <span class="k">return</span> <span class="n">_Logger</span><span class="p">()</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="110 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="111 "></span><span class="k">def</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_Logger</span><span class="p">:</span>
+<span class="linenos" data-linenos="112 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve global logger.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="113 "></span>    <span class="k">return</span> <span class="n">_Logger</span><span class="p">()</span>
 </code></pre></div>
       </details>
   </div>
@@ -779,11 +1045,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 22, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 23, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 22, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 23, 2023</span>
       
     
   </small>
