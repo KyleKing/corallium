@@ -17,13 +17,13 @@ DEF_LEVEL = logging.ERROR
 class LogCallable(Protocol):
     """Defined the kwargs accepted for a delegated task."""
 
+    @beartype
     def __call__(
         self,
         message: str,
         *,
         is_header: bool,
         _this_level: int,
-        _log_level: int,
         _is_text: bool,
     ) -> Any:
         """Type-checked arguments."""
@@ -36,25 +36,29 @@ class _LogSingleton:
     _log_level: int = DEF_LEVEL
 
     @beartype
-    def set_logger(self, logger: Optional[LogCallable] = None,
-                   _log_level: int = DEF_LEVEL, **kwargs: Any) -> LogCallable:
+    def set_logger(
+        self,
+        *,
+        log_level: int,
+        logger: Optional[LogCallable] = None,
+        **kwargs: Any,
+    ) -> LogCallable:
         """Set the internal logger instance."""
         _logger = logger or self._logger
         if not _logger:
             _logger = partial(rich_printer, _console=kwargs.setdefault('_console', Console()))
         self._logger = partial(_logger, **kwargs)
-        self._log_level = _log_level
+        self._log_level = log_level
         return self._logger
 
     @beartype
-    def log(self, *args: Any, _this_level: int, **kwargs: Any) -> None:
+    def log(self, *args: Any, _this_level: int, is_header: bool = False, _is_text: bool = False, **kwargs: Any) -> None:
         """Delegate the arguments to the logger if this level above the threshold."""
         if _this_level < self._log_level:
             return
         # Ensure logger is configured
-        _logger = self._logger or self.set_logger()
-        kwargs.setdefault('is_header', False)
-        _logger(*args, _this_level=_this_level, **kwargs)
+        _logger = self._logger or self.set_logger(log_level=self._log_level)
+        _logger(*args, _this_level=_this_level, is_header=is_header, _is_text=_is_text, **kwargs)
 
 
 _LOG_SINGLETON = _LogSingleton()
@@ -100,7 +104,7 @@ class _Logger:
 @beartype
 def configure_logger(*, log_level: int = DEF_LEVEL, logger: Optional[LogCallable] = None, **kwargs: Any) -> None:
     """Configure the global log level or replace the logger."""
-    _LogSingleton().set_logger(logger, _log_level=log_level, **kwargs)
+    _LOG_SINGLETON.set_logger(logger=logger, log_level=log_level, **kwargs)
 
 
 @beartype

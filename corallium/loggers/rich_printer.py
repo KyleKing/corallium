@@ -12,12 +12,11 @@ from .styles import _LEVEL_TO_NAME, STYLES
 
 
 @beartype
-def rich_printer(
+def rich_printer(  # noqa: CAC001
     message: str,
     *,
     is_header: bool,
     _this_level: int,
-    _log_level: int,
     _is_text: bool,
     # Logger-specific parameters that need to be initialized with partial(...)
     _console: Console,

@@ -39,7 +39,7 @@ def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
     # TODO: See below link for other options for chunking
     #   https://realpython.com/how-to-split-a-python-list-into-chunks/
     size = len(data)
-    chunk_size, chunk_rem = size // count, size % count
+    chunk_size, chunk_rem = size // count, size % count  # noqa: S001
     chunk_size += int(math.ceil(chunk_rem / size))
     return [
         data[ix:ix + chunk_size] for ix in range(0, size, chunk_size)
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     try:
         import psutil  # pyright: ignore
         num_cpus = psutil.cpu_count(logical=False)
-    except Exception as exc:
+    except Exception as exc:  # noqa: PIE786
         print(exc)  # noqa: T201
 
     result = pretty_process(__long_task, data=[*range(23)], num_workers=num_cpus)

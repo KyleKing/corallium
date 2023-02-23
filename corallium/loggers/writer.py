@@ -11,7 +11,6 @@ def writer(
     *,
     is_header: bool,  # noqa: ARG001
     _this_level: int,
-    _log_level: int,
     _is_text: bool,
     # Logger-specific parameters that need to be initialized with partial(...)
     **kwargs: Any,
