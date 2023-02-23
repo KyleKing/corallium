@@ -798,19 +798,18 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/loggers/writer.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 8 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="k">def</span> <span class="nf">writer</span><span class="p">(</span>
-<span class="linenos" data-linenos="10 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos="11 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="12 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>  <span class="c1"># noqa: ARG001</span>
-<span class="linenos" data-linenos="13 "></span>    <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="linenos" data-linenos="14 "></span>    <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="linenos" data-linenos="15 "></span>    <span class="c1"># Logger-specific parameters that need to be initialized with partial(...)</span>
-<span class="linenos" data-linenos="16 "></span>    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos" data-linenos="17 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="18 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic log writer..&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="19 "></span>    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># noqa: T201</span>
-<span class="linenos" data-linenos="20 "></span>    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;The writer is for testing hot-swapping and has not yet been implemented&#39;</span><span class="p">)</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 7 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">def</span> <span class="nf">writer</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>  <span class="c1"># noqa: ARG001</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>  <span class="c1"># noqa: ARG001</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="c1"># Logger-specific parameters that need to be initialized with partial(...)</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>  <span class="c1"># noqa: ARG001</span>
+<span class="linenos" data-linenos="16 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic log writer..&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;The writer is for testing hot-swapping and has not yet been implemented&#39;</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>

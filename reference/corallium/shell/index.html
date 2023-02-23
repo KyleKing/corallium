@@ -1090,10 +1090,10 @@
 <span class="linenos" data-linenos="76 "></span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="77 "></span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
 <span class="linenos" data-linenos="78 "></span>
-<span class="linenos" data-linenos="79 "></span>    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<span class="linenos" data-linenos="79 "></span>    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>  <span class="c1"># noqa: DUO116</span>
 <span class="linenos" data-linenos="80 "></span>        <span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span>
 <span class="linenos" data-linenos="81 "></span>        <span class="n">stdout</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos" data-linenos="82 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># noqa: DUO116,S602  # nosec  # nosemgrep</span>
+<span class="linenos" data-linenos="82 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># noqa: S602,  # nosec  # nosemgrep</span>
 <span class="linenos" data-linenos="83 "></span>    <span class="p">)</span>
 </code></pre></div>
       </details>
