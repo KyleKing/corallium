@@ -1,24 +1,31 @@
 # corallium
 
-Shared functionality for calcipy-ecosystem
+Shared functionality for the calcipy-ecosystem.
 
 ## Installation
 
-1. `poetry add `
+1. `poetry add corallium`
 
-1. ...
+1. Take advantage of the logger or other common functionality
 
     ```sh
-    import
+    form corallium.log import logger
 
-    # < TODO: Add example code here >
+    logger.info('Hello!')
     ```
-
-1. ...
 
 ## Usage
 
-<!-- < TODO: Show an example (screenshots, terminal recording, etc.) > -->
+<!-- < TODO: Show an example (screenshots, terminal recording, etc.) >
+
+- **log**: TBD
+- **pretty_process**: TBD
+- **shell**: TBD
+- **file_helpers**: TBD
+- **tomllib**: This is a lightweight wrapper to backport `tomli` in place of `tomllib` until we can use Python >3.11. Use with `from corallium.tomllib import tomllib`
+- **dot_dict**: has one function `ddict`, which is a light-weight wrapper around whatever is the most [maintained dotted-dictionary package in Python](https://pypi.org/search/?q=dot+accessible+dictionary&o=). Dotted dictionaries can sometimes improve code readability, but they aren't a one-size fits all solution. Sometimes `attr.s` or `dataclass` are more appropriate.
+    - The benefit of this wrapper is a stable interface that can be replaced with better internal implementations, such [Bunch](https://pypi.org/project/bunch/), [Chunk](https://pypi.org/project/chunk/), [Munch](https://pypi.org/project/munch/), [flexible-dotdict](https://pypi.org/project/flexible-dotdict/), [classy-json](https://pypi.org/project/classy-json/), and now [Python-Box](https://pypi.org/project/python-box/)
+ -->
 
 For more example code, see the [scripts] directory or the [tests].
 

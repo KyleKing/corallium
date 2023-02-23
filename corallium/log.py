@@ -15,18 +15,22 @@ _DEF_LEVEL = logging.ERROR
 
 
 class _Styles:
-    """Based on `tail-jsonl`."""
+    """Inspired by `structlog` and used in `tail-jsonl`.
 
-    timestamp: str = 'dim grey'
-    message: str = ''
+    https://rich.readthedocs.io/en/latest/style.html
+
+    """
+
+    timestamp: str = '#7b819d'  # originally 'dim grey'
+    message: str = 'bold #a9b1d6'
 
     level_error: str = 'red'
     level_warn: str = 'yellow'
-    level_info: str = 'green'
+    level_info: str = 'green'  # #b9f27c
     level_debug: str = 'dim blue'
 
-    key: str = 'bold blue'
-    value: str = ''
+    key: str = '#41919f'  # or '#af2ab4'
+    value: str = '#ab8ce3'
 
     @cached_property
     def level_lookup(self) -> Dict[int, str]:
@@ -90,15 +94,20 @@ def _log(
 
     text = Text()
     if _is_text:
-        mesage_style = ('bold ' if is_header else '') + _STYLES.level_info
+        if is_header:
+            print('')  # noqa: T201
+        mesage_style = ('underline2 ' if is_header else '') + _STYLES.message
         text.append(f'{message}', style=mesage_style)
     else:
         text.append(f'{datetime.now()} ', style=_STYLES.timestamp)  # noqa: DTZ005
-        text.append(_LEVEL_TO_NAME.get(_this_level, ''), style=_STYLES.level_lookup.get(_this_level))
+        text.append('[', style=_STYLES.timestamp)
+        level_style = _STYLES.level_lookup.get(_this_level)
+        text.append(f"{_LEVEL_TO_NAME.get(_this_level, ''): <7}", style=level_style)
+        text.append(']', style=_STYLES.timestamp)
         text.append(f' {message}', style=_STYLES.message)
     for key, value in kwargs.items():
-        text.append(f' {key}:', style=_STYLES.key)
-        text.append(f' {str(value): <10}', style=_STYLES.value)
+        text.append(f' {key}=', style=_STYLES.key)
+        text.append(f'{str(value)}', style=_STYLES.value)
     _console.print(text)
 
     if _this_level == logging.CRITICAL:
