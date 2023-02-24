@@ -8,7 +8,7 @@ from beartype.typing import Any
 from rich.console import Console
 from rich.text import Text
 
-from .styles import _LEVEL_TO_NAME, STYLES
+from .styles import STYLES, get_name
 
 
 @beartype
@@ -34,7 +34,7 @@ def rich_printer(  # noqa: CAC001
         text.append(f'{timestamp: <28} ', style=STYLES.timestamp)
         text.append('[', style=STYLES.timestamp)
         level_style = STYLES.get_style(level=_this_level)
-        text.append(f"{_LEVEL_TO_NAME.get(_this_level, ''): <7}", style=level_style)
+        text.append(f'{get_name(level=_this_level): <7}', style=level_style)
         text.append(']', style=STYLES.timestamp)
         text.append(f' {message}', style=STYLES.message)
 

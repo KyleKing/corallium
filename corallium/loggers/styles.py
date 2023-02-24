@@ -1,13 +1,12 @@
 """Styles."""
 
 import logging
-from functools import singledispatchmethod
 
+from pydantic import BaseModel
 from beartype import beartype
-from beartype.typing import Any
 
 
-class Styles:
+class Styles(BaseModel):
     """Inspired by `loguru` and `structlog` and used in `tail-jsonl`.
 
     https://rich.readthedocs.io/en/latest/style.html
@@ -31,15 +30,8 @@ class Styles:
     value: str = '#ab8ce3'  # light purple
     value_own_line: str = '#ab8ce3'
 
-    @singledispatchmethod
     @beartype
-    def get_style(self, *, level: Any) -> str:
-        """Return the right style for the specified level."""
-        raise NotImplementedError('Cannot negate a')
-
-    @get_style.register
-    @beartype
-    def _(self, *, level: int) -> str:
+    def get_style(self, *, level: int) -> str:
         """Return the right style for the specified level."""
         return {
             logging.CRITICAL: self.level_error,
@@ -49,32 +41,34 @@ class Styles:
             logging.DEBUG: self.level_debug,
         }.get(level, self.level_fallback)
 
-    @get_style.register
-    @beartype
-    def _(self, *, level: str) -> str:
-        """Return the right style for the specified level."""
-        level_value: int = {
-            'ERROR': logging.ERROR,
-            'WARNING': logging.WARNING,
-            'WARN': logging.WARNING,
-            'INFO': logging.INFO,
-            'DEBUG': logging.DEBUG,
-        }.get(level, logging.NOTSET)
-        return self.get_style(level=level_value)
+
+@beartype
+def get_level(*, name: str) -> int:
+    """Return the logging level based on the provided name."""
+    return {
+        'ERROR': logging.ERROR,
+        'WARNING': logging.WARNING,
+        'WARN': logging.WARNING,
+        'INFO': logging.INFO,
+        'DEBUG': logging.DEBUG,
+    }.get(name.upper(), logging.NOTSET)
 
 
-_LEVEL_TO_NAME = {
-    logging.CRITICAL: 'EXCEPTION',
-    logging.ERROR: 'ERROR',
-    logging.WARNING: 'WARNING',
-    logging.INFO: 'INFO',
-    logging.DEBUG: 'DEBUG',
-    logging.NOTSET: 'NOTSET',
-}
-"""Mapping to logging level name.
+@beartype
+def get_name(*, level: int) -> str:
+    """Return the logging name based on the provided level.
 
-https://docs.python.org/3.11/library/logging.html#logging-levels
+    https://docs.python.org/3.11/library/logging.html#logging-levels
 
-"""
+    """
+    return {
+        logging.CRITICAL: 'EXCEPTION',
+        logging.ERROR: 'ERROR',
+        logging.WARNING: 'WARNING',
+        logging.INFO: 'INFO',
+        logging.DEBUG: 'DEBUG',
+        logging.NOTSET: 'NOTSET',
+    }.get(level, '')
+
 
 STYLES = Styles()
