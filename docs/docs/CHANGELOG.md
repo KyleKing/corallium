@@ -1,3 +1,10 @@
+## 0.1.0rc3 (2023-02-24)
+
+### Refactor
+
+- extract the level lookups to replace singledispatch
+- experiment with singledispatch and extending Styles for tail-jsonl
+
 ## 0.1.0rc2 (2023-02-23)
 
 ### Fix

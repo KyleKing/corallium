@@ -2,8 +2,8 @@
 
 import logging
 
-from pydantic import BaseModel
 from beartype import beartype
+from pydantic import BaseModel
 
 
 class Styles(BaseModel):
@@ -17,18 +17,20 @@ class Styles(BaseModel):
 
     """  # noqa: E501
 
-    timestamp: str = '#7b819d'  # dim grey
-    message: str = 'bold #a9b1d6'  # light grey
+    timestamp: str = '#8DAAA1'
+    message: str = 'bold'
 
-    level_error: str = '#24283b'  # red
-    level_warn: str = 'yellow'
-    level_info: str = 'green'
-    level_debug: str = 'dim blue'
-    level_fallback: str = '#af2ab4'  # hot pink
+    # Tokyo Night: https://github.com/folke/tokyonight.nvim#-extras
+    level_error: str = '#e77d8f'
+    level_warn: str = '#d8b172'
+    level_info: str = '#a8cd76'
+    level_debug: str = '#82a1f1'
+    level_fallback: str = '#b69bf1'
 
-    key: str = '#02bcce'  # greem
-    value: str = '#ab8ce3'  # light purple
-    value_own_line: str = '#ab8ce3'
+    # triadic from: https://coolors.co/a28eab
+    key: str = '#8DAAA1'
+    value: str = '#A28EAB'
+    value_own_line: str = '#AAA18D'
 
     @beartype
     def get_style(self, *, level: int) -> str:

@@ -9,6 +9,7 @@ from beartype.typing import Any, Optional, Protocol
 from rich.console import Console
 
 from .loggers.rich_printer import rich_printer
+from .loggers.styles import STYLES, Styles
 
 DEF_LEVEL = logging.ERROR
 
@@ -41,12 +42,13 @@ class _LogSingleton:
         *,
         log_level: int,
         logger: Optional[LogCallable] = None,
+        _console: Optional[Console] = None,
+        _styles: Optional[Styles] = None,
         **kwargs: Any,
     ) -> LogCallable:
         """Set the internal logger instance."""
-        _logger = logger or self._logger
-        if not _logger:
-            _logger = partial(rich_printer, _console=kwargs.setdefault('_console', Console()))
+        if not (_logger := logger or self._logger):
+            _logger = partial(rich_printer, _console=_console or Console(), _styles=_styles or STYLES)
         self._logger = partial(_logger, **kwargs)
         self._log_level = log_level
         return self._logger

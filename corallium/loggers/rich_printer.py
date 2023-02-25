@@ -4,15 +4,15 @@ import logging
 from datetime import datetime
 
 from beartype import beartype
-from beartype.typing import Any
+from beartype.typing import Any, List, Optional
 from rich.console import Console
 from rich.text import Text
 
-from .styles import STYLES, get_name
+from .styles import Styles, get_name
 
 
 @beartype
-def rich_printer(  # noqa: CAC001
+def rich_printer(  # noqa: CAC001,CFQ002
     message: str,
     *,
     is_header: bool,
@@ -20,6 +20,8 @@ def rich_printer(  # noqa: CAC001
     _is_text: bool,
     # Logger-specific parameters that need to be initialized with partial(...)
     _console: Console,
+    _styles: Styles,
+    _keys_on_own_line: Optional[List[str]] = None,
     **kwargs: Any,
 ) -> None:
     """Generic log writer.."""
@@ -27,31 +29,28 @@ def rich_printer(  # noqa: CAC001
     if _is_text:
         if is_header:
             print('')  # noqa: T201
-        mesage_style = ('underline ' if is_header else '') + STYLES.message
-        text.append(f'{message}', style=mesage_style)
+        text.append(f'{message}', style=_styles.message)
     else:
         timestamp = kwargs.pop('timestamp', datetime.now())  # noqa: DTZ005
-        text.append(f'{timestamp: <28} ', style=STYLES.timestamp)
-        text.append('[', style=STYLES.timestamp)
-        level_style = STYLES.get_style(level=_this_level)
+        text.append(f'{timestamp: <28} ', style=_styles.timestamp)
+        text.append('[', style=_styles.timestamp)
+        level_style = _styles.get_style(level=_this_level)
         text.append(f'{get_name(level=_this_level): <7}', style=level_style)
-        text.append(']', style=STYLES.timestamp)
-        text.append(f' {message}', style=STYLES.message)
+        text.append(']', style=_styles.timestamp)
+        text.append(f' {message}', style=_styles.message)
 
     full_lines = []
-    _keys_on_own_line = kwargs.pop('_keys_on_own_line', [])
-    for key in _keys_on_own_line:
-        line = kwargs.pop(key, None)
-        if line:
+    for key in _keys_on_own_line or []:
+        if line := kwargs.pop(key, None):
             full_lines.append((key, line))
     for key, value in kwargs.items():
-        text.append(f' {key}=', style=STYLES.key)
-        text.append(f'{str(value)}', style=STYLES.value)
+        text.append(f' {key}=', style=_styles.key)
+        text.append(f'{str(value)}', style=_styles.value)
     _console.print(text)
     for key, line in full_lines:
         new_text = Text()
-        new_text.append(f' ∟ {key}', style=STYLES.key)
-        new_text.append(f': {line}', style=STYLES.value_own_line)
+        new_text.append(f' ∟ {key}', style=_styles.key)
+        new_text.append(f': {line}', style=_styles.value_own_line)
         _console.print(new_text)
 
     if _this_level == logging.CRITICAL:
