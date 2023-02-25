@@ -920,29 +920,31 @@
 <span class="linenos" data-linenos="17 "></span>
 <span class="linenos" data-linenos="18 "></span><span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
 <span class="linenos" data-linenos="19 "></span>
-<span class="linenos" data-linenos="20 "></span>    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#7b819d&#39;</span>  <span class="c1"># dim grey</span>
-<span class="linenos" data-linenos="21 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;bold #a9b1d6&#39;</span>  <span class="c1"># light grey</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#8DAAA1&#39;</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
 <span class="linenos" data-linenos="22 "></span>
-<span class="linenos" data-linenos="23 "></span>    <span class="n">level_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#24283b&#39;</span>  <span class="c1"># red</span>
-<span class="linenos" data-linenos="24 "></span>    <span class="n">level_warn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span>
-<span class="linenos" data-linenos="25 "></span>    <span class="n">level_info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span>
-<span class="linenos" data-linenos="26 "></span>    <span class="n">level_debug</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dim blue&#39;</span>
-<span class="linenos" data-linenos="27 "></span>    <span class="n">level_fallback</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#af2ab4&#39;</span>  <span class="c1"># hot pink</span>
-<span class="linenos" data-linenos="28 "></span>
-<span class="linenos" data-linenos="29 "></span>    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#02bcce&#39;</span>  <span class="c1"># greem</span>
-<span class="linenos" data-linenos="30 "></span>    <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#ab8ce3&#39;</span>  <span class="c1"># light purple</span>
-<span class="linenos" data-linenos="31 "></span>    <span class="n">value_own_line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#ab8ce3&#39;</span>
-<span class="linenos" data-linenos="32 "></span>
-<span class="linenos" data-linenos="33 "></span>    <span class="nd">@beartype</span>
-<span class="linenos" data-linenos="34 "></span>    <span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="35 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the right style for the specified level.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="36 "></span>        <span class="k">return</span> <span class="p">{</span>
-<span class="linenos" data-linenos="37 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
-<span class="linenos" data-linenos="38 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
-<span class="linenos" data-linenos="39 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_warn</span><span class="p">,</span>
-<span class="linenos" data-linenos="40 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_info</span><span class="p">,</span>
-<span class="linenos" data-linenos="41 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_debug</span><span class="p">,</span>
-<span class="linenos" data-linenos="42 "></span>        <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_fallback</span><span class="p">)</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="c1"># Tokyo Night: https://github.com/folke/tokyonight.nvim#-extras</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">level_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#e77d8f&#39;</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">level_warn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#d8b172&#39;</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="n">level_info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#a8cd76&#39;</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="n">level_debug</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#82a1f1&#39;</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="n">level_fallback</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#b69bf1&#39;</span>
+<span class="linenos" data-linenos="29 "></span>
+<span class="linenos" data-linenos="30 "></span>    <span class="c1"># triadic from: https://coolors.co/a28eab</span>
+<span class="linenos" data-linenos="31 "></span>    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#8DAAA1&#39;</span>
+<span class="linenos" data-linenos="32 "></span>    <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#A28EAB&#39;</span>
+<span class="linenos" data-linenos="33 "></span>    <span class="n">value_own_line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#AAA18D&#39;</span>
+<span class="linenos" data-linenos="34 "></span>
+<span class="linenos" data-linenos="35 "></span>    <span class="nd">@beartype</span>
+<span class="linenos" data-linenos="36 "></span>    <span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="37 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the right style for the specified level.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="38 "></span>        <span class="k">return</span> <span class="p">{</span>
+<span class="linenos" data-linenos="39 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
+<span class="linenos" data-linenos="40 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
+<span class="linenos" data-linenos="41 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_warn</span><span class="p">,</span>
+<span class="linenos" data-linenos="42 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_info</span><span class="p">,</span>
+<span class="linenos" data-linenos="43 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_debug</span><span class="p">,</span>
+<span class="linenos" data-linenos="44 "></span>        <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_fallback</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -976,16 +978,16 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="33 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="34 "></span><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="35 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the right style for the specified level.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="36 "></span>    <span class="k">return</span> <span class="p">{</span>
-<span class="linenos" data-linenos="37 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
-<span class="linenos" data-linenos="38 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
-<span class="linenos" data-linenos="39 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_warn</span><span class="p">,</span>
-<span class="linenos" data-linenos="40 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_info</span><span class="p">,</span>
-<span class="linenos" data-linenos="41 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_debug</span><span class="p">,</span>
-<span class="linenos" data-linenos="42 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_fallback</span><span class="p">)</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="35 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="36 "></span><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="37 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the right style for the specified level.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="38 "></span>    <span class="k">return</span> <span class="p">{</span>
+<span class="linenos" data-linenos="39 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
+<span class="linenos" data-linenos="40 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_error</span><span class="p">,</span>
+<span class="linenos" data-linenos="41 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_warn</span><span class="p">,</span>
+<span class="linenos" data-linenos="42 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_info</span><span class="p">,</span>
+<span class="linenos" data-linenos="43 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_debug</span><span class="p">,</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_fallback</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1019,16 +1021,16 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="45 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="46 "></span><span class="k">def</span> <span class="nf">get_level</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="linenos" data-linenos="47 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the logging level based on the provided name.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="48 "></span>    <span class="k">return</span> <span class="p">{</span>
-<span class="linenos" data-linenos="49 "></span>        <span class="s1">&#39;ERROR&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
-<span class="linenos" data-linenos="50 "></span>        <span class="s1">&#39;WARNING&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
-<span class="linenos" data-linenos="51 "></span>        <span class="s1">&#39;WARN&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
-<span class="linenos" data-linenos="52 "></span>        <span class="s1">&#39;INFO&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
-<span class="linenos" data-linenos="53 "></span>        <span class="s1">&#39;DEBUG&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-<span class="linenos" data-linenos="54 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">)</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="47 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="48 "></span><span class="k">def</span> <span class="nf">get_level</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos" data-linenos="49 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the logging level based on the provided name.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="50 "></span>    <span class="k">return</span> <span class="p">{</span>
+<span class="linenos" data-linenos="51 "></span>        <span class="s1">&#39;ERROR&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
+<span class="linenos" data-linenos="52 "></span>        <span class="s1">&#39;WARNING&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
+<span class="linenos" data-linenos="53 "></span>        <span class="s1">&#39;WARN&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
+<span class="linenos" data-linenos="54 "></span>        <span class="s1">&#39;INFO&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+<span class="linenos" data-linenos="55 "></span>        <span class="s1">&#39;DEBUG&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+<span class="linenos" data-linenos="56 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1054,21 +1056,21 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="57 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="58 "></span><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="59 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the logging name based on the provided level.</span>
-<span class="linenos" data-linenos="60 "></span>
-<span class="linenos" data-linenos="61 "></span><span class="sd">    https://docs.python.org/3.11/library/logging.html#logging-levels</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="59 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="60 "></span><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="61 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the logging name based on the provided level.</span>
 <span class="linenos" data-linenos="62 "></span>
-<span class="linenos" data-linenos="63 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="64 "></span>    <span class="k">return</span> <span class="p">{</span>
-<span class="linenos" data-linenos="65 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span> <span class="s1">&#39;EXCEPTION&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="66 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="67 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="68 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="69 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="70 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">:</span> <span class="s1">&#39;NOTSET&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="71 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="63 "></span><span class="sd">    https://docs.python.org/3.11/library/logging.html#logging-levels</span>
+<span class="linenos" data-linenos="64 "></span>
+<span class="linenos" data-linenos="65 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="66 "></span>    <span class="k">return</span> <span class="p">{</span>
+<span class="linenos" data-linenos="67 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span> <span class="s1">&#39;EXCEPTION&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="68 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="69 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="70 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="71 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="72 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">:</span> <span class="s1">&#39;NOTSET&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="73 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1088,11 +1090,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 25, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 25, 2023</span>
       
     
   </small>

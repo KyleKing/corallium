@@ -904,20 +904,20 @@
 
         <details class="quote">
           <summary>Source code in <code>corallium/log.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="16 "></span><span class="nd">@runtime_checkable</span>
-<span class="linenos" data-linenos="17 "></span><span class="k">class</span> <span class="nc">LogCallable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-<span class="linenos" data-linenos="18 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Defined the kwargs accepted for a delegated task.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="19 "></span>
-<span class="linenos" data-linenos="20 "></span>    <span class="nd">@beartype</span>
-<span class="linenos" data-linenos="21 "></span>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
-<span class="linenos" data-linenos="22 "></span>        <span class="bp">self</span><span class="p">,</span>
-<span class="linenos" data-linenos="23 "></span>        <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos="24 "></span>        <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="25 "></span>        <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="linenos" data-linenos="26 "></span>        <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="linenos" data-linenos="27 "></span>        <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="linenos" data-linenos="28 "></span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="linenos" data-linenos="29 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Type-checked arguments.&quot;&quot;&quot;</span>
+          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="17 "></span><span class="nd">@runtime_checkable</span>
+<span class="linenos" data-linenos="18 "></span><span class="k">class</span> <span class="nc">LogCallable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="linenos" data-linenos="19 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Defined the kwargs accepted for a delegated task.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="nd">@beartype</span>
+<span class="linenos" data-linenos="22 "></span>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="bp">self</span><span class="p">,</span>
+<span class="linenos" data-linenos="24 "></span>        <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="25 "></span>        <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos" data-linenos="28 "></span>        <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Type-checked arguments.&quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 
@@ -951,16 +951,16 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/log.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="20 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="21 "></span><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
-<span class="linenos" data-linenos="22 "></span>    <span class="bp">self</span><span class="p">,</span>
-<span class="linenos" data-linenos="23 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos="24 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="25 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="linenos" data-linenos="26 "></span>    <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="linenos" data-linenos="27 "></span>    <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="linenos" data-linenos="28 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="linenos" data-linenos="29 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Type-checked arguments.&quot;&quot;&quot;</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="21 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="22 "></span><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="bp">self</span><span class="p">,</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="n">_this_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="linenos" data-linenos="29 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Type-checked arguments.&quot;&quot;&quot;</span>
 </code></pre></div>
       </details>
   </div>
@@ -994,10 +994,10 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/log.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="104 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="105 "></span><span class="k">def</span> <span class="nf">configure_logger</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEF_LEVEL</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LogCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="106 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the global log level or replace the logger.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="107 "></span>    <span class="n">_LOG_SINGLETON</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="106 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="107 "></span><span class="k">def</span> <span class="nf">configure_logger</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEF_LEVEL</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LogCallable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="108 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the global log level or replace the logger.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="109 "></span>    <span class="n">_LOG_SINGLETON</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -1022,10 +1022,10 @@
 
       <details class="quote">
         <summary>Source code in <code>corallium/log.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="110 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="111 "></span><span class="k">def</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_Logger</span><span class="p">:</span>
-<span class="linenos" data-linenos="112 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve global logger.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="113 "></span>    <span class="k">return</span> <span class="n">_Logger</span><span class="p">()</span>
+        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="112 "></span><span class="nd">@beartype</span>
+<span class="linenos" data-linenos="113 "></span><span class="k">def</span> <span class="nf">get_logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_Logger</span><span class="p">:</span>
+<span class="linenos" data-linenos="114 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve global logger.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="115 "></span>    <span class="k">return</span> <span class="n">_Logger</span><span class="p">()</span>
 </code></pre></div>
       </details>
   </div>
@@ -1045,11 +1045,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 25, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 25, 2023</span>
       
     
   </small>

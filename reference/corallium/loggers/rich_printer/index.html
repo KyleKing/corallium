@@ -557,6 +557,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#corallium.loggers.rich_printer-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#corallium.loggers.rich_printer-functions" class="md-nav__link">
     Functions
   </a>
@@ -721,6 +728,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#corallium.loggers.rich_printer-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#corallium.loggers.rich_printer-functions" class="md-nav__link">
     Functions
   </a>
@@ -777,7 +791,7 @@
 
 
 
-
+<h2 id="corallium.loggers.rich_printer-classes">Classes<a href="#corallium.loggers.rich_printer-classes" class="headerlink" title="Permanent link">⚓︎</a></h2>
 <h2 id="corallium.loggers.rich_printer-functions">Functions<a href="#corallium.loggers.rich_printer-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
 <div class="doc doc-object doc-function">
@@ -789,7 +803,7 @@
 
 
 <a href="#corallium.loggers.rich_printer.rich_printer" class="headerlink" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">rich_printer</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">is_header</span><span class="p">,</span> <span class="n">_this_level</span><span class="p">,</span> <span class="n">_is_text</span><span class="p">,</span> <span class="n">_console</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">rich_printer</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">is_header</span><span class="p">,</span> <span class="n">_this_level</span><span class="p">,</span> <span class="n">_is_text</span><span class="p">,</span> <span class="n">_console</span><span class="p">,</span> <span class="n">_styles</span><span class="p">,</span> <span class="n">_keys_on_own_line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
   <div class="doc doc-contents ">
@@ -799,7 +813,7 @@
       <details class="quote">
         <summary>Source code in <code>corallium/loggers/rich_printer.py</code></summary>
         <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="14 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="15 "></span><span class="k">def</span> <span class="nf">rich_printer</span><span class="p">(</span>  <span class="c1"># noqa: CAC001</span>
+<span class="linenos" data-linenos="15 "></span><span class="k">def</span> <span class="nf">rich_printer</span><span class="p">(</span>  <span class="c1"># noqa: CAC001,CFQ002</span>
 <span class="linenos" data-linenos="16 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="linenos" data-linenos="17 "></span>    <span class="o">*</span><span class="p">,</span>
 <span class="linenos" data-linenos="18 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
@@ -807,42 +821,41 @@
 <span class="linenos" data-linenos="20 "></span>    <span class="n">_is_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="linenos" data-linenos="21 "></span>    <span class="c1"># Logger-specific parameters that need to be initialized with partial(...)</span>
 <span class="linenos" data-linenos="22 "></span>    <span class="n">_console</span><span class="p">:</span> <span class="n">Console</span><span class="p">,</span>
-<span class="linenos" data-linenos="23 "></span>    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-<span class="linenos" data-linenos="24 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="25 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic log writer..&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="26 "></span>    <span class="n">text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
-<span class="linenos" data-linenos="27 "></span>    <span class="k">if</span> <span class="n">_is_text</span><span class="p">:</span>
-<span class="linenos" data-linenos="28 "></span>        <span class="k">if</span> <span class="n">is_header</span><span class="p">:</span>
-<span class="linenos" data-linenos="29 "></span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  <span class="c1"># noqa: T201</span>
-<span class="linenos" data-linenos="30 "></span>        <span class="n">mesage_style</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;underline &#39;</span> <span class="k">if</span> <span class="n">is_header</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">STYLES</span><span class="o">.</span><span class="n">message</span>
-<span class="linenos" data-linenos="31 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">mesage_style</span><span class="p">)</span>
-<span class="linenos" data-linenos="32 "></span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos" data-linenos="33 "></span>        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>  <span class="c1"># noqa: DTZ005</span>
-<span class="linenos" data-linenos="34 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">:</span><span class="s1"> &lt;28</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
-<span class="linenos" data-linenos="35 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
-<span class="linenos" data-linenos="36 "></span>        <span class="n">level_style</span> <span class="o">=</span> <span class="n">STYLES</span><span class="o">.</span><span class="n">get_style</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">_this_level</span><span class="p">)</span>
-<span class="linenos" data-linenos="37 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">get_name</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">_this_level</span><span class="p">)</span><span class="si">:</span><span class="s1"> &lt;7</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">level_style</span><span class="p">)</span>
-<span class="linenos" data-linenos="38 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
-<span class="linenos" data-linenos="39 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-<span class="linenos" data-linenos="40 "></span>
-<span class="linenos" data-linenos="41 "></span>    <span class="n">full_lines</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos" data-linenos="42 "></span>    <span class="n">_keys_on_own_line</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;_keys_on_own_line&#39;</span><span class="p">,</span> <span class="p">[])</span>
-<span class="linenos" data-linenos="43 "></span>    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_keys_on_own_line</span><span class="p">:</span>
-<span class="linenos" data-linenos="44 "></span>        <span class="n">line</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos" data-linenos="45 "></span>        <span class="k">if</span> <span class="n">line</span><span class="p">:</span>
-<span class="linenos" data-linenos="46 "></span>            <span class="n">full_lines</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
-<span class="linenos" data-linenos="47 "></span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos" data-linenos="48 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
-<span class="linenos" data-linenos="49 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="linenos" data-linenos="50 "></span>    <span class="n">_console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="linenos" data-linenos="51 "></span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">full_lines</span><span class="p">:</span>
-<span class="linenos" data-linenos="52 "></span>        <span class="n">new_text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
-<span class="linenos" data-linenos="53 "></span>        <span class="n">new_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; ∟ </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
-<span class="linenos" data-linenos="54 "></span>        <span class="n">new_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">STYLES</span><span class="o">.</span><span class="n">value_own_line</span><span class="p">)</span>
-<span class="linenos" data-linenos="55 "></span>        <span class="n">_console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
-<span class="linenos" data-linenos="56 "></span>
-<span class="linenos" data-linenos="57 "></span>    <span class="k">if</span> <span class="n">_this_level</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span>
-<span class="linenos" data-linenos="58 "></span>        <span class="n">_console</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">show_locals</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">_styles</span><span class="p">:</span> <span class="n">Styles</span><span class="p">,</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">_keys_on_own_line</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="linenos" data-linenos="26 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="27 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic log writer..&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="28 "></span>    <span class="n">text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="k">if</span> <span class="n">_is_text</span><span class="p">:</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="k">if</span> <span class="n">is_header</span><span class="p">:</span>
+<span class="linenos" data-linenos="31 "></span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  <span class="c1"># noqa: T201</span>
+<span class="linenos" data-linenos="32 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<span class="linenos" data-linenos="33 "></span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="34 "></span>        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>  <span class="c1"># noqa: DTZ005</span>
+<span class="linenos" data-linenos="35 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">:</span><span class="s1"> &lt;28</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+<span class="linenos" data-linenos="36 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+<span class="linenos" data-linenos="37 "></span>        <span class="n">level_style</span> <span class="o">=</span> <span class="n">_styles</span><span class="o">.</span><span class="n">get_style</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">_this_level</span><span class="p">)</span>
+<span class="linenos" data-linenos="38 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">get_name</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">_this_level</span><span class="p">)</span><span class="si">:</span><span class="s1"> &lt;7</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">level_style</span><span class="p">)</span>
+<span class="linenos" data-linenos="39 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+<span class="linenos" data-linenos="40 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<span class="linenos" data-linenos="41 "></span>
+<span class="linenos" data-linenos="42 "></span>    <span class="n">full_lines</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_keys_on_own_line</span> <span class="ow">or</span> <span class="p">[]:</span>
+<span class="linenos" data-linenos="44 "></span>        <span class="k">if</span> <span class="n">line</span> <span class="o">:=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos" data-linenos="45 "></span>            <span class="n">full_lines</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
+<span class="linenos" data-linenos="46 "></span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos" data-linenos="47 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+<span class="linenos" data-linenos="48 "></span>        <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="linenos" data-linenos="49 "></span>    <span class="n">_console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="linenos" data-linenos="50 "></span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">full_lines</span><span class="p">:</span>
+<span class="linenos" data-linenos="51 "></span>        <span class="n">new_text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
+<span class="linenos" data-linenos="52 "></span>        <span class="n">new_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; ∟ </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+<span class="linenos" data-linenos="53 "></span>        <span class="n">new_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">_styles</span><span class="o">.</span><span class="n">value_own_line</span><span class="p">)</span>
+<span class="linenos" data-linenos="54 "></span>        <span class="n">_console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+<span class="linenos" data-linenos="55 "></span>
+<span class="linenos" data-linenos="56 "></span>    <span class="k">if</span> <span class="n">_this_level</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span>
+<span class="linenos" data-linenos="57 "></span>        <span class="n">_console</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">show_locals</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
       </details>
   </div>
@@ -862,11 +875,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 25, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 24, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 25, 2023</span>
       
     
   </small>
