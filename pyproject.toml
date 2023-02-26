@@ -36,8 +36,10 @@ rich = ">=12.6.0"
 tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0rc6"}
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.0.0"}
+pytest-structlog = ">=0.6" # Provides pytest fixture 'log'
 pytest-subprocess = ">=1.4.1"
+structlog = ">=22.3.0"
 types-pyyaml = ">=6.0.12.8"
 
 [tool.poetry.urls]
