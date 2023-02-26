@@ -1,3 +1,11 @@
+## Unreleased
+
+## 0.1.0 (2023-02-25)
+
+### Feat
+
+- make Styles configurable
+
 ## 0.1.0rc3 (2023-02-24)
 
 ### Refactor

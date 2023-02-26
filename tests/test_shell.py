@@ -1,4 +1,5 @@
 import json
+import platform
 import shlex
 from subprocess import CalledProcessError  # nosec
 
@@ -9,6 +10,9 @@ from corallium.shell import capture_shell, run_shell
 
 def test_shell() -> None:
     """Example to run jq."""
+    if platform.system() == 'Windows':
+        pytest.skip('jq is not installed on Windows')
+
     jq = 'gojq'
     try:
         capture_shell(f'{jq} --help')
