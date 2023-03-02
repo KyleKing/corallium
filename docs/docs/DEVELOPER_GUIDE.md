@@ -48,16 +48,15 @@ poetry config pypi-token.pypi ...
 |-------------------------------------|--------------|-----------|------------|------------|
 | `corallium/__init__.py`             |            7 |         1 |          0 | 85.7%      |
 | `corallium/file_helpers.py`         |          115 |        40 |          6 | 65.2%      |
-| `corallium/log.py`                  |           59 |        12 |          0 | 79.7%      |
+| `corallium/log.py`                  |           59 |         1 |          0 | 98.3%      |
 | `corallium/loggers/__init__.py`     |            0 |         0 |          0 | 100.0%     |
 | `corallium/loggers/rich_printer.py` |           36 |        27 |          0 | 25.0%      |
 | `corallium/loggers/styles.py`       |           24 |         3 |          0 | 87.5%      |
-| `corallium/loggers/writer.py`       |            5 |         5 |          0 | 0.0%       |
+| `corallium/loggers/writer.py`       |            5 |         0 |          0 | 100.0%     |
 | `corallium/pretty_process.py`       |           59 |        59 |          0 | 0.0%       |
-| `corallium/scripts.py`              |            7 |         7 |          0 | 0.0%       |
 | `corallium/shell.py`                |           33 |         2 |          0 | 93.9%      |
 | `corallium/tomllib.py`              |            2 |         0 |          2 | 100.0%     |
-| **Totals**                          |          347 |       156 |          8 | 55.0%      |
+| **Totals**                          |          340 |       133 |          8 | 60.9%      |
 
-Generated on: 2023-02-25
+Generated on: 2023-03-01
 <!-- {cte} -->
