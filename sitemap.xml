@@ -2,92 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://corallium.kyleking.me/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/Advanced_Documentation/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/CHANGELOG/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/CODE_TAG_SUMMARY/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/DEVELOPER_GUIDE/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/STYLE_GUIDE/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/modules/corallium/_code_diagrams/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>None</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/file_helpers/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/log/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/pretty_process/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/shell/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/tomllib/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/rich_printer/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/styles/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/writer/</loc>
-         <lastmod>2023-03-02</lastmod>
+         <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
