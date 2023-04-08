@@ -50,13 +50,13 @@ poetry config pypi-token.pypi ...
 | `corallium/file_helpers.py`         |          115 |        40 |          6 | 65.2%      |
 | `corallium/log.py`                  |           59 |         1 |          0 | 98.3%      |
 | `corallium/loggers/__init__.py`     |            0 |         0 |          0 | 100.0%     |
-| `corallium/loggers/rich_printer.py` |           36 |        27 |          0 | 25.0%      |
+| `corallium/loggers/rich_printer.py` |           38 |        28 |          0 | 26.3%      |
 | `corallium/loggers/styles.py`       |           24 |         3 |          0 | 87.5%      |
 | `corallium/loggers/writer.py`       |            5 |         0 |          0 | 100.0%     |
 | `corallium/pretty_process.py`       |           59 |        59 |          0 | 0.0%       |
 | `corallium/shell.py`                |           33 |         2 |          0 | 93.9%      |
 | `corallium/tomllib.py`              |            2 |         0 |          2 | 100.0%     |
-| **Totals**                          |          340 |       133 |          8 | 60.9%      |
+| **Totals**                          |          342 |       134 |          8 | 60.8%      |
 
-Generated on: 2023-03-01
+Generated on: 2023-04-07
 <!-- {cte} -->
