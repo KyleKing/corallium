@@ -1,6 +1,7 @@
 """Rich Printer."""
 
 import logging
+import shutil
 from datetime import datetime
 
 from beartype import beartype
@@ -54,5 +55,11 @@ def rich_printer(  # noqa: CAC001,CFQ002
         _console.print(new_text)
 
     if _this_level == logging.CRITICAL:
-        _console.print_exception(show_locals=True)
+        term_width, _height = shutil.get_terminal_size((100, 50))
+        _console.print_exception(
+            extra_lines=1,
+            max_frames=5,
+            show_locals=False,
+            width=term_width,
+        )
         # > or 'from rich.traceback import install; install(show_locals=True)'
