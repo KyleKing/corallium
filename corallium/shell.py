@@ -76,8 +76,8 @@ def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> No
     """
     logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
 
-    subprocess.run(  # noqa: DUO116
+    subprocess.run(  # noqa: DUO116  # nosemgrep
         cmd, timeout=timeout or None, cwd=cwd,
         stdout=sys.stdout, stderr=sys.stderr, check=True,
-        shell=True,  # noqa: S602,  # nosec  # nosemgrep
+        shell=True,  # noqa: S602,  # nosec
     )

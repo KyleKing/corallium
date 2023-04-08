@@ -101,7 +101,7 @@ def pretty_process(delegated_task: _DelegatedTask, *, data: List[_ItemT], num_wo
 def __long_task(*, task_id: int, shared_progress: DictProxy, data: List[_ItemT]) -> Any:  # type: ignore[type-arg]
     """Example long task."""
     for _val in data:
-        sleep(1)
+        sleep(1)  # nosemgrep: python.lang.best-practice.sleep.arbitrary-sleep
         shared_progress[task_id] += 1
     return True
 
