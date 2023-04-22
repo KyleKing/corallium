@@ -1,5 +1,15 @@
 ## Unreleased
 
+### Feat
+
+- add structlog and print loggers. Remove not implemented writer
+
+## 0.1.1 (2023-04-07)
+
+### Fix
+
+- reduce rich exception length
+
 ## 0.1.0 (2023-02-25)
 
 ### Feat

@@ -6,43 +6,41 @@ from beartype import beartype
 from beartype.typing import Any
 
 from corallium.log import configure_logger, get_logger
-from corallium.loggers.writer import writer
+from corallium.loggers.plain_printer import plain_printer
+from corallium.loggers.structlog_logger import structlog_logger
+
+from .configuration import DEFAULT_LOGGER
+
+
+@beartype
+def not_implemented_printer(
+    message: str,  # noqa: ARG001
+    *,
+    is_header: bool,  # noqa: ARG001
+    _this_level: int,
+    _is_text: bool,
+    # Logger-specific parameters that need to be initialized with partial(...)
+    **kwargs: Any,  # noqa: ARG001
+) -> None:
+    raise NotImplementedError('This logger is for testing hot-swapping')
 
 
 def test_configure_logger_writer():
     logger = get_logger()
-    configure_logger(log_level=logging.INFO, logger=writer)
-    logger.debug('Should raise an error')  # not sent to logger
+    configure_logger(log_level=logging.DEBUG, logger=plain_printer)
+    logger.error('No problems here')
+
+    configure_logger(log_level=logging.INFO, logger=not_implemented_printer)
+    logger.debug("Won't raise an error")  # not sent to logger
 
     with pytest.raises(NotImplementedError):
         logger.info('Should raise an error')
 
-    configure_logger(logger=None)  # Reset logger
-
-
-@beartype
-def structlog_logger(
-    message: str,
-    *,
-    is_header: bool,
-    _this_level: int,
-    _is_text: bool,
-    # Logger-specific parameters that need to be initialized with partial(...)
-    **kwargs: Any,
-) -> None:
-    logger = structlog.get_logger()
-    log = {
-        logging.CRITICAL: logger.exception,
-        logging.ERROR: logger.error,
-        logging.WARNING: logger.warning,
-        logging.INFO: logger.info,
-        logging.DEBUG: logger.debug,
-        logging.NOTSET: logger.debug,
-    }.get(_this_level, logger.msg)
-    log(message, is_header=is_header, _this_level=_this_level, _is_text=_is_text, **kwargs)
+    configure_logger(log_level=logging.DEBUG, logger=DEFAULT_LOGGER)  # Reset logger
 
 
 def test_configure_logger_new(log):
+    """Use the structlog_logger to capture log events."""
     logger = get_logger()
     configure_logger(log_level=logging.NOTSET, logger=structlog_logger)
     structlog.configure(processors=[structlog.stdlib.add_log_level])

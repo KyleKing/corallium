@@ -112,7 +112,7 @@ if __name__ == '__main__':
     # Resolve number of cores or specified maximum
     num_cpus = 4
     try:
-        import psutil  # pyright: ignore
+        import psutil  # pyright: ignore[reportMissingModuleSource]
         num_cpus = psutil.cpu_count(logical=False)
     except Exception as exc:  # noqa: PIE786
         print(exc)  # noqa: T201

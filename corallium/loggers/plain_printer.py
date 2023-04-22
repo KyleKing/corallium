@@ -5,7 +5,7 @@ from beartype.typing import Any
 
 
 @beartype
-def writer(
+def plain_printer(
     message: str,  # noqa: ARG001
     *,
     is_header: bool,  # noqa: ARG001
@@ -15,4 +15,5 @@ def writer(
     **kwargs: Any,  # noqa: ARG001
 ) -> None:
     """Generic log writer.."""
-    raise NotImplementedError('The writer is for testing hot-swapping and has not yet been implemented')
+    values = ' '.join([f'{key}={value}' for key, value in kwargs.items()])
+    print(f'{message} {values}'.strip())  # noqa: T201
