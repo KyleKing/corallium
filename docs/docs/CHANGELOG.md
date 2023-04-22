@@ -1,5 +1,11 @@
 ## Unreleased
 
+### Fix
+
+- default to 'utf-8' when reading files
+
+## 0.2.0 (2023-04-22)
+
 ### Feat
 
 - add structlog and print loggers. Remove not implemented writer

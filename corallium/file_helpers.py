@@ -32,17 +32,19 @@ MKDOCS_CONFIG = Path('mkdocs.yml')
 
 
 @beartype
-def read_lines(path_file: Path) -> List[str]:
+def read_lines(path_file: Path, encoding: Optional[str] = 'utf-8', errors: Optional[str] = None) -> List[str]:
     """Read a file and split on newlines for later parsing.
 
     Args:
         path_file: path to the file
+        encoding: defaults to 'utf-8'
+        encoding: defaults to None, Use 'ignore' if needed'
 
     Returns:
         List[str]: lines of text as list
 
     """
-    return path_file.read_text().splitlines() if path_file.is_file() else []
+    return path_file.read_text(encoding=encoding, errors=errors).splitlines() if path_file.is_file() else []
 
 
 @beartype
