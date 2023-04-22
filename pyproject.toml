@@ -3,7 +3,7 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.commitizen]
-version = "0.1.1"
+version = "0.2.0"
 version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
 
 [tool.poetry]
@@ -26,7 +26,7 @@ maintainers = []
 name = "corallium"
 readme = "docs/README.md"
 repository = "https://github.com/kyleking/corallium"
-version = "0.1.1"
+version = "0.2.0"
 
 [tool.poetry.dependencies]
 python = "^3.8.12"
