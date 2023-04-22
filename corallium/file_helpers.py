@@ -113,7 +113,7 @@ def read_pyproject(cwd: Optional[Path] = None) -> Any:
     except Exception as exc:
         msg = f'Could not locate: {toml_path}'
         raise RuntimeError(msg) from exc
-    return tomllib.loads(pyproject_txt)
+    return tomllib.loads(pyproject_txt)  # pyright: ignore[reportGeneralTypeIssues]
 
 
 @lru_cache(maxsize=5)
