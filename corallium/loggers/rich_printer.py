@@ -46,7 +46,7 @@ def rich_printer(  # noqa: CAC001,CFQ002
             full_lines.append((key, line))
     for key, value in kwargs.items():
         text.append(f' {key}=', style=_styles.key)
-        text.append(f'{str(value)}', style=_styles.value)
+        text.append(f'{value!s}', style=_styles.value)
     _console.print(text)
     for key, line in full_lines:
         new_text = Text()

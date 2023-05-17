@@ -46,19 +46,19 @@ poetry config pypi-token.pypi ...
 <!-- {cts} COVERAGE -->
 | File                                                      |   Statements |   Missing |   Excluded | Coverage   |
 |-----------------------------------------------------------|--------------|-----------|------------|------------|
-| `corallium/__init__.py`                                   |            7 |         1 |          0 | 85.7%      |
-| `corallium/file_helpers.py`                               |          115 |        40 |          6 | 65.2%      |
-| `corallium/log.py`                                        |           59 |         1 |          0 | 98.3%      |
+| `corallium/__init__.py`                                   |            7 |         1 |          0 | 77.8%      |
+| `corallium/file_helpers.py`                               |          115 |        40 |          6 | 67.6%      |
+| `corallium/log.py`                                        |           59 |         1 |          0 | 97.8%      |
 | `corallium/loggers/__init__.py`                           |            0 |         0 |          0 | 100.0%     |
 | `corallium/loggers/plain_printer.py`                      |            6 |         0 |          0 | 100.0%     |
-| `corallium/loggers/rich_printer.py`                       |           38 |         9 |          0 | 76.3%      |
+| `corallium/loggers/rich_printer.py`                       |           38 |        28 |          0 | 22.2%      |
 | `corallium/loggers/structlog_logger/__init__.py`          |            2 |         0 |          3 | 100.0%     |
 | `corallium/loggers/structlog_logger/_structlog_logger.py` |            9 |         0 |          0 | 100.0%     |
-| `corallium/loggers/styles.py`                             |           24 |         1 |          0 | 95.8%      |
+| `corallium/loggers/styles.py`                             |           24 |         3 |          0 | 90.0%      |
 | `corallium/pretty_process.py`                             |           59 |        59 |          0 | 0.0%       |
 | `corallium/shell.py`                                      |           33 |         2 |          0 | 93.9%      |
 | `corallium/tomllib.py`                                    |            2 |         0 |          2 | 100.0%     |
-| **Totals**                                                |          354 |       113 |         11 | 68.1%      |
+| **Totals**                                                |          354 |       134 |         11 | 62.3%      |
 
-Generated on: 2023-04-22
+Generated on: 2023-05-16
 <!-- {cte} -->

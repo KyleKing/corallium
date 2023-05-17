@@ -2,6 +2,12 @@
 
 ### Fix
 
+- bump minimum pymdown dependency
+
+## 0.2.1 (2023-04-22)
+
+### Fix
+
 - default to 'utf-8' when reading files
 
 ## 0.2.0 (2023-04-22)
