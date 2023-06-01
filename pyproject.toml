@@ -17,7 +17,7 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
 ] # https://pypi.org/classifiers/
-description = "Shared functionality for calcipy-ecosystem"
+description = "Shared functionality for the calcipy-ecosystem"
 documentation = "https://corallium.kyleking.me"
 include = ["LICENSE"]
 keywords = []
