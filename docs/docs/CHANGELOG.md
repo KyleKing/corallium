@@ -1,8 +1,14 @@
 ## Unreleased
 
+## 0.2.2 (2023-05-16)
+
 ### Fix
 
 - bump minimum pymdown dependency
+
+### Refactor
+
+- run main task
 
 ## 0.2.1 (2023-04-22)
 
