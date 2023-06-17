@@ -58,7 +58,7 @@ def rich_printer(  # noqa: CAC001,CFQ002
         term_width, _height = shutil.get_terminal_size((100, 50))
         _console.print_exception(
             extra_lines=1,
-            max_frames=5,
+            max_frames=6,
             show_locals=False,
             width=term_width,
         )
