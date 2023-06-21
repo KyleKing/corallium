@@ -12,7 +12,7 @@ from pathlib import Path
 from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 
-from .log import logger
+from .log import get_logger
 from .tomllib import tomllib
 
 LOCK = Path('poetry.lock')
@@ -154,10 +154,10 @@ def read_yaml_file(path_yaml: Path) -> Any:
     try:
         return yaml.unsafe_load(path_yaml.read_text())  # nosemgrep
     except (FileNotFoundError, KeyError) as exc:  # pragma: no cover
-        logger.warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
+        get_logger().warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
         return {}
     except yaml.constructor.ConstructorError:
-        logger.exception('Warning: burying poorly handled yaml error')
+        get_logger().exception('Warning: burying poorly handled yaml error')
         return {}
 
 
@@ -209,7 +209,7 @@ def if_found_unlink(path_file: Path) -> None:
 
     """
     if path_file.is_file():
-        logger.text('Deleting', path_file=path_file)
+        get_logger().text('Deleting', path_file=path_file)
         path_file.unlink()
 
 
@@ -236,7 +236,7 @@ def delete_dir(dir_path: Path) -> None:
 
     """
     if dir_path.is_dir():
-        logger.text('Deleting', dir_path=dir_path)
+        get_logger().text('Deleting', dir_path=dir_path)
         shutil.rmtree(dir_path)
 
 
@@ -248,7 +248,7 @@ def ensure_dir(dir_path: Path) -> None:
         dir_path: Path to directory that needs to exists
 
     """
-    logger.text('Creating', dir_path=dir_path)
+    get_logger().text('Creating', dir_path=dir_path)
     dir_path.mkdir(parents=True, exist_ok=True)
 
 

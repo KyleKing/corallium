@@ -1,5 +1,6 @@
 """Run shell commands."""
 
+import asyncio
 import subprocess  # noqa: S404  # nosec
 import sys
 from io import BufferedReader
@@ -9,14 +10,14 @@ from time import time
 from beartype import beartype
 from beartype.typing import Callable, Optional
 
-from .log import logger
+from .log import get_logger
 
 
 @beartype
 def capture_shell(
     cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None, printer: Optional[Callable[[str], None]] = None,
 ) -> str:
-    """Run shell command and return the output.
+    """Run shell command, return the output, and optionally print in real time.
 
     Inspired by: https://stackoverflow.com/a/38745040/3219667
 
@@ -33,7 +34,7 @@ def capture_shell(
         CalledProcessError: if return code is non-zero
 
     """
-    logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, printer=printer)
+    get_logger().debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, printer=printer)
 
     start = time()
     lines = []
@@ -61,9 +62,46 @@ def capture_shell(
     return output
 
 
+async def _capture_shell_async(cmd: str, *, cwd: Optional[Path] = None) -> str:
+    proc = await asyncio.create_subprocess_shell(  # noqa: DUO116  # nosec  # nosemgrep
+        cmd, cwd=cwd,
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        shell=True,  # noqa: S604
+    )
+
+    stdout, _stderr = await proc.communicate()
+    output = stdout.decode().strip()
+    if proc.returncode != 0:
+        raise subprocess.CalledProcessError(returncode=proc.returncode or 404, cmd=cmd, output=output)
+    return output
+
+
+async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> str:
+    """Run a shell command asynchronously and return the output.
+
+    ```py
+    print(asyncio.run(capture_shell_async('ls ~/.config')))
+    ```
+
+    Args:
+        cmd: shell command
+        timeout: process timeout. Defaults to 2 minutes
+        cwd: optional path for shell execution
+
+    Returns:
+        str: stripped output
+
+    Raises:
+        CalledProcessError: if return code is non-zero
+
+    """
+    get_logger().debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
+    return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout)
+
+
 @beartype
 def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> None:
-    """Run shell command with buffering output.
+    """Run a shell command without capturing the output.
 
     Args:
         cmd: shell command
@@ -74,7 +112,7 @@ def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> No
         CalledProcessError: if return code is non-zero
 
     """
-    logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
+    get_logger().debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
 
     subprocess.run(  # noqa: DUO116  # nosemgrep
         cmd, timeout=timeout or None, cwd=cwd,

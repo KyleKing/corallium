@@ -6,13 +6,13 @@ from beartype.typing import Any
 
 @beartype
 def plain_printer(
-    message: str,  # noqa: ARG001
+    message: str,
     *,
     is_header: bool,  # noqa: ARG001
     _this_level: int,
     _is_text: bool,
     # Logger-specific parameters that need to be initialized with partial(...)
-    **kwargs: Any,  # noqa: ARG001
+    **kwargs: Any,
 ) -> None:
     """Generic log writer.."""
     values = ' '.join([f'{key}={value}' for key, value in kwargs.items()])
