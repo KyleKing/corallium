@@ -1,5 +1,13 @@
 ## Unreleased
 
+### Feat
+
+- add capture shell async
+
+### Perf
+
+- use the logger global instead of the function
+
 ## 0.2.2 (2023-05-16)
 
 ### Fix

@@ -10,7 +10,7 @@ from time import time
 from beartype import beartype
 from beartype.typing import Callable, Optional
 
-from .log import get_logger
+from .log import logger
 
 
 @beartype
@@ -34,7 +34,7 @@ def capture_shell(
         CalledProcessError: if return code is non-zero
 
     """
-    get_logger().debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, printer=printer)
+    logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, printer=printer)
 
     start = time()
     lines = []
@@ -95,7 +95,7 @@ async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Optional[Pat
         CalledProcessError: if return code is non-zero
 
     """
-    get_logger().debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
+    logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
     return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout)
 
 
@@ -112,7 +112,7 @@ def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> No
         CalledProcessError: if return code is non-zero
 
     """
-    get_logger().debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
+    logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
 
     subprocess.run(  # noqa: DUO116  # nosemgrep
         cmd, timeout=timeout or None, cwd=cwd,
