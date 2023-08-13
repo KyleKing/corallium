@@ -106,7 +106,6 @@ def get_tool_versions(cwd: Optional[Path] = None) -> Dict[str, List[str]]:
 
 
 @lru_cache(maxsize=5)
-@beartype
 def read_pyproject(cwd: Optional[Path] = None) -> Any:
     """Read the 'pyproject.toml' file once."""
     toml_path = find_in_parents(name='pyproject.toml', cwd=cwd)
@@ -119,7 +118,6 @@ def read_pyproject(cwd: Optional[Path] = None) -> Any:
 
 
 @lru_cache(maxsize=5)
-@beartype
 def read_package_name(cwd: Optional[Path] = None) -> str:
     """Read the package name once."""
     poetry_config = read_pyproject(cwd=cwd)
