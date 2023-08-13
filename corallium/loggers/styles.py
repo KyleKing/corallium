@@ -32,7 +32,6 @@ class Styles(BaseModel):
     value: str = '#A28EAB'
     value_own_line: str = '#AAA18D'
 
-    @beartype
     def get_style(self, *, level: int) -> str:
         """Return the right style for the specified level."""
         return {
