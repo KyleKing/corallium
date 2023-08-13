@@ -21,7 +21,7 @@
         <link rel="next" href="../../pretty_process/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -936,15 +936,15 @@
 
 
 <h3 id="corallium.loggers.styles.Styles" class="doc doc-heading">
-        <span class="doc doc-object-name doc-class-name">Styles</span>
+          <span class="doc doc-object-name doc-class-name">Styles</span>
 
 
 <a href="#corallium.loggers.styles.Styles" class="headerlink" title="Permanent link">⚓︎</a></h3>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
 
   
       <p>Inspired by <code>loguru</code> and <code>structlog</code> and used in <code>tail-jsonl</code>.</p>
@@ -952,10 +952,9 @@
 <p>Inspired by: https://github.com/Delgan/loguru/blob/07f94f3c8373733119f85aa8b9ca05ace3325a4b/loguru/_defaults.py#L31-L73</p>
 <p>And: https://github.com/hynek/structlog/blob/bcfc7f9e60640c150bffbdaeed6328e582f93d1e/src/structlog/dev.py#L126-L141</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 9 "></span><span class="k">class</span> <span class="nc">Styles</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+            <details class="quote">
+              <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 9 "></span><span class="k">class</span> <span class="nc">Styles</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="linenos" data-linenos="10 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Inspired by `loguru` and `structlog` and used in `tail-jsonl`.</span>
 <span class="linenos" data-linenos="11 "></span>
 <span class="linenos" data-linenos="12 "></span><span class="sd">    https://rich.readthedocs.io/en/latest/style.html</span>
@@ -992,7 +991,7 @@
 <span class="linenos" data-linenos="43 "></span>            <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_debug</span><span class="p">,</span>
 <span class="linenos" data-linenos="44 "></span>        <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_fallback</span><span class="p">)</span>
 </code></pre></div>
-        </details>
+            </details>
 
   
 
@@ -1006,12 +1005,13 @@
 
 <h4 id="corallium.loggers.styles.Styles-functions">Functions<a href="#corallium.loggers.styles.Styles-functions" class="headerlink" title="Permanent link">⚓︎</a></h4>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h5 id="corallium.loggers.styles.Styles.get_style" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">get_style</span>
+          <span class="doc doc-object-name doc-function-name">get_style</span>
 
 
 <a href="#corallium.loggers.styles.Styles.get_style" class="headerlink" title="Permanent link">⚓︎</a></h5>
@@ -1022,9 +1022,9 @@
   
       <p>Return the right style for the specified level.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="35 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="35 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="36 "></span><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="37 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the right style for the specified level.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="38 "></span>    <span class="k">return</span> <span class="p">{</span>
@@ -1035,7 +1035,7 @@
 <span class="linenos" data-linenos="43 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_debug</span><span class="p">,</span>
 <span class="linenos" data-linenos="44 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_fallback</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1049,12 +1049,13 @@
 </div>
 <h2 id="corallium.loggers.styles-functions">Functions<a href="#corallium.loggers.styles-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="corallium.loggers.styles.get_level" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">get_level</span>
+          <span class="doc doc-object-name doc-function-name">get_level</span>
 
 
 <a href="#corallium.loggers.styles.get_level" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1065,9 +1066,9 @@
   
       <p>Return the logging level based on the provided name.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="47 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="47 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="48 "></span><span class="k">def</span> <span class="nf">get_level</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="linenos" data-linenos="49 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the logging level based on the provided name.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="50 "></span>    <span class="k">return</span> <span class="p">{</span>
@@ -1078,17 +1079,18 @@
 <span class="linenos" data-linenos="55 "></span>        <span class="s1">&#39;DEBUG&#39;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
 <span class="linenos" data-linenos="56 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="corallium.loggers.styles.get_name" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">get_name</span>
+          <span class="doc doc-object-name doc-function-name">get_name</span>
 
 
 <a href="#corallium.loggers.styles.get_name" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1100,9 +1102,9 @@
       <p>Return the logging name based on the provided level.</p>
 <p>https://docs.python.org/3.11/library/logging.html#logging-levels</p>
 
-      <details class="quote">
-        <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="59 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>corallium/loggers/styles.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="59 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="60 "></span><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="61 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the logging name based on the provided level.</span>
 <span class="linenos" data-linenos="62 "></span>
@@ -1118,7 +1120,7 @@
 <span class="linenos" data-linenos="72 "></span>        <span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">:</span> <span class="s1">&#39;NOTSET&#39;</span><span class="p">,</span>
 <span class="linenos" data-linenos="73 "></span>    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1136,11 +1138,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 21, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 13, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 21, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 13, 2023</span>
       
     
   </small>
@@ -1182,10 +1184,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["toc.autohide"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>

@@ -21,7 +21,7 @@
         <link rel="next" href="../tomllib/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -852,12 +852,13 @@
 
 <h2 id="corallium.shell-functions">Functions<a href="#corallium.shell-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="corallium.shell.capture_shell" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">capture_shell</span>
+          <span class="doc doc-object-name doc-function-name">capture_shell</span>
 
 
 <a href="#corallium.shell.capture_shell" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -869,11 +870,13 @@
       <p>Run shell command, return the output, and optionally print in real time.</p>
 <p>Inspired by: https://stackoverflow.com/a/38745040/3219667</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
@@ -948,6 +951,8 @@
     </tbody>
   </table>
 
+
+
   <table>
     <thead>
       <tr>
@@ -975,6 +980,8 @@
     </tbody>
   </table>
 
+
+
   <table>
     <thead>
       <tr>
@@ -998,9 +1005,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>corallium/shell.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="16 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>corallium/shell.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="16 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="17 "></span><span class="k">def</span> <span class="nf">capture_shell</span><span class="p">(</span>
 <span class="linenos" data-linenos="18 "></span>    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">printer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="linenos" data-linenos="19 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -1030,7 +1037,7 @@
 <span class="linenos" data-linenos="43 "></span>        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="linenos" data-linenos="44 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># noqa: S602</span>
 <span class="linenos" data-linenos="45 "></span>    <span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
-<span class="linenos" data-linenos="46 "></span>        <span class="n">stdout</span><span class="p">:</span> <span class="n">BufferedReader</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span>  <span class="c1"># type: ignore[assignment]</span>
+<span class="linenos" data-linenos="46 "></span>        <span class="n">stdout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">BufferedReader</span><span class="p">,</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">TextIOWrapper</span><span class="p">]</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span>  <span class="c1"># type: ignore[assignment]</span>
 <span class="linenos" data-linenos="47 "></span>        <span class="n">return_code</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="linenos" data-linenos="48 "></span>        <span class="k">while</span> <span class="n">return_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="49 "></span>            <span class="k">if</span> <span class="n">timeout</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">timeout</span><span class="p">:</span>
@@ -1048,17 +1055,18 @@
 <span class="linenos" data-linenos="61 "></span>        <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">(</span><span class="n">returncode</span><span class="o">=</span><span class="n">return_code</span> <span class="ow">or</span> <span class="mi">404</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
 <span class="linenos" data-linenos="62 "></span>    <span class="k">return</span> <span class="n">output</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="corallium.shell.capture_shell_async" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">capture_shell_async</span>
+          <span class="doc doc-object-name doc-function-name">capture_shell_async</span>
 
   
   <span class="doc doc-labels">
@@ -1075,11 +1083,13 @@
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nb">print</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">capture_shell_async</span><span class="p">(</span><span class="s1">&#39;ls ~/.config&#39;</span><span class="p">)))</span>
 </code></pre></div>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
@@ -1135,6 +1145,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <table>
     <thead>
@@ -1163,6 +1175,8 @@
     </tbody>
   </table>
 
+
+
   <table>
     <thead>
       <tr>
@@ -1186,9 +1200,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>corallium/shell.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="79 "></span><span class="k">async</span> <span class="k">def</span> <span class="nf">capture_shell_async</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+          <details class="quote">
+            <summary>Source code in <code>corallium/shell.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="79 "></span><span class="k">async</span> <span class="k">def</span> <span class="nf">capture_shell_async</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="linenos" data-linenos="80 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a shell command asynchronously and return the output.</span>
 <span class="linenos" data-linenos="81 "></span>
 <span class="linenos" data-linenos="82 "></span><span class="sd">    ```py</span>
@@ -1210,17 +1224,18 @@
 <span class="linenos" data-linenos="98 "></span>    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
 <span class="linenos" data-linenos="99 "></span>    <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">_capture_shell_async</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="corallium.shell.run_shell" class="doc doc-heading">
-        <span class="doc doc-object-name doc-function-name">run_shell</span>
+          <span class="doc doc-object-name doc-function-name">run_shell</span>
 
 
 <a href="#corallium.shell.run_shell" class="headerlink" title="Permanent link">⚓︎</a></h3>
@@ -1231,11 +1246,13 @@
   
       <p>Run a shell command without capturing the output.</p>
 
+
+
   <table>
     <thead>
       <tr>
         <th><b>PARAMETER</b></th>
-        <th><b>DESCRIPTION</b></th>
+        <th><b> DESCRIPTION</b></th>
       </tr>
     </thead>
     <tbody>
@@ -1292,6 +1309,8 @@
     </tbody>
   </table>
 
+
+
   <table>
     <thead>
       <tr>
@@ -1315,9 +1334,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>corallium/shell.py</code></summary>
-        <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="102 "></span><span class="nd">@beartype</span>
+          <details class="quote">
+            <summary>Source code in <code>corallium/shell.py</code></summary>
+            <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="102 "></span><span class="nd">@beartype</span>
 <span class="linenos" data-linenos="103 "></span><span class="k">def</span> <span class="nf">run_shell</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos" data-linenos="104 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a shell command without capturing the output.</span>
 <span class="linenos" data-linenos="105 "></span>
@@ -1338,7 +1357,7 @@
 <span class="linenos" data-linenos="120 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># noqa: S602,  # nosec</span>
 <span class="linenos" data-linenos="121 "></span>    <span class="p">)</span>
 </code></pre></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1356,11 +1375,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 21, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 13, 2023</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 21, 2023</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 13, 2023</span>
       
     
   </small>
@@ -1402,10 +1421,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.autohide"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.autohide"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
