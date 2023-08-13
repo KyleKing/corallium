@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.3.0 (2023-06-21)
+
 ### Feat
 
 - add capture shell async

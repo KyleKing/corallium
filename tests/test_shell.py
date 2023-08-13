@@ -31,7 +31,7 @@ async def test_shell() -> None:
 
 def test_capture_shell_gibberish():
     with pytest.raises(CalledProcessError):
-        capture_shell('gibberish')
+        capture_shell('gibberish-gibberish-gibberish')
 
 
 def test_capture_shell(fake_process):

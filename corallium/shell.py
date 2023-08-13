@@ -3,12 +3,12 @@
 import asyncio
 import subprocess  # noqa: S404  # nosec
 import sys
-from io import BufferedReader
+from io import BufferedReader, StringIO, TextIOWrapper
 from pathlib import Path
 from time import time
 
 from beartype import beartype
-from beartype.typing import Callable, Optional
+from beartype.typing import Callable, Optional, Union
 
 from .log import logger
 
@@ -43,7 +43,7 @@ def capture_shell(
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True,
         shell=True,  # noqa: S602
     ) as proc:
-        stdout: BufferedReader = proc.stdout  # type: ignore[assignment]
+        stdout: Union[BufferedReader, StringIO, TextIOWrapper] = proc.stdout  # type: ignore[assignment]
         return_code = None
         while return_code is None:
             if timeout != 0 and time() - start >= timeout:

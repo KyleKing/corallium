@@ -43,7 +43,7 @@ def rich_printer(  # noqa: CAC001,CFQ002
     full_lines = []
     for key in _keys_on_own_line or []:
         if line := kwargs.pop(key, None):
-            full_lines.append((key, line))
+            full_lines.append((key, line))  # noqa: PERF401
     for key, value in kwargs.items():
         text.append(f' {key}=', style=_styles.key)
         text.append(f'{value!s}', style=_styles.value)
