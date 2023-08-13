@@ -7,7 +7,7 @@ from beartype import BeartypeConf
 from beartype.claw import beartype_this_package
 from typing_extensions import Self  # noqa: UP035
 
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __pkg_name__ = 'corallium'
 
 
