@@ -46,7 +46,7 @@ poetry config pypi-token.pypi ...
 <!-- {cts} COVERAGE -->
 | File                                                      |   Statements |   Missing |   Excluded | Coverage   |
 |-----------------------------------------------------------|--------------|-----------|------------|------------|
-| `corallium/__init__.py`                                   |           32 |         4 |          0 | 80.0%      |
+| `corallium/__init__.py`                                   |           17 |         0 |         17 | 100.0%     |
 | `corallium/file_helpers.py`                               |          113 |        32 |          6 | 61.7%      |
 | `corallium/log.py`                                        |           59 |         1 |          0 | 94.4%      |
 | `corallium/loggers/__init__.py`                           |            0 |         0 |          0 | 100.0%     |
@@ -58,7 +58,7 @@ poetry config pypi-token.pypi ...
 | `corallium/pretty_process.py`                             |           59 |        59 |          0 | 0.0%       |
 | `corallium/shell.py`                                      |           44 |         3 |          0 | 91.9%      |
 | `corallium/tomllib.py`                                    |            2 |         0 |          2 | 100.0%     |
-| **Totals**                                                |          387 |       107 |         11 | 66.4%      |
+| **Totals**                                                |          372 |       103 |         28 | 66.4%      |
 
-Generated on: 2023-08-13
+Generated on: 2023-08-14
 <!-- {cte} -->

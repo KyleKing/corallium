@@ -1,4 +1,8 @@
-## Unreleased
+## 0.3.3 (2023-08-13)
+
+### Fix
+
+- correct copier update that broke Python <=3.10 support
 
 ## 0.3.2 (2023-08-13)
 
