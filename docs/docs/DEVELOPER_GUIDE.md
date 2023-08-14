@@ -46,19 +46,19 @@ poetry config pypi-token.pypi ...
 <!-- {cts} COVERAGE -->
 | File                                                      |   Statements |   Missing |   Excluded | Coverage   |
 |-----------------------------------------------------------|--------------|-----------|------------|------------|
-| `corallium/__init__.py`                                   |           26 |         4 |          0 | 78.1%      |
-| `corallium/file_helpers.py`                               |          115 |        32 |          6 | 63.8%      |
+| `corallium/__init__.py`                                   |           32 |         4 |          0 | 80.0%      |
+| `corallium/file_helpers.py`                               |          113 |        32 |          6 | 61.7%      |
 | `corallium/log.py`                                        |           59 |         1 |          0 | 94.4%      |
 | `corallium/loggers/__init__.py`                           |            0 |         0 |          0 | 100.0%     |
 | `corallium/loggers/plain_printer.py`                      |            6 |         0 |          0 | 100.0%     |
 | `corallium/loggers/rich_printer.py`                       |           38 |         8 |          0 | 72.2%      |
 | `corallium/loggers/structlog_logger/__init__.py`          |            2 |         0 |          3 | 100.0%     |
 | `corallium/loggers/structlog_logger/_structlog_logger.py` |            9 |         0 |          0 | 100.0%     |
-| `corallium/loggers/styles.py`                             |           24 |         0 |          0 | 96.7%      |
+| `corallium/loggers/styles.py`                             |           23 |         0 |          0 | 96.3%      |
 | `corallium/pretty_process.py`                             |           59 |        59 |          0 | 0.0%       |
 | `corallium/shell.py`                                      |           44 |         3 |          0 | 91.9%      |
 | `corallium/tomllib.py`                                    |            2 |         0 |          2 | 100.0%     |
-| **Totals**                                                |          384 |       107 |         11 | 66.8%      |
+| **Totals**                                                |          387 |       107 |         11 | 66.4%      |
 
-Generated on: 2023-08-12
+Generated on: 2023-08-13
 <!-- {cte} -->

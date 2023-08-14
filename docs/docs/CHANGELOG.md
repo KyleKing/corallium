@@ -1,5 +1,18 @@
 ## Unreleased
 
+## 0.3.2 (2023-08-13)
+
+### Fix
+
+- bump minimum pydantic to avoid beartype c-error
+- remove beartype from lru_cache
+
+## 0.3.1 (2023-08-12)
+
+### Fix
+
+- support beartype.claw type checking
+
 ## 0.3.0 (2023-06-21)
 
 ### Feat
