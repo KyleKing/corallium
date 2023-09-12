@@ -2,7 +2,7 @@
 # Answer file maintained by Copier for: https://github.com/KyleKing/calcipy_template
 # DO NOT MODIFY THIS FILE. Edit by re-running copier and changing responses to the questions
 # Check into version control.
-_commit: 1.7.13
+_commit: 1.8.2
 _src_path: gh:KyleKing/calcipy_template
 author_email: dev.act.kyle@gmail.com
 author_name: Kyle King
@@ -16,7 +16,7 @@ install_extras: ''
 minimum_python: 3.8.12
 minimum_python_short: '3.8'
 package_name_py: corallium
-project_description: Shared functionality for calcipy-ecosystem
+project_description: Shared functionality for the calcipy-ecosystem
 project_name: corallium
 repository_namespace: kyleking
 repository_provider: https://github.com
