@@ -14,7 +14,6 @@ classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
 ] # https://pypi.org/classifiers/
 description = "Shared functionality for the calcipy-ecosystem"
@@ -29,14 +28,14 @@ repository = "https://github.com/kyleking/corallium"
 version = "0.3.3"
 
 [tool.poetry.dependencies]
-python = "^3.8.12"
+python = "^3.9.13"
 beartype = ">=0.15.0"
 pydantic = ">=2.1.1"
 rich = ">=12.6.0"
 tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=1.6.2"}
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=2.0.1"}
 pytest-asyncio = ">=0.21.0"
 pytest-structlog = ">=0.6" # Provides pytest fixture 'log'
 pytest-subprocess = ">=1.4.1"
@@ -49,4 +48,4 @@ types-pyyaml = ">=6.0.12.8"
 
 [tool.pyright]
 include = ["corallium"]
-pythonVersion = "3.8"
+pythonVersion = "3.9"
