@@ -1,7 +1,7 @@
 """Run shell commands."""
 
 import asyncio
-import subprocess  # noqa: S404  # nosec
+import subprocess  # nosec
 import sys
 from io import BufferedReader, StringIO, TextIOWrapper
 from pathlib import Path
@@ -38,7 +38,7 @@ def capture_shell(
 
     start = time()
     lines = []
-    with subprocess.Popen(  # noqa: DUO116  # nosec  # nosemgrep
+    with subprocess.Popen(  # nosec  # nosemgrep
         cmd, cwd=cwd,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True,
         shell=True,  # noqa: S602
@@ -63,7 +63,7 @@ def capture_shell(
 
 
 async def _capture_shell_async(cmd: str, *, cwd: Optional[Path] = None) -> str:
-    proc = await asyncio.create_subprocess_shell(  # noqa: DUO116  # nosec  # nosemgrep
+    proc = await asyncio.create_subprocess_shell(  # nosec  # nosemgrep
         cmd, cwd=cwd,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
         shell=True,  # noqa: S604
@@ -114,7 +114,7 @@ def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> No
     """
     logger.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
 
-    subprocess.run(  # noqa: DUO116  # nosemgrep
+    subprocess.run(  # nosemgrep
         cmd, timeout=timeout or None, cwd=cwd,
         stdout=sys.stdout, stderr=sys.stderr, check=True,
         shell=True,  # noqa: S602,  # nosec

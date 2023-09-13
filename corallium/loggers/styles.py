@@ -15,7 +15,7 @@ class Styles(BaseModel):
 
     And: https://github.com/hynek/structlog/blob/bcfc7f9e60640c150bffbdaeed6328e582f93d1e/src/structlog/dev.py#L126-L141
 
-    """  # noqa: E501
+    """
 
     timestamp: str = '#8DAAA1'
     message: str = 'bold'

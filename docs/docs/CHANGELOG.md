@@ -1,3 +1,9 @@
+## Unreleased
+
+### Fix
+
+- drop Python 3.8
+
 ## 0.3.3 (2023-08-13)
 
 ### Fix

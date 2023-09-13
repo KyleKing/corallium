@@ -13,7 +13,7 @@ from .styles import Styles, get_name
 
 
 @beartype
-def rich_printer(  # noqa: CAC001,CFQ002
+def rich_printer(  # noqa: CAC001
     message: str,
     *,
     is_header: bool,
