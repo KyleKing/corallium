@@ -9,28 +9,19 @@ import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 from multiprocessing.managers import DictProxy
 from time import sleep
-from typing import runtime_checkable
 
 from beartype import beartype
-from beartype.typing import Any, List, Protocol, TypeVar, Union
-from rich.progress import BarColumn, Progress, ProgressColumn, TimeElapsedColumn, TimeRemainingColumn
+from beartype.typing import Any, Callable, List, TypeVar, Union
+from rich.progress import BarColumn, Progress, ProgressColumn, TaskID, TimeElapsedColumn, TimeRemainingColumn
 
 _ItemT = TypeVar('_ItemT', bound=Any)
 """Iterated item in the data."""
 
 
-@runtime_checkable
-class _DelegatedTask(Protocol):
-    """Defined the kwargs accepted for a delegated task."""
-
-    def __call__(
-        self,
-        *,
-        task_id: int,
-        shared_progress: DictProxy,  # type: ignore[type-arg]
-        data: List[_ItemT],
-    ) -> Any:
-        ...
+_DelegatedTask = Callable[
+    [TaskID, DictProxy, list[_ItemT]],
+    Any,
+]
 
 
 @beartype
@@ -47,7 +38,12 @@ def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
 
 
 @beartype
-def pretty_process(delegated_task: _DelegatedTask, *, data: List[_ItemT], num_workers: int = 3) -> Any:
+def pretty_process(
+    delegated_task: _DelegatedTask,  # type: ignore[type-arg]
+    *,
+    data: List[_ItemT],
+    num_workers: int = 3,
+) -> Any:
     """Run a task in parallel to process all provided data.
 
     Uses `rich` to display pretty progress bars
@@ -79,9 +75,7 @@ def pretty_process(delegated_task: _DelegatedTask, *, data: List[_ItemT], num_wo
                     task_id = progress.add_task(f'task {ix}')
                     shared_progress[task_id] = 0
                     totals[task_id] = len(chunk)
-                    jobs.append(executor.submit(
-                        delegated_task, task_id=task_id, shared_progress=shared_progress, data=chunk,
-                    ))
+                    jobs.append(executor.submit(delegated_task, task_id, shared_progress, chunk))
 
                 # Update progress bar from shared state
                 remaining = len(jobs)
@@ -98,7 +92,7 @@ def pretty_process(delegated_task: _DelegatedTask, *, data: List[_ItemT], num_wo
 
 
 # Note: can't use beartype on a delegated_task & this function can't be in the if-block below
-def __long_task(*, task_id: int, shared_progress: DictProxy, data: List[_ItemT]) -> Any:  # type: ignore[type-arg]
+def __long_task(task_id: int, shared_progress: DictProxy, data: List[_ItemT]) -> Any:  # type: ignore[type-arg]
     """Example long task."""
     for _val in data:
         sleep(1)  # nosemgrep: python.lang.best-practice.sleep.arbitrary-sleep

@@ -55,10 +55,10 @@ poetry config pypi-token.pypi ...
 | `corallium/loggers/structlog_logger/__init__.py`          |            2 |         0 |          3 | 100.0%     |
 | `corallium/loggers/structlog_logger/_structlog_logger.py` |            9 |         0 |          0 | 100.0%     |
 | `corallium/loggers/styles.py`                             |           23 |         0 |          0 | 96.3%      |
-| `corallium/pretty_process.py`                             |           59 |        59 |          0 | 0.0%       |
+| `corallium/pretty_process.py`                             |           55 |        55 |          0 | 0.0%       |
 | `corallium/shell.py`                                      |           44 |         3 |          0 | 91.9%      |
 | `corallium/tomllib.py`                                    |            2 |         0 |          2 | 100.0%     |
-| **Totals**                                                |          372 |       103 |         28 | 66.4%      |
+| **Totals**                                                |          368 |        99 |         28 | 67.2%      |
 
-Generated on: 2023-09-12
+Generated on: 2023-10-14
 <!-- {cte} -->
