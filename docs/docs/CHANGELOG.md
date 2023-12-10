@@ -2,6 +2,7 @@
 
 ### Fix
 
+- delegated tasks must accept positional arguments
 - drop Python 3.8
 
 ## 0.3.3 (2023-08-13)

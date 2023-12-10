@@ -19,7 +19,11 @@ _ItemT = TypeVar('_ItemT', bound=Any)
 
 
 _DelegatedTask = Callable[
-    [TaskID, DictProxy, list[_ItemT]],
+    [
+        TaskID,
+        DictProxy,  # type: ignore[type-arg]
+        list[_ItemT],
+    ],
     Any,
 ]
 

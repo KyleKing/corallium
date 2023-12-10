@@ -83,23 +83,23 @@ class _Logger:
         self.debug(message, **{'_is_text': True, 'is_header': is_header, **kwargs})
 
     @beartype
-    def debug(self, message: str, **kwargs: Any) -> None:
+    def debug(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.DEBUG, **kwargs)
 
     @beartype
-    def info(self, message: str, **kwargs: Any) -> None:
+    def info(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.INFO, **kwargs)
 
     @beartype
-    def warning(self, message: str, **kwargs: Any) -> None:
+    def warning(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.WARNING, **kwargs)
 
     @beartype
-    def error(self, message: str, **kwargs: Any) -> None:
+    def error(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.ERROR, **kwargs)
 
     @beartype
-    def exception(self, message: str, **kwargs: Any) -> None:
+    def exception(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.CRITICAL, **kwargs)
 
 

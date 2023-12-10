@@ -29,7 +29,7 @@ def rich_printer(  # noqa: CAC001
     text = Text()
     if _is_text:
         if is_header:
-            print('')  # noqa: T201
+            print()  # noqa: T201
         text.append(f'{message}', style=_styles.message)
     else:
         timestamp = kwargs.pop('timestamp', datetime.now())  # noqa: DTZ005

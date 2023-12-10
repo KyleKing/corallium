@@ -138,7 +138,7 @@ def read_yaml_file(path_yaml: Path) -> Any:
 
     """
     try:
-        import yaml  # lazy-load the optional dependency
+        import yaml  # noqa: PLC0415 # lazy-load the optional dependency
     except ImportError as exc:
         raise RuntimeError("The 'calcipy[docs]' extras are missing") from exc
 
