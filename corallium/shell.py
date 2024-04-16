@@ -1,7 +1,7 @@
 """Run shell commands."""
 
 import asyncio
-import subprocess  # nosec
+import subprocess  # nosec # noqa: S404
 import sys
 from io import BufferedReader, StringIO, TextIOWrapper
 from pathlib import Path
