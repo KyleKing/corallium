@@ -60,5 +60,5 @@ poetry config pypi-token.pypi ...
 | `corallium/tomllib.py`                                    |            2 |         0 |          2 | 100.0%     |
 | **Totals**                                                |          368 |        99 |         28 | 67.2%      |
 
-Generated on: 2024-04-16
+Generated on: 2024-04-17
 <!-- {cte} -->
