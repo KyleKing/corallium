@@ -35,13 +35,13 @@ trio = ["trio (>=0.23)"]
 
 [[package]]
 name = "argcomplete"
-version = "3.2.3"
+version = "3.3.0"
 description = "Bash tab completion for argparse"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "argcomplete-3.2.3-py3-none-any.whl", hash = "sha256:c12355e0494c76a2a7b73e3a59b09024ca0ba1e279fb9ed6c1b82d5b74b6a70c"},
-    {file = "argcomplete-3.2.3.tar.gz", hash = "sha256:bf7900329262e481be5a15f56f19736b376df6f82ed27576fa893652c5de6c23"},
+    {file = "argcomplete-3.3.0-py3-none-any.whl", hash = "sha256:c168c3723482c031df3c207d4ba8fa702717ccb9fc0bfe4117166c1f537b4a54"},
+    {file = "argcomplete-3.3.0.tar.gz", hash = "sha256:fd03ff4a5b9e6580569d34b273f741e85cd9e072f3feeeee3eba4891c70eda62"},
 ]
 
 [package.extras]
@@ -149,13 +149,13 @@ nodejs-bin = ">=18.4.0a4"
 
 [[package]]
 name = "beartype"
-version = "0.18.2"
+version = "0.18.3"
 description = "Unbearably fast runtime type checking in pure Python."
 optional = false
 python-versions = ">=3.8.0"
 files = [
-    {file = "beartype-0.18.2-py3-none-any.whl", hash = "sha256:561aa7858e92289b952a6fc5faf15ea32f9519c07cdc0f4df7a01b59fc4bbeaf"},
-    {file = "beartype-0.18.2.tar.gz", hash = "sha256:a6fbc0be9269889312388bfec6a9ddf41bf8fe31b68bcf9c8239db35cd38f411"},
+    {file = "beartype-0.18.3-py3-none-any.whl", hash = "sha256:0131717230b04a7f1994422edaf237735febc90c0c98bd0094ce69e0a6706fff"},
+    {file = "beartype-0.18.3.tar.gz", hash = "sha256:04853d78493f3c84b03956f1fa0c1e5b84c5332a760559ddc8f2cf6141ddf791"},
 ]
 
 [package.extras]
@@ -404,17 +404,17 @@ development = ["black", "flake8", "mypy", "pytest", "types-colorama"]
 
 [[package]]
 name = "commitizen"
-version = "3.22.0"
+version = "3.23.0"
 description = "Python commitizen client tool"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "commitizen-3.22.0-py3-none-any.whl", hash = "sha256:671a587a8684220e7527e7b6a79374d2b13dda7f287a7ef78be6c4ea9919520f"},
-    {file = "commitizen-3.22.0.tar.gz", hash = "sha256:806141c59ed9151acd468e6579c76df83a1536dae27a5f7be7b2ffb1847b79d5"},
+    {file = "commitizen-3.23.0-py3-none-any.whl", hash = "sha256:ccc4d69245c97d14a81c17cb2abedff2e02ef2dfb38cf0e8d5574858456d8916"},
+    {file = "commitizen-3.23.0.tar.gz", hash = "sha256:4a42ba962042d7934d4e953b9789323737d0aa2a6d6efde5d6ce2d68eb5e2e71"},
 ]
 
 [package.dependencies]
-argcomplete = ">=1.12.1,<3.3"
+argcomplete = ">=1.12.1,<3.4"
 charset-normalizer = ">=2.1.0,<4"
 colorama = ">=0.4.1,<0.5.0"
 decli = ">=0.6.0,<0.7.0"
