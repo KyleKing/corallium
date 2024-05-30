@@ -1,12 +1,13 @@
 """Styles."""
 
 import logging
+from dataclasses import dataclass
 
 from beartype import beartype
-from pydantic import BaseModel
 
 
-class Styles(BaseModel):
+@dataclass
+class Styles:
     """Inspired by `loguru` and `structlog` and used in `tail-jsonl`.
 
     https://rich.readthedocs.io/en/latest/style.html
