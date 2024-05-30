@@ -1,4 +1,8 @@
-## Unreleased
+## 1.0.1 (2024-05-29)
+
+### Fix
+
+- remove depdency on pydantic
 
 ## 1.0.0 (2024-04-16)
 
