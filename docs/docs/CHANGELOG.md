@@ -2,6 +2,14 @@
 
 ### Fix
 
+- upgrade calcipy to latest
+- remove lower case log.logger; use log.LOGGER
+
+## 1.0.3 (2024-06-07)
+
+### Fix
+
+- resolve pylint and ruff warnings
 - copier-auto-update
 
 ## 1.0.2 (2024-05-29)

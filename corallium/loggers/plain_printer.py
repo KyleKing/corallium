@@ -14,6 +14,6 @@ def plain_printer(
     # Logger-specific parameters that need to be initialized with partial(...)
     **kwargs: Any,
 ) -> None:
-    """Generic log writer.."""
+    """Print log message."""
     values = ' '.join([f'{key}={value}' for key, value in kwargs.items()])
     print(f'{message} {values}'.strip())  # noqa: T201

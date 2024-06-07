@@ -52,6 +52,7 @@ def pretty_process(
     Uses `rich` to display pretty progress bars
 
     Args:
+    ----
         delegated_task: must call `shared_progress[task_id] += 1` on each item in data
         data: the list of data to distribute
         num_workers: number of worker processes
@@ -97,7 +98,7 @@ def pretty_process(
 
 # Note: can't use beartype on a delegated_task & this function can't be in the if-block below
 def __long_task(task_id: int, shared_progress: DictProxy, data: List[_ItemT]) -> Any:  # type: ignore[type-arg]
-    """Example long task."""
+    """Run a long example task."""
     for _val in data:
         sleep(1)  # nosemgrep: python.lang.best-practice.sleep.arbitrary-sleep
         shared_progress[task_id] += 1

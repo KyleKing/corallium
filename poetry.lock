@@ -150,13 +150,13 @@ files = [
 
 [[package]]
 name = "calcipy"
-version = "2.2.0rc0"
+version = "3.0.0"
 description = "Python package to simplify development"
 optional = false
 python-versions = "<4.0.0,>=3.9.13"
 files = [
-    {file = "calcipy-2.2.0rc0-py3-none-any.whl", hash = "sha256:7eaeaa8fcf14876e25ffdbf608c3904ac393d3115d35963bb4052e02a0d345a9"},
-    {file = "calcipy-2.2.0rc0.tar.gz", hash = "sha256:4e3530e1a7e46a28a099971c747ab6fd1d9173fbc737f8fa2ac1f063e53c1ff0"},
+    {file = "calcipy-3.0.0-py3-none-any.whl", hash = "sha256:d5ecbc0ce316e427faa793d485eb9bb40f508b1fe6b4b958ee9d55b61a99cf68"},
+    {file = "calcipy-3.0.0.tar.gz", hash = "sha256:dd659742707261e21be367047a53bf7e62d9b88949eb2e8fb4448a078e829ed8"},
 ]
 
 [package.dependencies]
@@ -165,7 +165,7 @@ basedpyright = {version = ">=1.6.0", optional = true, markers = "extra == \"type
 beartype = ">=0.18.2"
 bidict = {version = ">=0.22.1", optional = true, markers = "extra == \"stale\""}
 commitizen = {version = ">=3.22.0", optional = true, markers = "extra == \"doc\""}
-corallium = ">=1.0.2"
+corallium = ">=1.0.3"
 httpx = {version = ">=0.24.1", optional = true, markers = "extra == \"stale\""}
 invoke = ">=2.2.0"
 mkdocs = {version = ">=1.5.3", optional = true, markers = "extra == \"doc\""}
@@ -189,7 +189,7 @@ pytest-cov = {version = ">=5.0.0", optional = true, markers = "extra == \"test\"
 pytest-randomly = {version = ">=3.12.0", optional = true, markers = "extra == \"test\""}
 pytest-watcher = {version = ">=0.4.2", optional = true, markers = "extra == \"test\""}
 pyyaml = {version = ">=5.2", optional = true, markers = "extra == \"doc\" or extra == \"tags\""}
-ruff = {version = ">=0.4.4", optional = true, markers = "extra == \"lint\""}
+ruff = {version = ">=0.4.8", optional = true, markers = "extra == \"lint\""}
 tabulate = {version = ">=0.9.0", optional = true, markers = "extra == \"tags\""}
 transitions = {version = ">=0.9.0", optional = true, markers = "extra == \"doc\""}
 virtualenv = {version = ">=20.24.0", optional = true, markers = "extra == \"nox\""}
@@ -198,7 +198,7 @@ virtualenv = {version = ">=20.24.0", optional = true, markers = "extra == \"nox\
 ddict = ["python-box (>=6.0.2)"]
 doc = ["commitizen (>=3.22.0)", "mkdocs (>=1.5.3)", "mkdocs-build-plantuml-plugin (>=1.9.0,!=1.10.0)", "mkdocs-gen-files (>=0.4.0)", "mkdocs-git-revision-date-localized-plugin (>=1.0.1)", "mkdocs-include-markdown-plugin (>=4.0.3)", "mkdocs-literate-nav (>=0.5.0)", "mkdocs-material (>=9.4.8)", "mkdocs-section-index (>=0.3.4)", "mkdocstrings[python] (>=0.24.2)", "pandas (>=1.5.3)", "pylint (>=3.0.2)", "pymdown-extensions (>=10.0.1)", "pyyaml (>=5.2)", "transitions (>=0.9.0)"]
 experimental = ["griffe (>=0.45.2)", "semver (>=3.0.2)"]
-lint = ["ruff (>=0.4.4)"]
+lint = ["ruff (>=0.4.8)"]
 nox = ["nox-poetry (>=1.0.3)", "virtualenv (>=20.24.0)"]
 pylint = ["pylint (>=3.0.2)"]
 stale = ["arrow (>=1.2.3)", "bidict (>=0.22.1)", "httpx (>=0.24.1)", "pyrate_limiter (>=3.0.2)"]
@@ -2298,4 +2298,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.13"
-content-hash = "ea7488b5301c7855aa2276a98a6c03ce910ce2d8e3000d4802f90e6184402814"
+content-hash = "3c3a72dbd9effdf18464a981d38cd766480ae262d91e513e21256ead30956b72"

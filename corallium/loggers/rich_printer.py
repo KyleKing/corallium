@@ -13,7 +13,7 @@ from .styles import Styles, get_name
 
 
 @beartype
-def rich_printer(  # noqa: CAC001
+def rich_printer(
     message: str,
     *,
     is_header: bool,
@@ -25,7 +25,7 @@ def rich_printer(  # noqa: CAC001
     _keys_on_own_line: Optional[List[str]] = None,
     **kwargs: Any,
 ) -> None:
-    """Generic log writer.."""
+    """Print log message with rich formatting."""
     text = Text()
     if _is_text:
         if is_header:

@@ -36,11 +36,13 @@ def read_lines(path_file: Path, encoding: Optional[str] = 'utf-8', errors: Optio
     """Read a file and split on newlines for later parsing.
 
     Args:
+    ----
         path_file: path to the file
         encoding: defaults to 'utf-8'
-        encoding: defaults to None, Use 'ignore' if needed'
+        errors: defaults to None. Use 'ignore' if needed. Full documentation: https://docs.python.org/3.12/library/functions.html#open
 
     Returns:
+    -------
         List[str]: lines of text as list
 
     """
@@ -56,10 +58,12 @@ def tail_lines(path_file: Path, *, count: int) -> List[str]:
     > Tip: `file_size = fh.tell()` -or- `os.fstat(fh.fileno()).st_size` -or- return from `fh.seek(0, os.SEEK_END)`
 
     Args:
+    ----
         path_file: path to the file
         count: maximum number of lines to return
 
     Returns:
+    -------
         List[str]: lines of text as list
 
     """
@@ -99,10 +103,7 @@ def find_in_parents(*, name: str, cwd: Optional[Path] = None) -> Path:
 def get_tool_versions(cwd: Optional[Path] = None) -> Dict[str, List[str]]:
     """Parse a `.tool-versions` file."""
     tv_path = find_in_parents(name='.tool-versions', cwd=cwd)
-    return {
-        line.split(' ')[0]: line.split(' ')[1:]
-        for line in tv_path.read_text().splitlines()
-    }
+    return {line.split(' ')[0]: line.split(' ')[1:] for line in tv_path.read_text().splitlines()}
 
 
 @lru_cache(maxsize=5)
@@ -131,9 +132,11 @@ def read_yaml_file(path_yaml: Path) -> Any:
     > Note: suppresses all tags in the YAML file
 
     Args:
+    ----
         path_yaml: path to the yaml file
 
     Returns:
+    -------
         dictionary representation of the source file
 
     """
@@ -171,11 +174,13 @@ def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = 
     """Replace all characters not in the `allow_chars` with `repl_char`.
 
     Args:
+    ----
         filename: string filename (stem and suffix only)
         repl_char: replacement character. Default is `_`
         allowed_chars: all allowed characters. Default is `ALLOWED_CHARS`
 
     Returns:
+    -------
         str: sanitized filename
 
     """
@@ -203,6 +208,7 @@ def if_found_unlink(path_file: Path) -> None:
     """Remove file if it exists. Function is intended to a doit action.
 
     Args:
+    ----
         path_file: Path to file to remove
 
     """
@@ -216,6 +222,7 @@ def delete_old_files(dir_path: Path, *, ttl_seconds: int) -> None:
     """Delete old files within the specified directory.
 
     Args:
+    ----
         dir_path: Path to directory to delete
         ttl_seconds: if last modified within this number of seconds, will not be deleted
 
@@ -230,6 +237,7 @@ def delete_dir(dir_path: Path) -> None:
     """Delete the specified directory from a doit task.
 
     Args:
+    ----
         dir_path: Path to directory to delete
 
     """
@@ -243,6 +251,7 @@ def ensure_dir(dir_path: Path) -> None:
     """Make sure that the specified dir_path exists and create any missing folders from a doit task.
 
     Args:
+    ----
         dir_path: Path to directory that needs to exists
 
     """
@@ -255,10 +264,12 @@ def get_relative(full_path: Path, other_path: Path) -> Optional[Path]:
     """Try to return the relative path between the two paths. None if no match.
 
     Args:
+    ----
         full_path: the full path to use
         other_path: the path that the full_path may be relative to
 
     Returns:
+    -------
         relative path
 
     """
@@ -276,6 +287,7 @@ def open_in_browser(path_file: Path) -> None:  # pragma: no cover
     """Open the path in the default web browser.
 
     Args:
+    ----
         path_file: Path to file
 
     """
