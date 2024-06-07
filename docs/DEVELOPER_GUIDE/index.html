@@ -986,17 +986,18 @@
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/kyleking/corallium.git
 <span class="linenos" data-linenos=" 2 "></span><span class="nb">cd</span><span class="w"> </span>corallium
 <span class="linenos" data-linenos=" 3 "></span>poetry<span class="w"> </span>install<span class="w"> </span>--sync
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="c1"># See the available tasks</span>
-<span class="linenos" data-linenos=" 6 "></span>poetry<span class="w"> </span>run<span class="w"> </span>calcipy
-<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Or use a local &#39;run&#39; file (so that &#39;calcipy&#39; can be extended)</span>
-<span class="linenos" data-linenos=" 8 "></span>./run
-<span class="linenos" data-linenos=" 9 "></span>
-<span class="linenos" data-linenos="10 "></span><span class="c1"># Run the default task list (lint, auto-format, test coverage, etc.)</span>
-<span class="linenos" data-linenos="11 "></span>./run<span class="w"> </span>main
-<span class="linenos" data-linenos="12 "></span>
-<span class="linenos" data-linenos="13 "></span><span class="c1"># Make code changes and run specific tasks as needed:</span>
-<span class="linenos" data-linenos="14 "></span>./run<span class="w"> </span>lint.fix<span class="w"> </span><span class="nb">test</span>
+<span class="linenos" data-linenos=" 4 "></span>poetry<span class="w"> </span>run<span class="w"> </span>calcipy-pack<span class="w"> </span>pack.install-extras
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># See the available tasks</span>
+<span class="linenos" data-linenos=" 7 "></span>poetry<span class="w"> </span>run<span class="w"> </span>calcipy
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Or use a local &#39;run&#39; file (so that &#39;calcipy&#39; can be extended)</span>
+<span class="linenos" data-linenos=" 9 "></span>./run
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="c1"># Run the default task list (lint, auto-format, test coverage, etc.)</span>
+<span class="linenos" data-linenos="12 "></span>./run<span class="w"> </span>main
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="c1"># Make code changes and run specific tasks as needed:</span>
+<span class="linenos" data-linenos="15 "></span>./run<span class="w"> </span>lint.fix<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 <h2 id="publishing">Publishing<a class="headerlink" href="#publishing" title="Permanent link">⚓︎</a></h2>
 <p>For testing, create an account on <a href="https://test.pypi.org/legacy/">TestPyPi</a>. Replace <code>...</code> with the API token generated on TestPyPi or PyPi respectively</p>
@@ -1037,12 +1038,12 @@
 <td><code>corallium/file_helpers.py</code></td>
 <td>112</td>
 <td>32</td>
-<td>12</td>
+<td>13</td>
 <td>62.7%</td>
 </tr>
 <tr>
 <td><code>corallium/log.py</code></td>
-<td>60</td>
+<td>59</td>
 <td>1</td>
 <td>0</td>
 <td>94.4%</td>
@@ -1064,13 +1065,13 @@
 <tr>
 <td><code>corallium/loggers/rich_printer.py</code></td>
 <td>38</td>
-<td>8</td>
+<td>27</td>
 <td>0</td>
-<td>72.2%</td>
+<td>24.1%</td>
 </tr>
 <tr>
 <td><code>corallium/loggers/structlog_logger/__init__.py</code></td>
-<td>2</td>
+<td>3</td>
 <td>0</td>
 <td>3</td>
 <td>100.0%</td>
@@ -1084,10 +1085,10 @@
 </tr>
 <tr>
 <td><code>corallium/loggers/styles.py</code></td>
-<td>24</td>
+<td>30</td>
+<td>2</td>
 <td>0</td>
-<td>0</td>
-<td>93.3%</td>
+<td>82.5%</td>
 </tr>
 <tr>
 <td><code>corallium/pretty_process.py</code></td>
@@ -1098,10 +1099,10 @@
 </tr>
 <tr>
 <td><code>corallium/shell.py</code></td>
-<td>44</td>
-<td>3</td>
+<td>45</td>
+<td>4</td>
 <td>0</td>
-<td>91.9%</td>
+<td>89.2%</td>
 </tr>
 <tr>
 <td><code>corallium/tomllib.py</code></td>
@@ -1112,10 +1113,10 @@
 </tr>
 <tr>
 <td><strong>Totals</strong></td>
-<td>371</td>
-<td>101</td>
-<td>41</td>
-<td>67.8%</td>
+<td>378</td>
+<td>123</td>
+<td>42</td>
+<td>62.4%</td>
 </tr>
 </tbody>
 </table>

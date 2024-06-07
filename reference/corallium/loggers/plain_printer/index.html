@@ -1027,7 +1027,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Generic log writer..</p>
+      <p>Print log message.</p>
 
             <details class="quote">
               <summary>Source code in <code>corallium/loggers/plain_printer.py</code></summary>
@@ -1041,7 +1041,7 @@
 <span class="linenos" data-linenos="14 "></span>    <span class="c1"># Logger-specific parameters that need to be initialized with partial(...)</span>
 <span class="linenos" data-linenos="15 "></span>    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="linenos" data-linenos="16 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="17 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic log writer..&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="17 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Print log message.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="18 "></span>    <span class="n">values</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 <span class="linenos" data-linenos="19 "></span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># noqa: T201</span>
 </code></pre></div>

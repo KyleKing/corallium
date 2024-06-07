@@ -1045,12 +1045,12 @@
 
     <div class="doc doc-contents ">
 
-      <p>Generic log writer..</p>
+      <p>Print log message with rich formatting.</p>
 
             <details class="quote">
               <summary>Source code in <code>corallium/loggers/rich_printer.py</code></summary>
               <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="15 "></span><span class="nd">@beartype</span>
-<span class="linenos" data-linenos="16 "></span><span class="k">def</span> <span class="nf">rich_printer</span><span class="p">(</span>  <span class="c1"># noqa: CAC001</span>
+<span class="linenos" data-linenos="16 "></span><span class="k">def</span> <span class="nf">rich_printer</span><span class="p">(</span>
 <span class="linenos" data-linenos="17 "></span>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="linenos" data-linenos="18 "></span>    <span class="o">*</span><span class="p">,</span>
 <span class="linenos" data-linenos="19 "></span>    <span class="n">is_header</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
@@ -1062,7 +1062,7 @@
 <span class="linenos" data-linenos="25 "></span>    <span class="n">_keys_on_own_line</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="linenos" data-linenos="26 "></span>    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="linenos" data-linenos="27 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="28 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic log writer..&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="28 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Print log message with rich formatting.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos="29 "></span>    <span class="n">text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
 <span class="linenos" data-linenos="30 "></span>    <span class="k">if</span> <span class="n">_is_text</span><span class="p">:</span>
 <span class="linenos" data-linenos="31 "></span>        <span class="k">if</span> <span class="n">is_header</span><span class="p">:</span>
