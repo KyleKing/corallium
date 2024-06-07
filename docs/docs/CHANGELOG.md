@@ -1,8 +1,10 @@
 ## Unreleased
 
+## 2.0.0 (2024-06-07)
+
 ### Fix
 
-- upgrade calcipy to latest
+- upgrade calcipy to latest and apply changes
 - remove lower case log.logger; use log.LOGGER
 
 ## 1.0.3 (2024-06-07)
