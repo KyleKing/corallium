@@ -6,6 +6,7 @@
 git clone https://github.com/kyleking/corallium.git
 cd corallium
 poetry install --sync
+poetry run calcipy-pack pack.install-extras
 
 # See the available tasks
 poetry run calcipy
