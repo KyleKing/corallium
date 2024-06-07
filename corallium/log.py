@@ -67,7 +67,6 @@ _LOG_SINGLETON = _LogSingleton()
 
 
 class _Logger:
-
     @beartype
     def text(self, message: str, *, is_header: bool = False, **kwargs: Any) -> None:
         """Print the content without a leading timestamp.
@@ -115,4 +114,5 @@ def get_logger() -> _Logger:
     return _Logger()
 
 
-logger = get_logger()
+LOGGER = get_logger()
+logger = LOGGER  # TODO: Remove once packages have updated to Upper Case version

@@ -9,9 +9,9 @@ Shared functionality for the calcipy-ecosystem.
 1. Take advantage of the logger or other common functionality
 
     ```sh
-    form corallium.log import logger
+    form corallium.log import LOGGER
 
-    logger.info('Hello!')
+    LOGGER.info('Hello!')
     ```
 
 ## Usage

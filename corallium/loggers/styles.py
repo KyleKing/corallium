@@ -4,6 +4,18 @@ import logging
 from dataclasses import dataclass
 
 from beartype import beartype
+from beartype.typing import Optional
+
+
+@dataclass
+class Colors:
+    """Based on Tokyo Night: https://github.com/folke/tokyonight.nvim#-extras."""
+
+    level_error: str = '#e77d8f'
+    level_warn: str = '#d8b172'
+    level_info: str = '#a8cd76'
+    level_debug: str = '#82a1f1'
+    level_fallback: str = '#b69bf1'
 
 
 @dataclass
@@ -21,12 +33,7 @@ class Styles:
     timestamp: str = '#8DAAA1'
     message: str = 'bold'
 
-    # Tokyo Night: https://github.com/folke/tokyonight.nvim#-extras
-    level_error: str = '#e77d8f'
-    level_warn: str = '#d8b172'
-    level_info: str = '#a8cd76'
-    level_debug: str = '#82a1f1'
-    level_fallback: str = '#b69bf1'
+    colors: Optional[Colors] = None
 
     # triadic from: https://coolors.co/a28eab
     key: str = '#8DAAA1'
@@ -35,13 +42,15 @@ class Styles:
 
     def get_style(self, *, level: int) -> str:
         """Return the right style for the specified level."""
+        if not self.colors:
+            self.colors = Colors()
         return {
-            logging.CRITICAL: self.level_error,
-            logging.ERROR: self.level_error,
-            logging.WARNING: self.level_warn,
-            logging.INFO: self.level_info,
-            logging.DEBUG: self.level_debug,
-        }.get(level, self.level_fallback)
+            logging.CRITICAL: self.colors.level_error,
+            logging.ERROR: self.colors.level_error,
+            logging.WARNING: self.colors.level_warn,
+            logging.INFO: self.colors.level_info,
+            logging.DEBUG: self.colors.level_debug,
+        }.get(level, self.colors.level_fallback)
 
 
 @beartype

@@ -36,9 +36,7 @@ def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
     size = len(data)
     chunk_size, chunk_rem = size // count, size % count
     chunk_size += int(math.ceil(chunk_rem / size))
-    return [
-        data[ix:ix + chunk_size] for ix in range(0, size, chunk_size)
-    ]
+    return [data[ix : ix + chunk_size] for ix in range(0, size, chunk_size)]
 
 
 @beartype
@@ -47,6 +45,7 @@ def pretty_process(
     *,
     data: List[_ItemT],
     num_workers: int = 3,
+    num_cpus: int = 4,
 ) -> Any:
     """Run a task in parallel to process all provided data.
 
@@ -56,6 +55,7 @@ def pretty_process(
         delegated_task: must call `shared_progress[task_id] += 1` on each item in data
         data: the list of data to distribute
         num_workers: number of worker processes
+        num_cpus: number of CPUs
 
     """
     # Docs: https://rich.readthedocs.io/en/latest/progress.html
@@ -105,15 +105,19 @@ def __long_task(task_id: int, shared_progress: DictProxy, data: List[_ItemT]) ->
 
 
 if __name__ == '__main__':
-    # Run demo with: 'poetry run python -m shoal.pretty_process'
 
-    # Resolve number of cores or specified maximum
-    num_cpus = 4
-    try:
-        import psutil  # pyright: ignore[reportMissingModuleSource]
-        num_cpus = psutil.cpu_count(logical=False)
-    except Exception as exc:
-        print(exc)  # noqa: T201
+    def _demo() -> None:
+        """Run demo with: 'poetry run python -m shoal.pretty_process'."""
+        # Resolve number of cores or specified maximum
+        num_cpus = 4
+        try:
+            import psutil  # pyright: ignore[reportMissingModuleSource] # noqa: PLC0415
 
-    result = pretty_process(__long_task, data=[*range(23)], num_workers=num_cpus)
-    print(result)  # noqa: T201
+            num_cpus = psutil.cpu_count(logical=False)
+        except Exception as exc:
+            print(exc)  # noqa: T201
+
+        result = pretty_process(__long_task, data=[*range(23)], num_workers=num_cpus)
+        print(result)  # noqa: T201
+
+    _demo()

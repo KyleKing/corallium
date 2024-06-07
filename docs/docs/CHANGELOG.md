@@ -1,3 +1,15 @@
+## Unreleased
+
+### Fix
+
+- copier-auto-update
+
+## 1.0.2 (2024-05-29)
+
+### Fix
+
+- add missing typing-extensions
+
 ## 1.0.1 (2024-05-29)
 
 ### Fix
