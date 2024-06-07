@@ -115,4 +115,3 @@ def get_logger() -> _Logger:
 
 
 LOGGER = get_logger()
-logger = LOGGER  # TODO: Remove once packages have updated to Upper Case version
