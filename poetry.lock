@@ -2249,6 +2249,17 @@ diagrams = ["pygraphviz"]
 test = ["pytest"]
 
 [[package]]
+name = "types-psutil"
+version = "5.9.5.20240516"
+description = "Typing stubs for psutil"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "types-psutil-5.9.5.20240516.tar.gz", hash = "sha256:bb296f59fc56458891d0feb1994717e548a1bcf89936a2877df8792b822b4696"},
+    {file = "types_psutil-5.9.5.20240516-py3-none-any.whl", hash = "sha256:83146ded949a10167d9895e567b3b71e53ebc5e23fd8363eab62b3c76cce7b89"},
+]
+
+[[package]]
 name = "types-python-dateutil"
 version = "2.9.0.20240316"
 description = "Typing stubs for python-dateutil"
@@ -2416,4 +2427,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.13"
-content-hash = "fceda824f1bbdc41f8990e671f3254e407e2bbb49a5056adf98aa0b978d972d6"
+content-hash = "1237f33f559484a53ad00a30183174ed9a32fee4e3eec931574d2f9938fc7e21"
