@@ -52,14 +52,14 @@ poetry config pypi-token.pypi ...
 | `corallium/log.py`                                        |           59 |         1 |          0 | 94.4%      |
 | `corallium/loggers/__init__.py`                           |            0 |         0 |          0 | 100.0%     |
 | `corallium/loggers/plain_printer.py`                      |            6 |         0 |          0 | 100.0%     |
-| `corallium/loggers/rich_printer.py`                       |           38 |         8 |          0 | 72.2%      |
+| `corallium/loggers/rich_printer.py`                       |           38 |        27 |          0 | 24.1%      |
 | `corallium/loggers/structlog_logger/__init__.py`          |            3 |         0 |          3 | 100.0%     |
 | `corallium/loggers/structlog_logger/_structlog_logger.py` |            9 |         0 |          0 | 100.0%     |
-| `corallium/loggers/styles.py`                             |           30 |         0 |          0 | 92.5%      |
+| `corallium/loggers/styles.py`                             |           30 |         2 |          0 | 82.5%      |
 | `corallium/pretty_process.py`                             |           57 |        57 |          0 | 0.0%       |
 | `corallium/shell.py`                                      |           44 |         4 |          0 | 89.1%      |
 | `corallium/tomllib.py`                                    |            3 |         0 |          2 | 100.0%     |
-| **Totals**                                                |          377 |       102 |         42 | 67.9%      |
+| **Totals**                                                |          377 |       123 |         42 | 62.3%      |
 
-Generated on: 2024-06-07
+Generated on: 2024-06-12
 <!-- {cte} -->

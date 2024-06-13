@@ -150,13 +150,13 @@ files = [
 
 [[package]]
 name = "calcipy"
-version = "3.0.0"
+version = "3.0.1"
 description = "Python package to simplify development"
 optional = false
 python-versions = "<4.0.0,>=3.9.13"
 files = [
-    {file = "calcipy-3.0.0-py3-none-any.whl", hash = "sha256:d5ecbc0ce316e427faa793d485eb9bb40f508b1fe6b4b958ee9d55b61a99cf68"},
-    {file = "calcipy-3.0.0.tar.gz", hash = "sha256:dd659742707261e21be367047a53bf7e62d9b88949eb2e8fb4448a078e829ed8"},
+    {file = "calcipy-3.0.1-py3-none-any.whl", hash = "sha256:2fedc6564ad4b2d16c02c8bd8571732688fe76ed102b80a3da05e86be8918993"},
+    {file = "calcipy-3.0.1.tar.gz", hash = "sha256:f9e409dbfda2c6e9fbc379958dc547bafbf8a883e8676f7b5fd3a8f6c5db8680"},
 ]
 
 [package.dependencies]
@@ -1335,8 +1335,8 @@ files = [
 [package.dependencies]
 numpy = [
     {version = ">=1.22.4", markers = "python_version < \"3.11\""},
-    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
     {version = ">=1.26.0", markers = "python_version >= \"3.12\""},
+    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
 ]
 python-dateutil = ">=2.8.2"
 pytz = ">=2020.1"
@@ -1563,8 +1563,8 @@ astroid = ">=3.2.2,<=3.3.0-dev0"
 colorama = {version = ">=0.4.5", markers = "sys_platform == \"win32\""}
 dill = [
     {version = ">=0.2", markers = "python_version < \"3.11\""},
-    {version = ">=0.3.6", markers = "python_version >= \"3.11\" and python_version < \"3.12\""},
     {version = ">=0.3.7", markers = "python_version >= \"3.12\""},
+    {version = ">=0.3.6", markers = "python_version >= \"3.11\" and python_version < \"3.12\""},
 ]
 isort = ">=4.2.5,<5.13.0 || >5.13.0,<6"
 mccabe = ">=0.6,<0.8"
@@ -2298,4 +2298,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.13"
-content-hash = "3c3a72dbd9effdf18464a981d38cd766480ae262d91e513e21256ead30956b72"
+content-hash = "83b8fd6032b1fcc30cb70fa5293833146c1fa056a97183ffdb9b928dcb620009"
