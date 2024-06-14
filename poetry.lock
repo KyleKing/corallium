@@ -1699,13 +1699,13 @@ pytest = "*"
 
 [[package]]
 name = "pytest-structlog"
-version = "0.10.1"
+version = "1.0"
 description = "Structured logging assertions"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest_structlog-0.10.1-py3-none-any.whl", hash = "sha256:bd0cbb66431d39fb5273766ed6329b3e722d9a4ec223d08409392e2cb6acb458"},
-    {file = "pytest_structlog-0.10.1.tar.gz", hash = "sha256:96cf6102003cb2a38bab86255a751dd862dc299076a0daca925fbfe831caba02"},
+    {file = "pytest_structlog-1.0-py3-none-any.whl", hash = "sha256:d3ff7e37c0b98500dc6c8bc7ff3b289f1309c4ec83a8c054c3726d013e483cff"},
+    {file = "pytest_structlog-1.0.tar.gz", hash = "sha256:530c4ccbee5fd617dd1d101138d3f7078ecb31b26cb4bf75ba3361b4d0b9fc45"},
 ]
 
 [package.dependencies]
@@ -2298,4 +2298,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.13"
-content-hash = "83b8fd6032b1fcc30cb70fa5293833146c1fa056a97183ffdb9b928dcb620009"
+content-hash = "c868b5ec57c1552f16c26534f73e7b30ee6ebab5fd1eb21ed40a7f55385bdca7"
