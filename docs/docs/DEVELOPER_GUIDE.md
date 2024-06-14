@@ -57,9 +57,9 @@ poetry config pypi-token.pypi ...
 | `corallium/loggers/structlog_logger/_structlog_logger.py` |            9 |         0 |          0 | 100.0%     |
 | `corallium/loggers/styles.py`                             |           30 |         2 |          0 | 82.5%      |
 | `corallium/pretty_process.py`                             |           57 |        57 |          0 | 0.0%       |
-| `corallium/shell.py`                                      |           45 |         4 |          0 | 89.2%      |
+| `corallium/shell.py`                                      |           44 |         4 |          0 | 89.1%      |
 | `corallium/tomllib.py`                                    |            3 |         0 |          2 | 100.0%     |
-| **Totals**                                                |          378 |       123 |         42 | 62.4%      |
+| **Totals**                                                |          377 |       123 |         42 | 62.3%      |
 
-Generated on: 2024-06-07
+Generated on: 2024-06-12
 <!-- {cte} -->
