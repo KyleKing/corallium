@@ -39,7 +39,6 @@ classifiers = [
 ] # https://pypi.org/classifiers/
 description = "Shared functionality for the calcipy-ecosystem"
 documentation = "https://corallium.kyleking.me"
-include = ["LICENSE"]
 keywords = ["calcipy_template"]
 license = "MIT"
 maintainers = []
