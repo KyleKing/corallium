@@ -52,7 +52,7 @@ python = "^3.9.13"
 beartype = ">=0.18.2"
 rich = ">=13.7.1"
 tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
-typing-extensions = ">=4.12.0"
+typing-extensions = ">=4.12.0" # Can be removed when using Python >3.11
 
 [tool.poetry.group.dev.dependencies]
 calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=3.0.1"}
