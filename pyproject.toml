@@ -55,7 +55,7 @@ tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
 typing-extensions = ">=4.12.0" # Can be removed when using Python >3.11
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0rc1"}
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0rc2"}
 pytest-asyncio = ">=0.23.6"
 pytest-structlog = ">=1.0.0" # Provides pytest fixture 'log'
 pytest-subprocess = ">=1.5.0"
@@ -115,7 +115,7 @@ unfixable = [
 inline-quotes = 'single'
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
-'invoke.collection.Collection'.msg = 'Use calcipy.cli.Collection instead.'
+'invoke.collection.Collection'.msg = 'Use calcipy.collection.Collection instead.'
 'invoke.tasks.task'.msg = 'Use calcipy.cli.task instead.'
 'typing.Callable'.msg = 'Use beartype.typing.* instead.'
 'typing.Dict'.msg = 'Use beartype.typing.* instead.'
@@ -144,12 +144,16 @@ known-first-party = ['corallium']
   'ANN001', # Missing type annotation for function argument
   'ANN201', # Missing return type annotation for public function
   'ANN202', # Missing return type annotation for private function `test_make_diffable`
+  'ARG001', # Unused function argument: `line`
   'D100', # Missing docstring in public module
   'D103', # Missing docstring in public function
   'PLC2701', # Private name import `_<>` from external module
   'PT004', # flake8-pytest-style: fixture does not return
   'S101', # Use of `assert` detected
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.tomlsort]
 all = true
