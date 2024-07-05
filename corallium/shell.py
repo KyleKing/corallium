@@ -1,7 +1,7 @@
 """Run shell commands."""
 
 import asyncio
-import subprocess  # nosec # noqa: S404
+import subprocess
 import sys
 from pathlib import Path
 from time import time
@@ -44,13 +44,13 @@ def capture_shell(
 
     start = time()
     lines = []
-    with subprocess.Popen(  # nosec  # nosemgrep
+    with subprocess.Popen(
         cmd,
         cwd=cwd,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         universal_newlines=True,
-        shell=True,  # noqa: S602
+        shell=True,
     ) as proc:
         if not (stdout := proc.stdout):
             raise NotImplementedError('Failed to read stdout from process.')
@@ -73,12 +73,12 @@ def capture_shell(
 
 
 async def _capture_shell_async(cmd: str, *, cwd: Optional[Path] = None) -> str:
-    proc = await asyncio.create_subprocess_shell(  # nosec  # nosemgrep
+    proc = await asyncio.create_subprocess_shell(
         cmd,
         cwd=cwd,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
-        shell=True,  # noqa: S604
+        shell=True,
     )
 
     stdout, _stderr = await proc.communicate()
@@ -131,12 +131,12 @@ def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> No
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
 
-    subprocess.run(  # nosemgrep
+    subprocess.run(
         cmd,
         timeout=timeout or None,
         cwd=cwd,
         stdout=sys.stdout,
         stderr=sys.stderr,
         check=True,
-        shell=True,  # noqa: S602,  # nosec
+        shell=True,
     )

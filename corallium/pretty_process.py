@@ -96,11 +96,11 @@ def pretty_process(
                 return [job.result() for job in jobs]
 
 
-# Note: can't use beartype on a delegated_task & this function can't be in the if-block below
+# Note: this function can't be in the if-block below
 def __long_task(task_id: int, shared_progress: DictProxy, data: List[_ItemT]) -> Any:  # type: ignore[type-arg]
     """Run a long example task."""
     for _val in data:
-        sleep(1)  # nosemgrep: python.lang.best-practice.sleep.arbitrary-sleep
+        sleep(1)
         shared_progress[task_id] += 1
     return True
 

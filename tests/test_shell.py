@@ -1,7 +1,7 @@
 import json
 import platform
 import shlex
-from subprocess import CalledProcessError  # nosec  # noqa: S404
+from subprocess import CalledProcessError
 
 import pytest
 

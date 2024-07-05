@@ -153,7 +153,7 @@ def read_yaml_file(path_yaml: Path) -> Any:
     yaml.add_multi_constructor('!', lambda _loader, _suffix, _node: None)
     yaml.add_multi_constructor('!!', lambda _loader, _suffix, _node: None)
     try:
-        return yaml.unsafe_load(path_yaml.read_text())  # nosemgrep
+        return yaml.unsafe_load(path_yaml.read_text())
     except (FileNotFoundError, KeyError) as exc:  # pragma: no cover
         LOGGER.warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
         return {}

@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Fix
+
+- **wheel**: don't distribute top-level LICENSE file (#7)
+
 ## 2.0.0 (2024-06-07)
 
 ### Fix

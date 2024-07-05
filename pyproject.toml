@@ -55,7 +55,7 @@ tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
 typing-extensions = ">=4.12.0" # Can be removed when using Python >3.11
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=3.0.1"}
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0rc1"}
 pytest-asyncio = ">=0.23.6"
 pytest-structlog = ">=1.0.0" # Provides pytest fixture 'log'
 pytest-subprocess = ">=1.5.0"
@@ -97,6 +97,9 @@ ignore = [
   'FIX002', # Line contains TODO
   'FIX004', # Line contains HACK
   'PLR0913', # Too many arguments in function definition (6 > 5)
+  'S404', # `subprocess` module is possibly insecure
+  'S602', # `subprocess` call with `shell=True` identified, security issue
+  'S604', # Function call with `shell=True` parameter identified, security issue
   'TD001', # Invalid TODO tag: `FIXME`
   'TD002', # Missing author in TODO; try: `# TODO(<author_name>): ...`
   'TD003', # Missing issue link on the line following this TODO
