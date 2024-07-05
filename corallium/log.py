@@ -4,7 +4,6 @@ import logging
 from functools import partial
 from typing import runtime_checkable
 
-from beartype import beartype
 from beartype.typing import Any, Optional, Protocol
 from rich.console import Console
 
@@ -18,7 +17,6 @@ DEF_LEVEL = logging.ERROR
 class LogCallable(Protocol):
     """Defined the kwargs accepted for a delegated task."""
 
-    @beartype
     def __call__(
         self,
         message: str,
@@ -36,7 +34,6 @@ class _LogSingleton:
     _logger: Optional[LogCallable] = None
     _log_level: int = DEF_LEVEL
 
-    @beartype
     def set_logger(
         self,
         *,
@@ -53,7 +50,6 @@ class _LogSingleton:
         self._log_level = log_level
         return self._logger
 
-    @beartype
     def log(self, *args: Any, _this_level: int, is_header: bool = False, _is_text: bool = False, **kwargs: Any) -> None:
         """Delegate the arguments to the logger if this level above the threshold."""
         if _this_level < self._log_level:
@@ -67,7 +63,7 @@ _LOG_SINGLETON = _LogSingleton()
 
 
 class _Logger:
-    @beartype
+
     def text(self, message: str, *, is_header: bool = False, **kwargs: Any) -> None:
         """Print the content without a leading timestamp.
 
@@ -76,39 +72,31 @@ class _Logger:
         """
         self.info(message, **{'_is_text': True, 'is_header': is_header, **kwargs})
 
-    @beartype
     def text_debug(self, message: str, *, is_header: bool = False, **kwargs: Any) -> None:
         """Variation on text that will appear as a debug log if not supported."""
         self.debug(message, **{'_is_text': True, 'is_header': is_header, **kwargs})
 
-    @beartype
     def debug(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.DEBUG, **kwargs)
 
-    @beartype
     def info(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.INFO, **kwargs)
 
-    @beartype
     def warning(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.WARNING, **kwargs)
 
-    @beartype
     def error(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.ERROR, **kwargs)
 
-    @beartype
     def exception(self, message: str, **kwargs: Any) -> None:  # noqa: PLR6301
         _LOG_SINGLETON.log(message, _this_level=logging.CRITICAL, **kwargs)
 
 
-@beartype
 def configure_logger(*, log_level: int = DEF_LEVEL, logger: Optional[LogCallable] = None, **kwargs: Any) -> None:
     """Configure the global log level or replace the logger."""
     _LOG_SINGLETON.set_logger(logger=logger, log_level=log_level, **kwargs)
 
 
-@beartype
 def get_logger() -> _Logger:
     """Retrieve global logger."""
     return _Logger()

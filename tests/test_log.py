@@ -2,7 +2,6 @@ import logging
 
 import pytest
 import structlog
-from beartype import beartype
 from beartype.typing import Any
 
 from corallium.log import configure_logger, get_logger
@@ -12,15 +11,14 @@ from corallium.loggers.structlog_logger import structlog_logger
 from .configuration import DEFAULT_LOGGER
 
 
-@beartype
 def not_implemented_printer(
-    message: str,  # noqa: ARG001
+    message: str,
     *,
-    is_header: bool,  # noqa: ARG001
+    is_header: bool,
     _this_level: int,
     _is_text: bool,
     # Logger-specific parameters that need to be initialized with partial(...)
-    **kwargs: Any,  # noqa: ARG001
+    **kwargs: Any,
 ) -> None:
     raise NotImplementedError('This logger is for testing hot-swapping')
 

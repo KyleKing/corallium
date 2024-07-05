@@ -3,11 +3,9 @@
 import logging
 
 import structlog
-from beartype import beartype
 from beartype.typing import Any
 
 
-@beartype
 def structlog_logger(
     message: str,
     *,

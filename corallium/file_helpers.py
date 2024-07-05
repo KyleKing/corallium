@@ -9,7 +9,6 @@ from contextlib import suppress
 from functools import lru_cache
 from pathlib import Path
 
-from beartype import beartype
 from beartype.typing import Any, Dict, List, Optional
 
 from .log import LOGGER
@@ -31,7 +30,6 @@ MKDOCS_CONFIG = Path('mkdocs.yml')
 # Read General Text Files
 
 
-@beartype
 def read_lines(path_file: Path, encoding: Optional[str] = 'utf-8', errors: Optional[str] = None) -> List[str]:
     """Read a file and split on newlines for later parsing.
 
@@ -49,7 +47,6 @@ def read_lines(path_file: Path, encoding: Optional[str] = 'utf-8', errors: Optio
     return path_file.read_text(encoding=encoding, errors=errors).splitlines() if path_file.is_file() else []
 
 
-@beartype
 def tail_lines(path_file: Path, *, count: int) -> List[str]:
     """Tail a file for up to the last count (or full file) lines.
 
@@ -86,7 +83,6 @@ def tail_lines(path_file: Path, *, count: int) -> List[str]:
 # Read Specific File Types
 
 
-@beartype
 def find_in_parents(*, name: str, cwd: Optional[Path] = None) -> Path:
     """Recursively locate the path to the file in the current directory or parents."""
     msg = f'Could not locate {name} in {cwd} or in any parent directory'
@@ -99,7 +95,6 @@ def find_in_parents(*, name: str, cwd: Optional[Path] = None) -> Path:
     return start_path
 
 
-@beartype
 def get_tool_versions(cwd: Optional[Path] = None) -> Dict[str, List[str]]:
     """Parse a `.tool-versions` file."""
     tv_path = find_in_parents(name='.tool-versions', cwd=cwd)
@@ -125,7 +120,6 @@ def read_package_name(cwd: Optional[Path] = None) -> str:
     return str(poetry_config['tool']['poetry']['name'])
 
 
-@beartype
 def read_yaml_file(path_yaml: Path) -> Any:
     """Attempt to read the specified yaml file. Returns an empty dictionary if not found or a parser error occurs.
 
@@ -169,7 +163,6 @@ ALLOWED_CHARS = string.ascii_lowercase + string.ascii_uppercase + string.digits 
 """Default string of acceptable characters in a filename."""
 
 
-@beartype
 def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = ALLOWED_CHARS) -> str:
     """Replace all characters not in the `allow_chars` with `repl_char`.
 
@@ -187,7 +180,6 @@ def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = 
     return ''.join((char if char in allowed_chars else repl_char) for char in filename)
 
 
-@beartype
 def trim_trailing_whitespace(pth: Path) -> None:
     """Trim trailing whitespace from the specified file.
 
@@ -203,7 +195,6 @@ def trim_trailing_whitespace(pth: Path) -> None:
 # Manage Files and Directories
 
 
-@beartype
 def if_found_unlink(path_file: Path) -> None:
     """Remove file if it exists. Function is intended to a doit action.
 
@@ -217,7 +208,6 @@ def if_found_unlink(path_file: Path) -> None:
         path_file.unlink()
 
 
-@beartype
 def delete_old_files(dir_path: Path, *, ttl_seconds: int) -> None:
     """Delete old files within the specified directory.
 
@@ -232,7 +222,6 @@ def delete_old_files(dir_path: Path, *, ttl_seconds: int) -> None:
             pth.unlink()
 
 
-@beartype
 def delete_dir(dir_path: Path) -> None:
     """Delete the specified directory from a doit task.
 
@@ -246,7 +235,6 @@ def delete_dir(dir_path: Path) -> None:
         shutil.rmtree(dir_path)
 
 
-@beartype
 def ensure_dir(dir_path: Path) -> None:
     """Make sure that the specified dir_path exists and create any missing folders from a doit task.
 
@@ -259,7 +247,6 @@ def ensure_dir(dir_path: Path) -> None:
     dir_path.mkdir(parents=True, exist_ok=True)
 
 
-@beartype
 def get_relative(full_path: Path, other_path: Path) -> Optional[Path]:
     """Try to return the relative path between the two paths. None if no match.
 
@@ -282,7 +269,6 @@ def get_relative(full_path: Path, other_path: Path) -> Optional[Path]:
 # Open Files
 
 
-@beartype
 def open_in_browser(path_file: Path) -> None:  # pragma: no cover
     """Open the path in the default web browser.
 

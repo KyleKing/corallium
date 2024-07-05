@@ -6,13 +6,11 @@ import sys
 from pathlib import Path
 from time import time
 
-from beartype import beartype
 from beartype.typing import Callable, Optional
 
 from .log import LOGGER
 
 
-@beartype
 def capture_shell(
     cmd: str,
     *,
@@ -114,7 +112,6 @@ async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Optional[Pat
     return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout)
 
 
-@beartype
 def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> None:
     """Run a shell command without capturing the output.
 

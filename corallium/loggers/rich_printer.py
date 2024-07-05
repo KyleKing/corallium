@@ -4,7 +4,6 @@ import logging
 import shutil
 from datetime import datetime
 
-from beartype import beartype
 from beartype.typing import Any, List, Optional
 from rich.console import Console
 from rich.text import Text
@@ -12,7 +11,6 @@ from rich.text import Text
 from .styles import Styles, get_name
 
 
-@beartype
 def rich_printer(
     message: str,
     *,

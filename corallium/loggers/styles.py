@@ -3,7 +3,6 @@
 import logging
 from dataclasses import dataclass
 
-from beartype import beartype
 from beartype.typing import Optional
 
 
@@ -53,7 +52,6 @@ class Styles:
         }.get(level, self.colors.level_fallback)
 
 
-@beartype
 def get_level(*, name: str) -> int:
     """Return the logging level based on the provided name."""
     return {
@@ -65,7 +63,6 @@ def get_level(*, name: str) -> int:
     }.get(name.upper(), logging.NOTSET)
 
 
-@beartype
 def get_name(*, level: int) -> str:
     """Return the logging name based on the provided level.
 

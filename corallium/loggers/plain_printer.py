@@ -1,10 +1,8 @@
 """Generic Log Writer."""
 
-from beartype import beartype
 from beartype.typing import Any
 
 
-@beartype
 def plain_printer(
     message: str,
     *,

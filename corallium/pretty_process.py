@@ -10,7 +10,6 @@ from concurrent.futures import ProcessPoolExecutor
 from multiprocessing.managers import DictProxy
 from time import sleep
 
-from beartype import beartype
 from beartype.typing import Any, Callable, List, TypeVar, Union
 from rich.progress import BarColumn, Progress, ProgressColumn, TaskID, TimeElapsedColumn, TimeRemainingColumn
 
@@ -28,7 +27,6 @@ _DelegatedTask = Callable[
 ]
 
 
-@beartype
 def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
     """Chunk the list of data into equally sized lists."""
     # TODO: See below link for other options for chunking
@@ -39,7 +37,6 @@ def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
     return [data[ix : ix + chunk_size] for ix in range(0, size, chunk_size)]
 
 
-@beartype
 def pretty_process(
     delegated_task: _DelegatedTask,  # type: ignore[type-arg]
     *,

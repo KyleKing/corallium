@@ -4,6 +4,10 @@
 
 - **wheel**: don't distribute top-level LICENSE file (#7)
 
+### Refactor
+
+- remove beartype decorator
+
 ## 2.0.0 (2024-06-07)
 
 ### Fix
