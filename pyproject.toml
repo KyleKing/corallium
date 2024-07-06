@@ -49,19 +49,19 @@ version = "2.0.1rc0"
 
 [tool.poetry.dependencies]
 python = "^3.9.13"
-beartype = ">=0.18.2"
+beartype = ">=0.18.5"
 rich = ">=13.7.1"
 tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
-typing-extensions = ">=4.12.0" # Can be removed when using Python >3.11
+typing-extensions = ">=4.12.2" # Can be removed when using Python >3.11
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0rc2"}
-pytest-asyncio = ">=0.23.6"
-pytest-structlog = ">=1.0.0" # Provides pytest fixture 'log'
+calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0"}
+pytest-asyncio = ">=0.23.7"
+pytest-structlog = ">=1.0" # Provides pytest fixture 'log'
 pytest-subprocess = ">=1.5.0"
-structlog = ">=24.1.0"
-types-psutil = ">=5.9.5.20240516"
-types-pyyaml = ">=6.0.12.8"
+structlog = ">=24.2.0"
+types-psutil = ">=6.0.0.20240621"
+types-pyyaml = ">=6.0.12.20240311"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/corallium/issues"

@@ -8,7 +8,7 @@ import pytest
 from corallium.shell import capture_shell, capture_shell_async, run_shell
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_shell() -> None:
     """Example to run jq."""
     if platform.system() == 'Windows':
