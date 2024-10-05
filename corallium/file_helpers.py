@@ -98,6 +98,7 @@ def find_in_parents(*, name: str, cwd: Path | None = None) -> Path:
     return start_path
 
 
+# TODO: Also read the `.mise.toml` file
 def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
     """Return versions from `.tool-versions` file."""
     tv_path = find_in_parents(name='.tool-versions', cwd=cwd)
@@ -106,13 +107,18 @@ def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
 
 @lru_cache(maxsize=5)
 def read_pyproject(cwd: Path | None = None) -> Any:
-    """Return the 'pyproject.toml' file contents."""
+    """Return the 'pyproject.toml' file contents.
+
+    Raises:
+        FileNotFoundError: if not found
+
+    """
     toml_path = find_in_parents(name='pyproject.toml', cwd=cwd)
     try:
         pyproject_txt = toml_path.read_text(encoding='utf-8')
     except Exception as exc:
         msg = f'Could not locate: {toml_path}'
-        raise RuntimeError(msg) from exc
+        raise FileNotFoundError(msg) from exc
     return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
 
 

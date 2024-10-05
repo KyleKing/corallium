@@ -45,10 +45,10 @@ class _LogSingleton:
         _styles: Styles | None = None,
         **kwargs: Any,
     ) -> LogCallable:
-        """Set the internal logger instance."""
+        """Return after updating the internal logger instance."""
         if not (_logger := logger or self._logger):
             _logger = partial(rich_printer, _console=_console or Console(), _styles=_styles or STYLES)
-        self._logger = partial(_logger, **kwargs)
+        self._logger = partial(_logger, **kwargs)  # type: ignore[misc]
         self._log_level = log_level
         return self._logger
 
@@ -65,7 +65,6 @@ _LOG_SINGLETON = _LogSingleton()
 
 
 class _Logger:
-
     def text(self, message: str, *, is_header: bool = False, **kwargs: Any) -> None:
         """Print the content without a leading timestamp.
 
@@ -100,7 +99,7 @@ def configure_logger(*, log_level: int = DEF_LEVEL, logger: LogCallable | None =
 
 
 def get_logger() -> _Logger:
-    """Retrieve global logger."""
+    """Return global logger."""
     return _Logger()
 
 

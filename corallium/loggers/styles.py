@@ -40,7 +40,7 @@ class Styles:
     value_own_line: str = '#AAA18D'
 
     @classmethod
-    def from_dict(cls, data: dict) -> Styles:
+    def from_dict(cls, data: dict) -> Styles:  # type: ignore[type-arg]
         """Return Self instance."""
         if colors := (data.pop('colors', None) or None):
             colors = Colors(**colors)

@@ -76,6 +76,9 @@ warn_required_dynamic_aliases = true
 include = ["corallium", "tests"]
 pythonVersion = "3.9"
 
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: poetry run python -m ruff rule RUF100

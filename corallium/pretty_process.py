@@ -56,6 +56,9 @@ def pretty_process(
         num_workers: number of worker processes
         num_cpus: number of CPUs
 
+    Returns:
+        List of results
+
     """
     # Docs: https://rich.readthedocs.io/en/latest/progress.html
     columns: list[str | ProgressColumn] = [
