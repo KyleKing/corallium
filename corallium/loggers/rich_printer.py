@@ -5,15 +5,12 @@ from __future__ import annotations
 import logging
 import shutil
 from datetime import datetime
-from typing import TYPE_CHECKING
 
+from beartype.typing import Any
+from rich.console import Console
 from rich.text import Text
 
 from .styles import Styles, get_name
-
-if TYPE_CHECKING:
-    from beartype.typing import Any, List, Optional
-    from rich.console import Console
 
 
 def rich_printer(
@@ -25,7 +22,7 @@ def rich_printer(
     # Logger-specific parameters that need to be initialized with partial(...)
     _console: Console,
     _styles: Styles,
-    _keys_on_own_line: Optional[List[str]] = None,
+    _keys_on_own_line: list[str] | None = None,
     **kwargs: Any,
 ) -> None:
     """Print log message with rich formatting."""

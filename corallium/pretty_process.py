@@ -12,7 +12,7 @@ from concurrent.futures import ProcessPoolExecutor
 from multiprocessing.managers import DictProxy
 from time import sleep
 
-from beartype.typing import Any, Callable, List, TypeVar, Union
+from beartype.typing import Any, Callable, TypeVar
 from rich.progress import BarColumn, Progress, ProgressColumn, TaskID, TimeElapsedColumn, TimeRemainingColumn
 
 _ItemT = TypeVar('_ItemT', bound=Any)
@@ -29,8 +29,8 @@ _DelegatedTask = Callable[
 ]
 
 
-def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
-    """Chunk the list of data into equally sized lists."""
+def _chunked(data: list[_ItemT], count: int) -> list[list[_ItemT]]:
+    """Return the list of data into equally sized lists (chunks)."""
     # TODO: See below link for other options for chunking
     #   https://realpython.com/how-to-split-a-python-list-into-chunks/
     size = len(data)
@@ -42,7 +42,7 @@ def _chunked(data: List[_ItemT], count: int) -> List[List[_ItemT]]:
 def pretty_process(
     delegated_task: _DelegatedTask,  # type: ignore[type-arg]
     *,
-    data: List[_ItemT],
+    data: list[_ItemT],
     num_workers: int = 3,
     num_cpus: int = 4,
 ) -> Any:
@@ -51,7 +51,6 @@ def pretty_process(
     Uses `rich` to display pretty progress bars
 
     Args:
-    ----
         delegated_task: must call `shared_progress[task_id] += 1` on each item in data
         data: the list of data to distribute
         num_workers: number of worker processes
@@ -59,7 +58,7 @@ def pretty_process(
 
     """
     # Docs: https://rich.readthedocs.io/en/latest/progress.html
-    columns: List[Union[str, ProgressColumn]] = [
+    columns: list[str | ProgressColumn] = [
         '[progress.description]{task.description}',
         BarColumn(),
         '[progress.percentage]{task.percentage:>3.0f}%',
@@ -95,9 +94,12 @@ def pretty_process(
                 return [job.result() for job in jobs]
 
 
-# Note: this function can't be in the if-block below
-def __long_task(task_id: int, shared_progress: DictProxy, data: List[_ItemT]) -> Any:  # type: ignore[type-arg]
-    """Run a long example task."""
+def ____private(task_id: int, shared_progress: DictProxy, data: list[_ItemT]) -> Any:  # type: ignore[type-arg]
+    """Return True for testing a long running task.
+
+    Note: this function can't be in the if-block below
+
+    """
     for _val in data:
         sleep(1)
         shared_progress[task_id] += 1
@@ -117,7 +119,7 @@ if __name__ == '__main__':
         except Exception as exc:
             print(exc)  # noqa: T201
 
-        result = pretty_process(__long_task, data=[*range(23)], num_workers=num_cpus)
+        result = pretty_process(____private, data=[*range(23)], num_workers=num_cpus)
         print(result)  # noqa: T201
 
     _demo()

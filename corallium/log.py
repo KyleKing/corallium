@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import logging
 from functools import partial
-from typing import runtime_checkable
 
-from beartype.typing import Any, Optional, Protocol
+from beartype.typing import Any, Protocol, runtime_checkable
 from rich.console import Console
 
 from .loggers.rich_printer import rich_printer
@@ -33,7 +32,7 @@ class LogCallable(Protocol):
 class _LogSingleton:
     """Store pointer to log function."""
 
-    _logger: Optional[LogCallable] = None
+    _logger: LogCallable | None = None
     _log_level: int = DEF_LEVEL
 
     # TODO: Setting the logger to structlog is one way to capture?
@@ -41,9 +40,9 @@ class _LogSingleton:
         self,
         *,
         log_level: int,
-        logger: Optional[LogCallable] = None,
-        _console: Optional[Console] = None,
-        _styles: Optional[Styles] = None,
+        logger: LogCallable | None = None,
+        _console: Console | None = None,
+        _styles: Styles | None = None,
         **kwargs: Any,
     ) -> LogCallable:
         """Set the internal logger instance."""
@@ -95,7 +94,7 @@ class _Logger:
         _LOG_SINGLETON.log(message, _this_level=logging.CRITICAL, **kwargs)
 
 
-def configure_logger(*, log_level: int = DEF_LEVEL, logger: Optional[LogCallable] = None, **kwargs: Any) -> None:
+def configure_logger(*, log_level: int = DEF_LEVEL, logger: LogCallable | None = None, **kwargs: Any) -> None:
     """Configure the global log level or replace the logger."""
     _LOG_SINGLETON.set_logger(logger=logger, log_level=log_level, **kwargs)
 

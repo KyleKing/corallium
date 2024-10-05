@@ -5,41 +5,35 @@ from __future__ import annotations
 import asyncio
 import subprocess
 import sys
+from pathlib import Path
 from time import time
-from typing import TYPE_CHECKING
+
+from beartype.typing import Callable
 
 from .log import LOGGER
-
-if TYPE_CHECKING:
-    from pathlib import Path
-
-    from beartype.typing import Callable, Optional
 
 
 def capture_shell(
     cmd: str,
     *,
     timeout: int = 120,
-    cwd: Optional[Path] = None,
-    printer: Optional[Callable[[str], None]] = None,
+    cwd: Path | None = None,
+    printer: Callable[[str], None] | None = None,
 ) -> str:
     """Run shell command, return the output, and optionally print in real time.
 
     Inspired by: https://stackoverflow.com/a/38745040/3219667
 
     Args:
-    ----
         cmd: shell command
         timeout: process timeout. Defaults to 2 minutes
         cwd: optional path for shell execution
         printer: optional callable to output the lines in real time
 
     Returns:
-    -------
         str: stripped output
 
     Raises:
-    ------
         CalledProcessError: if return code is non-zero
 
     """
@@ -75,7 +69,7 @@ def capture_shell(
     return output
 
 
-async def _capture_shell_async(cmd: str, *, cwd: Optional[Path] = None) -> str:
+async def _capture_shell_async(cmd: str, *, cwd: Path | None = None) -> str:
     proc = await asyncio.create_subprocess_shell(
         cmd,
         cwd=cwd,
@@ -91,7 +85,7 @@ async def _capture_shell_async(cmd: str, *, cwd: Optional[Path] = None) -> str:
     return output
 
 
-async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> str:
+async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Path | None = None) -> str:
     """Run a shell command asynchronously and return the output.
 
     ```py
@@ -99,36 +93,25 @@ async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Optional[Pat
     ```
 
     Args:
-    ----
         cmd: shell command
         timeout: process timeout. Defaults to 2 minutes
         cwd: optional path for shell execution
 
     Returns:
-    -------
         str: stripped output
-
-    Raises:
-    ------
-        CalledProcessError: if return code is non-zero
 
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
     return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout)
 
 
-def run_shell(cmd: str, *, timeout: int = 120, cwd: Optional[Path] = None) -> None:
+def run_shell(cmd: str, *, timeout: int = 120, cwd: Path | None = None) -> None:
     """Run a shell command without capturing the output.
 
     Args:
-    ----
         cmd: shell command
         timeout: process timeout. Defaults to 2 minutes
         cwd: optional path for shell execution
-
-    Raises:
-    ------
-        CalledProcessError: if return code is non-zero
 
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)

@@ -49,19 +49,19 @@ version = "2.0.1"
 
 [tool.poetry.dependencies]
 python = "^3.9.13"
-beartype = ">=0.18.5"
-rich = ">=13.7.1"
-tomli = {markers = "python_version < '3.11'", version = ">=2.0.1"}
+beartype = ">=0.19.0"
+rich = ">=13.9.2"
+tomli = {markers = "python_version < '3.11'", version = ">=2.0.2"}
 typing-extensions = ">=4.12.2" # Can be removed when using Python >3.11
 
 [tool.poetry.group.dev.dependencies]
 calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0"}
-pytest-asyncio = ">=0.23.7"
-pytest-structlog = ">=1.0" # Provides pytest fixture 'log'
-pytest-subprocess = ">=1.5.0"
-structlog = ">=24.2.0"
-types-psutil = ">=6.0.0.20240621"
-types-pyyaml = ">=6.0.12.20240311"
+pytest-asyncio = ">=0.24.0"
+pytest-structlog = ">=1.1" # Provides pytest fixture 'log'
+pytest-subprocess = ">=1.5.2"
+structlog = ">=24.4.0"
+types-psutil = ">=6.0.0.20240901"
+types-pyyaml = ">=6.0.12.20240917"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/corallium/issues"
@@ -121,12 +121,12 @@ inline-quotes = 'single'
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 'invoke.collection.Collection'.msg = 'Use calcipy.collection.Collection instead.'
 'invoke.tasks.task'.msg = 'Use calcipy.cli.task instead.'
-'typing.Callable'.msg = 'Use beartype.typing.* instead.'
-'typing.Dict'.msg = 'Use beartype.typing.* instead.'
-'typing.List'.msg = 'Use beartype.typing.* instead.'
-'typing.Optional'.msg = 'Use beartype.typing.* instead.'
-'typing.Protocol'.msg = 'Use beartype.typing.* instead.'
-'typing.TypeVar'.msg = 'Use beartype.typing.* instead.'
+'typing.Callable'.msg = 'Use typing.* instead.'
+'typing.Dict'.msg = 'Use typing.* instead.'
+'typing.List'.msg = 'Use typing.* instead.'
+'typing.Optional'.msg = 'Use typing.* instead.'
+'typing.Protocol'.msg = 'Use typing.* instead.'
+'typing.TypeVar'.msg = 'Use typing.* instead.'
 
 [tool.ruff.lint.isort]
 known-first-party = ['corallium']

@@ -1,3 +1,15 @@
+## Unreleased
+
+### Feat
+
+- add Style.from_dict
+
+### Refactor
+
+- use future.annotations
+
+## 2.0.1 (2024-07-06)
+
 ## 2.0.1rc0 (2024-07-05)
 
 ### Fix

@@ -4,10 +4,6 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from beartype.typing import Optional
 
 
 @dataclass
@@ -36,7 +32,7 @@ class Styles:
     timestamp: str = '#8DAAA1'
     message: str = 'bold'
 
-    colors: Optional[Colors] = None
+    colors: Colors | None = None
 
     # triadic from: https://coolors.co/a28eab
     key: str = '#8DAAA1'
