@@ -1,5 +1,7 @@
 """Styles."""
 
+from __future__ import annotations
+
 import logging
 from dataclasses import dataclass
 
@@ -38,6 +40,13 @@ class Styles:
     key: str = '#8DAAA1'
     value: str = '#A28EAB'
     value_own_line: str = '#AAA18D'
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Styles:
+        """Return Self instance."""
+        if colors := (data.pop('colors', None) or None):
+            colors = Colors(**colors)
+        return cls(**data, colors=colors)
 
     def get_style(self, *, level: int) -> str:
         """Return the right style for the specified level."""
