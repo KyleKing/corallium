@@ -4,6 +4,8 @@ Based on: https://www.deanmontgomery.com/2022/03/24/rich-progress-and-multiproce
 
 """
 
+from __future__ import annotations
+
 import math
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor

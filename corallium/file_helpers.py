@@ -1,5 +1,7 @@
 """File Helpers."""
 
+from __future__ import annotations
+
 import os
 import shutil
 import string
@@ -8,11 +10,13 @@ import webbrowser
 from contextlib import suppress
 from functools import lru_cache
 from pathlib import Path
-
-from beartype.typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING
 
 from .log import LOGGER
 from .tomllib import tomllib
+
+if TYPE_CHECKING:
+    from beartype.typing import Any, Dict, List, Optional
 
 LOCK = Path('poetry.lock')
 """poetry.lock Path."""

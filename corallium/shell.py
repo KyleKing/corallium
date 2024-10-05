@@ -1,14 +1,19 @@
 """Run shell commands."""
 
+from __future__ import annotations
+
 import asyncio
 import subprocess
 import sys
-from pathlib import Path
 from time import time
-
-from beartype.typing import Callable, Optional
+from typing import TYPE_CHECKING
 
 from .log import LOGGER
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from beartype.typing import Callable, Optional
 
 
 def capture_shell(

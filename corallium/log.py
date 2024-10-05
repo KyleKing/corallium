@@ -1,5 +1,7 @@
 """Log."""
 
+from __future__ import annotations
+
 import logging
 from functools import partial
 from typing import runtime_checkable
@@ -34,6 +36,7 @@ class _LogSingleton:
     _logger: Optional[LogCallable] = None
     _log_level: int = DEF_LEVEL
 
+    # TODO: Setting the logger to structlog is one way to capture?
     def set_logger(
         self,
         *,

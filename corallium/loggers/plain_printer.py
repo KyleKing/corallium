@@ -1,6 +1,11 @@
 """Generic Log Writer."""
 
-from beartype.typing import Any
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from beartype.typing import Any
 
 
 def plain_printer(
