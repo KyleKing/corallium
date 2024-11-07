@@ -10,6 +10,7 @@
 
 ### Refactor
 
+- reduce usage of beartype.typing
 - resolve lint warnings
 - general cleanup for latest ruff
 - use future.annotations

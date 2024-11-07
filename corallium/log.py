@@ -49,7 +49,7 @@ class _LogSingleton:
         """Return after updating the internal logger instance."""
         if not (_logger := logger or self._logger):
             _logger = partial(rich_printer, _console=_console or Console(), _styles=_styles or STYLES)
-        self._logger = partial(_logger, **kwargs)  # type: ignore[misc]
+        self._logger = partial(_logger, **kwargs)
         self._log_level = log_level
         return self._logger
 

@@ -14,7 +14,6 @@ extra_checks = true
 files = ["corallium", "tests"]
 no_implicit_reexport = true
 plugins = [
-  "pydantic.mypy", # Most settings are from: https://pydantic-docs.helpmanual.io/mypy_plugin
 ]
 python_version = "3.9"
 show_column_numbers = true
@@ -55,7 +54,7 @@ tomli = {markers = "python_version < '3.11'", version = ">=2.0.2"}
 typing-extensions = ">=4.12.2" # Can be removed when using Python >3.11
 
 [tool.poetry.group.dev.dependencies]
-calcipy = {extras = ["doc", "lint", "nox", "stale", "tags", "test", "types"], version = ">=4.0.0"}
+calcipy = {extras = ["doc", "lint", "nox", "tags", "test", "types"], version = ">=5.0.0"}
 pytest-asyncio = ">=0.24.0"
 pytest-structlog = ">=1.1" # Provides pytest fixture 'log'
 pytest-subprocess = ">=1.5.2"
@@ -66,11 +65,6 @@ types-pyyaml = ">=6.0.12.20240917"
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/corallium/issues"
 "Changelog" = "https://github.com/kyleking/corallium/blob/main/docs/docs/CHANGELOG.md"
-
-[tool.pydantic-mypy]
-init_forbid_extra = true
-init_typed = true
-warn_required_dynamic_aliases = true
 
 [tool.pyright]
 include = ["corallium", "tests"]
