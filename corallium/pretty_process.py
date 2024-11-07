@@ -119,7 +119,7 @@ if __name__ == '__main__':
         try:
             import psutil  # pyright: ignore[reportMissingModuleSource] # noqa: PLC0415
 
-            num_cpus = psutil.cpu_count(logical=False)
+            num_cpus = psutil.cpu_count(logical=False) or num_cpus
         except Exception as exc:
             print(exc)  # noqa: T201
 
