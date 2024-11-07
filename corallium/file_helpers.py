@@ -16,8 +16,23 @@ from beartype.typing import Any
 from .log import LOGGER
 from .tomllib import tomllib
 
-LOCK = Path('poetry.lock')
-"""poetry.lock Path."""
+
+@lru_cache(maxsize=1)
+def get_lock() -> Path:
+    """Return path to dependency manager's lock file.
+
+    Raises:
+        FileNotFoundError: if a lock file can't be located
+
+    """
+    for pth in map(Path, ('uv.lock', 'poetry.lock')):
+        if pth.is_file():
+            return pth
+    raise FileNotFoundError('Could not locate a known lock file type')
+
+
+LOCK = get_lock()
+"""Deprecated path to lock file."""
 
 PROJECT_TOML = Path('pyproject.toml')
 """pyproject.toml Path."""

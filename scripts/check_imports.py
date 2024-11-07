@@ -6,12 +6,12 @@ from timeit import timeit
 
 from corallium.file_helpers import (
     COPIER_ANSWERS,
-    LOCK,
     MKDOCS_CONFIG,
     PROJECT_TOML,
     delete_dir,
     delete_old_files,
     ensure_dir,
+    get_lock,
     get_relative,
     get_tool_versions,
     if_found_unlink,
