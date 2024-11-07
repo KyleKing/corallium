@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from beartype.typing import Any
+from typing import Any
 
 
 def plain_printer(

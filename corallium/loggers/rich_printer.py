@@ -5,8 +5,8 @@ from __future__ import annotations
 import logging
 import shutil
 from datetime import datetime
+from typing import Any
 
-from beartype.typing import Any
 from rich.console import Console
 from rich.text import Text
 

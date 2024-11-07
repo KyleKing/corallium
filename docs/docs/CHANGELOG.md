@@ -4,8 +4,13 @@
 
 - add Style.from_dict
 
+### Fix
+
+- support uv.lock and deprecate LOCK
+
 ### Refactor
 
+- resolve lint warnings
 - general cleanup for latest ruff
 - use future.annotations
 

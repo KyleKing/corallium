@@ -49,18 +49,18 @@ poetry config pypi-token.pypi ...
 |-----------------------------------------------------------|------------|---------|----------|----------|
 | `corallium/__init__.py`                                   | 4          | 0       | 0        | 100.0%   |
 | `corallium/_runtime_type_check_setup.py`                  | 14         | 0       | 33       | 100.0%   |
-| `corallium/file_helpers.py`                               | 95         | 40      | 11       | 53.6%    |
-| `corallium/log.py`                                        | 46         | 1       | 0        | 94.2%    |
+| `corallium/file_helpers.py`                               | 101        | 41      | 11       | 55.6%    |
+| `corallium/log.py`                                        | 47         | 1       | 0        | 94.3%    |
 | `corallium/loggers/__init__.py`                           | 0          | 0       | 0        | 100.0%   |
 | `corallium/loggers/plain_printer.py`                      | 5          | 0       | 0        | 100.0%   |
-| `corallium/loggers/rich_printer.py`                       | 37         | 28      | 0        | 17.6%    |
+| `corallium/loggers/rich_printer.py`                       | 37         | 11      | 0        | 62.7%    |
 | `corallium/loggers/structlog_logger/__init__.py`          | 3          | 0       | 3        | 100.0%   |
 | `corallium/loggers/structlog_logger/_structlog_logger.py` | 8          | 0       | 0        | 100.0%   |
-| `corallium/loggers/styles.py`                             | 32         | 8       | 0        | 65.0%    |
-| `corallium/pretty_process.py`                             | 54         | 54      | 0        | 0.0%     |
+| `corallium/loggers/styles.py`                             | 32         | 4       | 0        | 80.0%    |
+| `corallium/pretty_process.py`                             | 55         | 55      | 0        | 0.0%     |
 | `corallium/shell.py`                                      | 42         | 3       | 0        | 91.1%    |
 | `corallium/tomllib.py`                                    | 3          | 0       | 2        | 100.0%   |
-| **Totals**                                                | 343        | 134     | 49       | 55.7%    |
+| **Totals**                                                | 351        | 115     | 49       | 62.7%    |
 
-Generated on: 2024-10-05
+Generated on: 2024-11-07
 <!-- {cte} -->

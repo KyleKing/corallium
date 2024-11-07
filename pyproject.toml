@@ -124,12 +124,11 @@ inline-quotes = 'single'
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 'invoke.collection.Collection'.msg = 'Use calcipy.collection.Collection instead.'
 'invoke.tasks.task'.msg = 'Use calcipy.cli.task instead.'
-'typing.Callable'.msg = 'Use typing.* instead.'
-'typing.Dict'.msg = 'Use typing.* instead.'
-'typing.List'.msg = 'Use typing.* instead.'
-'typing.Optional'.msg = 'Use typing.* instead.'
-'typing.Protocol'.msg = 'Use typing.* instead.'
-'typing.TypeVar'.msg = 'Use typing.* instead.'
+'typing.Callable'.msg = 'Use "from collections.abc" instead.'
+'typing.Dict'.msg = 'Use "from __future__ import annotations"'
+'typing.List'.msg = 'Use "from __future__ import annotations"'
+'typing.Optional'.msg = 'Use "from __future__ import annotations"'
+'typing.Protocol'.msg = 'Use "from beartype.typing" instead.'
 
 [tool.ruff.lint.isort]
 known-first-party = ['corallium']

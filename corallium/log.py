@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import logging
 from functools import partial
+from typing import Any
 
-from beartype.typing import Any, Protocol, runtime_checkable
+from beartype.typing import Protocol, runtime_checkable
 from rich.console import Console
 
 from .loggers.rich_printer import rich_printer

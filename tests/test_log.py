@@ -1,8 +1,8 @@
 import logging
+from typing import Any
 
 import pytest
 import structlog
-from beartype.typing import Any
 
 from corallium.log import configure_logger, get_logger
 from corallium.loggers.plain_printer import plain_printer

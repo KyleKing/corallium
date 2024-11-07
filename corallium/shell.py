@@ -5,10 +5,9 @@ from __future__ import annotations
 import asyncio
 import subprocess
 import sys
+from collections.abc import Callable
 from pathlib import Path
 from time import time
-
-from beartype.typing import Callable
 
 from .log import LOGGER
 

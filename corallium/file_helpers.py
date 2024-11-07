@@ -10,8 +10,7 @@ import webbrowser
 from contextlib import suppress
 from functools import lru_cache
 from pathlib import Path
-
-from beartype.typing import Any
+from typing import Any
 
 from .log import LOGGER
 from .tomllib import tomllib

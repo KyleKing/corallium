@@ -8,11 +8,12 @@ from __future__ import annotations
 
 import math
 import multiprocessing
+from collections.abc import Callable
 from concurrent.futures import ProcessPoolExecutor
 from multiprocessing.managers import DictProxy
 from time import sleep
+from typing import Any, TypeVar
 
-from beartype.typing import Any, Callable, TypeVar
 from rich.progress import BarColumn, Progress, ProgressColumn, TaskID, TimeElapsedColumn, TimeRemainingColumn
 
 _ItemT = TypeVar('_ItemT', bound=Any)
