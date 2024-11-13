@@ -30,8 +30,8 @@ def get_lock() -> Path:
     raise FileNotFoundError('Could not locate a known lock file type')
 
 
-LOCK = get_lock()
-"""Deprecated path to lock file."""
+LOCK = Path('poetry.lock')
+"""poetry.lock Path."""
 
 PROJECT_TOML = Path('pyproject.toml')
 """pyproject.toml Path."""
