@@ -116,10 +116,15 @@ def capture_shell(
         raise subprocess.TimeoutExpired(cmd=cmd, timeout=timeout, output=output)
     if return_code != 0:
         raise subprocess.CalledProcessError(returncode=return_code, cmd=cmd, output=output)
+
+    # Audit log successful command execution
+    duration = time() - start
+    LOGGER.info('Shell command completed', cmd=cmd, returncode=0, duration_seconds=round(duration, 2), cwd=cwd)
+
     return output
 
 
-async def _capture_shell_async(cmd: str, *, cwd: Path | None = None) -> str:
+async def _capture_shell_async(cmd: str, *, cwd: Path | None = None, start_time: float = 0) -> str:
     proc = await asyncio.create_subprocess_shell(
         cmd,
         cwd=cwd,
@@ -135,6 +140,11 @@ async def _capture_shell_async(cmd: str, *, cwd: Path | None = None) -> str:
         raise RuntimeError(f'Process returncode is None after communicate() for command: {cmd}')
     if proc.returncode != 0:
         raise subprocess.CalledProcessError(returncode=proc.returncode, cmd=cmd, output=output)
+
+    # Audit log successful command execution
+    duration = time() - start_time if start_time else 0
+    LOGGER.info('Shell command completed', cmd=cmd, returncode=0, duration_seconds=round(duration, 2), cwd=cwd)
+
     return output
 
 
@@ -174,7 +184,11 @@ async def capture_shell_async(
         _validate_shell_command(cmd)
 
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, validate_cmd=validate_cmd)
-    return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout if timeout else None)
+    start = time()
+    return await asyncio.wait_for(
+        _capture_shell_async(cmd=cmd, cwd=cwd, start_time=start),
+        timeout=timeout if timeout else None,
+    )
 
 
 def run_shell(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None, validate_cmd: bool = False) -> None:
@@ -201,6 +215,7 @@ def run_shell(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None, v
 
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, validate_cmd=validate_cmd)
 
+    start = time()
     subprocess.run(
         cmd,
         timeout=timeout or None,
@@ -210,3 +225,7 @@ def run_shell(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None, v
         check=True,
         shell=True,
     )
+
+    # Audit log successful command execution
+    duration = time() - start
+    LOGGER.info('Shell command completed', cmd=cmd, returncode=0, duration_seconds=round(duration, 2), cwd=cwd)
