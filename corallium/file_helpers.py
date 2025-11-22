@@ -144,9 +144,11 @@ def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
     return result
 
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=128)
 def read_pyproject(cwd: Path | None = None) -> Any:
     """Return the 'pyproject.toml' file contents.
+
+    Cached with maxsize=128 to support multi-project workflows.
 
     Raises:
         FileNotFoundError: if not found
@@ -161,9 +163,12 @@ def read_pyproject(cwd: Path | None = None) -> Any:
     return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
 
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=128)
 def read_package_name(cwd: Path | None = None) -> str:
-    """Return the package name."""
+    """Return the package name.
+
+    Cached with maxsize=128 to support multi-project workflows.
+    """
     poetry_config = read_pyproject(cwd=cwd)
     return str(poetry_config['tool']['poetry']['name'])
 
