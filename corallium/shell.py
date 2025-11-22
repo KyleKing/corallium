@@ -15,7 +15,7 @@ from .log import LOGGER
 def capture_shell(
     cmd: str,
     *,
-    timeout: int = 120,
+    timeout: int | None = 120,
     cwd: Path | None = None,
     printer: Callable[[str], None] | None = None,
 ) -> str:
@@ -25,7 +25,7 @@ def capture_shell(
 
     Args:
         cmd: shell command
-        timeout: process timeout. Defaults to 2 minutes
+        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.
         cwd: optional path for shell execution
         printer: optional callable to output the lines in real time
 
@@ -34,6 +34,7 @@ def capture_shell(
 
     Raises:
         CalledProcessError: if return code is non-zero
+        TimeoutExpired: if timeout is reached
 
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, printer=printer)
@@ -52,7 +53,7 @@ def capture_shell(
             raise NotImplementedError('Failed to read stdout from process.')
         return_code = None
         while return_code is None:
-            if timeout != 0 and time() - start >= timeout:
+            if timeout is not None and time() - start >= timeout:
                 proc.kill()
                 break
             if line := stdout.readline():
@@ -90,7 +91,7 @@ async def _capture_shell_async(cmd: str, *, cwd: Path | None = None) -> str:
     return output
 
 
-async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Path | None = None) -> str:
+async def capture_shell_async(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None) -> str:
     """Run a shell command asynchronously and return the output.
 
     ```py
@@ -99,24 +100,32 @@ async def capture_shell_async(cmd: str, *, timeout: int = 120, cwd: Path | None 
 
     Args:
         cmd: shell command
-        timeout: process timeout. Defaults to 2 minutes
+        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.
         cwd: optional path for shell execution
 
     Returns:
         str: stripped output
 
+    Raises:
+        CalledProcessError: if return code is non-zero
+        TimeoutError: if timeout is reached
+
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
-    return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout)
+    return await asyncio.wait_for(_capture_shell_async(cmd=cmd, cwd=cwd), timeout=timeout if timeout else None)
 
 
-def run_shell(cmd: str, *, timeout: int = 120, cwd: Path | None = None) -> None:
+def run_shell(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None) -> None:
     """Run a shell command without capturing the output.
 
     Args:
         cmd: shell command
-        timeout: process timeout. Defaults to 2 minutes
+        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.
         cwd: optional path for shell execution
+
+    Raises:
+        CalledProcessError: if return code is non-zero
+        TimeoutExpired: if timeout is reached
 
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
