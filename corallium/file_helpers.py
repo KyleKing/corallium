@@ -214,20 +214,70 @@ def read_yaml_file(path_yaml: Path) -> Any:
 ALLOWED_CHARS = string.ascii_lowercase + string.ascii_uppercase + string.digits + '-_.'
 """Default string of acceptable characters in a filename."""
 
+# Windows reserved filenames that cannot be used
+RESERVED_NAMES = frozenset({
+    'CON',
+    'PRN',
+    'AUX',
+    'NUL',
+    'COM1',
+    'COM2',
+    'COM3',
+    'COM4',
+    'COM5',
+    'COM6',
+    'COM7',
+    'COM8',
+    'COM9',
+    'LPT1',
+    'LPT2',
+    'LPT3',
+    'LPT4',
+    'LPT5',
+    'LPT6',
+    'LPT7',
+    'LPT8',
+    'LPT9',
+})
+"""Windows reserved filenames."""
+
 
 def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = ALLOWED_CHARS) -> str:
     """Replace all characters not in the `allow_chars` with `repl_char`.
 
+    Handles empty strings, path separators, and Windows reserved names.
+
     Args:
-        filename: string filename (stem and suffix only)
+        filename: string filename (stem and suffix only, not a full path)
         repl_char: replacement character. Default is `_`
         allowed_chars: all allowed characters. Default is `ALLOWED_CHARS`
 
     Returns:
         str: sanitized filename
 
+    Raises:
+        ValueError: if filename is empty or becomes empty after sanitization
+
     """
-    return ''.join((char if char in allowed_chars else repl_char) for char in filename)
+    if not filename:
+        raise ValueError('Filename cannot be empty')
+
+    # Remove path separators first (prevents directory traversal)
+    filename = filename.replace('/', repl_char).replace('\\', repl_char)
+
+    # Replace disallowed characters
+    sanitized = ''.join((char if char in allowed_chars else repl_char) for char in filename)
+
+    if not sanitized:
+        raise ValueError(f'Filename becomes empty after sanitization: {filename!r}')
+
+    # Handle Windows reserved names (case-insensitive check)
+    # Strip extension for the check: "CON.txt" is also reserved
+    name_without_ext = sanitized.split('.')[0].upper()
+    if name_without_ext in RESERVED_NAMES:
+        sanitized = f'_{sanitized}'
+
+    return sanitized
 
 
 def trim_trailing_whitespace(pth: Path) -> None:
