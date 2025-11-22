@@ -151,16 +151,21 @@ def read_pyproject(cwd: Path | None = None) -> Any:
     Cached with maxsize=128 to support multi-project workflows.
 
     Raises:
-        FileNotFoundError: if not found
+        FileNotFoundError: if not found or cannot be read
 
     """
     toml_path = find_in_parents(name='pyproject.toml', cwd=cwd)
     try:
         pyproject_txt = toml_path.read_text(encoding='utf-8')
-    except Exception as exc:
-        msg = f'Could not locate: {toml_path}'
+    except (OSError, UnicodeDecodeError) as exc:
+        msg = f'Could not read pyproject.toml at: {toml_path}'
         raise FileNotFoundError(msg) from exc
-    return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
+
+    try:
+        return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
+    except tomllib.TOMLDecodeError as exc:  # pyright: ignore[reportAttributeAccessIssue]
+        msg = f'Invalid TOML in pyproject.toml at: {toml_path}'
+        raise ValueError(msg) from exc
 
 
 @lru_cache(maxsize=128)
