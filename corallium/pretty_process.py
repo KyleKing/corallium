@@ -31,13 +31,11 @@ _DelegatedTask = Callable[
 
 
 def _chunked(data: list[_ItemT], count: int) -> list[list[_ItemT]]:
-    """Return the list of data into equally sized lists (chunks)."""
-    # TODO: See below link for other options for chunking
-    #   https://realpython.com/how-to-split-a-python-list-into-chunks/
-    size = len(data)
-    chunk_size, chunk_rem = size // count, size % count
-    chunk_size += int(math.ceil(chunk_rem / size))
-    return [data[ix : ix + chunk_size] for ix in range(0, size, chunk_size)]
+    """Return the list of data split into count chunks of approximately equal size."""
+    if not data or count <= 0:
+        return [data] if data else []
+    chunk_size = math.ceil(len(data) / count)
+    return [data[i : i + chunk_size] for i in range(0, len(data), chunk_size)]
 
 
 def pretty_process(
@@ -93,8 +91,10 @@ def pretty_process(
                         progress.update(task_id, completed=latest, total=totals[task_id])
                     progress.update(task_id_all, completed=n_done, total=len(data))
                     remaining = len(jobs) - sum(job.done() for job in jobs)
+                    if remaining:
+                        sleep(0.1)  # 100ms refresh rate to avoid busy-waiting
 
-                # Collect results and catch and errors
+                # Collect results and catch any errors
                 return [job.result() for job in jobs]
 
 

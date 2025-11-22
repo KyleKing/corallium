@@ -20,6 +20,8 @@ from .tomllib import tomllib
 def get_lock() -> Path:
     """Return path to dependency manager's lock file.
 
+    Supports both uv.lock and poetry.lock files.
+
     Raises:
         FileNotFoundError: if a lock file can't be located
 
@@ -27,11 +29,11 @@ def get_lock() -> Path:
     for pth in map(Path, ('uv.lock', 'poetry.lock')):
         if pth.is_file():
             return pth
-    raise FileNotFoundError('Could not locate a known lock file type')
+    raise FileNotFoundError('Could not locate a known lock file type (uv.lock or poetry.lock)')
 
 
 LOCK = Path('poetry.lock')
-"""poetry.lock Path."""
+"""[DEPRECATED] Use get_lock() instead. This constant assumes poetry.lock and doesn't support uv.lock."""
 
 PROJECT_TOML = Path('pyproject.toml')
 """pyproject.toml Path."""
@@ -64,9 +66,7 @@ def read_lines(path_file: Path, encoding: str | None = 'utf-8', errors: str | No
 def tail_lines(path_file: Path, *, count: int) -> list[str]:
     """Tail a file for up to the last count (or full file) lines.
 
-    Based on: https://stackoverflow.com/a/54278929
-
-    > Tip: `file_size = fh.tell()` -or- `os.fstat(fh.fileno()).st_size` -or- return from `fh.seek(0, os.SEEK_END)`
+    Optimized to read in chunks instead of byte-by-byte for better performance.
 
     Args:
         path_file: path to the file
@@ -76,19 +76,34 @@ def tail_lines(path_file: Path, *, count: int) -> list[str]:
         List[str]: lines of text as list
 
     """
+    CHUNK_SIZE = 8192  # 8KB chunks for efficient disk I/O
     with path_file.open('rb') as f_h:
-        rem_bytes = f_h.seek(0, os.SEEK_END)
-        step_size = 1  # Initially set to 1 so that the last byte is read
-        found_lines = 0
-        while found_lines < count and rem_bytes >= step_size:
-            rem_bytes = f_h.seek(-1 * step_size, os.SEEK_CUR)
-            if f_h.read(1) == b'\n':
-                found_lines += 1
-            step_size = 2  # Increase so that repeats(read 1 / back 2)
+        file_size = f_h.seek(0, os.SEEK_END)
+        if file_size == 0:
+            return []
 
-        if rem_bytes < step_size:
-            f_h.seek(0, os.SEEK_SET)
-        return [line.rstrip('\r') for line in f_h.read().decode().split('\n')]
+        buffer = b''
+        remaining_bytes = file_size
+
+        while remaining_bytes > 0:
+            chunk_size = min(CHUNK_SIZE, remaining_bytes)
+            f_h.seek(remaining_bytes - chunk_size, os.SEEK_SET)
+            chunk = f_h.read(chunk_size)
+            buffer = chunk + buffer
+            remaining_bytes -= chunk_size
+
+            # Count newlines in buffer to see if we have enough lines
+            lines_found = buffer.count(b'\n')
+            if lines_found >= count:
+                break
+
+        # Decode and split into lines
+        decoded = buffer.decode('utf-8', errors='replace')
+        all_lines = [line.rstrip('\r') for line in decoded.split('\n')]
+
+        # Return last 'count' lines (matching original behavior)
+        # Note: split on '\n' creates an extra empty string if text ends with '\n'
+        return all_lines[-count:]
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -114,9 +129,19 @@ def find_in_parents(*, name: str, cwd: Path | None = None) -> Path:
 
 # TODO: Also read the `.mise.toml` file
 def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
-    """Return versions from `.tool-versions` file."""
+    """Return versions from `.tool-versions` file.
+
+    Handles multiple spaces/tabs between tool names and versions.
+    """
     tv_path = find_in_parents(name='.tool-versions', cwd=cwd)
-    return {line.split(' ')[0]: line.split(' ')[1:] for line in tv_path.read_text().splitlines()}
+    result = {}
+    for line in tv_path.read_text().splitlines():
+        if not line.strip() or line.strip().startswith('#'):
+            continue  # Skip empty lines and comments
+        parts = line.split()
+        if parts:
+            result[parts[0]] = parts[1:]
+    return result
 
 
 @lru_cache(maxsize=5)
@@ -163,15 +188,13 @@ def read_yaml_file(path_yaml: Path) -> Any:
     except ImportError as exc:
         raise RuntimeError("The 'calcipy[docs]' extras are missing") from exc
 
-    # PLANNED: Refactor so that unsafe_load isn't necessary:
-    #   read_text; remove any line containing ': !!python'; then yaml.loag
-
     # Based on: https://github.com/yaml/pyyaml/issues/86#issuecomment-380252434
-    yaml.add_multi_constructor('', lambda _loader, _suffix, _node: None)
-    yaml.add_multi_constructor('!', lambda _loader, _suffix, _node: None)
-    yaml.add_multi_constructor('!!', lambda _loader, _suffix, _node: None)
+    # Use safe_load with custom constructors to suppress tags
+    yaml.add_multi_constructor('', lambda _loader, _suffix, _node: None, Loader=yaml.SafeLoader)
+    yaml.add_multi_constructor('!', lambda _loader, _suffix, _node: None, Loader=yaml.SafeLoader)
+    yaml.add_multi_constructor('!!', lambda _loader, _suffix, _node: None, Loader=yaml.SafeLoader)
     try:
-        return yaml.unsafe_load(path_yaml.read_text())
+        return yaml.safe_load(path_yaml.read_text())
     except (FileNotFoundError, KeyError) as exc:  # pragma: no cover
         LOGGER.warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
         return {}

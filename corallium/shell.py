@@ -63,8 +63,11 @@ def capture_shell(
                 return_code = proc.poll()
 
     output = ''.join(lines)
+    if return_code is None:
+        # Process was killed due to timeout
+        raise subprocess.TimeoutExpired(cmd=cmd, timeout=timeout, output=output)
     if return_code != 0:
-        raise subprocess.CalledProcessError(returncode=return_code or 404, cmd=cmd, output=output)
+        raise subprocess.CalledProcessError(returncode=return_code, cmd=cmd, output=output)
     return output
 
 
@@ -79,8 +82,11 @@ async def _capture_shell_async(cmd: str, *, cwd: Path | None = None) -> str:
 
     stdout, _stderr = await proc.communicate()
     output = stdout.decode().strip()
+    if proc.returncode is None:
+        # Process returncode should not be None after communicate(), but handle defensively
+        raise RuntimeError(f'Process returncode is None after communicate() for command: {cmd}')
     if proc.returncode != 0:
-        raise subprocess.CalledProcessError(returncode=proc.returncode or 404, cmd=cmd, output=output)
+        raise subprocess.CalledProcessError(returncode=proc.returncode, cmd=cmd, output=output)
     return output
 
 
