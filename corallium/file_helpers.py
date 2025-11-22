@@ -288,11 +288,15 @@ def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = 
 def trim_trailing_whitespace(pth: Path) -> None:
     """Trim trailing whitespace from the specified file.
 
-    PLANNED: handle carriage returns
-
+    Preserves the original line ending style (LF or CRLF).
     """
-    line_break = '\n'
-    stripped = [line.rstrip(' ') for line in pth.read_text().split(line_break)]
+    text = pth.read_text()
+    # Detect line ending style
+    has_crlf = '\r\n' in text
+    line_break = '\r\n' if has_crlf else '\n'
+
+    # Strip trailing spaces from each line
+    stripped = [line.rstrip(' ') for line in text.split(line_break)]
     pth.write_text(line_break.join(stripped))
 
 
