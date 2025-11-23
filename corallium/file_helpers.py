@@ -255,12 +255,31 @@ def read_pyproject(cwd: Path | None = None) -> Any:
 
 @lru_cache(maxsize=128)
 def read_package_name(cwd: Path | None = None) -> str:
-    """Return the package name.
+    """Return the package name from pyproject.toml.
 
+    Supports both PEP 621 (uv/modern) and Poetry formats.
     Cached with maxsize=128 to support multi-project workflows.
+
+    Priority order:
+    1. [project.name] (PEP 621 standard, used by uv and modern tools)
+    2. [tool.poetry.name] (Poetry-specific format)
+
+    Args:
+        cwd: Working directory to search from. Defaults to current directory.
+
+    Returns:
+        Package name as string
+
+    Raises:
+        KeyError: if package name not found in either location
+
     """
-    poetry_config = read_pyproject(cwd=cwd)
-    return str(poetry_config['tool']['poetry']['name'])
+    pyproject = read_pyproject(cwd=cwd)
+    # Try PEP 621 format first (modern standard)
+    with suppress(KeyError):
+        return str(pyproject['project']['name'])
+    # Fall back to Poetry format
+    return str(pyproject['tool']['poetry']['name'])
 
 
 def read_yaml_file(path_yaml: Path) -> Any:
