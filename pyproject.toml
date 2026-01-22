@@ -1,6 +1,35 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core"]
+build-backend = "uv_build"
+requires = ["uv_build>=0.9.26"]
+
+[project]
+authors = [
+  {email = "dev.act.kyle@gmail.com", name = "Kyle King"},
+]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+] # https://pypi.org/classifiers/
+description = "Shared functionality for the calcipy-ecosystem"
+keywords = ["calcipy_template"]
+license = "MIT"
+maintainers = []
+name = "corallium"
+readme = "docs/README.md"
+requires-python = ">=3.9.13"
+version = "2.1.1"
+
+[project.urls]
+"Bug Tracker" = "https://github.com/kyleking/corallium/issues"
+"Changelog" = "https://github.com/kyleking/corallium/blob/main/docs/docs/CHANGELOG.md"
+"Documentation" = "https://corallium.kyleking.me"
+"Repository" = "https://github.com/kyleking/corallium"
 
 [tool.commitizen]
 version = "2.1.1"
@@ -25,29 +54,7 @@ warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
-[tool.poetry]
-authors = ["Kyle King <dev.act.kyle@gmail.com>"]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "License :: OSI Approved :: MIT License",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.9",
-] # https://pypi.org/classifiers/
-description = "CLI utility functions extracted from Calcipy"
-documentation = "https://corallium.kyleking.me"
-keywords = ["calcipy_template"]
-license = "MIT"
-maintainers = []
-name = "corallium"
-readme = "docs/README.md"
-repository = "https://github.com/kyleking/corallium"
-version = "2.1.1"
-
 [tool.poetry.dependencies]
-python = "^3.9.13"
 beartype = ">=0.19.0"
 rich = ">=13.9.2"
 tomli = {markers = "python_version < '3.11'", version = ">=2.0.2"}
@@ -62,10 +69,6 @@ structlog = ">=24.4.0"
 types-psutil = ">=6.0.0.20240901"
 types-pyyaml = ">=6.0.12.20240917"
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/kyleking/corallium/issues"
-"Changelog" = "https://github.com/kyleking/corallium/blob/main/docs/docs/CHANGELOG.md"
-
 [tool.pyright]
 include = ["corallium", "tests"]
 pythonVersion = "3.9"
@@ -75,7 +78,7 @@ asyncio_default_fixture_loop_scope = "function"
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
-# Tip: poetry run python -m ruff rule RUF100
+# Tip: uv run ruff rule RUF100
 line-length = 120
 target-version = 'py39'
 
@@ -83,24 +86,21 @@ target-version = 'py39'
 ignore = [
   'ANN002', # Missing type annotation for `*args`
   'ANN003', # Missing type annotation for `**kwargs`
-  'ANN101', # Missing type annotation for `self` in method (automatically inferred)
-  'ANN102', # Missing type annotation for `cls` in classmethod (automatically inferred)
   'ANN401', # Dynamically typed expressions (typing.Any) are disallowed in `pop_key`
   'BLE001', # Do not catch blind exception: `Exception`
   'CPY001', # Missing copyright notice at top of file
   'D203', # "1 blank line required before class docstring" (Conflicts with D211)
   'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
+  'DOC201', # PLANNED: finish updating docstrings for Returns
+  'DOC501', # Raised exception `RuntimeError` missing from docstring
   'EM101', # Exception must not use a string literal, assign to variable first
   'FIX001', # Line contains FIXME
   'FIX002', # Line contains TODO
   'FIX004', # Line contains HACK
   'PLR0913', # Too many arguments in function definition (6 > 5)
-  'S404', # `subprocess` module is possibly insecure
-  'S602', # `subprocess` call with `shell=True` identified, security issue
-  'S604', # Function call with `shell=True` parameter identified, security issue
-  'TCH001', # Move application import `tail_jsonl.config.Config` into a type-checking block (Conflicts with Beartype)
-  'TCH002', # Move third-party import `rich.console.Console` into a type-checking block (Conflicts with Beartype)
-  'TCH003', # Move standard library import `argparse` into a type-checking block (Conflicts with Beartype)
+  'TC001', # Move application import `tail_jsonl.config.Config` into a type-checking block (Conflicts with Beartype)
+  'TC002', # Move third-party import `rich.console.Console` into a type-checking block (Conflicts with Beartype)
+  'TC003', # Move standard library import `argparse` into a type-checking block (Conflicts with Beartype)
   'TD001', # Invalid TODO tag: `FIXME`
   'TD002', # Missing author in TODO; try: `# TODO(<author_name>): ...`
   'TD003', # Missing issue link on the line following this TODO
@@ -158,5 +158,12 @@ convention = "google"
 [tool.tomlsort]
 all = true
 in_place = true
-sort_first = ["python"]
 trailing_comma_inline_array = true
+
+[tool.uv]
+default-groups = ["dev"]
+required-version = ">=0.9.0"
+
+[tool.uv.build-backend]
+module-name = "corallium"
+module-root = ""
