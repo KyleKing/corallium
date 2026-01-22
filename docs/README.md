@@ -1,6 +1,6 @@
 # corallium
 
-Shared functionality for the calcipy-ecosystem.
+CLI utility functions extracted from Calcipy.
 
 ## Installation
 

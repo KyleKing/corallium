@@ -36,7 +36,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.9",
 ] # https://pypi.org/classifiers/
-description = "Shared functionality for the calcipy-ecosystem"
+description = "CLI utility functions extracted from Calcipy"
 documentation = "https://corallium.kyleking.me"
 keywords = ["calcipy_template"]
 license = "MIT"
