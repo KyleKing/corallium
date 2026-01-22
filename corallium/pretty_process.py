@@ -113,7 +113,8 @@ def ____private(task_id: int, shared_progress: DictProxy, data: list[_ItemT]) ->
 if __name__ == '__main__':
 
     def _demo() -> None:
-        """Run demo with: 'poetry run python -m shoal.pretty_process'."""
+        # TODO: Test?
+        """Run demo with: 'uv run shoal.pretty_process'."""
         # Resolve number of cores or specified maximum
         num_cpus = 4
         try:

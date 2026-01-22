@@ -24,14 +24,13 @@ def get_lock() -> Path:
         FileNotFoundError: if a lock file can't be located
 
     """
+    # PLANNED: Support file search?
+    # See: https://stackoverflow.com/a/78155822/3219667
     for pth in map(Path, ('uv.lock', 'poetry.lock')):
         if pth.is_file():
             return pth
     raise FileNotFoundError('Could not locate a known lock file type')
 
-
-LOCK = Path('poetry.lock')
-"""poetry.lock Path."""
 
 PROJECT_TOML = Path('pyproject.toml')
 """pyproject.toml Path."""
@@ -139,8 +138,10 @@ def read_pyproject(cwd: Path | None = None) -> Any:
 @lru_cache(maxsize=5)
 def read_package_name(cwd: Path | None = None) -> str:
     """Return the package name."""
-    poetry_config = read_pyproject(cwd=cwd)
-    return str(poetry_config['tool']['poetry']['name'])
+    pyproject = read_pyproject(cwd=cwd)
+    with suppress(KeyError):
+        return str(pyproject['project']['name'])  # For uv
+    return str(pyproject['tool']['poetry']['name'])
 
 
 def read_yaml_file(path_yaml: Path) -> Any:
