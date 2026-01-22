@@ -2,7 +2,20 @@
 
 from pathlib import Path
 
-from corallium.file_helpers import delete_dir, ensure_dir, if_found_unlink, read_lines, sanitize_filename, tail_lines
+import pytest
+
+from corallium.file_helpers import (
+    _parse_mise_lock,
+    _parse_mise_toml,
+    _parse_tool_versions,
+    delete_dir,
+    ensure_dir,
+    get_tool_versions,
+    if_found_unlink,
+    read_lines,
+    sanitize_filename,
+    tail_lines,
+)
 
 
 def test_sanitize_filename():
@@ -52,3 +65,86 @@ def test_dir_tools(fix_test_cache):
     assert tmp_subdir.is_dir()
     delete_dir(tmp_dir)
     assert not tmp_dir.is_dir()
+
+
+def test_parse_mise_lock(fix_test_cache):
+    lock_path = fix_test_cache / 'mise.lock'
+    lock_path.write_text("""\
+[tools.python]
+version = "3.11.11"
+
+[tools.node]
+version = "20.10.0"
+""")
+
+    result = _parse_mise_lock(lock_path)
+
+    assert result == {'python': ['3.11.11'], 'node': ['20.10.0']}
+
+
+def test_parse_mise_toml_single_version(fix_test_cache):
+    mise_path = fix_test_cache / 'mise.toml'
+    mise_path.write_text("""\
+[tools]
+python = "3.11"
+node = "20"
+""")
+
+    result = _parse_mise_toml(mise_path)
+
+    assert result == {'python': ['3.11'], 'node': ['20']}
+
+
+def test_parse_mise_toml_multiple_versions(fix_test_cache):
+    mise_path = fix_test_cache / 'mise.toml'
+    mise_path.write_text("""\
+[tools]
+python = ["3.10.16", "3.11.11", "3.12.5"]
+""")
+
+    result = _parse_mise_toml(mise_path)
+
+    assert result == {'python': ['3.10.16', '3.11.11', '3.12.5']}
+
+
+def test_parse_tool_versions(fix_test_cache):
+    tv_path = fix_test_cache / '.tool-versions'
+    tv_path.write_text('python 3.10.16 3.11.11\nnode 20.10.0\n')
+
+    result = _parse_tool_versions(tv_path)
+
+    assert result == {'python': ['3.10.16', '3.11.11'], 'node': ['20.10.0']}
+
+
+def test_get_tool_versions_prefers_mise_lock(fix_test_cache):
+    (fix_test_cache / 'mise.lock').write_text('[tools.python]\nversion = "3.11.11"\n')
+    (fix_test_cache / 'mise.toml').write_text('[tools]\npython = "3.10"\n')
+    (fix_test_cache / '.tool-versions').write_text('python 3.9.0\n')
+
+    result = get_tool_versions(cwd=fix_test_cache)
+
+    assert result == {'python': ['3.11.11']}
+
+
+def test_get_tool_versions_falls_back_to_mise_toml(fix_test_cache):
+    (fix_test_cache / 'mise.toml').write_text('[tools]\npython = "3.10"\n')
+    (fix_test_cache / '.tool-versions').write_text('python 3.9.0\n')
+
+    result = get_tool_versions(cwd=fix_test_cache)
+
+    assert result == {'python': ['3.10']}
+
+
+def test_get_tool_versions_falls_back_to_tool_versions(fix_test_cache):
+    (fix_test_cache / '.tool-versions').write_text('python 3.9.0\n')
+
+    result = get_tool_versions(cwd=fix_test_cache)
+
+    assert result == {'python': ['3.9.0']}
+
+
+def test_get_tool_versions_raises_when_no_file(tmp_path):
+    isolated_dir = tmp_path / 'isolated'
+    isolated_dir.mkdir()
+    with pytest.raises(FileNotFoundError):
+        get_tool_versions(cwd=isolated_dir)

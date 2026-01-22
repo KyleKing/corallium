@@ -111,11 +111,54 @@ def find_in_parents(*, name: str, cwd: Path | None = None) -> Path:
     return start_path
 
 
-# TODO: Also read the `.mise.toml` file
+def _parse_mise_lock(lock_path: Path) -> dict[str, list[str]]:
+    content = lock_path.read_bytes()
+    data = tomllib.loads(content.decode('utf-8'))
+
+    versions: dict[str, list[str]] = {}
+    if 'tools' in data:
+        for tool, tool_data in data['tools'].items():
+            if isinstance(tool_data, dict) and 'version' in tool_data:
+                version = tool_data['version']
+                if version:
+                    versions.setdefault(tool, []).append(version)
+    return versions
+
+
+def _parse_mise_toml(mise_path: Path) -> dict[str, list[str]]:
+    content = mise_path.read_bytes()
+    data = tomllib.loads(content.decode('utf-8'))
+
+    versions: dict[str, list[str]] = {}
+    if 'tools' in data:
+        for tool, version in data['tools'].items():
+            if isinstance(version, str):
+                versions.setdefault(tool, []).append(version)
+            elif isinstance(version, list):
+                versions.setdefault(tool, []).extend(version)
+    return versions
+
+
+def _parse_tool_versions(tv_path: Path) -> dict[str, list[str]]:
+    return {line.split(' ')[0]: line.split(' ')[1:] for line in tv_path.read_text(encoding='utf-8').splitlines()}
+
+
 def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
-    """Return versions from `.tool-versions` file."""
+    """Return versions from mise.lock, mise.toml, or .tool-versions file.
+
+    Priority order: mise.lock, mise.toml, .tool-versions (legacy asdf format).
+
+    """
+    with suppress(FileNotFoundError):
+        lock_path = find_in_parents(name='mise.lock', cwd=cwd)
+        return _parse_mise_lock(lock_path)
+
+    with suppress(FileNotFoundError):
+        mise_path = find_in_parents(name='mise.toml', cwd=cwd)
+        return _parse_mise_toml(mise_path)
+
     tv_path = find_in_parents(name='.tool-versions', cwd=cwd)
-    return {line.split(' ')[0]: line.split(' ')[1:] for line in tv_path.read_text().splitlines()}
+    return _parse_tool_versions(tv_path)
 
 
 @lru_cache(maxsize=5)
@@ -172,7 +215,7 @@ def read_yaml_file(path_yaml: Path) -> Any:
     yaml.add_multi_constructor('!', lambda _loader, _suffix, _node: None)
     yaml.add_multi_constructor('!!', lambda _loader, _suffix, _node: None)
     try:
-        return yaml.unsafe_load(path_yaml.read_text())
+        return yaml.unsafe_load(path_yaml.read_text(encoding='utf-8'))
     except (FileNotFoundError, KeyError) as exc:  # pragma: no cover
         LOGGER.warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
         return {}
@@ -210,8 +253,8 @@ def trim_trailing_whitespace(pth: Path) -> None:
 
     """
     line_break = '\n'
-    stripped = [line.rstrip(' ') for line in pth.read_text().split(line_break)]
-    pth.write_text(line_break.join(stripped))
+    stripped = [line.rstrip(' ') for line in pth.read_text(encoding='utf-8').split(line_break)]
+    pth.write_text(line_break.join(stripped), encoding='utf-8')
 
 
 # ----------------------------------------------------------------------------------------------------------------------

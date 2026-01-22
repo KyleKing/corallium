@@ -36,7 +36,7 @@ def _chunked(data: list[_ItemT], count: int) -> list[list[_ItemT]]:
     #   https://realpython.com/how-to-split-a-python-list-into-chunks/
     size = len(data)
     chunk_size, chunk_rem = size // count, size % count
-    chunk_size += int(math.ceil(chunk_rem / size))
+    chunk_size += math.ceil(chunk_rem / size)
     return [data[ix : ix + chunk_size] for ix in range(0, size, chunk_size)]
 
 

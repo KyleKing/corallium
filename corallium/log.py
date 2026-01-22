@@ -47,9 +47,9 @@ class _LogSingleton:
         **kwargs: Any,
     ) -> LogCallable:
         """Return after updating the internal logger instance."""
-        if not (_logger := logger or self._logger):
-            _logger = partial(rich_printer, _console=_console or Console(), _styles=_styles or STYLES)
-        self._logger = partial(_logger, **kwargs)
+        if not (logger_ := logger or self._logger):
+            logger_ = partial(rich_printer, _console=_console or Console(), _styles=_styles or STYLES)
+        self._logger = partial(logger_, **kwargs)
         self._log_level = log_level
         return self._logger
 
@@ -58,8 +58,8 @@ class _LogSingleton:
         if _this_level < self._log_level:
             return
         # Ensure logger is configured
-        _logger = self._logger or self.set_logger(log_level=self._log_level)
-        _logger(*args, _this_level=_this_level, is_header=is_header, _is_text=_is_text, **kwargs)
+        logger = self._logger or self.set_logger(log_level=self._log_level)
+        logger(*args, _this_level=_this_level, is_header=is_header, _is_text=_is_text, **kwargs)
 
 
 _LOG_SINGLETON = _LogSingleton()
