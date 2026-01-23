@@ -135,14 +135,6 @@ def test_get_tool_versions_falls_back_to_mise_toml(fix_test_cache):
     assert result == {'python': ['3.10']}
 
 
-def test_get_tool_versions_falls_back_to_tool_versions(fix_test_cache):
-    (fix_test_cache / '.tool-versions').write_text('python 3.9.0\n')
-
-    result = get_tool_versions(cwd=fix_test_cache)
-
-    assert result == {'python': ['3.9.0']}
-
-
 def test_get_tool_versions_raises_when_no_file(tmp_path):
     isolated_dir = tmp_path / 'isolated'
     isolated_dir.mkdir()

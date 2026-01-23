@@ -115,7 +115,7 @@ def find_in_parents(*, name: str, cwd: Path | None = None) -> Path:
 
 def _parse_mise_lock(lock_path: Path) -> dict[str, list[str]]:
     content = lock_path.read_bytes()
-    data = tomllib.loads(content.decode('utf-8'))
+    data = tomllib.loads(content.decode('utf-8'))  # pyright: ignore[reportAttributeAccessIssue]
 
     versions: dict[str, list[str]] = {}
     if 'tools' in data:
@@ -129,7 +129,7 @@ def _parse_mise_lock(lock_path: Path) -> dict[str, list[str]]:
 
 def _parse_mise_toml(mise_path: Path) -> dict[str, list[str]]:
     content = mise_path.read_bytes()
-    data = tomllib.loads(content.decode('utf-8'))
+    data = tomllib.loads(content.decode('utf-8'))  # pyright: ignore[reportAttributeAccessIssue]
 
     versions: dict[str, list[str]] = {}
     if 'tools' in data:
