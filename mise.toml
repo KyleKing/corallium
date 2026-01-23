@@ -2,4 +2,4 @@
 _.python.venv = {path = ".venv"}
 
 [tools]
-python = ["3.13.11", "3.9.13"]
+python = ["3.10.19", "3.13.11"]
