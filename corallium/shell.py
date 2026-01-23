@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-import subprocess
+import subprocess  # noqa: S404
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -40,7 +40,7 @@ def capture_shell(
 
     start = time()
     lines = []
-    with subprocess.Popen(
+    with subprocess.Popen(  # noqa: S602
         cmd,
         cwd=cwd,
         stdout=subprocess.PIPE,
@@ -69,7 +69,7 @@ def capture_shell(
 
 
 async def _capture_shell_async(cmd: str, *, cwd: Path | None = None) -> str:
-    proc = await asyncio.create_subprocess_shell(
+    proc = await asyncio.create_subprocess_shell(  # noqa: S604
         cmd,
         cwd=cwd,
         stdout=subprocess.PIPE,
@@ -115,7 +115,7 @@ def run_shell(cmd: str, *, timeout: int = 120, cwd: Path | None = None) -> None:
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd)
 
-    subprocess.run(
+    subprocess.run(  # noqa: S602
         cmd,
         timeout=timeout or None,
         cwd=cwd,

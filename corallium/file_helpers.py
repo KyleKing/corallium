@@ -15,6 +15,8 @@ from typing import Any
 from .log import LOGGER
 from .tomllib import tomllib
 
+LOCK = Path('poetry.lock')  # HACK: Temporary for initial release with Calcipy v5
+
 
 @lru_cache(maxsize=1)
 def get_lock() -> Path:

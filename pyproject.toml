@@ -3,7 +3,16 @@ build-backend = "uv_build"
 requires = ["uv_build>=0.9.26"]
 
 [dependency-groups]
-dev = ['calcipy[dev]>=5.0.0', 'pytest-asyncio>=0.24.0', 'pytest-structlog>=1.1', 'pytest-subprocess>=1.5.2', 'structlog>=24.4.0', 'types-psutil>=6.0.0.20240901', 'types-pyyaml>=6.0.12.20240917']
+dev = [
+  'calcipy[ddict,doc,lint,nox,tags,test,types]>=5.0.0',
+  # 'calcipy[dev]>=6.0.0',  # PLANNED: When available
+  'pytest-asyncio>=0.24.0',
+  'pytest-structlog>=1.1',
+  'pytest-subprocess>=1.5.2',
+  'structlog>=24.4.0',
+  'types-psutil>=6.0.0.20240901',
+  'types-pyyaml>=6.0.12.20240917',
+]
 
 [project]
 authors = [
@@ -19,7 +28,13 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
 ] # https://pypi.org/classifiers/
-dependencies = ["tomli>=2.0.2; python_version < '3.11'", 'beartype>=0.19.0', 'corallium>=2.0.1', 'rich>=13.9.2', 'typing-extensions>=4.12.2']
+dependencies = [
+  "tomli>=2.0.2; python_version < '3.11'",
+  'beartype>=0.19.0',
+  'corallium>=2.0.1',
+  'rich>=13.9.2',
+  'typing-extensions>=4.12.2',
+]
 description = "Shared functionality for the calcipy-ecosystem"
 keywords = ["calcipy_template"]
 license = "MIT"
