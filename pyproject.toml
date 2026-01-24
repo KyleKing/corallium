@@ -174,3 +174,36 @@ required-version = ">=0.9.0"
 [tool.uv.build-backend]
 module-name = "corallium"
 module-root = ""
+
+[tool.poetry.extras]
+tags = ["arrow"]
+
+[tool.ruff.lint]
+ignore = [
+  'ANN002', # Missing type annotation for `*args`
+  'ANN003', # Missing type annotation for `**kwargs`
+  'ANN101', # Missing type annotation for `self` in method (automatically inferred)
+  'ANN102', # Missing type annotation for `cls` in classmethod (automatically inferred)
+  'BLE001', # Do not catch blind exception: `Exception`
+  'CPY001', # Missing copyright notice at top of file
+  'D203', # "1 blank line required before class docstring" (Conflicts with D211)
+  'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
+  'EM101', # Exception must not use a string literal, assign to variable first
+  'FIX001', # Line contains FIXME
+  'FIX002', # Line contains TODO
+  'FIX004', # Line contains HACK
+  'PLR0913', # Too many arguments in function definition (6 > 5)
+  'S404', # `subprocess` module is possibly insecure
+  'S602', # `subprocess` call with `shell=True` identified, security issue
+  'S604', # Function call with `shell=True` parameter identified, security issue
+  'TCH002', # Move third-party import `rich.console.Console` into a type-checking block (Conflicts with Beartype)
+  'TD001', # Invalid TODO tag: `FIXME`
+  'TD002', # Missing author in TODO; try: `# TODO(<author_name>): ...`
+  'TD003', # Missing issue link on the line following this TODO
+  'TRY003', # Avoid specifying long messages outside the exception class
+]
+preview = true
+select = ['ALL']
+unfixable = [
+  'ERA001', # Commented out code
+]

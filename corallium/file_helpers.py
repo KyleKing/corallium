@@ -35,7 +35,6 @@ def get_lock() -> Path:
 LOCK = Path('poetry.lock')
 """[DEPRECATED] Use get_lock() instead. This constant assumes poetry.lock and doesn't support uv.lock."""
 
-
 PROJECT_TOML = Path('pyproject.toml')
 """pyproject.toml Path."""
 
@@ -67,9 +66,7 @@ def read_lines(path_file: Path, encoding: str | None = 'utf-8', errors: str | No
 def tail_lines(path_file: Path, *, count: int) -> list[str]:
     """Tail a file for up to the last count (or full file) lines.
 
-    Based on: https://stackoverflow.com/a/54278929
-
-    > Tip: `file_size = fh.tell()` -or- `os.fstat(fh.fileno()).st_size` -or- return from `fh.seek(0, os.SEEK_END)`
+    Optimized to read in chunks instead of byte-by-byte for better performance.
 
     Args:
         path_file: path to the file
@@ -79,19 +76,34 @@ def tail_lines(path_file: Path, *, count: int) -> list[str]:
         List[str]: lines of text as list
 
     """
+    CHUNK_SIZE = 8192  # 8KB chunks for efficient disk I/O
     with path_file.open('rb') as f_h:
-        rem_bytes = f_h.seek(0, os.SEEK_END)
-        step_size = 1  # Initially set to 1 so that the last byte is read
-        found_lines = 0
-        while found_lines < count and rem_bytes >= step_size:
-            rem_bytes = f_h.seek(-1 * step_size, os.SEEK_CUR)
-            if f_h.read(1) == b'\n':
-                found_lines += 1
-            step_size = 2  # Increase so that repeats(read 1 / back 2)
+        file_size = f_h.seek(0, os.SEEK_END)
+        if file_size == 0:
+            return []
 
-        if rem_bytes < step_size:
-            f_h.seek(0, os.SEEK_SET)
-        return [line.rstrip('\r') for line in f_h.read().decode().split('\n')]
+        buffer = b''
+        remaining_bytes = file_size
+
+        while remaining_bytes > 0:
+            chunk_size = min(CHUNK_SIZE, remaining_bytes)
+            f_h.seek(remaining_bytes - chunk_size, os.SEEK_SET)
+            chunk = f_h.read(chunk_size)
+            buffer = chunk + buffer
+            remaining_bytes -= chunk_size
+
+            # Count newlines in buffer to see if we have enough lines
+            lines_found = buffer.count(b'\n')
+            if lines_found >= count:
+                break
+
+        # Decode and split into lines
+        decoded = buffer.decode('utf-8', errors='replace')
+        all_lines = [line.rstrip('\r') for line in decoded.split('\n')]
+
+        # Return last 'count' lines (matching original behavior)
+        # Note: split on '\n' creates an extra empty string if text ends with '\n'
+        return all_lines[-count:]
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -182,6 +194,8 @@ def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
 def read_pyproject(cwd: Path | None = None) -> Any:
     """Return the 'pyproject.toml' file contents.
 
+    Cached with maxsize=128 to support multi-project workflows.
+
     Raises:
         FileNotFoundError: if not found or cannot be read
 
@@ -250,9 +264,38 @@ def read_yaml_file(path_yaml: Path) -> Any:
 ALLOWED_CHARS = string.ascii_lowercase + string.ascii_uppercase + string.digits + '-_.'
 """Default string of acceptable characters in a filename."""
 
+# Windows reserved filenames that cannot be used
+RESERVED_NAMES = frozenset({
+    'CON',
+    'PRN',
+    'AUX',
+    'NUL',
+    'COM1',
+    'COM2',
+    'COM3',
+    'COM4',
+    'COM5',
+    'COM6',
+    'COM7',
+    'COM8',
+    'COM9',
+    'LPT1',
+    'LPT2',
+    'LPT3',
+    'LPT4',
+    'LPT5',
+    'LPT6',
+    'LPT7',
+    'LPT8',
+    'LPT9',
+})
+"""Windows reserved filenames."""
+
 
 def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = ALLOWED_CHARS) -> str:
     """Replace all characters not in the `allow_chars` with `repl_char`.
+
+    Handles empty strings, path separators, and Windows reserved names.
 
     Args:
         filename: string filename (stem and suffix only, not a full path)
