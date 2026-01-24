@@ -15,12 +15,12 @@ from typing import Any
 from .log import LOGGER
 from .tomllib import tomllib
 
-LOCK = Path('poetry.lock')  # HACK: Temporary for initial release with Calcipy v5
-
 
 @lru_cache(maxsize=1)
 def get_lock() -> Path:
     """Return path to dependency manager's lock file.
+
+    Supports both uv.lock and poetry.lock files.
 
     Raises:
         FileNotFoundError: if a lock file can't be located
@@ -31,7 +31,11 @@ def get_lock() -> Path:
     for pth in map(Path, ('uv.lock', 'poetry.lock')):
         if pth.is_file():
             return pth
-    raise FileNotFoundError('Could not locate a known lock file type')
+    raise FileNotFoundError('Could not locate a known lock file type (uv.lock or poetry.lock)')
+
+
+LOCK = Path('poetry.lock')
+"""[DEPRECATED] Use get_lock() instead. This constant assumes poetry.lock and doesn't support uv.lock."""
 
 
 PROJECT_TOML = Path('pyproject.toml')
@@ -142,7 +146,15 @@ def _parse_mise_toml(mise_path: Path) -> dict[str, list[str]]:
 
 
 def _parse_tool_versions(tv_path: Path) -> dict[str, list[str]]:
-    return {line.split(' ')[0]: line.split(' ')[1:] for line in tv_path.read_text(encoding='utf-8').splitlines()}
+    """Parse .tool-versions file handling multiple spaces/tabs and comments."""
+    result = {}
+    for line in tv_path.read_text(encoding='utf-8').splitlines():
+        if not line.strip() or line.lstrip().startswith('#'):
+            continue  # Skip empty lines and comments
+        parts = line.split()
+        if parts:
+            result[parts[0]] = parts[1:]
+    return result
 
 
 def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
@@ -163,24 +175,28 @@ def get_tool_versions(cwd: Path | None = None) -> dict[str, list[str]]:
     return _parse_tool_versions(tv_path)
 
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=25)
 def read_pyproject(cwd: Path | None = None) -> Any:
     """Return the 'pyproject.toml' file contents.
 
     Raises:
-        FileNotFoundError: if not found
+        FileNotFoundError: if not found or cannot be read
 
     """
     toml_path = find_in_parents(name='pyproject.toml', cwd=cwd)
     try:
         pyproject_txt = toml_path.read_text(encoding='utf-8')
-    except Exception as exc:
-        msg = f'Could not locate: {toml_path}'
+    except (OSError, UnicodeDecodeError) as exc:
+        msg = f'Could not read pyproject.toml at: {toml_path}'
         raise FileNotFoundError(msg) from exc
-    return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
 
+    try:
+        return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
+    except tomllib.TOMLDecodeError as exc:  # pyright: ignore[reportAttributeAccessIssue]
+        msg = f'Invalid TOML in pyproject.toml at: {toml_path}'
+        raise ValueError(msg) from exc
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=25)
 def read_package_name(cwd: Path | None = None) -> str:
     """Return the package name."""
     pyproject = read_pyproject(cwd=cwd)
@@ -209,15 +225,13 @@ def read_yaml_file(path_yaml: Path) -> Any:
     except ImportError as exc:
         raise RuntimeError("The 'calcipy[docs]' extras are missing") from exc
 
-    # PLANNED: Refactor so that unsafe_load isn't necessary:
-    #   read_text; remove any line containing ': !!python'; then yaml.loag
-
     # Based on: https://github.com/yaml/pyyaml/issues/86#issuecomment-380252434
-    yaml.add_multi_constructor('', lambda _loader, _suffix, _node: None)
-    yaml.add_multi_constructor('!', lambda _loader, _suffix, _node: None)
-    yaml.add_multi_constructor('!!', lambda _loader, _suffix, _node: None)
+    # Use safe_load with custom constructors to suppress tags
+    yaml.add_multi_constructor('', lambda _loader, _suffix, _node: None, Loader=yaml.SafeLoader)
+    yaml.add_multi_constructor('!', lambda _loader, _suffix, _node: None, Loader=yaml.SafeLoader)
+    yaml.add_multi_constructor('!!', lambda _loader, _suffix, _node: None, Loader=yaml.SafeLoader)
     try:
-        return yaml.unsafe_load(path_yaml.read_text(encoding='utf-8'))
+        return yaml.safe_load(path_yaml.read_text(encoding='utf-8'))
     except (FileNotFoundError, KeyError) as exc:  # pragma: no cover
         LOGGER.warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
         return {}
@@ -237,25 +251,45 @@ def sanitize_filename(filename: str, repl_char: str = '_', allowed_chars: str = 
     """Replace all characters not in the `allow_chars` with `repl_char`.
 
     Args:
-        filename: string filename (stem and suffix only)
+        filename: string filename (stem and suffix only, not a full path)
         repl_char: replacement character. Default is `_`
         allowed_chars: all allowed characters. Default is `ALLOWED_CHARS`
 
     Returns:
         str: sanitized filename
 
+    Raises:
+        ValueError: if filename is empty or becomes empty after sanitization
+
     """
-    return ''.join((char if char in allowed_chars else repl_char) for char in filename)
+    if not filename:
+        raise ValueError('Filename cannot be empty')
+
+    # Remove path separators first (prevents directory traversal)
+    filename = filename.replace('/', repl_char).replace('\\', repl_char)
+
+    # Replace disallowed characters
+    sanitized = ''.join((char if char in allowed_chars else repl_char) for char in filename)
+
+    if not sanitized:
+        msg = f'Filename becomes empty after sanitization: {filename!r}'
+        raise ValueError(msg)
+
+    return sanitized
 
 
 def trim_trailing_whitespace(pth: Path) -> None:
     """Trim trailing whitespace from the specified file.
 
-    PLANNED: handle carriage returns
-
+    Preserves the original line ending style (LF or CRLF).
     """
-    line_break = '\n'
-    stripped = [line.rstrip(' ') for line in pth.read_text(encoding='utf-8').split(line_break)]
+    text = pth.read_text(encoding='utf-8')
+    # Detect line ending style
+    has_crlf = '\r\n' in text
+    line_break = '\r\n' if has_crlf else '\n'
+
+    # Strip trailing spaces from each line
+    stripped = [line.rstrip(' ') for line in text.split(line_break)]
     pth.write_text(line_break.join(stripped), encoding='utf-8')
 
 
@@ -278,12 +312,17 @@ def if_found_unlink(path_file: Path) -> None:
 def delete_old_files(dir_path: Path, *, ttl_seconds: int) -> None:
     """Delete old files within the specified directory.
 
+    Skips symlinks to avoid deleting files outside the target directory.
+
     Args:
         dir_path: Path to directory to delete
         ttl_seconds: if last modified within this number of seconds, will not be deleted
 
     """
     for pth in dir_path.rglob('*'):
+        # Skip symlinks to avoid deleting files outside directory
+        if pth.is_symlink():
+            continue
         if pth.is_file() and (time.time() - pth.stat().st_mtime) > ttl_seconds:
             pth.unlink()
 
