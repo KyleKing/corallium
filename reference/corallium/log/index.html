@@ -1260,9 +1260,9 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/log.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="97 "></span><span class="k">def</span><span class="w"> </span><span class="nf">configure_logger</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEF_LEVEL</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">LogCallable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="98 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the global log level or replace the logger.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="99 "></span>    <span class="n">_LOG_SINGLETON</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="96 "></span><span class="k">def</span><span class="w"> </span><span class="nf">configure_logger</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEF_LEVEL</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">LogCallable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="97 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the global log level or replace the logger.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="98 "></span>    <span class="n">_LOG_SINGLETON</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
@@ -1287,9 +1287,9 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/log.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="102 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_Logger</span><span class="p">:</span>
-<span class="linenos" data-linenos="103 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return global logger.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="104 "></span>    <span class="k">return</span> <span class="n">_Logger</span><span class="p">()</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="101 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_Logger</span><span class="p">:</span>
+<span class="linenos" data-linenos="102 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return global logger.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="103 "></span>    <span class="k">return</span> <span class="n">_Logger</span><span class="p">()</span>
 </code></pre></div>
             </details>
     </div>

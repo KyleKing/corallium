@@ -1093,17 +1093,62 @@
 </li>
 </ol>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">⚓︎</a></h2>
-<!-- < TODO: Show an example (screenshots, terminal recording, etc.) >
-
-- **log**: TBD
-- **pretty_process**: TBD
-- **shell**: TBD
-- **file_helpers**: TBD
-- **tomllib**: This is a lightweight wrapper to backport `tomli` in place of `tomllib` until we can use Python >3.11. Use with `from corallium.tomllib import tomllib`
-- **dot_dict**: has one function `ddict`, which is a light-weight wrapper around whatever is the most [maintained dotted-dictionary package in Python](https://pypi.org/search/?q=dot+accessible+dictionary&o=). Dotted dictionaries can sometimes improve code readability, but they aren't a one-size fits all solution. Sometimes `attr.s` or `dataclass` are more appropriate.
-    - The benefit of this wrapper is a stable interface that can be replaced with better internal implementations, such [Bunch](https://pypi.org/project/bunch/), [Chunk](https://pypi.org/project/chunk/), [Munch](https://pypi.org/project/munch/), [flexible-dotdict](https://pypi.org/project/flexible-dotdict/), [classy-json](https://pypi.org/project/classy-json/), and now [Python-Box](https://pypi.org/project/python-box/)
- -->
-
+<ul>
+<li>
+<p><strong>log</strong>: Configure and use the global logger</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">corallium.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">LOGGER</span><span class="p">,</span> <span class="n">configure_logger</span>
+<span class="linenos" data-linenos="2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="n">configure_logger</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Processing started&#39;</span><span class="p">,</span> <span class="n">item_count</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>pretty_process</strong>: Run parallel tasks with progress bars</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">corallium.pretty_process</span><span class="w"> </span><span class="kn">import</span> <span class="n">pretty_process</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">shared_progress</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="n">process</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="n">shared_progress</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="n">results</span> <span class="o">=</span> <span class="n">pretty_process</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>shell</strong>: Execute shell commands with output capture</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">corallium.shell</span><span class="w"> </span><span class="kn">import</span> <span class="n">capture_shell</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">output</span> <span class="o">=</span> <span class="n">capture_shell</span><span class="p">(</span><span class="s1">&#39;git status&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>file_helpers</strong>: File utilities and project configuration</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">corallium.file_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_in_parents</span><span class="p">,</span> <span class="n">read_pyproject</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">pyproject</span> <span class="o">=</span> <span class="n">read_pyproject</span><span class="p">()</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">lock_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;uv.lock&#39;</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>tomllib</strong>: Backport wrapper for TOML parsing (Python \&lt;3.11 compatibility)</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">corallium.tomllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">tomllib</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">data</span> <span class="o">=</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>dot_dict</strong>: Wrapper for dotted-dictionary access via <a href="https://pypi.org/project/python-box/">Python-Box</a></p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">corallium.dot_dict</span><span class="w"> </span><span class="kn">import</span> <span class="n">ddict</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">config</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">({</span><span class="s1">&#39;nested&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}})</span>
+<span class="linenos" data-linenos="4 "></span><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">nested</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+</li>
+</ul>
 <p>For more example code, see the <a href="https://github.com/kyleking/corallium/blob/main/scripts">scripts</a> directory or the <a href="https://github.com/kyleking/corallium/blob/main/tests">tests</a>.</p>
 <h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">⚓︎</a></h2>
 <p>See the <code>Open Issues</code> and/or the <a href="https://corallium.kyleking.me/docs/CODE_TAG_SUMMARY">CODE_TAG_SUMMARY</a>. For release history, see the <a href="https://corallium.kyleking.me/docs/CHANGELOG">CHANGELOG</a>.</p>
