@@ -36,7 +36,6 @@ class _LogSingleton:
     _logger: LogCallable | None = None
     _log_level: int = DEF_LEVEL
 
-    # TODO: Setting the logger to structlog is one way to capture?
     def set_logger(
         self,
         *,

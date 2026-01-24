@@ -16,16 +16,65 @@ CLI utility functions extracted from Calcipy.
 
 ## Usage
 
-<!-- < TODO: Show an example (screenshots, terminal recording, etc.) >
+- **log**: Configure and use the global logger
 
-- **log**: TBD
-- **pretty_process**: TBD
-- **shell**: TBD
-- **file_helpers**: TBD
-- **tomllib**: This is a lightweight wrapper to backport `tomli` in place of `tomllib` until we can use Python >3.11. Use with `from corallium.tomllib import tomllib`
-- **dot_dict**: has one function `ddict`, which is a light-weight wrapper around whatever is the most [maintained dotted-dictionary package in Python](https://pypi.org/search/?q=dot+accessible+dictionary&o=). Dotted dictionaries can sometimes improve code readability, but they aren't a one-size fits all solution. Sometimes `attr.s` or `dataclass` are more appropriate.
-    - The benefit of this wrapper is a stable interface that can be replaced with better internal implementations, such [Bunch](https://pypi.org/project/bunch/), [Chunk](https://pypi.org/project/chunk/), [Munch](https://pypi.org/project/munch/), [flexible-dotdict](https://pypi.org/project/flexible-dotdict/), [classy-json](https://pypi.org/project/classy-json/), and now [Python-Box](https://pypi.org/project/python-box/)
- -->
+    ```python
+    from corallium.log import LOGGER, configure_logger
+    import logging
+
+    configure_logger(log_level=logging.INFO)
+    LOGGER.info('Processing started', item_count=42)
+    ```
+
+- **pretty_process**: Run parallel tasks with progress bars
+
+    ```python
+    from corallium.pretty_process import pretty_process
+
+
+    def task(task_id, shared_progress, data):
+        for item in data:
+            process(item)
+            shared_progress[task_id] += 1
+        return len(data)
+
+
+    results = pretty_process(task, data=items, num_workers=4)
+    ```
+
+- **shell**: Execute shell commands with output capture
+
+    ```python
+    from corallium.shell import capture_shell
+
+    output = capture_shell('git status', timeout=30)
+    ```
+
+- **file_helpers**: File utilities and project configuration
+
+    ```python
+    from corallium.file_helpers import find_in_parents, read_pyproject
+
+    pyproject = read_pyproject()
+    lock_path = find_in_parents(name='uv.lock')
+    ```
+
+- **tomllib**: Backport wrapper for TOML parsing (Python \<3.11 compatibility)
+
+    ```python
+    from corallium.tomllib import tomllib
+
+    data = tomllib.loads(content)
+    ```
+
+- **dot_dict**: Wrapper for dotted-dictionary access via [Python-Box](https://pypi.org/project/python-box/)
+
+    ```python
+    from corallium.dot_dict import ddict
+
+    config = ddict({'nested': {'value': 42}})
+    print(config.nested.value)
+    ```
 
 For more example code, see the [scripts] directory or the [tests].
 

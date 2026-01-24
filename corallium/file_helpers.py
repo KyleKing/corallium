@@ -26,11 +26,9 @@ def get_lock() -> Path:
         FileNotFoundError: if a lock file can't be located
 
     """
-    # PLANNED: Support file search?
-    # See: https://stackoverflow.com/a/78155822/3219667
-    for pth in map(Path, ('uv.lock', 'poetry.lock')):
-        if pth.is_file():
-            return pth
+    for name in ('uv.lock', 'poetry.lock'):
+        with suppress(FileNotFoundError):
+            return find_in_parents(name=name)
     raise FileNotFoundError('Could not locate a known lock file type (uv.lock or poetry.lock)')
 
 
@@ -146,7 +144,12 @@ def _parse_mise_toml(mise_path: Path) -> dict[str, list[str]]:
 
 
 def _parse_tool_versions(tv_path: Path) -> dict[str, list[str]]:
-    """Parse .tool-versions file handling multiple spaces/tabs and comments."""
+    """Parse .tool-versions file handling multiple spaces/tabs and comments.
+
+    Returns:
+        dict mapping tool names to lists of version strings
+
+    """
     result = {}
     for line in tv_path.read_text(encoding='utf-8').splitlines():
         if not line.strip() or line.lstrip().startswith('#'):
