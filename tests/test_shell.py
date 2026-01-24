@@ -29,11 +29,13 @@ async def test_shell() -> None:
     run_shell(f"echo '{json.dumps(data)}' | {jq}")
 
 
+@pytest.mark.skipif(platform.system() == 'Windows', reason='Shell error messages differ on Windows')
 def test_capture_shell_gibberish():
     with pytest.raises(CalledProcessError):
         capture_shell('gibberish-gibberish-gibberish')
 
 
+@pytest.mark.skipif(platform.system() == 'Windows', reason='Shell command behavior differs on Windows')
 def test_capture_shell(fake_process):
     process = 'git branch'
     expected = 'fake output'
