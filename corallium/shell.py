@@ -41,7 +41,7 @@ def capture_shell(
 
     """
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, printer=printer)
-    if timeout < 0:
+    if timeout and timeout < 0:
         raise ValueError('Negative timeouts are not allowed')
 
     start = time()
@@ -71,7 +71,7 @@ def capture_shell(
     output = ''.join(lines)
     if return_code is None:
         # Process was killed due to timeout
-        raise subprocess.TimeoutExpired(cmd=cmd, timeout=timeout, output=output)
+        raise subprocess.TimeoutExpired(cmd=cmd, timeout=float(timeout or 0), output=output)
     if return_code != 0:
         raise subprocess.CalledProcessError(returncode=return_code, cmd=cmd, output=output)
 
@@ -94,7 +94,8 @@ async def _capture_shell_async(cmd: str, *, cwd: Path | None = None, start_time:
     output = stdout.decode().strip()
     if proc.returncode is None:
         # Process returncode should not be None after communicate(), but handle defensively
-        raise RuntimeError(f'Process returncode is None after communicate() for command: {cmd}')
+        msg = f'Process returncode is None after communicate() for command: {cmd}'
+        raise RuntimeError(msg)
     if proc.returncode != 0:
         raise subprocess.CalledProcessError(returncode=proc.returncode, cmd=cmd, output=output)
 

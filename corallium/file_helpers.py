@@ -196,6 +196,7 @@ def read_pyproject(cwd: Path | None = None) -> Any:
         msg = f'Invalid TOML in pyproject.toml at: {toml_path}'
         raise ValueError(msg) from exc
 
+
 @lru_cache(maxsize=25)
 def read_package_name(cwd: Path | None = None) -> str:
     """Return the package name."""

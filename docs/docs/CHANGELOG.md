@@ -1,3 +1,31 @@
+## Unreleased
+
+### Feat
+
+- implement uv and mise support from calcipy
+
+### Fix
+
+- only publish on tags
+- use Python 3.10.11 for Windows CI
+- resolve issues with ./run main
+- start unblocking release
+
+### Refactor
+
+- **#9**: resolve a few TODOs
+- wip uv support
+
+### Perf
+
+- possible performance improve for tailing
+
+## 2.1.1 (2024-11-12)
+
+### Fix
+
+- restore constant string for LOCK
+
 ## 2.1.0 (2024-11-07)
 
 ### Feat

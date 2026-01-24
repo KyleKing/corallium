@@ -75,5 +75,22 @@ uv publish
 ## Current Status
 
 <!-- {cts} COVERAGE -->
+| File                                                      | Statements | Missing | Excluded | Coverage |
+|-----------------------------------------------------------|-----------:|--------:|---------:|---------:|
+| `corallium/__init__.py`                                   | 4          | 0       | 0        | 100.0%   |
+| `corallium/_runtime_type_check_setup.py`                  | 13         | 0       | 37       | 100.0%   |
+| `corallium/file_helpers.py`                               | 160        | 41      | 11       | 70.2%    |
+| `corallium/log.py`                                        | 47         | 1       | 0        | 96.1%    |
+| `corallium/loggers/__init__.py`                           | 0          | 0       | 0        | 100.0%   |
+| `corallium/loggers/plain_printer.py`                      | 5          | 0       | 0        | 100.0%   |
+| `corallium/loggers/rich_printer.py`                       | 37         | 27      | 0        | 19.6%    |
+| `corallium/loggers/structlog_logger/__init__.py`          | 3          | 0       | 3        | 100.0%   |
+| `corallium/loggers/structlog_logger/_structlog_logger.py` | 8          | 0       | 0        | 100.0%   |
+| `corallium/loggers/styles.py`                             | 32         | 5       | 0        | 75.0%    |
+| `corallium/pretty_process.py`                             | 58         | 58      | 0        | 0.0%     |
+| `corallium/shell.py`                                      | 57         | 7       | 0        | 84.4%    |
+| `corallium/tomllib.py`                                    | 3          | 0       | 2        | 100.0%   |
+| **Totals**                                                | 427        | 139     | 53       | 62.7%    |
 
+Generated on: 2026-01-23
 <!-- {cte} -->
