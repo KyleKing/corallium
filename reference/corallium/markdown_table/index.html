@@ -12,13 +12,13 @@
         <meta name="author" content="Kyle King">
       
       
-        <link rel="canonical" href="https://corallium.kyleking.me/reference/corallium/pretty_process/">
+        <link rel="canonical" href="https://corallium.kyleking.me/reference/corallium/markdown_table/">
       
       
-        <link rel="prev" href="../markdown_table/">
+        <link rel="prev" href="../log/">
       
       
-        <link rel="next" href="../shell/">
+        <link rel="next" href="../pretty_process/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Pretty process - corallium</title>
+        <title>Markdown table - corallium</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#corallium.pretty_process" class="md-skip">
+        <a href="#corallium.markdown_table" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pretty process
+              Markdown table
             
           </span>
         </div>
@@ -652,34 +652,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../markdown_table/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Markdown table
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -697,7 +669,7 @@
   <span class="md-ellipsis">
     
   
-    Pretty process
+    Markdown table
   
 
     
@@ -715,7 +687,7 @@
   <span class="md-ellipsis">
     
   
-    Pretty process
+    Markdown table
   
 
     
@@ -739,10 +711,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#corallium.pretty_process" class="md-nav__link">
+  <a href="#corallium.markdown_table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        pretty_process
+        markdown_table
       
     </span>
   </a>
@@ -750,7 +722,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#corallium.pretty_process-functions" class="md-nav__link">
+  <a href="#corallium.markdown_table-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
         Functions
@@ -762,21 +734,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#corallium.pretty_process.____private" class="md-nav__link">
+  <a href="#corallium.markdown_table.format_table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ____private
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#corallium.pretty_process.pretty_process" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pretty_process
+        format_table
       
     </span>
   </a>
@@ -792,6 +753,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pretty_process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pretty process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1032,10 +1021,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#corallium.pretty_process" class="md-nav__link">
+  <a href="#corallium.markdown_table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        pretty_process
+        markdown_table
       
     </span>
   </a>
@@ -1043,7 +1032,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#corallium.pretty_process-functions" class="md-nav__link">
+  <a href="#corallium.markdown_table-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
         Functions
@@ -1055,21 +1044,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#corallium.pretty_process.____private" class="md-nav__link">
+  <a href="#corallium.markdown_table.format_table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ____private
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#corallium.pretty_process.pretty_process" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pretty_process
+        format_table
       
     </span>
   </a>
@@ -1101,17 +1079,17 @@
   
 
 
-  <h1>Pretty process</h1>
+  <h1>Markdown table</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="corallium.pretty_process"></a>
+<a id="corallium.markdown_table"></a>
     <div class="doc doc-contents first">
 
-        <p>Track delegated processes with rich progress meters.</p>
-<p>Based on: https://www.deanmontgomery.com/2022/03/24/rich-progress-and-multiprocessing</p>
+        <p>Markdown table formatting.</p>
+<p>Migrated from calcipy.markdown_table.</p>
 
 
 
@@ -1131,58 +1109,22 @@
 
 
 
-<h2 id="corallium.pretty_process-functions">Functions<a href="#corallium.pretty_process-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
+<h2 id="corallium.markdown_table-functions">Functions<a href="#corallium.markdown_table-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
 <div class="doc doc-object doc-function">
 
 
-<h3 id="corallium.pretty_process.____private" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">____private</span>
+<h3 id="corallium.markdown_table.format_table" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">format_table</span>
 
 
-<a href="#corallium.pretty_process.____private" class="headerlink" title="Permanent link">⚓︎</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">____private</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">shared_progress</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<a href="#corallium.markdown_table.format_table" class="headerlink" title="Permanent link">⚓︎</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">format_table</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">records</span><span class="p">,</span> <span class="n">delimiters</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Return True for testing a long running task.</p>
-<p>Note: this function can&rsquo;t be in the if-block below</p>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>corallium/pretty_process.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="101 "></span><span class="k">def</span><span class="w"> </span><span class="nf">____private</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">shared_progress</span><span class="p">:</span> <span class="n">DictProxy</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">_ItemT</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>  <span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos="102 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True for testing a long running task.</span>
-<span class="linenos" data-linenos="103 "></span>
-<span class="linenos" data-linenos="104 "></span><span class="sd">    Note: this function can&#39;t be in the if-block below</span>
-<span class="linenos" data-linenos="105 "></span>
-<span class="linenos" data-linenos="106 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="107 "></span>    <span class="k">for</span> <span class="n">_val</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="linenos" data-linenos="108 "></span>        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos" data-linenos="109 "></span>        <span class="n">shared_progress</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos" data-linenos="110 "></span>    <span class="k">return</span> <span class="kc">True</span>
-</code></pre></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="corallium.pretty_process.pretty_process" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">pretty_process</span>
-
-
-<a href="#corallium.pretty_process.pretty_process" class="headerlink" title="Permanent link">⚓︎</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">pretty_process</span><span class="p">(</span><span class="n">delegated_task</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Run a task in parallel to process all provided data.</p>
-<p>Uses <code>rich</code> to display pretty progress bars</p>
+        <p>Returns a formatted Github Markdown table.</p>
 
 
 <table>
@@ -1195,72 +1137,53 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>delegated_task</code>
+                <code>headers</code>
             </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
-                <p>must call <code>shared_progress[task_id] += 1</code> on each item in data</p>
+                <p>ordered keys to use as column title</p>
               </div>
               <p>
                   <span class="doc-param-annotation">
                     <b>TYPE:</b>
-                      <code><span title="corallium.pretty_process._DelegatedTask">_DelegatedTask</span></code>
+                      <code><span title="list">list</span>[<span title="str">str</span>]</code>
                   </span>
               </p>
             </td>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>data</code>
+                <code>records</code>
             </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
-                <p>the list of data to distribute</p>
+                <p>list of key:row-value dictionaries</p>
               </div>
               <p>
                   <span class="doc-param-annotation">
                     <b>TYPE:</b>
-                      <code><span title="list">list</span>[<span title="corallium.pretty_process._ItemT">_ItemT</span>]</code>
+                      <code><span title="list">list</span>[<span title="dict">dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]]</code>
                   </span>
               </p>
             </td>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>num_workers</code>
+                <code>delimiters</code>
             </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
-                <p>number of worker processes</p>
+                <p>optional list to allow for alignment (e.g., [&lsquo;:-&lsquo;, &lsquo;&ndash;:&rsquo;, &lsquo;:-:&rsquo;])
+Valid delimiters: &lsquo;-&rsquo; (default), &lsquo;:-&rsquo; (left), &lsquo;-:&rsquo; (right), &lsquo;:-:&rsquo; (center)</p>
               </div>
               <p>
                   <span class="doc-param-annotation">
                     <b>TYPE:</b>
-                      <code><span title="int">int</span></code>
+                      <code><span title="list">list</span>[<span title="str">str</span>] | None</code>
                   </span>
                   <span class="doc-param-default">
                     <b>DEFAULT:</b>
-                      <code>3</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>num_cpus</code>
-            </td>
-            <td class="doc-param-details">
-              <div class="doc-md-description">
-                <p>number of CPUs</p>
-              </div>
-              <p>
-                  <span class="doc-param-annotation">
-                    <b>TYPE:</b>
-                      <code><span title="int">int</span></code>
-                  </span>
-                  <span class="doc-param-default">
-                    <b>DEFAULT:</b>
-                      <code>4</code>
+                      <code>None</code>
                   </span>
               </p>
             </td>
@@ -1279,13 +1202,41 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <span class="doc-returns-annotation">
-                    <code><span title="typing.Any">Any</span></code>
-                </span>
+                <code>str</code>
             </td>
             <td class="doc-returns-details">
               <div class="doc-md-description">
-                <p>List of results</p>
+                <p>Formatted markdown table with headers, separators, and data rows</p>
+              </div>
+                <p>
+                  <span class="doc-returns-annotation">
+                    <b>TYPE:</b>
+                      <code><span title="str">str</span></code>
+                  </span>
+                </p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<table>
+      <thead>
+        <tr>
+          <th><span class="doc-section-title">RAISES</span></th>
+          <th><span>DESCRIPTION</span></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+              <span class="doc-raises-annotation">
+                  <code><span title="ValueError">ValueError</span></code>
+              </span>
+            </td>
+            <td class="doc-raises-details">
+              <div class="doc-md-description">
+                <p>if delimiters count doesn&rsquo;t match headers or uses invalid values</p>
               </div>
             </td>
           </tr>
@@ -1293,66 +1244,93 @@
     </table>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>headers = [&lsquo;Name&rsquo;, &lsquo;Age&rsquo;, &lsquo;Score&rsquo;]
+records = [
+&hellip;     {&lsquo;Name&rsquo;: &lsquo;Alice&rsquo;, &lsquo;Age&rsquo;: 30, &lsquo;Score&rsquo;: 95},
+&hellip;     {&lsquo;Name&rsquo;: &lsquo;Bob&rsquo;, &lsquo;Age&rsquo;: 25, &lsquo;Score&rsquo;: 88}
+&hellip; ]
+print(format_table(headers, records))
+| Name  | Age | Score |
+|-------|-----|-------|
+| Alice | 30  | 95    |
+| Bob   | 25  | 88    |</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>corallium/pretty_process.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="41 "></span><span class="k">def</span><span class="w"> </span><span class="nf">pretty_process</span><span class="p">(</span>
-<span class="linenos" data-linenos="42 "></span>    <span class="n">delegated_task</span><span class="p">:</span> <span class="n">_DelegatedTask</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
-<span class="linenos" data-linenos="43 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="44 "></span>    <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">_ItemT</span><span class="p">],</span>
-<span class="linenos" data-linenos="45 "></span>    <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-<span class="linenos" data-linenos="46 "></span>    <span class="n">num_cpus</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-<span class="linenos" data-linenos="47 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="linenos" data-linenos="48 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a task in parallel to process all provided data.</span>
+              <summary>Source code in <code>corallium/markdown_table.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="12 "></span><span class="k">def</span><span class="w"> </span><span class="nf">format_table</span><span class="p">(</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">headers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="n">delimiters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="16 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a formatted Github Markdown table.</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="20 "></span><span class="sd">        headers: ordered keys to use as column title</span>
+<span class="linenos" data-linenos="21 "></span><span class="sd">        records: list of key:row-value dictionaries</span>
+<span class="linenos" data-linenos="22 "></span><span class="sd">        delimiters: optional list to allow for alignment (e.g., [&#39;:-&#39;, &#39;--:&#39;, &#39;:-:&#39;])</span>
+<span class="linenos" data-linenos="23 "></span><span class="sd">            Valid delimiters: &#39;-&#39; (default), &#39;:-&#39; (left), &#39;-:&#39; (right), &#39;:-:&#39; (center)</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="26 "></span><span class="sd">        str: Formatted markdown table with headers, separators, and data rows</span>
+<span class="linenos" data-linenos="27 "></span>
+<span class="linenos" data-linenos="28 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="29 "></span><span class="sd">        ValueError: if delimiters count doesn&#39;t match headers or uses invalid values</span>
+<span class="linenos" data-linenos="30 "></span>
+<span class="linenos" data-linenos="31 "></span><span class="sd">    Example:</span>
+<span class="linenos" data-linenos="32 "></span><span class="sd">        &gt;&gt;&gt; headers = [&#39;Name&#39;, &#39;Age&#39;, &#39;Score&#39;]</span>
+<span class="linenos" data-linenos="33 "></span><span class="sd">        &gt;&gt;&gt; records = [</span>
+<span class="linenos" data-linenos="34 "></span><span class="sd">        ...     {&#39;Name&#39;: &#39;Alice&#39;, &#39;Age&#39;: 30, &#39;Score&#39;: 95},</span>
+<span class="linenos" data-linenos="35 "></span><span class="sd">        ...     {&#39;Name&#39;: &#39;Bob&#39;, &#39;Age&#39;: 25, &#39;Score&#39;: 88}</span>
+<span class="linenos" data-linenos="36 "></span><span class="sd">        ... ]</span>
+<span class="linenos" data-linenos="37 "></span><span class="sd">        &gt;&gt;&gt; print(format_table(headers, records))</span>
+<span class="linenos" data-linenos="38 "></span><span class="sd">        | Name  | Age | Score |</span>
+<span class="linenos" data-linenos="39 "></span><span class="sd">        |-------|-----|-------|</span>
+<span class="linenos" data-linenos="40 "></span><span class="sd">        | Alice | 30  | 95    |</span>
+<span class="linenos" data-linenos="41 "></span><span class="sd">        | Bob   | 25  | 88    |</span>
+<span class="linenos" data-linenos="42 "></span>
+<span class="linenos" data-linenos="43 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">r_</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">]</span> <span class="k">for</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">records</span><span class="p">]</span>
+<span class="linenos" data-linenos="45 "></span>    <span class="n">widths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[</span><span class="n">headers</span><span class="p">,</span> <span class="o">*</span><span class="n">table</span><span class="p">])</span> <span class="k">for</span> <span class="n">col_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">))]</span>
+<span class="linenos" data-linenos="46 "></span>
+<span class="linenos" data-linenos="47 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">pad</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos" data-linenos="48 "></span>        <span class="k">return</span> <span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">widths</span><span class="p">[</span><span class="n">col_idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span>
 <span class="linenos" data-linenos="49 "></span>
-<span class="linenos" data-linenos="50 "></span><span class="sd">    Uses `rich` to display pretty progress bars</span>
-<span class="linenos" data-linenos="51 "></span>
-<span class="linenos" data-linenos="52 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="53 "></span><span class="sd">        delegated_task: must call `shared_progress[task_id] += 1` on each item in data</span>
-<span class="linenos" data-linenos="54 "></span><span class="sd">        data: the list of data to distribute</span>
-<span class="linenos" data-linenos="55 "></span><span class="sd">        num_workers: number of worker processes</span>
-<span class="linenos" data-linenos="56 "></span><span class="sd">        num_cpus: number of CPUs</span>
-<span class="linenos" data-linenos="57 "></span>
-<span class="linenos" data-linenos="58 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="59 "></span><span class="sd">        List of results</span>
+<span class="linenos" data-linenos="50 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">spacer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="51 "></span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;|</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">|</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">|&#39;</span>
+<span class="linenos" data-linenos="52 "></span>
+<span class="linenos" data-linenos="53 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">expand_delimiters</span><span class="p">(</span><span class="n">delim</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="54 "></span>        <span class="n">expanded</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos="55 "></span>        <span class="k">if</span> <span class="n">delim</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="56 "></span>            <span class="n">expanded</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">expanded</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="linenos" data-linenos="57 "></span>        <span class="k">if</span> <span class="n">delim</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="58 "></span>            <span class="n">expanded</span> <span class="o">=</span> <span class="n">expanded</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span>
+<span class="linenos" data-linenos="59 "></span>        <span class="k">return</span> <span class="n">expanded</span>
 <span class="linenos" data-linenos="60 "></span>
-<span class="linenos" data-linenos="61 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="62 "></span>    <span class="c1"># Docs: https://rich.readthedocs.io/en/latest/progress.html</span>
-<span class="linenos" data-linenos="63 "></span>    <span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ProgressColumn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos" data-linenos="64 "></span>        <span class="s1">&#39;[progress.description]</span><span class="si">{task.description}</span><span class="s1">&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="65 "></span>        <span class="n">BarColumn</span><span class="p">(),</span>
-<span class="linenos" data-linenos="66 "></span>        <span class="s1">&#39;[progress.percentage]</span><span class="si">{task.percentage:&gt;3.0f}</span><span class="s1">%&#39;</span><span class="p">,</span>
-<span class="linenos" data-linenos="67 "></span>        <span class="n">TimeRemainingColumn</span><span class="p">(),</span>
-<span class="linenos" data-linenos="68 "></span>        <span class="n">TimeElapsedColumn</span><span class="p">(),</span>
-<span class="linenos" data-linenos="69 "></span>    <span class="p">]</span>
-<span class="linenos" data-linenos="70 "></span>    <span class="k">with</span> <span class="n">Progress</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">refresh_per_second</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">progress</span><span class="p">:</span>  <span class="c1"># noqa: SIM117 (Py&gt;3.9)</span>
-<span class="linenos" data-linenos="71 "></span>        <span class="c1"># Share state between process and workers</span>
-<span class="linenos" data-linenos="72 "></span>        <span class="k">with</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span> <span class="k">as</span> <span class="n">manager</span><span class="p">:</span>
-<span class="linenos" data-linenos="73 "></span>            <span class="n">shared_progress</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
-<span class="linenos" data-linenos="74 "></span>            <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos" data-linenos="75 "></span>            <span class="n">totals</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos" data-linenos="76 "></span>            <span class="n">task_id_all</span> <span class="o">=</span> <span class="n">progress</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="s1">&#39;[green]All jobs progress:&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="77 "></span>
-<span class="linenos" data-linenos="78 "></span>            <span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
-<span class="linenos" data-linenos="79 "></span>                <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_chunked</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">num_cpus</span><span class="p">)):</span>
-<span class="linenos" data-linenos="80 "></span>                    <span class="n">task_id</span> <span class="o">=</span> <span class="n">progress</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;task </span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="81 "></span>                    <span class="n">shared_progress</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos" data-linenos="82 "></span>                    <span class="n">totals</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-<span class="linenos" data-linenos="83 "></span>                    <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">delegated_task</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">shared_progress</span><span class="p">,</span> <span class="n">chunk</span><span class="p">))</span>
-<span class="linenos" data-linenos="84 "></span>
-<span class="linenos" data-linenos="85 "></span>                <span class="c1"># Update progress bar from shared state</span>
-<span class="linenos" data-linenos="86 "></span>                <span class="n">remaining</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
-<span class="linenos" data-linenos="87 "></span>                <span class="k">while</span> <span class="n">remaining</span><span class="p">:</span>
-<span class="linenos" data-linenos="88 "></span>                    <span class="n">n_done</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos" data-linenos="89 "></span>                    <span class="k">for</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">latest</span> <span class="ow">in</span> <span class="n">shared_progress</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="linenos" data-linenos="90 "></span>                        <span class="n">n_done</span> <span class="o">+=</span> <span class="n">latest</span>
-<span class="linenos" data-linenos="91 "></span>                        <span class="n">progress</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="n">latest</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">totals</span><span class="p">[</span><span class="n">task_id</span><span class="p">])</span>
-<span class="linenos" data-linenos="92 "></span>                    <span class="n">progress</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">task_id_all</span><span class="p">,</span> <span class="n">completed</span><span class="o">=</span><span class="n">n_done</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="linenos" data-linenos="93 "></span>                    <span class="n">remaining</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">done</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">)</span>
-<span class="linenos" data-linenos="94 "></span>                    <span class="k">if</span> <span class="n">remaining</span><span class="p">:</span>
-<span class="linenos" data-linenos="95 "></span>                        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 100ms refresh rate to avoid busy-waiting</span>
-<span class="linenos" data-linenos="96 "></span>
-<span class="linenos" data-linenos="97 "></span>                <span class="c1"># Collect results and catch any errors</span>
-<span class="linenos" data-linenos="98 "></span>                <span class="k">return</span> <span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">]</span>
+<span class="linenos" data-linenos="61 "></span>    <span class="k">if</span> <span class="n">delimiters</span><span class="p">:</span>
+<span class="linenos" data-linenos="62 "></span>        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="63 "></span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">delimiters</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+<span class="linenos" data-linenos="64 "></span>            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incorrect number of delimiters provided (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">delimiters</span><span class="p">)</span><span class="si">}</span><span class="s1">). Expected: (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="65 "></span>        <span class="n">allowed_delimiters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;:-&#39;</span><span class="p">,</span> <span class="s1">&#39;-:&#39;</span><span class="p">,</span> <span class="s1">&#39;:-:&#39;</span><span class="p">}</span>
+<span class="linenos" data-linenos="66 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">delim</span> <span class="ow">in</span> <span class="n">allowed_delimiters</span> <span class="k">for</span> <span class="n">delim</span> <span class="ow">in</span> <span class="n">delimiters</span><span class="p">):</span>
+<span class="linenos" data-linenos="67 "></span>            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Delimiters must one of (</span><span class="si">{</span><span class="n">allowed_delimiters</span><span class="si">}</span><span class="s1">). Received: (</span><span class="si">{</span><span class="n">delimiters</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="68 "></span>        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+<span class="linenos" data-linenos="69 "></span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39; and &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+<span class="linenos" data-linenos="70 "></span>
+<span class="linenos" data-linenos="71 "></span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos" data-linenos="72 "></span>        <span class="n">join</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">headers</span><span class="p">)),</span>
+<span class="linenos" data-linenos="73 "></span>        <span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">expand_delimiters</span><span class="p">,</span> <span class="n">delimiters</span> <span class="ow">or</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">),</span> <span class="n">widths</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="linenos" data-linenos="74 "></span>        <span class="o">*</span><span class="p">[</span><span class="n">join</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">],</span>
+<span class="linenos" data-linenos="75 "></span>    <span class="p">]</span>
+<span class="linenos" data-linenos="76 "></span>    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>

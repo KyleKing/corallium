@@ -5,10 +5,9 @@ https://github.com/pawamoy/copier-pdm/blob/adff9b64887d0b4c9ec0b42de1698b34858a5
 
 """
 
-from pathlib import Path
+from pathlib import Path  # noqa: I001
 
 import mkdocs_gen_files
-
 from corallium.tomllib import tomllib
 
 
