@@ -129,7 +129,7 @@ def find_in_parents(*, name: str, cwd: Path | None = None) -> Path:
 
 def _parse_mise_lock(lock_path: Path) -> dict[str, list[str]]:
     content = lock_path.read_bytes()
-    data = tomllib.loads(content.decode('utf-8'))  # pyright: ignore[reportAttributeAccessIssue]
+    data = tomllib.loads(content.decode('utf-8'))
 
     versions: dict[str, list[str]] = {}
     if 'tools' in data:
@@ -143,7 +143,7 @@ def _parse_mise_lock(lock_path: Path) -> dict[str, list[str]]:
 
 def _parse_mise_toml(mise_path: Path) -> dict[str, list[str]]:
     content = mise_path.read_bytes()
-    data = tomllib.loads(content.decode('utf-8'))  # pyright: ignore[reportAttributeAccessIssue]
+    data = tomllib.loads(content.decode('utf-8'))
 
     versions: dict[str, list[str]] = {}
     if 'tools' in data:
@@ -208,8 +208,8 @@ def read_pyproject(cwd: Path | None = None) -> Any:
         raise FileNotFoundError(msg) from exc
 
     try:
-        return tomllib.loads(pyproject_txt)  # pyright: ignore[reportAttributeAccessIssue]
-    except tomllib.TOMLDecodeError as exc:  # pyright: ignore[reportAttributeAccessIssue]
+        return tomllib.loads(pyproject_txt)
+    except tomllib.TOMLDecodeError as exc:
         msg = f'Invalid TOML in pyproject.toml at: {toml_path}'
         raise ValueError(msg) from exc
 
