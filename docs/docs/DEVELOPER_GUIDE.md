@@ -75,5 +75,28 @@ uv publish
 ## Current Status
 
 <!-- {cts} COVERAGE -->
+| File                                                      | Statements | Missing | Excluded | Coverage |
+|-----------------------------------------------------------|-----------:|--------:|---------:|---------:|
+| `corallium/__init__.py`                                   | 6          | 0       | 0        | 100.0%   |
+| `corallium/_runtime_type_check_setup.py`                  | 13         | 0       | 37       | 100.0%   |
+| `corallium/can_skip.py`                                   | 14         | 0       | 0        | 100.0%   |
+| `corallium/code_tag_collector/__init__.py`                | 6          | 6       | 0        | 0.0%     |
+| `corallium/code_tag_collector/_collector.py`              | 133        | 133     | 0        | 0.0%     |
+| `corallium/file_helpers.py`                               | 169        | 42      | 11       | 71.2%    |
+| `corallium/file_search.py`                                | 32         | 0       | 2        | 100.0%   |
+| `corallium/log.py`                                        | 47         | 1       | 0        | 96.1%    |
+| `corallium/loggers/__init__.py`                           | 0          | 0       | 0        | 100.0%   |
+| `corallium/loggers/plain_printer.py`                      | 5          | 0       | 0        | 100.0%   |
+| `corallium/loggers/rich_printer.py`                       | 37         | 8       | 0        | 72.5%    |
+| `corallium/loggers/structlog_logger/__init__.py`          | 3          | 0       | 3        | 100.0%   |
+| `corallium/loggers/structlog_logger/_structlog_logger.py` | 8          | 0       | 0        | 100.0%   |
+| `corallium/loggers/styles.py`                             | 32         | 3       | 0        | 86.1%    |
+| `corallium/markdown_table.py`                             | 28         | 0       | 0        | 100.0%   |
+| `corallium/pretty_process.py`                             | 58         | 13      | 0        | 77.8%    |
+| `corallium/shell.py`                                      | 69         | 13      | 0        | 74.7%    |
+| `corallium/sync_dependencies.py`                          | 154        | 18      | 0        | 82.8%    |
+| `corallium/tomllib.py`                                    | 4          | 0       | 2        | 100.0%   |
+| **Totals**                                                | 818        | 237     | 55       | 68.4%    |
 
+Generated on: 2026-01-27
 <!-- {cte} -->

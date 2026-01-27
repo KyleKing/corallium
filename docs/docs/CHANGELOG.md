@@ -8,6 +8,7 @@
 
 ### Fix
 
+- prevent type errors with tomllib backport
 - only publish on tags
 - use Python 3.10.11 for Windows CI
 - resolve issues with ./run main
