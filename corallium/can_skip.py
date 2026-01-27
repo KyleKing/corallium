@@ -40,8 +40,9 @@ def can_skip(*, prerequisites: list[Path], targets: list[Path]) -> bool:
     if not (ts_prerequisites := [pth.stat().st_mtime for pth in prerequisites]):
         raise ValueError('Required files do not exist', prerequisites)
 
-    ts_targets = [pth.stat().st_mtime for pth in targets]
-    if ts_targets and min(ts_targets) > max(ts_prerequisites):
+    # Collect target mtimes, skipping missing files
+    ts_targets = [pth.stat().st_mtime for pth in targets if pth.is_file()]
+    if ts_targets and len(ts_targets) == len(targets) and min(ts_targets) > max(ts_prerequisites):
         LOGGER.warning('Skipping because targets are newer', targets=targets)
         return True
     return False
