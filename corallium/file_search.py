@@ -37,9 +37,6 @@ def _get_all_files(*, cwd: Path) -> list[str]:
     Returns:
         List of all file paths relative to the cwd
 
-    Raises:
-        CalledProcessError: if git command fails
-
     """
     return _zsplit(capture_shell('git ls-files -z', cwd=cwd))
 

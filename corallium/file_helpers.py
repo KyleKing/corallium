@@ -76,7 +76,7 @@ def tail_lines(path_file: Path, *, count: int) -> list[str]:
         List[str]: lines of text as list
 
     """
-    CHUNK_SIZE = 8192  # 8KB chunks for efficient disk I/O
+    max_chunk_size = 8192  # 8KB chunks for efficient disk I/O
     with path_file.open('rb') as f_h:
         file_size = f_h.seek(0, os.SEEK_END)
         if file_size == 0:
@@ -86,7 +86,7 @@ def tail_lines(path_file: Path, *, count: int) -> list[str]:
         remaining_bytes = file_size
 
         while remaining_bytes > 0:
-            chunk_size = min(CHUNK_SIZE, remaining_bytes)
+            chunk_size = min(max_chunk_size, remaining_bytes)
             f_h.seek(remaining_bytes - chunk_size, os.SEEK_SET)
             chunk = f_h.read(chunk_size)
             buffer = chunk + buffer

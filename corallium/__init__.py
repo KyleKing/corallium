@@ -10,6 +10,6 @@ configure_runtime_type_checking_mode()  # noqa: RUF067
 
 # == Above code must always be first ==
 
-from corallium.markdown_table import format_table
+from corallium.markdown_table import format_table  # noqa: E402
 
 __all__ = ['format_table']

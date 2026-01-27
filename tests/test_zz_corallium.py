@@ -10,6 +10,6 @@ def test_version():
     """Check that PyProject and package __version__ are equivalent."""
     data = Path('pyproject.toml').read_text(encoding='utf-8')
 
-    result = tomllib.loads(data)['project']['version']  # pyright: ignore[reportAttributeAccessIssue]
+    result = tomllib.loads(data)['project']['version']
 
     assert result == __version__

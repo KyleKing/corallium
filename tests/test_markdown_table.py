@@ -30,7 +30,7 @@ def test_format_table_column_width_adjusts_to_content() -> None:
 
 def test_format_table_empty_records() -> None:
     headers = ['A', 'B']
-    records = []
+    records: list[dict[str, str]] = []
 
     result = format_table(headers, records)
 

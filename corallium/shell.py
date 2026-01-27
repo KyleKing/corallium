@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-import subprocess  # noqa: S404
+import subprocess
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -90,7 +90,7 @@ def capture_shell(
 
     start = time()
     lines = []
-    with subprocess.Popen(  # noqa: S602
+    with subprocess.Popen(
         cmd,
         cwd=cwd,
         stdout=subprocess.PIPE,
@@ -126,7 +126,7 @@ def capture_shell(
 
 
 async def _capture_shell_async(cmd: str, *, cwd: Path | None = None, start_time: float = 0) -> str:
-    proc = await asyncio.create_subprocess_shell(  # noqa: S604
+    proc = await asyncio.create_subprocess_shell(
         cmd,
         cwd=cwd,
         stdout=subprocess.PIPE,
@@ -175,11 +175,6 @@ async def capture_shell_async(
     Returns:
         str: stripped output
 
-    Raises:
-        CalledProcessError: if return code is non-zero
-        TimeoutError: if timeout is reached
-        ValueError: if validate_cmd=True and dangerous patterns are detected
-
     """
     if validate_cmd:
         _validate_shell_command(cmd)
@@ -205,11 +200,6 @@ def run_shell(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None, v
         validate_cmd: if True, validates command for dangerous patterns. Default False
             to preserve backward compatibility and allow legitimate shell features.
 
-    Raises:
-        CalledProcessError: if return code is non-zero
-        TimeoutExpired: if timeout is reached
-        ValueError: if validate_cmd=True and dangerous patterns are detected
-
     """
     if validate_cmd:
         _validate_shell_command(cmd)
@@ -217,7 +207,7 @@ def run_shell(cmd: str, *, timeout: int | None = 120, cwd: Path | None = None, v
     LOGGER.debug('Running', cmd=cmd, timeout=timeout, cwd=cwd, validate_cmd=validate_cmd)
 
     start = time()
-    subprocess.run(  # noqa: S602
+    subprocess.run(
         cmd,
         timeout=timeout or None,
         cwd=cwd,

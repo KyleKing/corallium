@@ -2,6 +2,8 @@
 
 ### Feat
 
+- **#11**: changes from PR
+- implement remaining TODOs
 - implement uv and mise support from calcipy
 
 ### Fix

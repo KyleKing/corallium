@@ -73,9 +73,6 @@ warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
-[tool.poetry.extras]
-tags = ["arrow"]
-
 [tool.pyright]
 include = ["corallium", "tests"]
 pythonVersion = "3.10"
@@ -96,14 +93,13 @@ quote-style = 'single'
 ignore = [
   'ANN002', # Missing type annotation for `*args`
   'ANN003', # Missing type annotation for `**kwargs`
-  'ANN101', # Missing type annotation for `self` in method (automatically inferred)
-  'ANN102', # Missing type annotation for `cls` in classmethod (automatically inferred)
   'ANN401', # Dynamically typed expressions (typing.Any) are disallowed in `pop_key`
   'BLE001', # Do not catch blind exception: `Exception`
   'COM812', # Conflicts with formatter
   'CPY001', # Missing copyright notice at top of file
   'D203', # "1 blank line required before class docstring" (Conflicts with D211)
   'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
+  'DOC201', # Missing "Returns" in docstring; prefer minimal docstrings
   'DOC501', # Raised exception `RuntimeError` missing from docstring
   'EM101', # Exception must not use a string literal, assign to variable first
   'FIX001', # Line contains FIXME
@@ -113,9 +109,9 @@ ignore = [
   'S404', # `subprocess` module is possibly insecure
   'S602', # `subprocess` call with `shell=True` identified, security issue
   'S604', # Function call with `shell=True` parameter identified, security issue
-  'TCH001', # Move application import into a type-checking block (Conflicts with Beartype)
-  'TCH002', # Move third-party import into a type-checking block (Conflicts with Beartype)
-  'TCH003', # Move standard library import into a type-checking block (Conflicts with Beartype)
+  'TC001', # Move application import into a type-checking block (Conflicts with Beartype)
+  'TC002', # Move third-party import into a type-checking block (Conflicts with Beartype)
+  'TC003', # Move standard library import into a type-checking block (Conflicts with Beartype)
   'TD001', # Invalid TODO tag: `FIXME`
   'TD002', # Missing author in TODO; try: `# TODO(<author_name>): ...`
   'TD003', # Missing issue link on the line following this TODO
