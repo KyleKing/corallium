@@ -4,8 +4,7 @@ requires = ["uv_build>=0.9.26"]
 
 [dependency-groups]
 dev = [
-  'calcipy[ddict,doc,lint,nox,tags,test,types]>=5.0.0',
-  # 'calcipy[dev]>=6.0.0',  # PLANNED: When available
+  'calcipy[recommended]>=6.0.0b2',
   'pytest-asyncio>=0.24.0',
   'pytest-structlog>=1.1',
   'pytest-subprocess>=1.5.2',
@@ -109,9 +108,9 @@ ignore = [
   'S404', # `subprocess` module is possibly insecure
   'S602', # `subprocess` call with `shell=True` identified, security issue
   'S604', # Function call with `shell=True` parameter identified, security issue
-  'TC001', # Move application import into a type-checking block (Conflicts with Beartype)
-  'TC002', # Move third-party import into a type-checking block (Conflicts with Beartype)
-  'TC003', # Move standard library import into a type-checking block (Conflicts with Beartype)
+  'TC001', # Move application import `tail_jsonl.config.Config` into a type-checking block (Conflicts with Beartype)
+  'TC002', # Move third-party import `rich.console.Console` into a type-checking block (Conflicts with Beartype)
+  'TC003', # Move standard library import `argparse` into a type-checking block (Conflicts with Beartype)
   'TD001', # Invalid TODO tag: `FIXME`
   'TD002', # Missing author in TODO; try: `# TODO(<author_name>): ...`
   'TD003', # Missing issue link on the line following this TODO
