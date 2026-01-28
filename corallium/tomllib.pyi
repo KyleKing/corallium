@@ -1,14 +1,16 @@
-from typing import Any, BinaryIO
+from typing import Any, BinaryIO, Callable
 
 class TOMLDecodeError(ValueError): ...
 
 def load(fp: BinaryIO, /) -> dict[str, Any]: ...
 def loads(s: str, /) -> dict[str, Any]: ...
 
-# Re-export as module for backward compatibility
-class Tomllib:
-    TOMLDecodeError = TOMLDecodeError
-    load = staticmethod(load)
-    loads = staticmethod(loads)
+# Re-export tomllib module (the actual module from stdlib or tomli)
+class _TomllibModule:
+    TOMLDecodeError: type[TOMLDecodeError]
+    load: Callable[[BinaryIO], dict[str, Any]]
+    loads: Callable[[str], dict[str, Any]]
 
-__all__ = ('TOMLDecodeError', 'Tomllib', 'load', 'loads')
+tomllib: _TomllibModule
+
+__all__ = ('TOMLDecodeError', 'tomllib')
