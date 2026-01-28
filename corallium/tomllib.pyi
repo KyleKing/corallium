@@ -7,9 +7,9 @@ def loads(s: str, /) -> dict[str, Any]: ...
 
 # Re-export tomllib module (the actual module from stdlib or tomli)
 class _TomllibModule:
-    TOMLDecodeError = TOMLDecodeError
-    load = staticmethod(load)
-    loads = staticmethod(loads)
+    TOMLDecodeError: type[TOMLDecodeError]
+    load: staticmethod
+    loads: staticmethod
 
 tomllib: _TomllibModule
 
