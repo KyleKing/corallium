@@ -9,11 +9,10 @@ from contextlib import suppress
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from re import Pattern
 from subprocess import CalledProcessError  # nosec
 
 import arrow
-from beartype.typing import Dict, List, Tuple
+from beartype.typing import Dict, List, Pattern, Tuple
 
 from corallium.file_helpers import read_lines
 from corallium.log import LOGGER
@@ -21,7 +20,10 @@ from corallium.markdown_table import format_table
 from corallium.shell import capture_shell
 
 SKIP_PHRASE = 'calcipy_skip_tags'
-"""String that indicates the file should be excluded from the tag search."""
+"""String that indicates the file should be excluded from the tag search.
+
+Note: kept `calcipy_` prefix for backward compatibility
+"""
 
 COMMON_CODE_TAGS = ['FIXME', 'TODO', 'PLANNED', 'HACK', 'REVIEW', 'TBD', 'DEBUG']
 """Most common code tags.
@@ -60,7 +62,7 @@ class _Tags:
 def _search_lines(
     lines: List[str],
     regex_compiled: Pattern[str],
-    skip_phrase: str = 'calcipy_skip_tags',
+    skip_phrase: str = SKIP_PHRASE,
 ) -> List[_CodeTag]:
     """Search lines of text for matches to the compiled regular expression.
 
@@ -132,7 +134,7 @@ def github_blame_url(clone_uri: str) -> str:
     # > https://github.com/KyleKing/calcipy.git
     if matches := re.compile(_GITHUB_ORIGIN).match(clone_uri):
         github_url = 'https://github.com/'
-        return f"{github_url}{matches['owner']}/{matches['repository']}"
+        return f'{github_url}{matches["owner"]}/{matches["repository"]}'
     return ''
 
 
@@ -147,17 +149,20 @@ def _git_info(cwd: Path) -> Tuple[Path, str]:
         cwd: Path to the current working directory (typically file_path.parent)
 
     Returns:
-        tuple of (git_dir, repo_url)
+        tuple of (git_dir, repo_url). Returns (cwd, '') if not in a git repository.
 
     """
-    git_dir = Path(capture_shell('git rev-parse --show-toplevel', cwd=cwd))
+    git_dir = cwd
+    with suppress(CalledProcessError):
+        git_dir = Path(capture_shell('git rev-parse --show-toplevel', cwd=cwd))
+
     clone_uri = ''
     with suppress(CalledProcessError):
         clone_uri = capture_shell('git remote get-url origin', cwd=cwd)
     return git_dir, github_blame_url(clone_uri)
 
 
-@dataclass
+@dataclass(frozen=True)
 class _CollectorRow:
     """Each row of the Code Tag table."""
 
@@ -202,16 +207,22 @@ def _format_from_blame(
     user = 'committer' if 'committer-tz' in blame_dict else 'author'
     dt = arrow.get(int(blame_dict[f'{user}-time']))
     tz = blame_dict[f'{user}-tz'][:3] + ':' + blame_dict[f'{user}-tz'][-2:]
-    collector_row.last_edit = arrow.get(dt.isoformat()[:-6] + tz).format('YYYY-MM-DD')
+    last_edit = arrow.get(dt.isoformat()[:-6] + tz).format('YYYY-MM-DD')
 
+    source_file = collector_row.source_file
     if repo_url:
         # Filename may not be present if uncommitted. Use local path as fallback
         remote_file_path = blame_dict.get('filename', rel_path.as_posix())
         # Assumes Github format
         git_url = f'{repo_url}/blame/{revision}/{remote_file_path}#L{old_line_number}'
-        collector_row.source_file = f'[{collector_row.source_file}]({git_url})'
+        source_file = f'[{source_file}]({git_url})'
 
-    return collector_row
+    return _CollectorRow(
+        tag_name=collector_row.tag_name,
+        comment=collector_row.comment,
+        last_edit=last_edit,
+        source_file=source_file,
+    )
 
 
 def _format_record(base_dir: Path, file_path: Path, comment: _CodeTag) -> _CollectorRow:
