@@ -1,4 +1,5 @@
-from typing import Any, BinaryIO, Callable
+from collections.abc import Callable
+from typing import Any, BinaryIO
 
 class TOMLDecodeError(ValueError): ...
 
