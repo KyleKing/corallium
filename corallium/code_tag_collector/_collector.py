@@ -18,11 +18,14 @@ from corallium.log import LOGGER
 from corallium.markup_table import format_table
 from corallium.shell import capture_shell
 
-SKIP_PHRASE = 'calcipy_skip_tags'
+SKIP_PHRASE = 'corallium_skip_tags'
 """String that indicates the file should be excluded from the tag search.
 
-Note: kept `calcipy_` prefix for backward compatibility
+When writing, uses 'corallium_skip_tags'. When reading, also checks for legacy 'calcipy_skip_tags'.
 """
+
+_LEGACY_SKIP_PHRASES = ['calcipy_skip_tags']
+"""Legacy skip phrases supported for backward compatibility when reading files."""
 
 COMMON_CODE_TAGS = ['FIXME', 'TODO', 'PLANNED', 'HACK', 'REVIEW', 'TBD', 'DEBUG']
 """Most common code tags.
@@ -74,7 +77,9 @@ def _search_lines(
         list of all code tags found in lines
 
     """
-    if skip_phrase in '\n'.join(lines[-2:]):
+    final_lines = '\n'.join(lines[-2:])
+    skip_phrases = [skip_phrase, *_LEGACY_SKIP_PHRASES]
+    if any(phrase in final_lines for phrase in skip_phrases):
         return []
 
     max_len = 400

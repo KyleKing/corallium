@@ -4,6 +4,7 @@ import pytest
 
 from corallium.code_tag_collector import CODE_TAG_RE, COMMON_CODE_TAGS, SKIP_PHRASE, write_code_tag_file
 from corallium.code_tag_collector._collector import (
+    _LEGACY_SKIP_PHRASES,
     _CodeTag,
     _format_report,
     _search_lines,
@@ -151,4 +152,26 @@ def test_write_code_tag_file_when_no_matches(fix_test_cache):
     assert not path_tag_summary.is_file()
 
 
-# calcipy_skip_tags
+@pytest.mark.parametrize('legacy_phrase', _LEGACY_SKIP_PHRASES)
+def test_legacy_skip_phrase_backward_compatibility(legacy_phrase: str):
+    """Verify that legacy skip phrases are still recognized when reading files."""
+    regex = re.compile(CODE_TAG_RE.format(tag='|'.join(COMMON_CODE_TAGS)))
+    lines_with_legacy = ['# TODO: This should be skipped', '', f'<!-- {legacy_phrase} -->']
+
+    result = _search_lines(lines_with_legacy, regex)
+
+    assert len(result) == 0, f'Legacy phrase "{legacy_phrase}" should skip the file'
+
+
+def test_new_skip_phrase():
+    """Verify that the new corallium skip phrase works."""
+    regex = re.compile(CODE_TAG_RE.format(tag='|'.join(COMMON_CODE_TAGS)))
+    lines_with_new = ['# TODO: This should be skipped', '', f'<!-- {SKIP_PHRASE} -->']
+
+    result = _search_lines(lines_with_new, regex)
+
+    assert len(result) == 0
+    assert SKIP_PHRASE == 'corallium_skip_tags', 'SKIP_PHRASE should use corallium branding'
+
+
+# corallium_skip_tags
