@@ -1,0 +1,66 @@
+# serializer version: 1
+# name: test_end_to_end_replacement
+  '''
+  
+  [project]
+  name = "test-package"
+  dependencies = [
+      "requests>=2.31.0",
+      "zope.interface>=6.0.0",
+  ]
+  
+  [project.optional-dependencies]
+  doc = [
+      "mkdocstrings[python]>=0.27.0",
+  ]
+  
+  '''
+# ---
+# name: test_replace_pyproject_versions[\n[dependency-groups]\ndev = [  # development dependencies\n    "pytest>=7.0.0",\n]\n-lock_versions4-pyproject_versions4]
+  '''
+  
+  [dependency-groups]
+  dev = [  # development dependencies
+      "pytest>=7.1.0",
+  ]
+  
+  '''
+# ---
+# name: test_replace_pyproject_versions[\n[project.optional-dependencies]\ndoc = [\n    "mkdocstrings[python]>=0.26.1",\n]\n-lock_versions2-pyproject_versions2]
+  '''
+  
+  [project.optional-dependencies]
+  doc = [
+      "mkdocstrings[python]>=0.27.0",
+  ]
+  
+  '''
+# ---
+# name: test_replace_pyproject_versions[\n[project]\ndependencies = ["requests>=2.0.0"]\n-lock_versions3-pyproject_versions3]
+  '''
+  
+  [project]
+  dependencies = ["requests>=2.1.0"]
+  
+  '''
+# ---
+# name: test_replace_pyproject_versions[\n[project]\ndependencies = [\n    "requests>=2.0.0",\n    "flask>=2.0.0",\n]\n-lock_versions1-pyproject_versions1]
+  '''
+  
+  [project]
+  dependencies = [
+      "requests>=2.1.0",
+      "flask>=2.1.0",
+  ]
+  
+  '''
+# ---
+# name: test_replace_pyproject_versions[\n[tool.poetry.dependencies]\nrequests = ">=2.0.0,<3.0.0"\nflask = "2.0.0"\n-lock_versions0-pyproject_versions0]
+  '''
+  
+  [tool.poetry.dependencies]
+  requests = ">=2.1.0,<3.0.0"
+  flask = "2.1.0"
+  
+  '''
+# ---

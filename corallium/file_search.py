@@ -28,8 +28,8 @@ def _zsplit(stdout: str) -> list[str]:
 def _get_all_files(*, cwd: Path) -> list[str]:
     """Get all files using git.
 
-    Modified from pre-commit's get_all_files to accept cwd parameter.
-    Based on: https://github.com/pre-commit/pre-commit/blob/main/pre_commit/git.py
+    Modified from pre-commit's get_all_files to accept cwd parameter. Based on:
+    https://github.com/pre-commit/pre-commit/blob/488b1999f36cac62b6b0d9bc8eae99418ae5c226/pre_commit/git.py#L153
 
     Args:
         cwd: Current working directory to pass to git command

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
-from collections.abc import Sequence
 from contextlib import suppress
 from dataclasses import dataclass
 from functools import lru_cache
@@ -12,11 +11,11 @@ from pathlib import Path
 from subprocess import CalledProcessError  # nosec
 
 import arrow
-from beartype.typing import Dict, List, Pattern, Tuple
+from beartype.typing import Dict, List, Pattern, Sequence, Tuple
 
 from corallium.file_helpers import read_lines
 from corallium.log import LOGGER
-from corallium.markdown_table import format_table
+from corallium.markup_table import format_table
 from corallium.shell import capture_shell
 
 SKIP_PHRASE = 'calcipy_skip_tags'
@@ -192,7 +191,7 @@ def _format_from_blame(
     """Parse the git blame for useful timestamps and author when available.
 
     Returns:
-        The updated collector row with timestamps and author information.
+        new _CollectorRow with updated timestamps and source file link.
 
     """
     # Note: line number may be different in older blame (and relative path)

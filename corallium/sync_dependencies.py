@@ -24,11 +24,17 @@ def _extract_base_version(version_spec: str) -> str:
 def _parse_pep621_dependency(dep_spec: str) -> tuple[str, str] | None:
     """Parse a PEP 621 dependency string into (package_name, version).
 
+    Match package name (with optional extras) and version spec.
+    Package name can contain letters, numbers, hyphens, underscores, dots.
+    Extras are in square brackets.
+    Version spec starts with comparison operators (whitespace around operator).
+
     Handles formats like:
     - "package>=1.0.0"
-    - "package[extra]>=1.0.0"
-    - "package[extra1,extra2]>=1.0.0"
-    - "zope.interface>=5.0.0" (dot-separated package names)
+    - "package >=1.0.0"
+    - "package[extra] >=1.0.0"
+    - "package[extra1,extra2] >=1.0.0"
+    - "zope.interface >=5.0.0" (dot-separated package names)
 
     Args:
         dep_spec: Dependency specification string
@@ -37,11 +43,8 @@ def _parse_pep621_dependency(dep_spec: str) -> tuple[str, str] | None:
         Tuple of (package_name, version) or None if no version specified
 
     """
-    # Match package name (with optional extras) and version spec
-    # Package name can contain letters, numbers, hyphens, underscores, dots
-    # Extras are in square brackets
-    # Version spec starts with comparison operators
-    match = re.match(r'^([a-zA-Z0-9_.-]+(?:\[[^\]]+\])?)([><=!~].+)?$', dep_spec.strip())
+    re_dep = re.compile(r'^([a-zA-Z0-9_.-]+(?:\[[^\]]+\])?)\s*([><=!~].+)?$')
+    match = re.match(re_dep, dep_spec.strip())
     if not match:
         return None
 
@@ -49,7 +52,7 @@ def _parse_pep621_dependency(dep_spec: str) -> tuple[str, str] | None:
     version_spec = match.group(2)
 
     # Remove extras from package name for version tracking
-    base_package_name = re.sub(r'\[.+\]', '', package_name)
+    base_package_name = re.sub(re.compile(r'\[.+\]'), '', package_name)
 
     if version_spec:
         return (base_package_name, _extract_base_version(version_spec))
@@ -282,14 +285,16 @@ def _handle_single_line_list(
 
     """
     stripped = line.split('#', maxsplit=1)[0].strip()
-    list_content = stripped[stripped.index('[') + 1:stripped.index(']')].strip()
+    list_content = stripped[stripped.index('[') + 1 : stripped.index(']')].strip()
 
-    if list_content and ('"' in list_content or "'" in list_content) and (
-        replaced := _replace_pep621_versions(list_content, lock_versions, pyproject_versions)
+    if (
+        list_content
+        and ('"' in list_content or "'" in list_content)
+        and (replaced := _replace_pep621_versions(list_content, lock_versions, pyproject_versions))
     ):
         # Reconstruct the line with replaced version
-        before_bracket = line[:line.index('[') + 1]
-        after_bracket = line[line.index(']'):]
+        before_bracket = line[: line.index('[') + 1]
+        after_bracket = line[line.index(']') :]
         return f'{before_bracket}{replaced}{after_bracket}'
 
     return None
@@ -335,8 +340,10 @@ def _replace_pyproject_versions(
                     continue
 
             # Poetry dict format (name = "version")
-            elif not in_dependency_list and ']' not in line and (
-                replaced := _try_replace_poetry_line(line, lock_versions, pyproject_versions)
+            elif (
+                not in_dependency_list
+                and ']' not in line
+                and (replaced := _try_replace_poetry_line(line, lock_versions, pyproject_versions))
             ):
                 new_lines.append(replaced)
                 continue

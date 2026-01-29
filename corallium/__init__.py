@@ -11,6 +11,6 @@ configure_runtime_type_checking_mode()
 
 # == Above code must always be first ==
 
-from corallium.markdown_table import format_table  # noqa: E402
+from corallium.markup_table import format_table  # noqa: E402
 
 __all__ = ['format_table']

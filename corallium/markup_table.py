@@ -1,7 +1,4 @@
-"""Markdown table formatting.
-
-Migrated from calcipy.markdown_table.
-"""
+"""Markup table formatting."""
 
 from __future__ import annotations
 
@@ -14,16 +11,16 @@ def format_table(
     records: list[dict[str, Any]],
     delimiters: list[str] | None = None,
 ) -> str:
-    """Returns a formatted Github Markdown table.
+    """Returns a formatted table.
 
     Args:
         headers: ordered keys to use as column title
         records: list of key:row-value dictionaries
-        delimiters: optional list to allow for alignment (e.g., [':-', '--:', ':-:'])
+        delimiters: optional list to allow for alignment (e.g., [':-', '-:', ':-:'])
             Valid delimiters: '-' (default), ':-' (left), '-:' (right), ':-:' (center)
 
     Returns:
-        str: Formatted markdown table with headers, separators, and data rows
+        Formatted table with headers, separators, and data rows
 
     Raises:
         ValueError: if delimiters count doesn't match headers or uses invalid values
@@ -64,7 +61,7 @@ def format_table(
             errors.append(f'Incorrect number of delimiters provided ({len(delimiters)}). Expected: ({len(headers)})')
         allowed_delimiters = {'-', ':-', '-:', ':-:'}
         if not all(delim in allowed_delimiters for delim in delimiters):
-            errors.append(f'Delimiters must one of ({allowed_delimiters}). Received: ({delimiters})')
+            errors.append(f'Delimiters must be one of {allowed_delimiters}. Received: {delimiters}')
         if errors:
             raise ValueError(' and '.join(errors))
 

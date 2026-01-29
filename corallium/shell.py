@@ -12,19 +12,21 @@ from time import time
 from .log import LOGGER
 
 # Potentially dangerous shell patterns that could indicate command injection
-_DANGEROUS_PATTERNS = frozenset({
-    ';',  # Command chaining
-    '&&',  # Conditional execution
-    '||',  # Conditional execution
-    '|',  # Pipe (legitimate use but can be dangerous)
-    '$(',  # Command substitution
-    '`',  # Command substitution
-    '>',  # Redirection (legitimate but can overwrite files)
-    '<',  # Redirection
-    '>>',  # Append redirection
-    '\n',  # Newline can execute multiple commands
-    '\r',  # Carriage return
-})
+_DANGEROUS_PATTERNS = frozenset(
+    {
+        ';',  # Command chaining
+        '&&',  # Conditional execution
+        '||',  # Conditional execution
+        '|',  # Pipe (legitimate use but can be dangerous)
+        '$(',  # Command substitution
+        '`',  # Command substitution
+        '>',  # Redirection (legitimate but can overwrite files)
+        '<',  # Redirection
+        '>>',  # Append redirection
+        '\n',  # Newline can execute multiple commands
+        '\r',  # Carriage return
+    }
+)
 
 
 def _validate_shell_command(cmd: str) -> None:

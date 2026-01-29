@@ -9,6 +9,7 @@ dev = [
   'pytest-structlog>=1.1',
   'pytest-subprocess>=1.5.2',
   'structlog>=24.4.0',
+  'syrupy>=5.1.0',
   'types-psutil>=6.0.0.20240901',
   'types-pyyaml>=6.0.12.20240917',
 ]

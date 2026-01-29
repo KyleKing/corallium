@@ -1,5 +1,12 @@
 ## Unreleased
 
+### Refactor
+
+- merge calcipy improvements into corallium
+- minor code tag collector improvements and tests
+
+## 2.2.0 (2026-01-27)
+
 ### Feat
 
 - **#11**: changes from PR

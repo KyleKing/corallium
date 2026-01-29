@@ -1,0 +1,58 @@
+# serializer version: 1
+# name: test_format_table[headers0-records0-None]
+  '''
+  | Name  | Age |
+  |-------|-----|
+  | Alice | 30  |
+  | Bob   | 25  |
+  '''
+# ---
+# name: test_format_table[headers1-records1-None]
+  '''
+  | X                 |
+  |-------------------|
+  | short             |
+  | much longer value |
+  '''
+# ---
+# name: test_format_table[headers2-records2-None]
+  '''
+  | A | B |
+  |---|---|
+  '''
+# ---
+# name: test_format_table[headers3-records3-None]
+  '''
+  | Int | Float             |
+  |-----|-------------------|
+  | 42  | 3.141592653589793 |
+  '''
+# ---
+# name: test_format_table[headers4-records4-delimiters4]
+  '''
+  | Col |
+  |:----|
+  | val |
+  '''
+# ---
+# name: test_format_table[headers5-records5-delimiters5]
+  '''
+  | Col |
+  |----:|
+  | val |
+  '''
+# ---
+# name: test_format_table[headers6-records6-delimiters6]
+  '''
+  | Col |
+  |:---:|
+  | val |
+  '''
+# ---
+# name: test_format_table[headers7-records7-delimiters7]
+  '''
+  | Col |
+  |-----|
+  | val |
+  '''
+# ---

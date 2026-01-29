@@ -265,30 +265,32 @@ ALLOWED_CHARS = string.ascii_lowercase + string.ascii_uppercase + string.digits 
 """Default string of acceptable characters in a filename."""
 
 # Windows reserved filenames that cannot be used
-RESERVED_NAMES = frozenset({
-    'CON',
-    'PRN',
-    'AUX',
-    'NUL',
-    'COM1',
-    'COM2',
-    'COM3',
-    'COM4',
-    'COM5',
-    'COM6',
-    'COM7',
-    'COM8',
-    'COM9',
-    'LPT1',
-    'LPT2',
-    'LPT3',
-    'LPT4',
-    'LPT5',
-    'LPT6',
-    'LPT7',
-    'LPT8',
-    'LPT9',
-})
+RESERVED_NAMES = frozenset(
+    {
+        'CON',
+        'PRN',
+        'AUX',
+        'NUL',
+        'COM1',
+        'COM2',
+        'COM3',
+        'COM4',
+        'COM5',
+        'COM6',
+        'COM7',
+        'COM8',
+        'COM9',
+        'LPT1',
+        'LPT2',
+        'LPT3',
+        'LPT4',
+        'LPT5',
+        'LPT6',
+        'LPT7',
+        'LPT8',
+        'LPT9',
+    }
+)
 """Windows reserved filenames."""
 
 
