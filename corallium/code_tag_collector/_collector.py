@@ -148,17 +148,17 @@ def _git_info(cwd: Path) -> Tuple[Path, str]:
         cwd: Path to the current working directory (typically file_path.parent)
 
     Returns:
-        tuple of (git_dir, repo_url). Returns (cwd, '') if not in a git repository.
+        tuple of (git_dir, repo_url). Returns (cwd, '') if git unavailable.
 
     """
-    git_dir = cwd
     with suppress(CalledProcessError):
         git_dir = Path(capture_shell('git rev-parse --show-toplevel', cwd=cwd))
+        clone_uri = ''
+        with suppress(CalledProcessError):
+            clone_uri = capture_shell('git remote get-url origin', cwd=cwd)
+        return git_dir, github_blame_url(clone_uri)
 
-    clone_uri = ''
-    with suppress(CalledProcessError):
-        clone_uri = capture_shell('git remote get-url origin', cwd=cwd)
-    return git_dir, github_blame_url(clone_uri)
+    return cwd, ''
 
 
 @dataclass(frozen=True)
