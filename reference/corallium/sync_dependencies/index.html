@@ -655,14 +655,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../markdown_table/" class="md-nav__link">
+      <a href="../markup_table/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Markdown table
+    Markup table
   
 
     
@@ -1182,29 +1182,29 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/sync_dependencies.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="392 "></span><span class="k">def</span><span class="w"> </span><span class="nf">replace_versions</span><span class="p">(</span><span class="n">path_lock</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="393 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read packages from lock file and update the versions in pyproject.toml.</span>
-<span class="linenos" data-linenos="394 "></span>
-<span class="linenos" data-linenos="395 "></span><span class="sd">    Supports both poetry.lock and uv.lock formats.</span>
-<span class="linenos" data-linenos="396 "></span>
-<span class="linenos" data-linenos="397 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="398 "></span><span class="sd">        path_lock: Path to the lock file (poetry.lock or uv.lock)</span>
-<span class="linenos" data-linenos="399 "></span>
-<span class="linenos" data-linenos="400 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="401 "></span><span class="sd">        NotImplementedError: if the lock file format is not recognized</span>
-<span class="linenos" data-linenos="402 "></span>
-<span class="linenos" data-linenos="403 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="404 "></span>    <span class="k">if</span> <span class="n">path_lock</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;poetry.lock&#39;</span><span class="p">,</span> <span class="s1">&#39;uv.lock&#39;</span><span class="p">}:</span>
-<span class="linenos" data-linenos="405 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Expected a path to a &quot;poetry.lock&quot; or &quot;uv.lock&quot; file. Instead, received: &quot;</span><span class="si">{</span><span class="n">path_lock</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
-<span class="linenos" data-linenos="406 "></span>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="linenos" data-linenos="407 "></span>
-<span class="linenos" data-linenos="408 "></span>    <span class="n">lock_versions</span> <span class="o">=</span> <span class="n">_parse_lock_file</span><span class="p">(</span><span class="n">path_lock</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="399 "></span><span class="k">def</span><span class="w"> </span><span class="nf">replace_versions</span><span class="p">(</span><span class="n">path_lock</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="400 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read packages from lock file and update the versions in pyproject.toml.</span>
+<span class="linenos" data-linenos="401 "></span>
+<span class="linenos" data-linenos="402 "></span><span class="sd">    Supports both poetry.lock and uv.lock formats.</span>
+<span class="linenos" data-linenos="403 "></span>
+<span class="linenos" data-linenos="404 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="405 "></span><span class="sd">        path_lock: Path to the lock file (poetry.lock or uv.lock)</span>
+<span class="linenos" data-linenos="406 "></span>
+<span class="linenos" data-linenos="407 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="408 "></span><span class="sd">        NotImplementedError: if the lock file format is not recognized</span>
 <span class="linenos" data-linenos="409 "></span>
-<span class="linenos" data-linenos="410 "></span>    <span class="n">path_pyproject</span> <span class="o">=</span> <span class="n">path_lock</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;pyproject.toml&#39;</span>
-<span class="linenos" data-linenos="411 "></span>    <span class="n">pyproject_text</span> <span class="o">=</span> <span class="n">path_pyproject</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="412 "></span>    <span class="n">pyproject_versions</span> <span class="o">=</span> <span class="n">_collect_pyproject_versions</span><span class="p">(</span><span class="n">pyproject_text</span><span class="p">)</span>
-<span class="linenos" data-linenos="413 "></span>
-<span class="linenos" data-linenos="414 "></span>    <span class="n">path_pyproject</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">_replace_pyproject_versions</span><span class="p">(</span><span class="n">lock_versions</span><span class="p">,</span> <span class="n">pyproject_versions</span><span class="p">,</span> <span class="n">pyproject_text</span><span class="p">))</span>
+<span class="linenos" data-linenos="410 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="411 "></span>    <span class="k">if</span> <span class="n">path_lock</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;poetry.lock&#39;</span><span class="p">,</span> <span class="s1">&#39;uv.lock&#39;</span><span class="p">}:</span>
+<span class="linenos" data-linenos="412 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Expected a path to a &quot;poetry.lock&quot; or &quot;uv.lock&quot; file. Instead, received: &quot;</span><span class="si">{</span><span class="n">path_lock</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+<span class="linenos" data-linenos="413 "></span>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="linenos" data-linenos="414 "></span>
+<span class="linenos" data-linenos="415 "></span>    <span class="n">lock_versions</span> <span class="o">=</span> <span class="n">_parse_lock_file</span><span class="p">(</span><span class="n">path_lock</span><span class="p">)</span>
+<span class="linenos" data-linenos="416 "></span>
+<span class="linenos" data-linenos="417 "></span>    <span class="n">path_pyproject</span> <span class="o">=</span> <span class="n">path_lock</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;pyproject.toml&#39;</span>
+<span class="linenos" data-linenos="418 "></span>    <span class="n">pyproject_text</span> <span class="o">=</span> <span class="n">path_pyproject</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="419 "></span>    <span class="n">pyproject_versions</span> <span class="o">=</span> <span class="n">_collect_pyproject_versions</span><span class="p">(</span><span class="n">pyproject_text</span><span class="p">)</span>
+<span class="linenos" data-linenos="420 "></span>
+<span class="linenos" data-linenos="421 "></span>    <span class="n">path_pyproject</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">_replace_pyproject_versions</span><span class="p">(</span><span class="n">lock_versions</span><span class="p">,</span> <span class="n">pyproject_versions</span><span class="p">,</span> <span class="n">pyproject_text</span><span class="p">))</span>
 </code></pre></div>
             </details>
     </div>

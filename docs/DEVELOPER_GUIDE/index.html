@@ -778,14 +778,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/corallium/markdown_table/" class="md-nav__link">
+      <a href="../../reference/corallium/markup_table/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Markdown table
+    Markup table
   
 
     
@@ -1195,17 +1195,12 @@
 - Create <code>testpypi</code> environment (no protection rules)
 - Create <code>pypi</code> environment with &ldquo;Required reviewers&rdquo; enabled</p>
 <p><strong>Register Trusted Publishers</strong></p>
-<p>TestPyPI: https://test.pypi.org/manage/account/publishing/
-- PyPI Project Name: <code>corallium</code>
-- Owner: <code>kyleking</code>
-- Repository: <code>corallium</code>
-- Workflow: <code>publish.yml</code>
-- Environment: <code>testpypi</code></p>
 <p>PyPI: https://pypi.org/manage/project/corallium/settings/publishing/
 - Owner: <code>kyleking</code>
 - Repository: <code>corallium</code>
 - Workflow: <code>publish.yml</code>
-- Environment: <code>pypi</code></p>
+- Environment: <code>pypi</code>
+    - Or environment <code>testpypi</code> (for <a href="https://test.pypi.org/manage/account/publishing">TestPyPI</a>)</p>
 <h3 id="manual-publishing">Manual Publishing<a class="headerlink" href="#manual-publishing" title="Permanent link">⚓︎</a></h3>
 <p>For emergency manual publish:</p>
 <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nb">export</span><span class="w"> </span><span class="nv">UV_PUBLISH_TOKEN</span><span class="o">=</span>pypi-...
@@ -1249,30 +1244,30 @@
 <tr>
 <td><code>corallium/code_tag_collector/__init__.py</code></td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">50.0%</td>
 </tr>
 <tr>
 <td><code>corallium/code_tag_collector/_collector.py</code></td>
-<td style="text-align: right;">133</td>
-<td style="text-align: right;">133</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">81.2%</td>
 </tr>
 <tr>
 <td><code>corallium/file_helpers.py</code></td>
-<td style="text-align: right;">169</td>
+<td style="text-align: right;">178</td>
 <td style="text-align: right;">42</td>
 <td style="text-align: right;">11</td>
-<td style="text-align: right;">71.2%</td>
+<td style="text-align: right;">72.8%</td>
 </tr>
 <tr>
 <td><code>corallium/file_search.py</code></td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">53</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">97.1%</td>
 </tr>
 <tr>
 <td><code>corallium/log.py</code></td>
@@ -1324,8 +1319,8 @@
 <td style="text-align: right;">86.1%</td>
 </tr>
 <tr>
-<td><code>corallium/markdown_table.py</code></td>
-<td style="text-align: right;">28</td>
+<td><code>corallium/markup_table.py</code></td>
+<td style="text-align: right;">31</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">100.0%</td>
@@ -1346,10 +1341,10 @@
 </tr>
 <tr>
 <td><code>corallium/sync_dependencies.py</code></td>
-<td style="text-align: right;">154</td>
-<td style="text-align: right;">18</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">82.8%</td>
+<td style="text-align: right;">90.6%</td>
 </tr>
 <tr>
 <td><code>corallium/tomllib.py</code></td>
@@ -1360,14 +1355,14 @@
 </tr>
 <tr>
 <td><strong>Totals</strong></td>
-<td style="text-align: right;">818</td>
-<td style="text-align: right;">237</td>
+<td style="text-align: right;">859</td>
+<td style="text-align: right;">116</td>
 <td style="text-align: right;">55</td>
-<td style="text-align: right;">68.4%</td>
+<td style="text-align: right;">83.6%</td>
 </tr>
 </tbody>
 </table>
-<p>Generated on: 2026-01-27</p>
+<p>Generated on: 2026-01-28</p>
 <!-- {cte} -->
 
 

@@ -655,14 +655,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../markdown_table/" class="md-nav__link">
+      <a href="../markup_table/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Markdown table
+    Markup table
   
 
     
@@ -1360,80 +1360,80 @@ to preserve backward compatibility and allow legitimate shell features.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/shell.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 52 "></span><span class="k">def</span><span class="w"> </span><span class="nf">capture_shell</span><span class="p">(</span>
-<span class="linenos" data-linenos=" 53 "></span>    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 54 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 55 "></span>    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 56 "></span>    <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 57 "></span>    <span class="n">printer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 58 "></span>    <span class="n">validate_cmd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 59 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 60 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run shell command, return the output, and optionally print in real time.</span>
-<span class="linenos" data-linenos=" 61 "></span>
-<span class="linenos" data-linenos=" 62 "></span><span class="sd">    WARNING: This function uses shell=True which can be a security risk.</span>
-<span class="linenos" data-linenos=" 63 "></span><span class="sd">    Only use with trusted input or enable validate_cmd for basic protection.</span>
-<span class="linenos" data-linenos=" 64 "></span>
-<span class="linenos" data-linenos=" 65 "></span><span class="sd">    Inspired by: https://stackoverflow.com/a/38745040/3219667</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 54 "></span><span class="k">def</span><span class="w"> </span><span class="nf">capture_shell</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 55 "></span>    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 56 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 57 "></span>    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 58 "></span>    <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 59 "></span>    <span class="n">printer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 60 "></span>    <span class="n">validate_cmd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 61 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 62 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run shell command, return the output, and optionally print in real time.</span>
+<span class="linenos" data-linenos=" 63 "></span>
+<span class="linenos" data-linenos=" 64 "></span><span class="sd">    WARNING: This function uses shell=True which can be a security risk.</span>
+<span class="linenos" data-linenos=" 65 "></span><span class="sd">    Only use with trusted input or enable validate_cmd for basic protection.</span>
 <span class="linenos" data-linenos=" 66 "></span>
-<span class="linenos" data-linenos=" 67 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 68 "></span><span class="sd">        cmd: shell command</span>
-<span class="linenos" data-linenos=" 69 "></span><span class="sd">        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.</span>
-<span class="linenos" data-linenos=" 70 "></span><span class="sd">        cwd: optional path for shell execution</span>
-<span class="linenos" data-linenos=" 71 "></span><span class="sd">        printer: optional callable to output the lines in real time</span>
-<span class="linenos" data-linenos=" 72 "></span><span class="sd">        validate_cmd: if True, validates command for dangerous patterns. Default False</span>
-<span class="linenos" data-linenos=" 73 "></span><span class="sd">            to preserve backward compatibility and allow legitimate shell features.</span>
-<span class="linenos" data-linenos=" 74 "></span>
-<span class="linenos" data-linenos=" 75 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos=" 76 "></span><span class="sd">        str: stripped output</span>
-<span class="linenos" data-linenos=" 77 "></span>
-<span class="linenos" data-linenos=" 78 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos=" 79 "></span><span class="sd">        CalledProcessError: if return code is non-zero</span>
-<span class="linenos" data-linenos=" 80 "></span><span class="sd">        TimeoutExpired: if timeout is reached</span>
-<span class="linenos" data-linenos=" 81 "></span><span class="sd">        ValueError: if validate_cmd=True and dangerous patterns are detected</span>
-<span class="linenos" data-linenos=" 82 "></span>
-<span class="linenos" data-linenos=" 83 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 84 "></span>    <span class="k">if</span> <span class="n">validate_cmd</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 85 "></span>        <span class="n">_validate_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 86 "></span>
-<span class="linenos" data-linenos=" 87 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">printer</span><span class="o">=</span><span class="n">printer</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="o">=</span><span class="n">validate_cmd</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 88 "></span>    <span class="k">if</span> <span class="n">timeout</span> <span class="ow">and</span> <span class="n">timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 89 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Negative timeouts are not allowed&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 90 "></span>
-<span class="linenos" data-linenos=" 91 "></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 92 "></span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos" data-linenos=" 93 "></span>    <span class="k">with</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
-<span class="linenos" data-linenos=" 94 "></span>        <span class="n">cmd</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 95 "></span>        <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 96 "></span>        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 97 "></span>        <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 98 "></span>        <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos" data-linenos=" 99 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos" data-linenos="100 "></span>    <span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
-<span class="linenos" data-linenos="101 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">stdout</span> <span class="o">:=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
-<span class="linenos" data-linenos="102 "></span>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Failed to read stdout from process.&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="103 "></span>        <span class="n">return_code</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos" data-linenos="104 "></span>        <span class="k">while</span> <span class="n">return_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="105 "></span>            <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">timeout</span><span class="p">:</span>
-<span class="linenos" data-linenos="106 "></span>                <span class="n">proc</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
-<span class="linenos" data-linenos="107 "></span>                <span class="k">break</span>
-<span class="linenos" data-linenos="108 "></span>            <span class="k">if</span> <span class="n">line</span> <span class="o">:=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">():</span>
-<span class="linenos" data-linenos="109 "></span>                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="linenos" data-linenos="110 "></span>                <span class="k">if</span> <span class="n">printer</span><span class="p">:</span>
-<span class="linenos" data-linenos="111 "></span>                    <span class="n">printer</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
-<span class="linenos" data-linenos="112 "></span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos" data-linenos="113 "></span>                <span class="n">return_code</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
-<span class="linenos" data-linenos="114 "></span>
-<span class="linenos" data-linenos="115 "></span>    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
-<span class="linenos" data-linenos="116 "></span>    <span class="k">if</span> <span class="n">return_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="117 "></span>        <span class="c1"># Process was killed due to timeout</span>
-<span class="linenos" data-linenos="118 "></span>        <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">TimeoutExpired</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">timeout</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">),</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-<span class="linenos" data-linenos="119 "></span>    <span class="k">if</span> <span class="n">return_code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos" data-linenos="120 "></span>        <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">(</span><span class="n">returncode</span><span class="o">=</span><span class="n">return_code</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
-<span class="linenos" data-linenos="121 "></span>
-<span class="linenos" data-linenos="122 "></span>    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
-<span class="linenos" data-linenos="123 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Shell command completed&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">duration_seconds</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
-<span class="linenos" data-linenos="124 "></span>
-<span class="linenos" data-linenos="125 "></span>    <span class="k">return</span> <span class="n">output</span>
+<span class="linenos" data-linenos=" 67 "></span><span class="sd">    Inspired by: https://stackoverflow.com/a/38745040/3219667</span>
+<span class="linenos" data-linenos=" 68 "></span>
+<span class="linenos" data-linenos=" 69 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 70 "></span><span class="sd">        cmd: shell command</span>
+<span class="linenos" data-linenos=" 71 "></span><span class="sd">        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.</span>
+<span class="linenos" data-linenos=" 72 "></span><span class="sd">        cwd: optional path for shell execution</span>
+<span class="linenos" data-linenos=" 73 "></span><span class="sd">        printer: optional callable to output the lines in real time</span>
+<span class="linenos" data-linenos=" 74 "></span><span class="sd">        validate_cmd: if True, validates command for dangerous patterns. Default False</span>
+<span class="linenos" data-linenos=" 75 "></span><span class="sd">            to preserve backward compatibility and allow legitimate shell features.</span>
+<span class="linenos" data-linenos=" 76 "></span>
+<span class="linenos" data-linenos=" 77 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 78 "></span><span class="sd">        str: stripped output</span>
+<span class="linenos" data-linenos=" 79 "></span>
+<span class="linenos" data-linenos=" 80 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos=" 81 "></span><span class="sd">        CalledProcessError: if return code is non-zero</span>
+<span class="linenos" data-linenos=" 82 "></span><span class="sd">        TimeoutExpired: if timeout is reached</span>
+<span class="linenos" data-linenos=" 83 "></span><span class="sd">        ValueError: if validate_cmd=True and dangerous patterns are detected</span>
+<span class="linenos" data-linenos=" 84 "></span>
+<span class="linenos" data-linenos=" 85 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 86 "></span>    <span class="k">if</span> <span class="n">validate_cmd</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 87 "></span>        <span class="n">_validate_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 88 "></span>
+<span class="linenos" data-linenos=" 89 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">printer</span><span class="o">=</span><span class="n">printer</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="o">=</span><span class="n">validate_cmd</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 90 "></span>    <span class="k">if</span> <span class="n">timeout</span> <span class="ow">and</span> <span class="n">timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 91 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Negative timeouts are not allowed&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 92 "></span>
+<span class="linenos" data-linenos=" 93 "></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 94 "></span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos=" 95 "></span>    <span class="k">with</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+<span class="linenos" data-linenos=" 96 "></span>        <span class="n">cmd</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 97 "></span>        <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 98 "></span>        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 99 "></span>        <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span>
+<span class="linenos" data-linenos="100 "></span>        <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos" data-linenos="101 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos" data-linenos="102 "></span>    <span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
+<span class="linenos" data-linenos="103 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">stdout</span> <span class="o">:=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
+<span class="linenos" data-linenos="104 "></span>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Failed to read stdout from process.&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="105 "></span>        <span class="n">return_code</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos="106 "></span>        <span class="k">while</span> <span class="n">return_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="107 "></span>            <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="linenos" data-linenos="108 "></span>                <span class="n">proc</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+<span class="linenos" data-linenos="109 "></span>                <span class="k">break</span>
+<span class="linenos" data-linenos="110 "></span>            <span class="k">if</span> <span class="n">line</span> <span class="o">:=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">():</span>
+<span class="linenos" data-linenos="111 "></span>                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="linenos" data-linenos="112 "></span>                <span class="k">if</span> <span class="n">printer</span><span class="p">:</span>
+<span class="linenos" data-linenos="113 "></span>                    <span class="n">printer</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="linenos" data-linenos="114 "></span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="115 "></span>                <span class="n">return_code</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+<span class="linenos" data-linenos="116 "></span>
+<span class="linenos" data-linenos="117 "></span>    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="linenos" data-linenos="118 "></span>    <span class="k">if</span> <span class="n">return_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="119 "></span>        <span class="c1"># Process was killed due to timeout</span>
+<span class="linenos" data-linenos="120 "></span>        <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">TimeoutExpired</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">timeout</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">),</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+<span class="linenos" data-linenos="121 "></span>    <span class="k">if</span> <span class="n">return_code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos" data-linenos="122 "></span>        <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">(</span><span class="n">returncode</span><span class="o">=</span><span class="n">return_code</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+<span class="linenos" data-linenos="123 "></span>
+<span class="linenos" data-linenos="124 "></span>    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="linenos" data-linenos="125 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Shell command completed&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">duration_seconds</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="126 "></span>
+<span class="linenos" data-linenos="127 "></span>    <span class="k">return</span> <span class="n">output</span>
 </code></pre></div>
             </details>
     </div>
@@ -1583,42 +1583,42 @@ to preserve backward compatibility and allow legitimate shell features.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/shell.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="152 "></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">capture_shell_async</span><span class="p">(</span>
-<span class="linenos" data-linenos="153 "></span>    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="linenos" data-linenos="154 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="155 "></span>    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span>
-<span class="linenos" data-linenos="156 "></span>    <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="157 "></span>    <span class="n">validate_cmd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="linenos" data-linenos="158 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="159 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a shell command asynchronously and return the output.</span>
-<span class="linenos" data-linenos="160 "></span>
-<span class="linenos" data-linenos="161 "></span><span class="sd">    WARNING: This function uses shell=True which can be a security risk.</span>
-<span class="linenos" data-linenos="162 "></span><span class="sd">    Only use with trusted input or enable validate_cmd for basic protection.</span>
-<span class="linenos" data-linenos="163 "></span>
-<span class="linenos" data-linenos="164 "></span><span class="sd">    ```py</span>
-<span class="linenos" data-linenos="165 "></span><span class="sd">    print(asyncio.run(capture_shell_async(&#39;ls ~/.config&#39;)))</span>
-<span class="linenos" data-linenos="166 "></span><span class="sd">    ```</span>
-<span class="linenos" data-linenos="167 "></span>
-<span class="linenos" data-linenos="168 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="169 "></span><span class="sd">        cmd: shell command</span>
-<span class="linenos" data-linenos="170 "></span><span class="sd">        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.</span>
-<span class="linenos" data-linenos="171 "></span><span class="sd">        cwd: optional path for shell execution</span>
-<span class="linenos" data-linenos="172 "></span><span class="sd">        validate_cmd: if True, validates command for dangerous patterns. Default False</span>
-<span class="linenos" data-linenos="173 "></span><span class="sd">            to preserve backward compatibility and allow legitimate shell features.</span>
-<span class="linenos" data-linenos="174 "></span>
-<span class="linenos" data-linenos="175 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="176 "></span><span class="sd">        str: stripped output</span>
-<span class="linenos" data-linenos="177 "></span>
-<span class="linenos" data-linenos="178 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="179 "></span>    <span class="k">if</span> <span class="n">validate_cmd</span><span class="p">:</span>
-<span class="linenos" data-linenos="180 "></span>        <span class="n">_validate_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-<span class="linenos" data-linenos="181 "></span>
-<span class="linenos" data-linenos="182 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="o">=</span><span class="n">validate_cmd</span><span class="p">)</span>
-<span class="linenos" data-linenos="183 "></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="linenos" data-linenos="184 "></span>    <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span>
-<span class="linenos" data-linenos="185 "></span>        <span class="n">_capture_shell_async</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start</span><span class="p">),</span>
-<span class="linenos" data-linenos="186 "></span>        <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="187 "></span>    <span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="154 "></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">capture_shell_async</span><span class="p">(</span>
+<span class="linenos" data-linenos="155 "></span>    <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="linenos" data-linenos="156 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="157 "></span>    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span>
+<span class="linenos" data-linenos="158 "></span>    <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="159 "></span>    <span class="n">validate_cmd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="linenos" data-linenos="160 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="161 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a shell command asynchronously and return the output.</span>
+<span class="linenos" data-linenos="162 "></span>
+<span class="linenos" data-linenos="163 "></span><span class="sd">    WARNING: This function uses shell=True which can be a security risk.</span>
+<span class="linenos" data-linenos="164 "></span><span class="sd">    Only use with trusted input or enable validate_cmd for basic protection.</span>
+<span class="linenos" data-linenos="165 "></span>
+<span class="linenos" data-linenos="166 "></span><span class="sd">    ```py</span>
+<span class="linenos" data-linenos="167 "></span><span class="sd">    print(asyncio.run(capture_shell_async(&#39;ls ~/.config&#39;)))</span>
+<span class="linenos" data-linenos="168 "></span><span class="sd">    ```</span>
+<span class="linenos" data-linenos="169 "></span>
+<span class="linenos" data-linenos="170 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="171 "></span><span class="sd">        cmd: shell command</span>
+<span class="linenos" data-linenos="172 "></span><span class="sd">        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.</span>
+<span class="linenos" data-linenos="173 "></span><span class="sd">        cwd: optional path for shell execution</span>
+<span class="linenos" data-linenos="174 "></span><span class="sd">        validate_cmd: if True, validates command for dangerous patterns. Default False</span>
+<span class="linenos" data-linenos="175 "></span><span class="sd">            to preserve backward compatibility and allow legitimate shell features.</span>
+<span class="linenos" data-linenos="176 "></span>
+<span class="linenos" data-linenos="177 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="178 "></span><span class="sd">        str: stripped output</span>
+<span class="linenos" data-linenos="179 "></span>
+<span class="linenos" data-linenos="180 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="181 "></span>    <span class="k">if</span> <span class="n">validate_cmd</span><span class="p">:</span>
+<span class="linenos" data-linenos="182 "></span>        <span class="n">_validate_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="linenos" data-linenos="183 "></span>
+<span class="linenos" data-linenos="184 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="o">=</span><span class="n">validate_cmd</span><span class="p">)</span>
+<span class="linenos" data-linenos="185 "></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="linenos" data-linenos="186 "></span>    <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span>
+<span class="linenos" data-linenos="187 "></span>        <span class="n">_capture_shell_async</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start</span><span class="p">),</span>
+<span class="linenos" data-linenos="188 "></span>        <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="189 "></span>    <span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
@@ -1734,38 +1734,38 @@ to preserve backward compatibility and allow legitimate shell features.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/shell.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="190 "></span><span class="k">def</span><span class="w"> </span><span class="nf">run_shell</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="191 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a shell command without capturing the output.</span>
-<span class="linenos" data-linenos="192 "></span>
-<span class="linenos" data-linenos="193 "></span><span class="sd">    WARNING: This function uses shell=True which can be a security risk.</span>
-<span class="linenos" data-linenos="194 "></span><span class="sd">    Only use with trusted input or enable validate_cmd for basic protection.</span>
-<span class="linenos" data-linenos="195 "></span>
-<span class="linenos" data-linenos="196 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="197 "></span><span class="sd">        cmd: shell command</span>
-<span class="linenos" data-linenos="198 "></span><span class="sd">        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.</span>
-<span class="linenos" data-linenos="199 "></span><span class="sd">        cwd: optional path for shell execution</span>
-<span class="linenos" data-linenos="200 "></span><span class="sd">        validate_cmd: if True, validates command for dangerous patterns. Default False</span>
-<span class="linenos" data-linenos="201 "></span><span class="sd">            to preserve backward compatibility and allow legitimate shell features.</span>
-<span class="linenos" data-linenos="202 "></span>
-<span class="linenos" data-linenos="203 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="204 "></span>    <span class="k">if</span> <span class="n">validate_cmd</span><span class="p">:</span>
-<span class="linenos" data-linenos="205 "></span>        <span class="n">_validate_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-<span class="linenos" data-linenos="206 "></span>
-<span class="linenos" data-linenos="207 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="o">=</span><span class="n">validate_cmd</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="192 "></span><span class="k">def</span><span class="w"> </span><span class="nf">run_shell</span><span class="p">(</span><span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="193 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a shell command without capturing the output.</span>
+<span class="linenos" data-linenos="194 "></span>
+<span class="linenos" data-linenos="195 "></span><span class="sd">    WARNING: This function uses shell=True which can be a security risk.</span>
+<span class="linenos" data-linenos="196 "></span><span class="sd">    Only use with trusted input or enable validate_cmd for basic protection.</span>
+<span class="linenos" data-linenos="197 "></span>
+<span class="linenos" data-linenos="198 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="199 "></span><span class="sd">        cmd: shell command</span>
+<span class="linenos" data-linenos="200 "></span><span class="sd">        timeout: process timeout in seconds. Defaults to 2 minutes. Use None for no timeout.</span>
+<span class="linenos" data-linenos="201 "></span><span class="sd">        cwd: optional path for shell execution</span>
+<span class="linenos" data-linenos="202 "></span><span class="sd">        validate_cmd: if True, validates command for dangerous patterns. Default False</span>
+<span class="linenos" data-linenos="203 "></span><span class="sd">            to preserve backward compatibility and allow legitimate shell features.</span>
+<span class="linenos" data-linenos="204 "></span>
+<span class="linenos" data-linenos="205 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="206 "></span>    <span class="k">if</span> <span class="n">validate_cmd</span><span class="p">:</span>
+<span class="linenos" data-linenos="207 "></span>        <span class="n">_validate_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
 <span class="linenos" data-linenos="208 "></span>
-<span class="linenos" data-linenos="209 "></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="linenos" data-linenos="210 "></span>    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-<span class="linenos" data-linenos="211 "></span>        <span class="n">cmd</span><span class="p">,</span>
-<span class="linenos" data-linenos="212 "></span>        <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="213 "></span>        <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span>
-<span class="linenos" data-linenos="214 "></span>        <span class="n">stdout</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
-<span class="linenos" data-linenos="215 "></span>        <span class="n">stderr</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
-<span class="linenos" data-linenos="216 "></span>        <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos" data-linenos="217 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos" data-linenos="218 "></span>    <span class="p">)</span>
-<span class="linenos" data-linenos="219 "></span>
-<span class="linenos" data-linenos="220 "></span>    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
-<span class="linenos" data-linenos="221 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Shell command completed&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">duration_seconds</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="209 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Running&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">validate_cmd</span><span class="o">=</span><span class="n">validate_cmd</span><span class="p">)</span>
+<span class="linenos" data-linenos="210 "></span>
+<span class="linenos" data-linenos="211 "></span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="linenos" data-linenos="212 "></span>    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<span class="linenos" data-linenos="213 "></span>        <span class="n">cmd</span><span class="p">,</span>
+<span class="linenos" data-linenos="214 "></span>        <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="215 "></span>        <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span>
+<span class="linenos" data-linenos="216 "></span>        <span class="n">stdout</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+<span class="linenos" data-linenos="217 "></span>        <span class="n">stderr</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+<span class="linenos" data-linenos="218 "></span>        <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos" data-linenos="219 "></span>        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos" data-linenos="220 "></span>    <span class="p">)</span>
+<span class="linenos" data-linenos="221 "></span>
+<span class="linenos" data-linenos="222 "></span>    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="linenos" data-linenos="223 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Shell command completed&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">duration_seconds</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>

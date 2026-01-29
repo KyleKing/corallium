@@ -2,66 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://corallium.kyleking.me/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/CHANGELOG/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/CODE_TAG_SUMMARY/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/DEVELOPER_GUIDE/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/docs/STYLE_GUIDE/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/can_skip/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/file_helpers/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/file_search/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/log/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
-         <loc>https://corallium.kyleking.me/reference/corallium/markdown_table/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <loc>https://corallium.kyleking.me/reference/corallium/markup_table/</loc>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/pretty_process/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/shell/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/sync_dependencies/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/plain_printer/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/rich_printer/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
     <url>
          <loc>https://corallium.kyleking.me/reference/corallium/loggers/styles/</loc>
-         <lastmod>2026-01-27</lastmod>
+         <lastmod>2026-01-29</lastmod>
     </url>
 </urlset>

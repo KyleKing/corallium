@@ -12,7 +12,7 @@
         <meta name="author" content="Kyle King">
       
       
-        <link rel="canonical" href="https://corallium.kyleking.me/reference/corallium/markdown_table/">
+        <link rel="canonical" href="https://corallium.kyleking.me/reference/corallium/markup_table/">
       
       
         <link rel="prev" href="../log/">
@@ -29,7 +29,7 @@
     
     
       
-        <title>Markdown table - corallium</title>
+        <title>Markup table - corallium</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#corallium.markdown_table" class="md-skip">
+        <a href="#corallium.markup_table" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Markdown table
+              Markup table
             
           </span>
         </div>
@@ -669,7 +669,7 @@
   <span class="md-ellipsis">
     
   
-    Markdown table
+    Markup table
   
 
     
@@ -687,7 +687,7 @@
   <span class="md-ellipsis">
     
   
-    Markdown table
+    Markup table
   
 
     
@@ -711,10 +711,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#corallium.markdown_table" class="md-nav__link">
+  <a href="#corallium.markup_table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        markdown_table
+        markup_table
       
     </span>
   </a>
@@ -722,7 +722,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#corallium.markdown_table-functions" class="md-nav__link">
+  <a href="#corallium.markup_table-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
         Functions
@@ -734,7 +734,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#corallium.markdown_table.format_table" class="md-nav__link">
+  <a href="#corallium.markup_table.format_table" class="md-nav__link">
     <span class="md-ellipsis">
       
         format_table
@@ -1021,10 +1021,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#corallium.markdown_table" class="md-nav__link">
+  <a href="#corallium.markup_table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        markdown_table
+        markup_table
       
     </span>
   </a>
@@ -1032,7 +1032,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#corallium.markdown_table-functions" class="md-nav__link">
+  <a href="#corallium.markup_table-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
         Functions
@@ -1044,7 +1044,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#corallium.markdown_table.format_table" class="md-nav__link">
+  <a href="#corallium.markup_table.format_table" class="md-nav__link">
     <span class="md-ellipsis">
       
         format_table
@@ -1079,17 +1079,16 @@
   
 
 
-  <h1>Markdown table</h1>
+  <h1>Markup table</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="corallium.markdown_table"></a>
+<a id="corallium.markup_table"></a>
     <div class="doc doc-contents first">
 
-        <p>Markdown table formatting.</p>
-<p>Migrated from calcipy.markdown_table.</p>
+        <p>Markup table formatting.</p>
 
 
 
@@ -1109,22 +1108,22 @@
 
 
 
-<h2 id="corallium.markdown_table-functions">Functions<a href="#corallium.markdown_table-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
+<h2 id="corallium.markup_table-functions">Functions<a href="#corallium.markup_table-functions" class="headerlink" title="Permanent link">⚓︎</a></h2>
 
 <div class="doc doc-object doc-function">
 
 
-<h3 id="corallium.markdown_table.format_table" class="doc doc-heading">
+<h3 id="corallium.markup_table.format_table" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">format_table</span>
 
 
-<a href="#corallium.markdown_table.format_table" class="headerlink" title="Permanent link">⚓︎</a></h3>
+<a href="#corallium.markup_table.format_table" class="headerlink" title="Permanent link">⚓︎</a></h3>
 <div class="doc-signature highlight"><pre><span></span><code><span class="nf">format_table</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">records</span><span class="p">,</span> <span class="n">delimiters</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Returns a formatted Github Markdown table.</p>
+        <p>Returns a formatted table.</p>
 
 
 <table>
@@ -1173,7 +1172,7 @@
             </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
-                <p>optional list to allow for alignment (e.g., [&lsquo;:-&lsquo;, &lsquo;&ndash;:&rsquo;, &lsquo;:-:&rsquo;])
+                <p>optional list to allow for alignment (e.g., [&lsquo;:-&lsquo;, &lsquo;-:&rsquo;, &lsquo;:-:&rsquo;])
 Valid delimiters: &lsquo;-&rsquo; (default), &lsquo;:-&rsquo; (left), &lsquo;-:&rsquo; (right), &lsquo;:-:&rsquo; (center)</p>
               </div>
               <p>
@@ -1202,18 +1201,14 @@ Valid delimiters: &lsquo;-&rsquo; (default), &lsquo;:-&rsquo; (left), &lsquo;-:&
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>str</code>
+                <span class="doc-returns-annotation">
+                    <code><span title="str">str</span></code>
+                </span>
             </td>
             <td class="doc-returns-details">
               <div class="doc-md-description">
-                <p>Formatted markdown table with headers, separators, and data rows</p>
+                <p>Formatted table with headers, separators, and data rows</p>
               </div>
-                <p>
-                  <span class="doc-returns-annotation">
-                    <b>TYPE:</b>
-                      <code><span title="str">str</span></code>
-                  </span>
-                </p>
             </td>
           </tr>
       </tbody>
@@ -1265,69 +1260,71 @@ print(format_table(headers, records))
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>corallium/markdown_table.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="12 "></span><span class="k">def</span><span class="w"> </span><span class="nf">format_table</span><span class="p">(</span>
-<span class="linenos" data-linenos="13 "></span>    <span class="n">headers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-<span class="linenos" data-linenos="14 "></span>    <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
-<span class="linenos" data-linenos="15 "></span>    <span class="n">delimiters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="16 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="17 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a formatted Github Markdown table.</span>
-<span class="linenos" data-linenos="18 "></span>
-<span class="linenos" data-linenos="19 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="20 "></span><span class="sd">        headers: ordered keys to use as column title</span>
-<span class="linenos" data-linenos="21 "></span><span class="sd">        records: list of key:row-value dictionaries</span>
-<span class="linenos" data-linenos="22 "></span><span class="sd">        delimiters: optional list to allow for alignment (e.g., [&#39;:-&#39;, &#39;--:&#39;, &#39;:-:&#39;])</span>
-<span class="linenos" data-linenos="23 "></span><span class="sd">            Valid delimiters: &#39;-&#39; (default), &#39;:-&#39; (left), &#39;-:&#39; (right), &#39;:-:&#39; (center)</span>
-<span class="linenos" data-linenos="24 "></span>
-<span class="linenos" data-linenos="25 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="26 "></span><span class="sd">        str: Formatted markdown table with headers, separators, and data rows</span>
-<span class="linenos" data-linenos="27 "></span>
-<span class="linenos" data-linenos="28 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="29 "></span><span class="sd">        ValueError: if delimiters count doesn&#39;t match headers or uses invalid values</span>
-<span class="linenos" data-linenos="30 "></span>
-<span class="linenos" data-linenos="31 "></span><span class="sd">    Example:</span>
-<span class="linenos" data-linenos="32 "></span><span class="sd">        &gt;&gt;&gt; headers = [&#39;Name&#39;, &#39;Age&#39;, &#39;Score&#39;]</span>
-<span class="linenos" data-linenos="33 "></span><span class="sd">        &gt;&gt;&gt; records = [</span>
-<span class="linenos" data-linenos="34 "></span><span class="sd">        ...     {&#39;Name&#39;: &#39;Alice&#39;, &#39;Age&#39;: 30, &#39;Score&#39;: 95},</span>
-<span class="linenos" data-linenos="35 "></span><span class="sd">        ...     {&#39;Name&#39;: &#39;Bob&#39;, &#39;Age&#39;: 25, &#39;Score&#39;: 88}</span>
-<span class="linenos" data-linenos="36 "></span><span class="sd">        ... ]</span>
-<span class="linenos" data-linenos="37 "></span><span class="sd">        &gt;&gt;&gt; print(format_table(headers, records))</span>
-<span class="linenos" data-linenos="38 "></span><span class="sd">        | Name  | Age | Score |</span>
-<span class="linenos" data-linenos="39 "></span><span class="sd">        |-------|-----|-------|</span>
-<span class="linenos" data-linenos="40 "></span><span class="sd">        | Alice | 30  | 95    |</span>
-<span class="linenos" data-linenos="41 "></span><span class="sd">        | Bob   | 25  | 88    |</span>
-<span class="linenos" data-linenos="42 "></span>
-<span class="linenos" data-linenos="43 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="44 "></span>    <span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">r_</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">]</span> <span class="k">for</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">records</span><span class="p">]</span>
-<span class="linenos" data-linenos="45 "></span>    <span class="n">widths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[</span><span class="n">headers</span><span class="p">,</span> <span class="o">*</span><span class="n">table</span><span class="p">])</span> <span class="k">for</span> <span class="n">col_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">))]</span>
-<span class="linenos" data-linenos="46 "></span>
-<span class="linenos" data-linenos="47 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">pad</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos" data-linenos="48 "></span>        <span class="k">return</span> <span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">widths</span><span class="p">[</span><span class="n">col_idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span>
-<span class="linenos" data-linenos="49 "></span>
-<span class="linenos" data-linenos="50 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">spacer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="51 "></span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;|</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">|</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">|&#39;</span>
-<span class="linenos" data-linenos="52 "></span>
-<span class="linenos" data-linenos="53 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">expand_delimiters</span><span class="p">(</span><span class="n">delim</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="54 "></span>        <span class="n">expanded</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
-<span class="linenos" data-linenos="55 "></span>        <span class="k">if</span> <span class="n">delim</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
-<span class="linenos" data-linenos="56 "></span>            <span class="n">expanded</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">expanded</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-<span class="linenos" data-linenos="57 "></span>        <span class="k">if</span> <span class="n">delim</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
-<span class="linenos" data-linenos="58 "></span>            <span class="n">expanded</span> <span class="o">=</span> <span class="n">expanded</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span>
-<span class="linenos" data-linenos="59 "></span>        <span class="k">return</span> <span class="n">expanded</span>
-<span class="linenos" data-linenos="60 "></span>
-<span class="linenos" data-linenos="61 "></span>    <span class="k">if</span> <span class="n">delimiters</span><span class="p">:</span>
-<span class="linenos" data-linenos="62 "></span>        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos" data-linenos="63 "></span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">delimiters</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
-<span class="linenos" data-linenos="64 "></span>            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incorrect number of delimiters provided (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">delimiters</span><span class="p">)</span><span class="si">}</span><span class="s1">). Expected: (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="65 "></span>        <span class="n">allowed_delimiters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;:-&#39;</span><span class="p">,</span> <span class="s1">&#39;-:&#39;</span><span class="p">,</span> <span class="s1">&#39;:-:&#39;</span><span class="p">}</span>
-<span class="linenos" data-linenos="66 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">delim</span> <span class="ow">in</span> <span class="n">allowed_delimiters</span> <span class="k">for</span> <span class="n">delim</span> <span class="ow">in</span> <span class="n">delimiters</span><span class="p">):</span>
-<span class="linenos" data-linenos="67 "></span>            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Delimiters must one of (</span><span class="si">{</span><span class="n">allowed_delimiters</span><span class="si">}</span><span class="s1">). Received: (</span><span class="si">{</span><span class="n">delimiters</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="68 "></span>        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
-<span class="linenos" data-linenos="69 "></span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39; and &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
-<span class="linenos" data-linenos="70 "></span>
+              <summary>Source code in <code>corallium/markup_table.py</code></summary>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="10 "></span><span class="k">def</span><span class="w"> </span><span class="nf">format_table</span><span class="p">(</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">headers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">delimiters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="14 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="15 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a formatted table.</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="18 "></span><span class="sd">        headers: ordered keys to use as column title</span>
+<span class="linenos" data-linenos="19 "></span><span class="sd">        records: list of key:row-value dictionaries</span>
+<span class="linenos" data-linenos="20 "></span><span class="sd">        delimiters: optional list to allow for alignment (e.g., [&#39;:-&#39;, &#39;-:&#39;, &#39;:-:&#39;])</span>
+<span class="linenos" data-linenos="21 "></span><span class="sd">            Valid delimiters: &#39;-&#39; (default), &#39;:-&#39; (left), &#39;-:&#39; (right), &#39;:-:&#39; (center)</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="24 "></span><span class="sd">        Formatted table with headers, separators, and data rows</span>
+<span class="linenos" data-linenos="25 "></span>
+<span class="linenos" data-linenos="26 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="27 "></span><span class="sd">        ValueError: if delimiters count doesn&#39;t match headers or uses invalid values</span>
+<span class="linenos" data-linenos="28 "></span>
+<span class="linenos" data-linenos="29 "></span><span class="sd">    Example:</span>
+<span class="linenos" data-linenos="30 "></span><span class="sd">        &gt;&gt;&gt; headers = [&#39;Name&#39;, &#39;Age&#39;, &#39;Score&#39;]</span>
+<span class="linenos" data-linenos="31 "></span><span class="sd">        &gt;&gt;&gt; records = [</span>
+<span class="linenos" data-linenos="32 "></span><span class="sd">        ...     {&#39;Name&#39;: &#39;Alice&#39;, &#39;Age&#39;: 30, &#39;Score&#39;: 95},</span>
+<span class="linenos" data-linenos="33 "></span><span class="sd">        ...     {&#39;Name&#39;: &#39;Bob&#39;, &#39;Age&#39;: 25, &#39;Score&#39;: 88}</span>
+<span class="linenos" data-linenos="34 "></span><span class="sd">        ... ]</span>
+<span class="linenos" data-linenos="35 "></span><span class="sd">        &gt;&gt;&gt; print(format_table(headers, records))</span>
+<span class="linenos" data-linenos="36 "></span><span class="sd">        | Name  | Age | Score |</span>
+<span class="linenos" data-linenos="37 "></span><span class="sd">        |-------|-----|-------|</span>
+<span class="linenos" data-linenos="38 "></span><span class="sd">        | Alice | 30  | 95    |</span>
+<span class="linenos" data-linenos="39 "></span><span class="sd">        | Bob   | 25  | 88    |</span>
+<span class="linenos" data-linenos="40 "></span>
+<span class="linenos" data-linenos="41 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="42 "></span>    <span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">r_</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">]</span> <span class="k">for</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">records</span><span class="p">]</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="n">widths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">col_idx</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[</span><span class="n">headers</span><span class="p">,</span> <span class="o">*</span><span class="n">table</span><span class="p">])</span> <span class="k">for</span> <span class="n">col_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">))]</span>
+<span class="linenos" data-linenos="44 "></span>
+<span class="linenos" data-linenos="45 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">pad</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos" data-linenos="46 "></span>        <span class="k">return</span> <span class="p">[</span><span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">widths</span><span class="p">[</span><span class="n">col_idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span>
+<span class="linenos" data-linenos="47 "></span>
+<span class="linenos" data-linenos="48 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">spacer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="49 "></span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;|</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">|</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">spacer</span><span class="si">}</span><span class="s1">|&#39;</span>
+<span class="linenos" data-linenos="50 "></span>
+<span class="linenos" data-linenos="51 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">expand_delimiters</span><span class="p">(</span><span class="n">delim</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="52 "></span>        <span class="n">expanded</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos="53 "></span>        <span class="k">if</span> <span class="n">delim</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="54 "></span>            <span class="n">expanded</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">expanded</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="linenos" data-linenos="55 "></span>        <span class="k">if</span> <span class="n">delim</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="56 "></span>            <span class="n">expanded</span> <span class="o">=</span> <span class="n">expanded</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span>
+<span class="linenos" data-linenos="57 "></span>        <span class="k">return</span> <span class="n">expanded</span>
+<span class="linenos" data-linenos="58 "></span>
+<span class="linenos" data-linenos="59 "></span>    <span class="k">if</span> <span class="n">delimiters</span><span class="p">:</span>
+<span class="linenos" data-linenos="60 "></span>        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="61 "></span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">delimiters</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+<span class="linenos" data-linenos="62 "></span>            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incorrect number of delimiters provided (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">delimiters</span><span class="p">)</span><span class="si">}</span><span class="s1">). Expected: (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="63 "></span>        <span class="n">allowed_delimiters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;:-&#39;</span><span class="p">,</span> <span class="s1">&#39;-:&#39;</span><span class="p">,</span> <span class="s1">&#39;:-:&#39;</span><span class="p">}</span>
+<span class="linenos" data-linenos="64 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">delim</span> <span class="ow">in</span> <span class="n">allowed_delimiters</span> <span class="k">for</span> <span class="n">delim</span> <span class="ow">in</span> <span class="n">delimiters</span><span class="p">):</span>
+<span class="linenos" data-linenos="65 "></span>            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Delimiters must be one of </span><span class="si">{</span><span class="n">allowed_delimiters</span><span class="si">}</span><span class="s1">. Received: </span><span class="si">{</span><span class="n">delimiters</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="66 "></span>        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+<span class="linenos" data-linenos="67 "></span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39; and &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+<span class="linenos" data-linenos="68 "></span>
+<span class="linenos" data-linenos="69 "></span>    <span class="n">delimiter_values</span> <span class="o">=</span> <span class="n">delimiters</span> <span class="ow">or</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="linenos" data-linenos="70 "></span>    <span class="n">expanded_delimiters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">starmap</span><span class="p">(</span><span class="n">expand_delimiters</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">delimiter_values</span><span class="p">,</span> <span class="n">widths</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
 <span class="linenos" data-linenos="71 "></span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos" data-linenos="72 "></span>        <span class="n">join</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">headers</span><span class="p">)),</span>
-<span class="linenos" data-linenos="73 "></span>        <span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">expand_delimiters</span><span class="p">,</span> <span class="n">delimiters</span> <span class="ow">or</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">),</span> <span class="n">widths</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+<span class="linenos" data-linenos="73 "></span>        <span class="n">join</span><span class="p">(</span><span class="n">expanded_delimiters</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
 <span class="linenos" data-linenos="74 "></span>        <span class="o">*</span><span class="p">[</span><span class="n">join</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">],</span>
 <span class="linenos" data-linenos="75 "></span>    <span class="p">]</span>
 <span class="linenos" data-linenos="76 "></span>    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>

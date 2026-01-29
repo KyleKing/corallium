@@ -748,14 +748,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../markdown_table/" class="md-nav__link">
+      <a href="../markup_table/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Markdown table
+    Markup table
   
 
     
@@ -1110,7 +1110,7 @@
 <a id="corallium.file_search"></a>
     <div class="doc doc-contents first">
 
-        <p>Find files using git.</p>
+        <p>Find files using git, with filesystem walk fallback.</p>
 <p>Migrated from calcipy.file_search for git-based file discovery.</p>
 
 
@@ -1146,9 +1146,9 @@
 
     <div class="doc doc-contents ">
 
-        <p>Find project files in git version control.</p>
+        <p>Find project files in git version control or via filesystem walk.</p>
 <p>Note: Uses git ls-files and verifies that each file exists.
-Requires git to be installed and the directory to be a git repository.</p>
+Falls back to recursive filesystem walk when git is unavailable.</p>
 
 
 <table>
@@ -1236,37 +1236,49 @@ files = find_project_files(
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_search.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="65 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_project_files</span><span class="p">(</span><span class="n">path_project</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">ignore_patterns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
-<span class="linenos" data-linenos="66 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find project files in git version control.</span>
-<span class="linenos" data-linenos="67 "></span>
-<span class="linenos" data-linenos="68 "></span><span class="sd">    Note: Uses git ls-files and verifies that each file exists.</span>
-<span class="linenos" data-linenos="69 "></span><span class="sd">    Requires git to be installed and the directory to be a git repository.</span>
-<span class="linenos" data-linenos="70 "></span>
-<span class="linenos" data-linenos="71 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="72 "></span><span class="sd">        path_project: Path to the project directory</span>
-<span class="linenos" data-linenos="73 "></span><span class="sd">        ignore_patterns: Glob ignore patterns</span>
-<span class="linenos" data-linenos="74 "></span>
-<span class="linenos" data-linenos="75 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="76 "></span><span class="sd">        List of Path objects for all tracked, non-ignored files</span>
-<span class="linenos" data-linenos="77 "></span>
-<span class="linenos" data-linenos="78 "></span><span class="sd">    Example:</span>
-<span class="linenos" data-linenos="79 "></span><span class="sd">        &gt;&gt;&gt; from pathlib import Path</span>
-<span class="linenos" data-linenos="80 "></span><span class="sd">        &gt;&gt;&gt; files = find_project_files(</span>
-<span class="linenos" data-linenos="81 "></span><span class="sd">        ...     Path(&#39;.&#39;),</span>
-<span class="linenos" data-linenos="82 "></span><span class="sd">        ...     ignore_patterns=[&#39;*.pyc&#39;, &#39;__pycache__/*&#39;, &#39;.git/*&#39;]</span>
-<span class="linenos" data-linenos="83 "></span><span class="sd">        ... )</span>
-<span class="linenos" data-linenos="84 "></span>
-<span class="linenos" data-linenos="85 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="86 "></span>    <span class="n">file_paths</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos" data-linenos="87 "></span>    <span class="n">rel_filepaths</span> <span class="o">=</span> <span class="n">_get_all_files</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="n">path_project</span><span class="p">)</span>
-<span class="linenos" data-linenos="88 "></span>    <span class="n">filtered_rel_files</span> <span class="o">=</span> <span class="n">_filter_files</span><span class="p">(</span><span class="n">rel_filepaths</span><span class="o">=</span><span class="n">rel_filepaths</span><span class="p">,</span> <span class="n">ignore_patterns</span><span class="o">=</span><span class="n">ignore_patterns</span><span class="p">)</span>
-<span class="linenos" data-linenos="89 "></span>    <span class="k">for</span> <span class="n">rel_file</span> <span class="ow">in</span> <span class="n">filtered_rel_files</span><span class="p">:</span>
-<span class="linenos" data-linenos="90 "></span>        <span class="n">path_file</span> <span class="o">=</span> <span class="n">path_project</span> <span class="o">/</span> <span class="n">rel_file</span>
-<span class="linenos" data-linenos="91 "></span>        <span class="k">if</span> <span class="n">path_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<span class="linenos" data-linenos="92 "></span>            <span class="n">file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="93 "></span>        <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-<span class="linenos" data-linenos="94 "></span>            <span class="n">LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Could not find the specified file&#39;</span><span class="p">,</span> <span class="n">path_file</span><span class="o">=</span><span class="n">path_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="95 "></span>    <span class="k">return</span> <span class="n">file_paths</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="112 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_project_files</span><span class="p">(</span><span class="n">path_project</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">ignore_patterns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<span class="linenos" data-linenos="113 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find project files in git version control or via filesystem walk.</span>
+<span class="linenos" data-linenos="114 "></span>
+<span class="linenos" data-linenos="115 "></span><span class="sd">    Note: Uses git ls-files and verifies that each file exists.</span>
+<span class="linenos" data-linenos="116 "></span><span class="sd">    Falls back to recursive filesystem walk when git is unavailable.</span>
+<span class="linenos" data-linenos="117 "></span>
+<span class="linenos" data-linenos="118 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="119 "></span><span class="sd">        path_project: Path to the project directory</span>
+<span class="linenos" data-linenos="120 "></span><span class="sd">        ignore_patterns: Glob ignore patterns</span>
+<span class="linenos" data-linenos="121 "></span>
+<span class="linenos" data-linenos="122 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="123 "></span><span class="sd">        List of Path objects for all tracked, non-ignored files</span>
+<span class="linenos" data-linenos="124 "></span>
+<span class="linenos" data-linenos="125 "></span><span class="sd">    Example:</span>
+<span class="linenos" data-linenos="126 "></span><span class="sd">        &gt;&gt;&gt; from pathlib import Path</span>
+<span class="linenos" data-linenos="127 "></span><span class="sd">        &gt;&gt;&gt; files = find_project_files(</span>
+<span class="linenos" data-linenos="128 "></span><span class="sd">        ...     Path(&#39;.&#39;),</span>
+<span class="linenos" data-linenos="129 "></span><span class="sd">        ...     ignore_patterns=[&#39;*.pyc&#39;, &#39;__pycache__/*&#39;, &#39;.git/*&#39;]</span>
+<span class="linenos" data-linenos="130 "></span><span class="sd">        ... )</span>
+<span class="linenos" data-linenos="131 "></span>
+<span class="linenos" data-linenos="132 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="133 "></span>    <span class="n">file_paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="134 "></span>    <span class="n">rel_filepaths</span><span class="p">,</span> <span class="n">used_git</span> <span class="o">=</span> <span class="n">_get_all_files</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="n">path_project</span><span class="p">)</span>
+<span class="linenos" data-linenos="135 "></span>
+<span class="linenos" data-linenos="136 "></span>    <span class="n">effective_patterns</span> <span class="o">=</span> <span class="n">ignore_patterns</span>
+<span class="linenos" data-linenos="137 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">used_git</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ignore_patterns</span><span class="p">:</span>
+<span class="linenos" data-linenos="138 "></span>        <span class="n">effective_patterns</span> <span class="o">=</span> <span class="n">_get_default_ignore_patterns</span><span class="p">()</span>
+<span class="linenos" data-linenos="139 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="linenos" data-linenos="140 "></span>            <span class="s1">&#39;Using default ignore patterns for filesystem walk. Specify --ignore-patterns to customize.&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="141 "></span>            <span class="n">pattern_count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">effective_patterns</span><span class="p">),</span>
+<span class="linenos" data-linenos="142 "></span>        <span class="p">)</span>
+<span class="linenos" data-linenos="143 "></span>
+<span class="linenos" data-linenos="144 "></span>    <span class="n">filtered_rel_files</span> <span class="o">=</span> <span class="n">_filter_files</span><span class="p">(</span>
+<span class="linenos" data-linenos="145 "></span>        <span class="n">rel_filepaths</span><span class="o">=</span><span class="n">rel_filepaths</span><span class="p">,</span>
+<span class="linenos" data-linenos="146 "></span>        <span class="n">ignore_patterns</span><span class="o">=</span><span class="n">effective_patterns</span><span class="p">,</span>
+<span class="linenos" data-linenos="147 "></span>    <span class="p">)</span>
+<span class="linenos" data-linenos="148 "></span>    <span class="k">for</span> <span class="n">rel_file</span> <span class="ow">in</span> <span class="n">filtered_rel_files</span><span class="p">:</span>
+<span class="linenos" data-linenos="149 "></span>        <span class="n">path_file</span> <span class="o">=</span> <span class="n">path_project</span> <span class="o">/</span> <span class="n">rel_file</span>
+<span class="linenos" data-linenos="150 "></span>        <span class="k">if</span> <span class="n">path_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+<span class="linenos" data-linenos="151 "></span>            <span class="n">file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="152 "></span>        <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="linenos" data-linenos="153 "></span>            <span class="n">LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Could not find the specified file&#39;</span><span class="p">,</span> <span class="n">path_file</span><span class="o">=</span><span class="n">path_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="154 "></span>    <span class="k">return</span> <span class="n">file_paths</span>
 </code></pre></div>
             </details>
     </div>
@@ -1288,7 +1300,7 @@ files = find_project_files(
 
         <p>Find project files in git version control grouped by file extension.</p>
 <p>Note: Uses git ls-files and verifies that each file exists.
-Requires git to be installed and the directory to be a git repository.</p>
+Falls back to recursive filesystem walk when git is unavailable.</p>
 
 
 <table>
@@ -1394,38 +1406,38 @@ md_files = files_by_ext.get(&lsquo;md&rsquo;, [])</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_search.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 98 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_project_files_by_suffix</span><span class="p">(</span>
-<span class="linenos" data-linenos=" 99 "></span>    <span class="n">path_project</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
-<span class="linenos" data-linenos="100 "></span>    <span class="o">*</span><span class="p">,</span>
-<span class="linenos" data-linenos="101 "></span>    <span class="n">ignore_patterns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="linenos" data-linenos="102 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]:</span>
-<span class="linenos" data-linenos="103 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find project files in git version control grouped by file extension.</span>
-<span class="linenos" data-linenos="104 "></span>
-<span class="linenos" data-linenos="105 "></span><span class="sd">    Note: Uses git ls-files and verifies that each file exists.</span>
-<span class="linenos" data-linenos="106 "></span><span class="sd">    Requires git to be installed and the directory to be a git repository.</span>
-<span class="linenos" data-linenos="107 "></span>
-<span class="linenos" data-linenos="108 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="109 "></span><span class="sd">        path_project: Path to the project directory</span>
-<span class="linenos" data-linenos="110 "></span><span class="sd">        ignore_patterns: Glob ignore patterns (optional)</span>
-<span class="linenos" data-linenos="111 "></span>
-<span class="linenos" data-linenos="112 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="113 "></span><span class="sd">        Dictionary where keys are file extensions (without leading dot) and</span>
-<span class="linenos" data-linenos="114 "></span><span class="sd">        values are lists of Path objects with that extension</span>
-<span class="linenos" data-linenos="115 "></span>
-<span class="linenos" data-linenos="116 "></span><span class="sd">    Example:</span>
-<span class="linenos" data-linenos="117 "></span><span class="sd">        &gt;&gt;&gt; from pathlib import Path</span>
-<span class="linenos" data-linenos="118 "></span><span class="sd">        &gt;&gt;&gt; files_by_ext = find_project_files_by_suffix(</span>
-<span class="linenos" data-linenos="119 "></span><span class="sd">        ...     Path(&#39;.&#39;),</span>
-<span class="linenos" data-linenos="120 "></span><span class="sd">        ...     ignore_patterns=[&#39;*.pyc&#39;, &#39;__pycache__/*&#39;]</span>
-<span class="linenos" data-linenos="121 "></span><span class="sd">        ... )</span>
-<span class="linenos" data-linenos="122 "></span><span class="sd">        &gt;&gt;&gt; py_files = files_by_ext.get(&#39;py&#39;, [])</span>
-<span class="linenos" data-linenos="123 "></span><span class="sd">        &gt;&gt;&gt; md_files = files_by_ext.get(&#39;md&#39;, [])</span>
-<span class="linenos" data-linenos="124 "></span>
-<span class="linenos" data-linenos="125 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="126 "></span>    <span class="n">file_lookup</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="linenos" data-linenos="127 "></span>    <span class="k">for</span> <span class="n">path_file</span> <span class="ow">in</span> <span class="n">find_project_files</span><span class="p">(</span><span class="n">path_project</span><span class="p">,</span> <span class="n">ignore_patterns</span> <span class="ow">or</span> <span class="p">[]):</span>
-<span class="linenos" data-linenos="128 "></span>        <span class="n">file_lookup</span><span class="p">[</span><span class="n">path_file</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="129 "></span>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">file_lookup</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="157 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_project_files_by_suffix</span><span class="p">(</span>
+<span class="linenos" data-linenos="158 "></span>    <span class="n">path_project</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+<span class="linenos" data-linenos="159 "></span>    <span class="o">*</span><span class="p">,</span>
+<span class="linenos" data-linenos="160 "></span>    <span class="n">ignore_patterns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos" data-linenos="161 "></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]:</span>
+<span class="linenos" data-linenos="162 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find project files in git version control grouped by file extension.</span>
+<span class="linenos" data-linenos="163 "></span>
+<span class="linenos" data-linenos="164 "></span><span class="sd">    Note: Uses git ls-files and verifies that each file exists.</span>
+<span class="linenos" data-linenos="165 "></span><span class="sd">    Falls back to recursive filesystem walk when git is unavailable.</span>
+<span class="linenos" data-linenos="166 "></span>
+<span class="linenos" data-linenos="167 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="168 "></span><span class="sd">        path_project: Path to the project directory</span>
+<span class="linenos" data-linenos="169 "></span><span class="sd">        ignore_patterns: Glob ignore patterns (optional)</span>
+<span class="linenos" data-linenos="170 "></span>
+<span class="linenos" data-linenos="171 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="172 "></span><span class="sd">        Dictionary where keys are file extensions (without leading dot) and</span>
+<span class="linenos" data-linenos="173 "></span><span class="sd">        values are lists of Path objects with that extension</span>
+<span class="linenos" data-linenos="174 "></span>
+<span class="linenos" data-linenos="175 "></span><span class="sd">    Example:</span>
+<span class="linenos" data-linenos="176 "></span><span class="sd">        &gt;&gt;&gt; from pathlib import Path</span>
+<span class="linenos" data-linenos="177 "></span><span class="sd">        &gt;&gt;&gt; files_by_ext = find_project_files_by_suffix(</span>
+<span class="linenos" data-linenos="178 "></span><span class="sd">        ...     Path(&#39;.&#39;),</span>
+<span class="linenos" data-linenos="179 "></span><span class="sd">        ...     ignore_patterns=[&#39;*.pyc&#39;, &#39;__pycache__/*&#39;]</span>
+<span class="linenos" data-linenos="180 "></span><span class="sd">        ... )</span>
+<span class="linenos" data-linenos="181 "></span><span class="sd">        &gt;&gt;&gt; py_files = files_by_ext.get(&#39;py&#39;, [])</span>
+<span class="linenos" data-linenos="182 "></span><span class="sd">        &gt;&gt;&gt; md_files = files_by_ext.get(&#39;md&#39;, [])</span>
+<span class="linenos" data-linenos="183 "></span>
+<span class="linenos" data-linenos="184 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="185 "></span>    <span class="n">file_lookup</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="linenos" data-linenos="186 "></span>    <span class="k">for</span> <span class="n">path_file</span> <span class="ow">in</span> <span class="n">find_project_files</span><span class="p">(</span><span class="n">path_project</span><span class="p">,</span> <span class="n">ignore_patterns</span> <span class="ow">or</span> <span class="p">[]):</span>
+<span class="linenos" data-linenos="187 "></span>        <span class="n">file_lookup</span><span class="p">[</span><span class="n">path_file</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="188 "></span>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">file_lookup</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
