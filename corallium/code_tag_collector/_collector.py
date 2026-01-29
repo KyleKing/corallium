@@ -13,7 +13,7 @@ from subprocess import CalledProcessError  # nosec
 import arrow
 from beartype.typing import Dict, List, Pattern, Sequence, Tuple
 
-from corallium.file_helpers import read_lines
+from corallium.file_helpers import find_repo_root, read_lines
 from corallium.log import LOGGER
 from corallium.markup_table import format_table
 from corallium.shell import capture_shell
@@ -153,7 +153,8 @@ def _git_info(cwd: Path) -> Tuple[Path, str]:
         cwd: Path to the current working directory (typically file_path.parent)
 
     Returns:
-        tuple of (git_dir, repo_url). Returns (cwd, '') if git unavailable.
+        tuple of (git_dir, repo_url). Falls back to find_repo_root() for jj repos,
+        then to cwd if no VCS found.
 
     """
     with suppress(CalledProcessError):
@@ -162,6 +163,9 @@ def _git_info(cwd: Path) -> Tuple[Path, str]:
         with suppress(CalledProcessError):
             clone_uri = capture_shell('git remote get-url origin', cwd=cwd)
         return git_dir, github_blame_url(clone_uri)
+
+    if repo_root := find_repo_root(cwd):
+        return repo_root, ''
 
     return cwd, ''
 

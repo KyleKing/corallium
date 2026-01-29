@@ -1,5 +1,11 @@
 ## Unreleased
 
+### Feat
+
+- integrate find repo root from calcipy
+- rewrite calcipy skip tags to corallium
+- merge improvements from calcipy
+
 ### Refactor
 
 - merge calcipy improvements into corallium

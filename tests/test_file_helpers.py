@@ -10,6 +10,7 @@ from corallium.file_helpers import (
     _parse_tool_versions,
     delete_dir,
     ensure_dir,
+    find_repo_root,
     get_tool_versions,
     if_found_unlink,
     read_lines,
@@ -140,3 +141,40 @@ def test_get_tool_versions_raises_when_no_file(tmp_path):
     isolated_dir.mkdir()
     with pytest.raises(FileNotFoundError):
         get_tool_versions(cwd=isolated_dir)
+
+
+def test_find_repo_root_git(tmp_path):
+    repo_dir = tmp_path / 'project'
+    repo_dir.mkdir()
+    (repo_dir / '.git').mkdir()
+
+    assert find_repo_root(repo_dir) == repo_dir
+
+
+def test_find_repo_root_jj(tmp_path):
+    repo_dir = tmp_path / 'project'
+    repo_dir.mkdir()
+    (repo_dir / '.jj').mkdir()
+
+    assert find_repo_root(repo_dir) == repo_dir
+
+
+def test_find_repo_root_from_nested_subdirectory(tmp_path):
+    repo_dir = tmp_path / 'project'
+    repo_dir.mkdir()
+    nested = repo_dir / 'src' / 'pkg'
+    nested.mkdir(parents=True)
+
+    (repo_dir / '.git').mkdir()
+    assert find_repo_root(nested) == repo_dir
+
+    (repo_dir / '.git').rmdir()
+    (repo_dir / '.jj').mkdir()
+    assert find_repo_root(nested) == repo_dir
+
+
+def test_find_repo_root_returns_none_outside_repo(tmp_path):
+    isolated = tmp_path / 'no_repo'
+    isolated.mkdir()
+
+    assert find_repo_root(isolated) is None

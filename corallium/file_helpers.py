@@ -127,6 +127,28 @@ def find_in_parents(*, name: str, cwd: Path | None = None) -> Path:
     return start_path
 
 
+_VCS_DIRS = ('.git', '.jj')
+"""Version control system directory markers."""
+
+
+def find_repo_root(start_path: Path | None = None) -> Path | None:
+    """Find the repository root by searching for .git or .jj directory.
+
+    Args:
+        start_path: Path to start searching from. Defaults to current working directory.
+
+    Returns:
+        Path to the repository root, or None if not found
+
+    """
+    current = (start_path or Path.cwd()).resolve()
+    while current != current.parent:
+        if any((current / vcs).is_dir() for vcs in _VCS_DIRS):
+            return current
+        current = current.parent
+    return None
+
+
 def _parse_mise_lock(lock_path: Path) -> dict[str, list[str]]:
     content = lock_path.read_bytes()
     data = tomllib.loads(content.decode('utf-8'))

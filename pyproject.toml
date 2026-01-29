@@ -58,6 +58,9 @@ version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
 check_untyped_defs = true
 disallow_any_generics = true
 enable_error_code = ["ignore-without-code", "possibly-undefined", "redundant-expr", "truthy-bool"]
+exclude = [
+  '^tests/_tmp_cache/',
+]
 extra_checks = true
 files = ["corallium", "tests"]
 no_implicit_reexport = true
