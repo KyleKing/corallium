@@ -1,6 +1,7 @@
 """Test file_search."""
 
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -134,6 +135,18 @@ def test_default_ignore_patterns_applied(tmp_path: Path) -> None:
     file_names = [f.name for f in files]
     assert 'source.py' in file_names
     assert 'cached.pyc' not in file_names
+
+
+def test_get_all_files_jj_fallback(tmp_path: Path) -> None:
+    jj_files = ['src/main.py', 'README.md']
+    with (
+        patch('corallium.file_search.git_ls_files', return_value=None),
+        patch('corallium.file_search.jj_file_list', return_value=jj_files),
+    ):
+        files, used_vcs = _get_all_files(cwd=tmp_path)
+
+    assert used_vcs is True
+    assert files == jj_files
 
 
 @pytest.mark.parametrize(

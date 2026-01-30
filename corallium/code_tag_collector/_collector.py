@@ -14,8 +14,10 @@ from beartype.typing import Dict, List, Pattern, Sequence
 from corallium.file_helpers import read_lines
 from corallium.log import LOGGER
 from corallium.markup_table import format_table
-from corallium.shell import capture_shell
 from corallium.vcs import RepoMetadata, forge_blame_url, get_repo_metadata
+from corallium.vcs._git_commands import git_blame_porcelain
+from corallium.vcs._jj_commands import jj_file_annotate
+from corallium.vcs._types import VcsKind
 
 SKIP_PHRASE = 'corallium_skip_tags'
 """String that indicates the file should be excluded from the tag search.
@@ -142,7 +144,6 @@ def _format_from_blame(
     collector_row: _CollectorRow,
     blame: str,
     metadata: RepoMetadata | None,
-    cwd: Path,
     rel_path: Path,
 ) -> _CollectorRow:
     """Parse the git blame for useful timestamps and author when available.
@@ -152,8 +153,8 @@ def _format_from_blame(
 
     """
     revision, old_line_number = blame.split('\n', maxsplit=1)[0].split(' ')[:2]
-    if all(c_ == '0' for c_ in revision):
-        revision = capture_shell('git branch --show-current', cwd=cwd)
+    if all(c_ == '0' for c_ in revision) and metadata:
+        revision = metadata.branch
     blame_dict = {line.split(' ')[0]: ' '.join(line.split(' ')[1:]) for line in blame.split('\n')}
 
     user = 'committer' if 'committer-tz' in blame_dict else 'author'
@@ -205,20 +206,28 @@ def _format_record(base_dir: Path, file_path: Path, comment: _CodeTag) -> _Colle
         source_file=f'{rel_path.as_posix()}:{comment.lineno}',
     )
 
-    try:
-        blame = capture_shell(f'git blame {file_path} -L {comment.lineno},{comment.lineno} --porcelain', cwd=cwd)
-        collector_row = _format_from_blame(
-            collector_row=collector_row,
-            blame=blame,
-            metadata=metadata,
-            cwd=cwd,
-            rel_path=rel_path,
-        )
-    except CalledProcessError as exc:
-        handled_errors = (128,)
-        if exc.returncode not in handled_errors:
-            raise
-        LOGGER.text_debug('Skipping blame', file_path=file_path, exc=exc)
+    vcs = metadata.vcs if metadata else None
+    match vcs:
+        case VcsKind.JUJUTSU:
+            if annotate := jj_file_annotate(file_path=file_path, line=comment.lineno, cwd=cwd):
+                lines = annotate.splitlines()
+                if comment.lineno <= len(lines):
+                    LOGGER.text_debug('jj annotate line', line=lines[comment.lineno - 1])
+        case _:
+            try:
+                blame = git_blame_porcelain(file_path=file_path, line=comment.lineno, cwd=cwd)
+                if blame:
+                    collector_row = _format_from_blame(
+                        collector_row=collector_row,
+                        blame=blame,
+                        metadata=metadata,
+                        rel_path=rel_path,
+                    )
+            except CalledProcessError as exc:
+                handled_errors = (128,)
+                if exc.returncode not in handled_errors:
+                    raise
+                LOGGER.text_debug('Skipping blame', file_path=file_path, exc=exc)
 
     return collector_row
 

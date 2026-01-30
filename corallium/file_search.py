@@ -10,6 +10,7 @@ from pathlib import Path
 
 from corallium.log import LOGGER
 from corallium.vcs._git_commands import git_ls_files
+from corallium.vcs._jj_commands import jj_file_list
 
 
 def _walk_files(*, cwd: Path) -> list[str]:
@@ -69,7 +70,10 @@ def _get_all_files(*, cwd: Path) -> tuple[list[str], bool]:
     if (files := git_ls_files(cwd=cwd)) is not None:
         return files, True
 
-    LOGGER.debug('Git not available, using filesystem walk', cwd=cwd)
+    if (files := jj_file_list(cwd=cwd)) is not None:
+        return files, True
+
+    LOGGER.debug('VCS not available, using filesystem walk', cwd=cwd)
     return _walk_files(cwd=cwd), False
 
 

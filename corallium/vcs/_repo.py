@@ -11,6 +11,7 @@ from corallium.shell import capture_shell
 
 from ._forge import detect_forge, parse_remote_url
 from ._git_commands import git_show_toplevel
+from ._jj_commands import jj_git_remote_list, jj_root
 from ._types import RepoMetadata, VcsKind
 
 _VCS_MARKERS = {
@@ -45,15 +46,33 @@ def detect_vcs_kind(repo_root: Path) -> VcsKind | None:
     return None
 
 
-def _get_remote_url(*, cwd: Path) -> str:
+def _get_git_remote_url(*, cwd: Path) -> str:
     with suppress(CalledProcessError):
         return capture_shell('git remote get-url origin', cwd=cwd).strip()
     return ''
 
 
-def _get_branch(*, cwd: Path) -> str:
+def _get_git_branch(*, cwd: Path) -> str:
     with suppress(CalledProcessError):
         return capture_shell('git branch --show-current', cwd=cwd).strip()
+    return ''
+
+
+def _get_jj_remote_url(*, cwd: Path) -> str:
+    if raw := jj_git_remote_list(cwd=cwd):
+        for line in raw.splitlines():
+            parts = line.split(maxsplit=1)
+            if len(parts) == 2 and parts[0] == 'origin':  # noqa: PLR2004
+                return parts[1].strip()
+    return ''
+
+
+def _get_jj_bookmark(*, cwd: Path) -> str:
+    with suppress(CalledProcessError):
+        raw = capture_shell('jj bookmark list --pointing-at @-', cwd=cwd)
+        for line in raw.splitlines():
+            if name := line.split(':')[0].strip():
+                return name
     return ''
 
 
@@ -73,15 +92,24 @@ def get_repo_metadata(cwd: Path) -> RepoMetadata | None:
     if git_root := git_show_toplevel(cwd=cwd):
         root = git_root
         vcs = VcsKind.GIT
+    elif jj_repo_root := jj_root(cwd=cwd):
+        root = jj_repo_root
+        vcs = VcsKind.JUJUTSU
     elif repo_root := find_repo_root(cwd):
         root = repo_root
         vcs = detect_vcs_kind(root) or VcsKind.GIT
     else:
         return None
 
-    remote_url = _get_remote_url(cwd=root)
+    match vcs:
+        case VcsKind.JUJUTSU:
+            remote_url = _get_jj_remote_url(cwd=root)
+            branch = _get_jj_bookmark(cwd=root)
+        case _:
+            remote_url = _get_git_remote_url(cwd=root)
+            branch = _get_git_branch(cwd=root)
+
     owner, repo_name = parse_remote_url(remote_url)
-    branch = _get_branch(cwd=root)
     forge = detect_forge(remote_url)
 
     return RepoMetadata(
