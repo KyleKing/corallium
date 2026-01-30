@@ -914,17 +914,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#corallium.file_helpers.find_repo_root" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        find_repo_root
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#corallium.file_helpers.get_lock" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1567,17 +1556,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#corallium.file_helpers.find_repo_root" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        find_repo_root
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#corallium.file_helpers.get_lock" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1980,16 +1958,16 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="401 "></span><span class="k">def</span><span class="w"> </span><span class="nf">delete_dir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="402 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete the specified directory from a doit task.</span>
-<span class="linenos" data-linenos="403 "></span>
-<span class="linenos" data-linenos="404 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="405 "></span><span class="sd">        dir_path: Path to directory to delete</span>
-<span class="linenos" data-linenos="406 "></span>
-<span class="linenos" data-linenos="407 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="408 "></span>    <span class="k">if</span> <span class="n">dir_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-<span class="linenos" data-linenos="409 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Deleting&#39;</span><span class="p">,</span> <span class="n">dir_path</span><span class="o">=</span><span class="n">dir_path</span><span class="p">)</span>
-<span class="linenos" data-linenos="410 "></span>        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="380 "></span><span class="k">def</span><span class="w"> </span><span class="nf">delete_dir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="381 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete the specified directory from a doit task.</span>
+<span class="linenos" data-linenos="382 "></span>
+<span class="linenos" data-linenos="383 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="384 "></span><span class="sd">        dir_path: Path to directory to delete</span>
+<span class="linenos" data-linenos="385 "></span>
+<span class="linenos" data-linenos="386 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="387 "></span>    <span class="k">if</span> <span class="n">dir_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+<span class="linenos" data-linenos="388 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Deleting&#39;</span><span class="p">,</span> <span class="n">dir_path</span><span class="o">=</span><span class="n">dir_path</span><span class="p">)</span>
+<span class="linenos" data-linenos="389 "></span>        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
@@ -2059,22 +2037,22 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="383 "></span><span class="k">def</span><span class="w"> </span><span class="nf">delete_old_files</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ttl_seconds</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="384 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete old files within the specified directory.</span>
-<span class="linenos" data-linenos="385 "></span>
-<span class="linenos" data-linenos="386 "></span><span class="sd">    Skips symlinks to avoid deleting files outside the target directory.</span>
-<span class="linenos" data-linenos="387 "></span>
-<span class="linenos" data-linenos="388 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="389 "></span><span class="sd">        dir_path: Path to directory to delete</span>
-<span class="linenos" data-linenos="390 "></span><span class="sd">        ttl_seconds: if last modified within this number of seconds, will not be deleted</span>
-<span class="linenos" data-linenos="391 "></span>
-<span class="linenos" data-linenos="392 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="393 "></span>    <span class="k">for</span> <span class="n">pth</span> <span class="ow">in</span> <span class="n">dir_path</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">):</span>
-<span class="linenos" data-linenos="394 "></span>        <span class="c1"># Skip symlinks to avoid deleting files outside directory</span>
-<span class="linenos" data-linenos="395 "></span>        <span class="k">if</span> <span class="n">pth</span><span class="o">.</span><span class="n">is_symlink</span><span class="p">():</span>
-<span class="linenos" data-linenos="396 "></span>            <span class="k">continue</span>
-<span class="linenos" data-linenos="397 "></span>        <span class="k">if</span> <span class="n">pth</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pth</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">ttl_seconds</span><span class="p">:</span>
-<span class="linenos" data-linenos="398 "></span>            <span class="n">pth</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="362 "></span><span class="k">def</span><span class="w"> </span><span class="nf">delete_old_files</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ttl_seconds</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="363 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete old files within the specified directory.</span>
+<span class="linenos" data-linenos="364 "></span>
+<span class="linenos" data-linenos="365 "></span><span class="sd">    Skips symlinks to avoid deleting files outside the target directory.</span>
+<span class="linenos" data-linenos="366 "></span>
+<span class="linenos" data-linenos="367 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="368 "></span><span class="sd">        dir_path: Path to directory to delete</span>
+<span class="linenos" data-linenos="369 "></span><span class="sd">        ttl_seconds: if last modified within this number of seconds, will not be deleted</span>
+<span class="linenos" data-linenos="370 "></span>
+<span class="linenos" data-linenos="371 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="372 "></span>    <span class="k">for</span> <span class="n">pth</span> <span class="ow">in</span> <span class="n">dir_path</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="373 "></span>        <span class="c1"># Skip symlinks to avoid deleting files outside directory</span>
+<span class="linenos" data-linenos="374 "></span>        <span class="k">if</span> <span class="n">pth</span><span class="o">.</span><span class="n">is_symlink</span><span class="p">():</span>
+<span class="linenos" data-linenos="375 "></span>            <span class="k">continue</span>
+<span class="linenos" data-linenos="376 "></span>        <span class="k">if</span> <span class="n">pth</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pth</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">ttl_seconds</span><span class="p">:</span>
+<span class="linenos" data-linenos="377 "></span>            <span class="n">pth</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
 </code></pre></div>
             </details>
     </div>
@@ -2127,15 +2105,15 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="413 "></span><span class="k">def</span><span class="w"> </span><span class="nf">ensure_dir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="414 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Make sure that the specified dir_path exists and create any missing folders from a doit task.</span>
-<span class="linenos" data-linenos="415 "></span>
-<span class="linenos" data-linenos="416 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="417 "></span><span class="sd">        dir_path: Path to directory that needs to exists</span>
-<span class="linenos" data-linenos="418 "></span>
-<span class="linenos" data-linenos="419 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="420 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Creating&#39;</span><span class="p">,</span> <span class="n">dir_path</span><span class="o">=</span><span class="n">dir_path</span><span class="p">)</span>
-<span class="linenos" data-linenos="421 "></span>    <span class="n">dir_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="392 "></span><span class="k">def</span><span class="w"> </span><span class="nf">ensure_dir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="393 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Make sure that the specified dir_path exists and create any missing folders from a doit task.</span>
+<span class="linenos" data-linenos="394 "></span>
+<span class="linenos" data-linenos="395 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="396 "></span><span class="sd">        dir_path: Path to directory that needs to exists</span>
+<span class="linenos" data-linenos="397 "></span>
+<span class="linenos" data-linenos="398 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="399 "></span>    <span class="n">LOGGER</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Creating&#39;</span><span class="p">,</span> <span class="n">dir_path</span><span class="o">=</span><span class="n">dir_path</span><span class="p">)</span>
+<span class="linenos" data-linenos="400 "></span>    <span class="n">dir_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
@@ -2184,117 +2162,21 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="113 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_in_parents</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="linenos" data-linenos="114 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return path to specific file by recursively searching in cwd and parents.</span>
-<span class="linenos" data-linenos="115 "></span>
-<span class="linenos" data-linenos="116 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="117 "></span><span class="sd">        FileNotFoundError: if not found</span>
-<span class="linenos" data-linenos="118 "></span>
-<span class="linenos" data-linenos="119 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="120 "></span>    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Could not locate </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> in </span><span class="si">{</span><span class="n">cwd</span><span class="si">}</span><span class="s1"> or in any parent directory&#39;</span>
-<span class="linenos" data-linenos="121 "></span>    <span class="n">start_path</span> <span class="o">=</span> <span class="p">(</span><span class="n">cwd</span> <span class="ow">or</span> <span class="n">Path</span><span class="p">())</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> <span class="o">/</span> <span class="n">name</span>
-<span class="linenos" data-linenos="122 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="123 "></span>        <span class="k">while</span> <span class="ow">not</span> <span class="n">start_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<span class="linenos" data-linenos="124 "></span>            <span class="n">start_path</span> <span class="o">=</span> <span class="n">start_path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span>
-<span class="linenos" data-linenos="125 "></span>    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-<span class="linenos" data-linenos="126 "></span>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
-<span class="linenos" data-linenos="127 "></span>    <span class="k">return</span> <span class="n">start_path</span>
-</code></pre></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="corallium.file_helpers.find_repo_root" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">find_repo_root</span>
-
-
-<a href="#corallium.file_helpers.find_repo_root" class="headerlink" title="Permanent link">⚓︎</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">find_repo_root</span><span class="p">(</span><span class="n">start_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Find the repository root by searching for .git or .jj directory.</p>
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">PARAMETER</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>start_path</code>
-            </td>
-            <td class="doc-param-details">
-              <div class="doc-md-description">
-                <p>Path to start searching from. Defaults to current working directory.</p>
-              </div>
-              <p>
-                  <span class="doc-param-annotation">
-                    <b>TYPE:</b>
-                      <code><span title="pathlib.Path">Path</span> | None</code>
-                  </span>
-                  <span class="doc-param-default">
-                    <b>DEFAULT:</b>
-                      <code>None</code>
-                  </span>
-              </p>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-<table>
-      <thead>
-        <tr>
-          <th><span class="doc-section-title">RETURNS</span></th>
-          <th><span>DESCRIPTION</span></th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <span class="doc-returns-annotation">
-                    <code><span title="pathlib.Path">Path</span> | None</code>
-                </span>
-            </td>
-            <td class="doc-returns-details">
-              <div class="doc-md-description">
-                <p>Path to the repository root, or None if not found</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="134 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_repo_root</span><span class="p">(</span><span class="n">start_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="135 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the repository root by searching for .git or .jj directory.</span>
-<span class="linenos" data-linenos="136 "></span>
-<span class="linenos" data-linenos="137 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="138 "></span><span class="sd">        start_path: Path to start searching from. Defaults to current working directory.</span>
-<span class="linenos" data-linenos="139 "></span>
-<span class="linenos" data-linenos="140 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="141 "></span><span class="sd">        Path to the repository root, or None if not found</span>
-<span class="linenos" data-linenos="142 "></span>
-<span class="linenos" data-linenos="143 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="144 "></span>    <span class="n">current</span> <span class="o">=</span> <span class="p">(</span><span class="n">start_path</span> <span class="ow">or</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">())</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-<span class="linenos" data-linenos="145 "></span>    <span class="k">while</span> <span class="n">current</span> <span class="o">!=</span> <span class="n">current</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
-<span class="linenos" data-linenos="146 "></span>        <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">current</span> <span class="o">/</span> <span class="n">vcs</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="k">for</span> <span class="n">vcs</span> <span class="ow">in</span> <span class="n">_VCS_DIRS</span><span class="p">):</span>
-<span class="linenos" data-linenos="147 "></span>            <span class="k">return</span> <span class="n">current</span>
-<span class="linenos" data-linenos="148 "></span>        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">parent</span>
-<span class="linenos" data-linenos="149 "></span>    <span class="k">return</span> <span class="kc">None</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="114 "></span><span class="k">def</span><span class="w"> </span><span class="nf">find_in_parents</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="linenos" data-linenos="115 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return path to specific file by recursively searching in cwd and parents.</span>
+<span class="linenos" data-linenos="116 "></span>
+<span class="linenos" data-linenos="117 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="118 "></span><span class="sd">        FileNotFoundError: if not found</span>
+<span class="linenos" data-linenos="119 "></span>
+<span class="linenos" data-linenos="120 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="121 "></span>    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Could not locate </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> in </span><span class="si">{</span><span class="n">cwd</span><span class="si">}</span><span class="s1"> or in any parent directory&#39;</span>
+<span class="linenos" data-linenos="122 "></span>    <span class="n">start_path</span> <span class="o">=</span> <span class="p">(</span><span class="n">cwd</span> <span class="ow">or</span> <span class="n">Path</span><span class="p">())</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> <span class="o">/</span> <span class="n">name</span>
+<span class="linenos" data-linenos="123 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="124 "></span>        <span class="k">while</span> <span class="ow">not</span> <span class="n">start_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+<span class="linenos" data-linenos="125 "></span>            <span class="n">start_path</span> <span class="o">=</span> <span class="n">start_path</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span>
+<span class="linenos" data-linenos="126 "></span>    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+<span class="linenos" data-linenos="127 "></span>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+<span class="linenos" data-linenos="128 "></span>    <span class="k">return</span> <span class="n">start_path</span>
 </code></pre></div>
             </details>
     </div>
@@ -2348,20 +2230,20 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="19 "></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos" data-linenos="20 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_lock</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="linenos" data-linenos="21 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return path to dependency manager&#39;s lock file.</span>
-<span class="linenos" data-linenos="22 "></span>
-<span class="linenos" data-linenos="23 "></span><span class="sd">    Supports both uv.lock and poetry.lock files.</span>
-<span class="linenos" data-linenos="24 "></span>
-<span class="linenos" data-linenos="25 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="26 "></span><span class="sd">        FileNotFoundError: if a lock file can&#39;t be located</span>
-<span class="linenos" data-linenos="27 "></span>
-<span class="linenos" data-linenos="28 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="29 "></span>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;uv.lock&#39;</span><span class="p">,</span> <span class="s1">&#39;poetry.lock&#39;</span><span class="p">):</span>
-<span class="linenos" data-linenos="30 "></span>        <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
-<span class="linenos" data-linenos="31 "></span>            <span class="k">return</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-<span class="linenos" data-linenos="32 "></span>    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Could not locate a known lock file type (uv.lock or poetry.lock)&#39;</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="20 "></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos="21 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_lock</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="linenos" data-linenos="22 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return path to dependency manager&#39;s lock file.</span>
+<span class="linenos" data-linenos="23 "></span>
+<span class="linenos" data-linenos="24 "></span><span class="sd">    Supports both uv.lock and poetry.lock files.</span>
+<span class="linenos" data-linenos="25 "></span>
+<span class="linenos" data-linenos="26 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="27 "></span><span class="sd">        FileNotFoundError: if a lock file can&#39;t be located</span>
+<span class="linenos" data-linenos="28 "></span>
+<span class="linenos" data-linenos="29 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="30 "></span>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;uv.lock&#39;</span><span class="p">,</span> <span class="s1">&#39;poetry.lock&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="31 "></span>        <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
+<span class="linenos" data-linenos="32 "></span>            <span class="k">return</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos" data-linenos="33 "></span>    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Could not locate a known lock file type (uv.lock or poetry.lock)&#39;</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
@@ -2454,20 +2336,20 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="424 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_relative</span><span class="p">(</span><span class="n">full_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">other_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="425 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Try to return the relative path between the two paths. None if no match.</span>
-<span class="linenos" data-linenos="426 "></span>
-<span class="linenos" data-linenos="427 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="428 "></span><span class="sd">        full_path: the full path to use</span>
-<span class="linenos" data-linenos="429 "></span><span class="sd">        other_path: the path that the full_path may be relative to</span>
-<span class="linenos" data-linenos="430 "></span>
-<span class="linenos" data-linenos="431 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="432 "></span><span class="sd">        relative path</span>
-<span class="linenos" data-linenos="433 "></span>
-<span class="linenos" data-linenos="434 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="435 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-<span class="linenos" data-linenos="436 "></span>        <span class="k">return</span> <span class="n">full_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">other_path</span><span class="p">)</span>
-<span class="linenos" data-linenos="437 "></span>    <span class="k">return</span> <span class="kc">None</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="403 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_relative</span><span class="p">(</span><span class="n">full_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">other_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="404 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Try to return the relative path between the two paths. None if no match.</span>
+<span class="linenos" data-linenos="405 "></span>
+<span class="linenos" data-linenos="406 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="407 "></span><span class="sd">        full_path: the full path to use</span>
+<span class="linenos" data-linenos="408 "></span><span class="sd">        other_path: the path that the full_path may be relative to</span>
+<span class="linenos" data-linenos="409 "></span>
+<span class="linenos" data-linenos="410 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="411 "></span><span class="sd">        relative path</span>
+<span class="linenos" data-linenos="412 "></span>
+<span class="linenos" data-linenos="413 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="414 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+<span class="linenos" data-linenos="415 "></span>        <span class="k">return</span> <span class="n">full_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">other_path</span><span class="p">)</span>
+<span class="linenos" data-linenos="416 "></span>    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
             </details>
     </div>
@@ -2493,22 +2375,22 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="197 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_tool_versions</span><span class="p">(</span><span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="linenos" data-linenos="198 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return versions from mise.lock, mise.toml, or .tool-versions file.</span>
-<span class="linenos" data-linenos="199 "></span>
-<span class="linenos" data-linenos="200 "></span><span class="sd">    Priority order: mise.lock, mise.toml, .tool-versions (legacy asdf format).</span>
-<span class="linenos" data-linenos="201 "></span>
-<span class="linenos" data-linenos="202 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="203 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
-<span class="linenos" data-linenos="204 "></span>        <span class="n">lock_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mise.lock&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
-<span class="linenos" data-linenos="205 "></span>        <span class="k">return</span> <span class="n">_parse_mise_lock</span><span class="p">(</span><span class="n">lock_path</span><span class="p">)</span>
-<span class="linenos" data-linenos="206 "></span>
-<span class="linenos" data-linenos="207 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
-<span class="linenos" data-linenos="208 "></span>        <span class="n">mise_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mise.toml&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
-<span class="linenos" data-linenos="209 "></span>        <span class="k">return</span> <span class="n">_parse_mise_toml</span><span class="p">(</span><span class="n">mise_path</span><span class="p">)</span>
-<span class="linenos" data-linenos="210 "></span>
-<span class="linenos" data-linenos="211 "></span>    <span class="n">tv_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;.tool-versions&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
-<span class="linenos" data-linenos="212 "></span>    <span class="k">return</span> <span class="n">_parse_tool_versions</span><span class="p">(</span><span class="n">tv_path</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="176 "></span><span class="k">def</span><span class="w"> </span><span class="nf">get_tool_versions</span><span class="p">(</span><span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="linenos" data-linenos="177 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return versions from mise.lock, mise.toml, or .tool-versions file.</span>
+<span class="linenos" data-linenos="178 "></span>
+<span class="linenos" data-linenos="179 "></span><span class="sd">    Priority order: mise.lock, mise.toml, .tool-versions (legacy asdf format).</span>
+<span class="linenos" data-linenos="180 "></span>
+<span class="linenos" data-linenos="181 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="182 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
+<span class="linenos" data-linenos="183 "></span>        <span class="n">lock_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mise.lock&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="184 "></span>        <span class="k">return</span> <span class="n">_parse_mise_lock</span><span class="p">(</span><span class="n">lock_path</span><span class="p">)</span>
+<span class="linenos" data-linenos="185 "></span>
+<span class="linenos" data-linenos="186 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
+<span class="linenos" data-linenos="187 "></span>        <span class="n">mise_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mise.toml&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="188 "></span>        <span class="k">return</span> <span class="n">_parse_mise_toml</span><span class="p">(</span><span class="n">mise_path</span><span class="p">)</span>
+<span class="linenos" data-linenos="189 "></span>
+<span class="linenos" data-linenos="190 "></span>    <span class="n">tv_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;.tool-versions&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="191 "></span>    <span class="k">return</span> <span class="n">_parse_tool_versions</span><span class="p">(</span><span class="n">tv_path</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
@@ -2561,16 +2443,16 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="371 "></span><span class="k">def</span><span class="w"> </span><span class="nf">if_found_unlink</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="372 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove file if it exists. Function is intended to a doit action.</span>
-<span class="linenos" data-linenos="373 "></span>
-<span class="linenos" data-linenos="374 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="375 "></span><span class="sd">        path_file: Path to file to remove</span>
-<span class="linenos" data-linenos="376 "></span>
-<span class="linenos" data-linenos="377 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="378 "></span>    <span class="k">if</span> <span class="n">path_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<span class="linenos" data-linenos="379 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Deleting&#39;</span><span class="p">,</span> <span class="n">path_file</span><span class="o">=</span><span class="n">path_file</span><span class="p">)</span>
-<span class="linenos" data-linenos="380 "></span>        <span class="n">path_file</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="350 "></span><span class="k">def</span><span class="w"> </span><span class="nf">if_found_unlink</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="351 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove file if it exists. Function is intended to a doit action.</span>
+<span class="linenos" data-linenos="352 "></span>
+<span class="linenos" data-linenos="353 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="354 "></span><span class="sd">        path_file: Path to file to remove</span>
+<span class="linenos" data-linenos="355 "></span>
+<span class="linenos" data-linenos="356 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="357 "></span>    <span class="k">if</span> <span class="n">path_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+<span class="linenos" data-linenos="358 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Deleting&#39;</span><span class="p">,</span> <span class="n">path_file</span><span class="o">=</span><span class="n">path_file</span><span class="p">)</span>
+<span class="linenos" data-linenos="359 "></span>        <span class="n">path_file</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
 </code></pre></div>
             </details>
     </div>
@@ -2623,14 +2505,14 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="444 "></span><span class="k">def</span><span class="w"> </span><span class="nf">open_in_browser</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-<span class="linenos" data-linenos="445 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Open the path in the default web browser.</span>
-<span class="linenos" data-linenos="446 "></span>
-<span class="linenos" data-linenos="447 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="448 "></span><span class="sd">        path_file: Path to file</span>
-<span class="linenos" data-linenos="449 "></span>
-<span class="linenos" data-linenos="450 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="451 "></span>    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path_file</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="423 "></span><span class="k">def</span><span class="w"> </span><span class="nf">open_in_browser</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="linenos" data-linenos="424 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Open the path in the default web browser.</span>
+<span class="linenos" data-linenos="425 "></span>
+<span class="linenos" data-linenos="426 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="427 "></span><span class="sd">        path_file: Path to file</span>
+<span class="linenos" data-linenos="428 "></span>
+<span class="linenos" data-linenos="429 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="430 "></span>    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path_file</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">as_uri</span><span class="p">())</span>
 </code></pre></div>
             </details>
     </div>
@@ -2747,19 +2629,19 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="51 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_lines</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos" data-linenos="52 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a file and split on newlines for later parsing.</span>
-<span class="linenos" data-linenos="53 "></span>
-<span class="linenos" data-linenos="54 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="55 "></span><span class="sd">        path_file: path to the file</span>
-<span class="linenos" data-linenos="56 "></span><span class="sd">        encoding: defaults to &#39;utf-8&#39;</span>
-<span class="linenos" data-linenos="57 "></span><span class="sd">        errors: defaults to None. Use &#39;ignore&#39; if needed. Full documentation: https://docs.python.org/3.12/library/functions.html#open</span>
-<span class="linenos" data-linenos="58 "></span>
-<span class="linenos" data-linenos="59 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="60 "></span><span class="sd">        List[str]: lines of text as list</span>
-<span class="linenos" data-linenos="61 "></span>
-<span class="linenos" data-linenos="62 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="63 "></span>    <span class="k">return</span> <span class="n">path_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">path_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="k">else</span> <span class="p">[]</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="52 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_lines</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos" data-linenos="53 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a file and split on newlines for later parsing.</span>
+<span class="linenos" data-linenos="54 "></span>
+<span class="linenos" data-linenos="55 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="56 "></span><span class="sd">        path_file: path to the file</span>
+<span class="linenos" data-linenos="57 "></span><span class="sd">        encoding: defaults to &#39;utf-8&#39;</span>
+<span class="linenos" data-linenos="58 "></span><span class="sd">        errors: defaults to None. Use &#39;ignore&#39; if needed. Full documentation: https://docs.python.org/3.12/library/functions.html#open</span>
+<span class="linenos" data-linenos="59 "></span>
+<span class="linenos" data-linenos="60 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="61 "></span><span class="sd">        List[str]: lines of text as list</span>
+<span class="linenos" data-linenos="62 "></span>
+<span class="linenos" data-linenos="63 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="64 "></span>    <span class="k">return</span> <span class="n">path_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">path_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="k">else</span> <span class="p">[]</span>
 </code></pre></div>
             </details>
     </div>
@@ -2788,13 +2670,13 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="239 "></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-<span class="linenos" data-linenos="240 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_package_name</span><span class="p">(</span><span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="241 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the package name.&quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="242 "></span>    <span class="n">pyproject</span> <span class="o">=</span> <span class="n">read_pyproject</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
-<span class="linenos" data-linenos="243 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
-<span class="linenos" data-linenos="244 "></span>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">pyproject</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>  <span class="c1"># For uv</span>
-<span class="linenos" data-linenos="245 "></span>    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">pyproject</span><span class="p">[</span><span class="s1">&#39;tool&#39;</span><span class="p">][</span><span class="s1">&#39;poetry&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="218 "></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="linenos" data-linenos="219 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_package_name</span><span class="p">(</span><span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="220 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the package name.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="221 "></span>    <span class="n">pyproject</span> <span class="o">=</span> <span class="n">read_pyproject</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="222 "></span>    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+<span class="linenos" data-linenos="223 "></span>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">pyproject</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>  <span class="c1"># For uv</span>
+<span class="linenos" data-linenos="224 "></span>    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">pyproject</span><span class="p">[</span><span class="s1">&#39;tool&#39;</span><span class="p">][</span><span class="s1">&#39;poetry&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
 </code></pre></div>
             </details>
     </div>
@@ -2848,28 +2730,28 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="215 "></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-<span class="linenos" data-linenos="216 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_pyproject</span><span class="p">(</span><span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="linenos" data-linenos="217 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the &#39;pyproject.toml&#39; file contents.</span>
-<span class="linenos" data-linenos="218 "></span>
-<span class="linenos" data-linenos="219 "></span><span class="sd">    Cached with maxsize=128 to support multi-project workflows.</span>
-<span class="linenos" data-linenos="220 "></span>
-<span class="linenos" data-linenos="221 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="222 "></span><span class="sd">        FileNotFoundError: if not found or cannot be read</span>
-<span class="linenos" data-linenos="223 "></span>
-<span class="linenos" data-linenos="224 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="225 "></span>    <span class="n">toml_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pyproject.toml&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
-<span class="linenos" data-linenos="226 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="227 "></span>        <span class="n">pyproject_txt</span> <span class="o">=</span> <span class="n">toml_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="228 "></span>    <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="linenos" data-linenos="229 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Could not read pyproject.toml at: </span><span class="si">{</span><span class="n">toml_path</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="linenos" data-linenos="230 "></span>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
-<span class="linenos" data-linenos="231 "></span>
-<span class="linenos" data-linenos="232 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="233 "></span>        <span class="k">return</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pyproject_txt</span><span class="p">)</span>
-<span class="linenos" data-linenos="234 "></span>    <span class="k">except</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">TOMLDecodeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="linenos" data-linenos="235 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Invalid TOML in pyproject.toml at: </span><span class="si">{</span><span class="n">toml_path</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="linenos" data-linenos="236 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="194 "></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="linenos" data-linenos="195 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_pyproject</span><span class="p">(</span><span class="n">cwd</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="196 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the &#39;pyproject.toml&#39; file contents.</span>
+<span class="linenos" data-linenos="197 "></span>
+<span class="linenos" data-linenos="198 "></span><span class="sd">    Cached with maxsize=128 to support multi-project workflows.</span>
+<span class="linenos" data-linenos="199 "></span>
+<span class="linenos" data-linenos="200 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="201 "></span><span class="sd">        FileNotFoundError: if not found or cannot be read</span>
+<span class="linenos" data-linenos="202 "></span>
+<span class="linenos" data-linenos="203 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="204 "></span>    <span class="n">toml_path</span> <span class="o">=</span> <span class="n">find_in_parents</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pyproject.toml&#39;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">)</span>
+<span class="linenos" data-linenos="205 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="206 "></span>        <span class="n">pyproject_txt</span> <span class="o">=</span> <span class="n">toml_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="207 "></span>    <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">UnicodeDecodeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos" data-linenos="208 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Could not read pyproject.toml at: </span><span class="si">{</span><span class="n">toml_path</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos" data-linenos="209 "></span>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+<span class="linenos" data-linenos="210 "></span>
+<span class="linenos" data-linenos="211 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="212 "></span>        <span class="k">return</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pyproject_txt</span><span class="p">)</span>
+<span class="linenos" data-linenos="213 "></span>    <span class="k">except</span> <span class="n">tomllib</span><span class="o">.</span><span class="n">TOMLDecodeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos" data-linenos="214 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Invalid TOML in pyproject.toml at: </span><span class="si">{</span><span class="n">toml_path</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos" data-linenos="215 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 </code></pre></div>
             </details>
     </div>
@@ -2973,39 +2855,39 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="248 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_yaml_file</span><span class="p">(</span><span class="n">path_yaml</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="linenos" data-linenos="249 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Attempt to read the specified yaml file. Returns an empty dictionary if not found or a parser error occurs.</span>
-<span class="linenos" data-linenos="250 "></span>
-<span class="linenos" data-linenos="251 "></span><span class="sd">    &gt; Note: suppresses all tags in the YAML file</span>
-<span class="linenos" data-linenos="252 "></span>
-<span class="linenos" data-linenos="253 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="254 "></span><span class="sd">        path_yaml: path to the yaml file</span>
-<span class="linenos" data-linenos="255 "></span>
-<span class="linenos" data-linenos="256 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="257 "></span><span class="sd">        dictionary representation of the source file</span>
-<span class="linenos" data-linenos="258 "></span>
-<span class="linenos" data-linenos="259 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="260 "></span><span class="sd">        RuntimeError: when yaml dependency is missing</span>
-<span class="linenos" data-linenos="261 "></span>
-<span class="linenos" data-linenos="262 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="263 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="264 "></span>        <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>  <span class="c1"># noqa: PLC0415 # lazy-load the optional dependency</span>
-<span class="linenos" data-linenos="265 "></span>    <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="linenos" data-linenos="266 "></span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The &#39;calcipy[docs]&#39; extras are missing&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
-<span class="linenos" data-linenos="267 "></span>
-<span class="linenos" data-linenos="268 "></span>    <span class="c1"># Based on: https://github.com/yaml/pyyaml/issues/86#issuecomment-380252434</span>
-<span class="linenos" data-linenos="269 "></span>    <span class="c1"># Use safe_load with custom constructors to suppress tags</span>
-<span class="linenos" data-linenos="270 "></span>    <span class="n">yaml</span><span class="o">.</span><span class="n">add_multi_constructor</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_loader</span><span class="p">,</span> <span class="n">_suffix</span><span class="p">,</span> <span class="n">_node</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
-<span class="linenos" data-linenos="271 "></span>    <span class="n">yaml</span><span class="o">.</span><span class="n">add_multi_constructor</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_loader</span><span class="p">,</span> <span class="n">_suffix</span><span class="p">,</span> <span class="n">_node</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
-<span class="linenos" data-linenos="272 "></span>    <span class="n">yaml</span><span class="o">.</span><span class="n">add_multi_constructor</span><span class="p">(</span><span class="s1">&#39;!!&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_loader</span><span class="p">,</span> <span class="n">_suffix</span><span class="p">,</span> <span class="n">_node</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
-<span class="linenos" data-linenos="273 "></span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos" data-linenos="274 "></span>        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">path_yaml</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="linenos" data-linenos="275 "></span>    <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-<span class="linenos" data-linenos="276 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Unexpected read error&#39;</span><span class="p">,</span> <span class="n">path_yaml</span><span class="o">=</span><span class="n">path_yaml</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
-<span class="linenos" data-linenos="277 "></span>        <span class="k">return</span> <span class="p">{}</span>
-<span class="linenos" data-linenos="278 "></span>    <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">constructor</span><span class="o">.</span><span class="n">ConstructorError</span><span class="p">:</span>
-<span class="linenos" data-linenos="279 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Warning: burying poorly handled yaml error&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="280 "></span>        <span class="k">return</span> <span class="p">{}</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="227 "></span><span class="k">def</span><span class="w"> </span><span class="nf">read_yaml_file</span><span class="p">(</span><span class="n">path_yaml</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos" data-linenos="228 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Attempt to read the specified yaml file. Returns an empty dictionary if not found or a parser error occurs.</span>
+<span class="linenos" data-linenos="229 "></span>
+<span class="linenos" data-linenos="230 "></span><span class="sd">    &gt; Note: suppresses all tags in the YAML file</span>
+<span class="linenos" data-linenos="231 "></span>
+<span class="linenos" data-linenos="232 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="233 "></span><span class="sd">        path_yaml: path to the yaml file</span>
+<span class="linenos" data-linenos="234 "></span>
+<span class="linenos" data-linenos="235 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="236 "></span><span class="sd">        dictionary representation of the source file</span>
+<span class="linenos" data-linenos="237 "></span>
+<span class="linenos" data-linenos="238 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="239 "></span><span class="sd">        RuntimeError: when yaml dependency is missing</span>
+<span class="linenos" data-linenos="240 "></span>
+<span class="linenos" data-linenos="241 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="242 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="243 "></span>        <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>  <span class="c1"># noqa: PLC0415 # lazy-load the optional dependency</span>
+<span class="linenos" data-linenos="244 "></span>    <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos" data-linenos="245 "></span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The &#39;calcipy[docs]&#39; extras are missing&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+<span class="linenos" data-linenos="246 "></span>
+<span class="linenos" data-linenos="247 "></span>    <span class="c1"># Based on: https://github.com/yaml/pyyaml/issues/86#issuecomment-380252434</span>
+<span class="linenos" data-linenos="248 "></span>    <span class="c1"># Use safe_load with custom constructors to suppress tags</span>
+<span class="linenos" data-linenos="249 "></span>    <span class="n">yaml</span><span class="o">.</span><span class="n">add_multi_constructor</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_loader</span><span class="p">,</span> <span class="n">_suffix</span><span class="p">,</span> <span class="n">_node</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
+<span class="linenos" data-linenos="250 "></span>    <span class="n">yaml</span><span class="o">.</span><span class="n">add_multi_constructor</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_loader</span><span class="p">,</span> <span class="n">_suffix</span><span class="p">,</span> <span class="n">_node</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
+<span class="linenos" data-linenos="251 "></span>    <span class="n">yaml</span><span class="o">.</span><span class="n">add_multi_constructor</span><span class="p">(</span><span class="s1">&#39;!!&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_loader</span><span class="p">,</span> <span class="n">_suffix</span><span class="p">,</span> <span class="n">_node</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
+<span class="linenos" data-linenos="252 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="253 "></span>        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">path_yaml</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="linenos" data-linenos="254 "></span>    <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="linenos" data-linenos="255 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Unexpected read error&#39;</span><span class="p">,</span> <span class="n">path_yaml</span><span class="o">=</span><span class="n">path_yaml</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+<span class="linenos" data-linenos="256 "></span>        <span class="k">return</span> <span class="p">{}</span>
+<span class="linenos" data-linenos="257 "></span>    <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">constructor</span><span class="o">.</span><span class="n">ConstructorError</span><span class="p">:</span>
+<span class="linenos" data-linenos="258 "></span>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Warning: burying poorly handled yaml error&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="259 "></span>        <span class="k">return</span> <span class="p">{}</span>
 </code></pre></div>
             </details>
     </div>
@@ -3156,37 +3038,37 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="319 "></span><span class="k">def</span><span class="w"> </span><span class="nf">sanitize_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repl_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">allowed_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">ALLOWED_CHARS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="linenos" data-linenos="320 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace all characters not in the `allow_chars` with `repl_char`.</span>
-<span class="linenos" data-linenos="321 "></span>
-<span class="linenos" data-linenos="322 "></span><span class="sd">    Handles empty strings, path separators, and Windows reserved names.</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="298 "></span><span class="k">def</span><span class="w"> </span><span class="nf">sanitize_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repl_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">allowed_chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">ALLOWED_CHARS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="299 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace all characters not in the `allow_chars` with `repl_char`.</span>
+<span class="linenos" data-linenos="300 "></span>
+<span class="linenos" data-linenos="301 "></span><span class="sd">    Handles empty strings, path separators, and Windows reserved names.</span>
+<span class="linenos" data-linenos="302 "></span>
+<span class="linenos" data-linenos="303 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos="304 "></span><span class="sd">        filename: string filename (stem and suffix only, not a full path)</span>
+<span class="linenos" data-linenos="305 "></span><span class="sd">        repl_char: replacement character. Default is `_`</span>
+<span class="linenos" data-linenos="306 "></span><span class="sd">        allowed_chars: all allowed characters. Default is `ALLOWED_CHARS`</span>
+<span class="linenos" data-linenos="307 "></span>
+<span class="linenos" data-linenos="308 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos="309 "></span><span class="sd">        str: sanitized filename</span>
+<span class="linenos" data-linenos="310 "></span>
+<span class="linenos" data-linenos="311 "></span><span class="sd">    Raises:</span>
+<span class="linenos" data-linenos="312 "></span><span class="sd">        ValueError: if filename is empty or becomes empty after sanitization</span>
+<span class="linenos" data-linenos="313 "></span>
+<span class="linenos" data-linenos="314 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="315 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
+<span class="linenos" data-linenos="316 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Filename cannot be empty&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="317 "></span>
+<span class="linenos" data-linenos="318 "></span>    <span class="c1"># Remove path separators first (prevents directory traversal)</span>
+<span class="linenos" data-linenos="319 "></span>    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">repl_char</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">repl_char</span><span class="p">)</span>
+<span class="linenos" data-linenos="320 "></span>
+<span class="linenos" data-linenos="321 "></span>    <span class="c1"># Replace disallowed characters</span>
+<span class="linenos" data-linenos="322 "></span>    <span class="n">sanitized</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">char</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">allowed_chars</span> <span class="k">else</span> <span class="n">repl_char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">)</span>
 <span class="linenos" data-linenos="323 "></span>
-<span class="linenos" data-linenos="324 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos="325 "></span><span class="sd">        filename: string filename (stem and suffix only, not a full path)</span>
-<span class="linenos" data-linenos="326 "></span><span class="sd">        repl_char: replacement character. Default is `_`</span>
-<span class="linenos" data-linenos="327 "></span><span class="sd">        allowed_chars: all allowed characters. Default is `ALLOWED_CHARS`</span>
-<span class="linenos" data-linenos="328 "></span>
-<span class="linenos" data-linenos="329 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos="330 "></span><span class="sd">        str: sanitized filename</span>
-<span class="linenos" data-linenos="331 "></span>
-<span class="linenos" data-linenos="332 "></span><span class="sd">    Raises:</span>
-<span class="linenos" data-linenos="333 "></span><span class="sd">        ValueError: if filename is empty or becomes empty after sanitization</span>
-<span class="linenos" data-linenos="334 "></span>
-<span class="linenos" data-linenos="335 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="336 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
-<span class="linenos" data-linenos="337 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Filename cannot be empty&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="338 "></span>
-<span class="linenos" data-linenos="339 "></span>    <span class="c1"># Remove path separators first (prevents directory traversal)</span>
-<span class="linenos" data-linenos="340 "></span>    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">repl_char</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">repl_char</span><span class="p">)</span>
-<span class="linenos" data-linenos="341 "></span>
-<span class="linenos" data-linenos="342 "></span>    <span class="c1"># Replace disallowed characters</span>
-<span class="linenos" data-linenos="343 "></span>    <span class="n">sanitized</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">char</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">allowed_chars</span> <span class="k">else</span> <span class="n">repl_char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">)</span>
-<span class="linenos" data-linenos="344 "></span>
-<span class="linenos" data-linenos="345 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">sanitized</span><span class="p">:</span>
-<span class="linenos" data-linenos="346 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Filename becomes empty after sanitization: </span><span class="si">{</span><span class="n">filename</span><span class="si">!r}</span><span class="s1">&#39;</span>
-<span class="linenos" data-linenos="347 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="linenos" data-linenos="348 "></span>
-<span class="linenos" data-linenos="349 "></span>    <span class="k">return</span> <span class="n">sanitized</span>
+<span class="linenos" data-linenos="324 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">sanitized</span><span class="p">:</span>
+<span class="linenos" data-linenos="325 "></span>        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Filename becomes empty after sanitization: </span><span class="si">{</span><span class="n">filename</span><span class="si">!r}</span><span class="s1">&#39;</span>
+<span class="linenos" data-linenos="326 "></span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="linenos" data-linenos="327 "></span>
+<span class="linenos" data-linenos="328 "></span>    <span class="k">return</span> <span class="n">sanitized</span>
 </code></pre></div>
             </details>
     </div>
@@ -3280,47 +3162,47 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 66 "></span><span class="k">def</span><span class="w"> </span><span class="nf">tail_lines</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="linenos" data-linenos=" 67 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Tail a file for up to the last count (or full file) lines.</span>
-<span class="linenos" data-linenos=" 68 "></span>
-<span class="linenos" data-linenos=" 69 "></span><span class="sd">    Optimized to read in chunks instead of byte-by-byte for better performance.</span>
-<span class="linenos" data-linenos=" 70 "></span>
-<span class="linenos" data-linenos=" 71 "></span><span class="sd">    Args:</span>
-<span class="linenos" data-linenos=" 72 "></span><span class="sd">        path_file: path to the file</span>
-<span class="linenos" data-linenos=" 73 "></span><span class="sd">        count: maximum number of lines to return</span>
-<span class="linenos" data-linenos=" 74 "></span>
-<span class="linenos" data-linenos=" 75 "></span><span class="sd">    Returns:</span>
-<span class="linenos" data-linenos=" 76 "></span><span class="sd">        List[str]: lines of text as list</span>
-<span class="linenos" data-linenos=" 77 "></span>
-<span class="linenos" data-linenos=" 78 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos=" 79 "></span>    <span class="n">max_chunk_size</span> <span class="o">=</span> <span class="mi">8192</span>  <span class="c1"># 8KB chunks for efficient disk I/O</span>
-<span class="linenos" data-linenos=" 80 "></span>    <span class="k">with</span> <span class="n">path_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_h</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 81 "></span>        <span class="n">file_size</span> <span class="o">=</span> <span class="n">f_h</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_END</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 82 "></span>        <span class="k">if</span> <span class="n">file_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 83 "></span>            <span class="k">return</span> <span class="p">[]</span>
-<span class="linenos" data-linenos=" 84 "></span>
-<span class="linenos" data-linenos=" 85 "></span>        <span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
-<span class="linenos" data-linenos=" 86 "></span>        <span class="n">remaining_bytes</span> <span class="o">=</span> <span class="n">file_size</span>
-<span class="linenos" data-linenos=" 87 "></span>
-<span class="linenos" data-linenos=" 88 "></span>        <span class="k">while</span> <span class="n">remaining_bytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 89 "></span>            <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_chunk_size</span><span class="p">,</span> <span class="n">remaining_bytes</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 90 "></span>            <span class="n">f_h</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">remaining_bytes</span> <span class="o">-</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_SET</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 91 "></span>            <span class="n">chunk</span> <span class="o">=</span> <span class="n">f_h</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 92 "></span>            <span class="n">buffer</span> <span class="o">=</span> <span class="n">chunk</span> <span class="o">+</span> <span class="n">buffer</span>
-<span class="linenos" data-linenos=" 93 "></span>            <span class="n">remaining_bytes</span> <span class="o">-=</span> <span class="n">chunk_size</span>
-<span class="linenos" data-linenos=" 94 "></span>
-<span class="linenos" data-linenos=" 95 "></span>            <span class="c1"># Count newlines in buffer to see if we have enough lines</span>
-<span class="linenos" data-linenos=" 96 "></span>            <span class="n">lines_found</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 97 "></span>            <span class="k">if</span> <span class="n">lines_found</span> <span class="o">&gt;=</span> <span class="n">count</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 98 "></span>                <span class="k">break</span>
-<span class="linenos" data-linenos=" 99 "></span>
-<span class="linenos" data-linenos="100 "></span>        <span class="c1"># Decode and split into lines</span>
-<span class="linenos" data-linenos="101 "></span>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="102 "></span>        <span class="n">all_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">decoded</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
-<span class="linenos" data-linenos="103 "></span>
-<span class="linenos" data-linenos="104 "></span>        <span class="c1"># Return last &#39;count&#39; lines (matching original behavior)</span>
-<span class="linenos" data-linenos="105 "></span>        <span class="c1"># Note: split on &#39;\n&#39; creates an extra empty string if text ends with &#39;\n&#39;</span>
-<span class="linenos" data-linenos="106 "></span>        <span class="k">return</span> <span class="n">all_lines</span><span class="p">[</span><span class="o">-</span><span class="n">count</span><span class="p">:]</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 67 "></span><span class="k">def</span><span class="w"> </span><span class="nf">tail_lines</span><span class="p">(</span><span class="n">path_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos" data-linenos=" 68 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Tail a file for up to the last count (or full file) lines.</span>
+<span class="linenos" data-linenos=" 69 "></span>
+<span class="linenos" data-linenos=" 70 "></span><span class="sd">    Optimized to read in chunks instead of byte-by-byte for better performance.</span>
+<span class="linenos" data-linenos=" 71 "></span>
+<span class="linenos" data-linenos=" 72 "></span><span class="sd">    Args:</span>
+<span class="linenos" data-linenos=" 73 "></span><span class="sd">        path_file: path to the file</span>
+<span class="linenos" data-linenos=" 74 "></span><span class="sd">        count: maximum number of lines to return</span>
+<span class="linenos" data-linenos=" 75 "></span>
+<span class="linenos" data-linenos=" 76 "></span><span class="sd">    Returns:</span>
+<span class="linenos" data-linenos=" 77 "></span><span class="sd">        List[str]: lines of text as list</span>
+<span class="linenos" data-linenos=" 78 "></span>
+<span class="linenos" data-linenos=" 79 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 80 "></span>    <span class="n">max_chunk_size</span> <span class="o">=</span> <span class="mi">8192</span>  <span class="c1"># 8KB chunks for efficient disk I/O</span>
+<span class="linenos" data-linenos=" 81 "></span>    <span class="k">with</span> <span class="n">path_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_h</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 82 "></span>        <span class="n">file_size</span> <span class="o">=</span> <span class="n">f_h</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_END</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 83 "></span>        <span class="k">if</span> <span class="n">file_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 84 "></span>            <span class="k">return</span> <span class="p">[]</span>
+<span class="linenos" data-linenos=" 85 "></span>
+<span class="linenos" data-linenos=" 86 "></span>        <span class="n">buffer</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+<span class="linenos" data-linenos=" 87 "></span>        <span class="n">remaining_bytes</span> <span class="o">=</span> <span class="n">file_size</span>
+<span class="linenos" data-linenos=" 88 "></span>
+<span class="linenos" data-linenos=" 89 "></span>        <span class="k">while</span> <span class="n">remaining_bytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 90 "></span>            <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_chunk_size</span><span class="p">,</span> <span class="n">remaining_bytes</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 91 "></span>            <span class="n">f_h</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">remaining_bytes</span> <span class="o">-</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_SET</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 92 "></span>            <span class="n">chunk</span> <span class="o">=</span> <span class="n">f_h</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 93 "></span>            <span class="n">buffer</span> <span class="o">=</span> <span class="n">chunk</span> <span class="o">+</span> <span class="n">buffer</span>
+<span class="linenos" data-linenos=" 94 "></span>            <span class="n">remaining_bytes</span> <span class="o">-=</span> <span class="n">chunk_size</span>
+<span class="linenos" data-linenos=" 95 "></span>
+<span class="linenos" data-linenos=" 96 "></span>            <span class="c1"># Count newlines in buffer to see if we have enough lines</span>
+<span class="linenos" data-linenos=" 97 "></span>            <span class="n">lines_found</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 98 "></span>            <span class="k">if</span> <span class="n">lines_found</span> <span class="o">&gt;=</span> <span class="n">count</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 99 "></span>                <span class="k">break</span>
+<span class="linenos" data-linenos="100 "></span>
+<span class="linenos" data-linenos="101 "></span>        <span class="c1"># Decode and split into lines</span>
+<span class="linenos" data-linenos="102 "></span>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="103 "></span>        <span class="n">all_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">decoded</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+<span class="linenos" data-linenos="104 "></span>
+<span class="linenos" data-linenos="105 "></span>        <span class="c1"># Return last &#39;count&#39; lines (matching original behavior)</span>
+<span class="linenos" data-linenos="106 "></span>        <span class="c1"># Note: split on &#39;\n&#39; creates an extra empty string if text ends with &#39;\n&#39;</span>
+<span class="linenos" data-linenos="107 "></span>        <span class="k">return</span> <span class="n">all_lines</span><span class="p">[</span><span class="o">-</span><span class="n">count</span><span class="p">:]</span>
 </code></pre></div>
             </details>
     </div>
@@ -3346,19 +3228,19 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>corallium/file_helpers.py</code></summary>
-              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="352 "></span><span class="k">def</span><span class="w"> </span><span class="nf">trim_trailing_whitespace</span><span class="p">(</span><span class="n">pth</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="353 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Trim trailing whitespace from the specified file.</span>
-<span class="linenos" data-linenos="354 "></span>
-<span class="linenos" data-linenos="355 "></span><span class="sd">    Preserves the original line ending style (LF or CRLF).</span>
-<span class="linenos" data-linenos="356 "></span><span class="sd">    &quot;&quot;&quot;</span>
-<span class="linenos" data-linenos="357 "></span>    <span class="n">text</span> <span class="o">=</span> <span class="n">pth</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="linenos" data-linenos="358 "></span>    <span class="c1"># Detect line ending style</span>
-<span class="linenos" data-linenos="359 "></span>    <span class="n">has_crlf</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">text</span>
-<span class="linenos" data-linenos="360 "></span>    <span class="n">line_break</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">has_crlf</span> <span class="k">else</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="linenos" data-linenos="361 "></span>
-<span class="linenos" data-linenos="362 "></span>    <span class="c1"># Strip trailing spaces from each line</span>
-<span class="linenos" data-linenos="363 "></span>    <span class="n">stripped</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">line_break</span><span class="p">)]</span>
-<span class="linenos" data-linenos="364 "></span>    <span class="n">pth</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">line_break</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stripped</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+              <div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="331 "></span><span class="k">def</span><span class="w"> </span><span class="nf">trim_trailing_whitespace</span><span class="p">(</span><span class="n">pth</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="332 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Trim trailing whitespace from the specified file.</span>
+<span class="linenos" data-linenos="333 "></span>
+<span class="linenos" data-linenos="334 "></span><span class="sd">    Preserves the original line ending style (LF or CRLF).</span>
+<span class="linenos" data-linenos="335 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="336 "></span>    <span class="n">text</span> <span class="o">=</span> <span class="n">pth</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="337 "></span>    <span class="c1"># Detect line ending style</span>
+<span class="linenos" data-linenos="338 "></span>    <span class="n">has_crlf</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">text</span>
+<span class="linenos" data-linenos="339 "></span>    <span class="n">line_break</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">has_crlf</span> <span class="k">else</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos" data-linenos="340 "></span>
+<span class="linenos" data-linenos="341 "></span>    <span class="c1"># Strip trailing spaces from each line</span>
+<span class="linenos" data-linenos="342 "></span>    <span class="n">stripped</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">line_break</span><span class="p">)]</span>
+<span class="linenos" data-linenos="343 "></span>    <span class="n">pth</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">line_break</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stripped</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </code></pre></div>
             </details>
     </div>
