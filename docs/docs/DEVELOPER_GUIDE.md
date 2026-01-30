@@ -75,9 +75,9 @@ uv publish
 | `corallium/_runtime_type_check_setup.py`                  | 13         | 0       | 37       | 100.0%   |
 | `corallium/can_skip.py`                                   | 14         | 0       | 0        | 100.0%   |
 | `corallium/code_tag_collector/__init__.py`                | 6          | 3       | 0        | 50.0%    |
-| `corallium/code_tag_collector/_collector.py`              | 140        | 23      | 0        | 81.2%    |
-| `corallium/file_helpers.py`                               | 178        | 42      | 11       | 72.8%    |
-| `corallium/file_search.py`                                | 53         | 2       | 2        | 97.1%    |
+| `corallium/code_tag_collector/_collector.py`              | 133        | 30      | 0        | 73.1%    |
+| `corallium/file_helpers.py`                               | 170        | 42      | 11       | 71.3%    |
+| `corallium/file_search.py`                                | 52         | 2       | 2        | 97.2%    |
 | `corallium/log.py`                                        | 47         | 1       | 0        | 96.1%    |
 | `corallium/loggers/__init__.py`                           | 0          | 0       | 0        | 100.0%   |
 | `corallium/loggers/plain_printer.py`                      | 5          | 0       | 0        | 100.0%   |
@@ -90,7 +90,13 @@ uv publish
 | `corallium/shell.py`                                      | 69         | 13      | 0        | 74.7%    |
 | `corallium/sync_dependencies.py`                          | 155        | 8       | 0        | 90.6%    |
 | `corallium/tomllib.py`                                    | 4          | 0       | 2        | 100.0%   |
-| **Totals**                                                | 859        | 116     | 55       | 83.6%    |
+| `corallium/vcs/__init__.py`                               | 6          | 0       | 0        | 100.0%   |
+| `corallium/vcs/_forge.py`                                 | 50         | 2       | 0        | 94.9%    |
+| `corallium/vcs/_git_commands.py`                          | 20         | 0       | 0        | 100.0%   |
+| `corallium/vcs/_jj_commands.py`                           | 23         | 0       | 0        | 100.0%   |
+| `corallium/vcs/_repo.py`                                  | 67         | 2       | 0        | 94.6%    |
+| `corallium/vcs/_types.py`                                 | 21         | 0       | 0        | 100.0%   |
+| **Totals**                                                | 1030       | 127     | 55       | 84.7%    |
 
-Generated on: 2026-01-28
+Generated on: 2026-01-30
 <!-- {cte} -->

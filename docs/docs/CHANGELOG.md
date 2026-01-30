@@ -2,6 +2,13 @@
 
 ### Feat
 
+- add jj wrappers
+- implement VCS abstraction on git and jj
+
+## 2.3.0rc0 (2026-01-28)
+
+### Feat
+
 - integrate find repo root from calcipy
 - rewrite calcipy skip tags to corallium
 - merge improvements from calcipy
