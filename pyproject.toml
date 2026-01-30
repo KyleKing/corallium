@@ -52,7 +52,7 @@ version = "2.3.0rc1"
 
 [tool.commitizen]
 version = "2.3.0rc1"
-version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
+version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version", "uv.lock:^version"]
 
 [tool.mypy]
 check_untyped_defs = true
@@ -109,6 +109,7 @@ ignore = [
   'FIX002', # Line contains TODO
   'FIX004', # Line contains HACK
   'PLR0913', # Too many arguments in function definition (6 > 5)
+  'RUF067', # `__init__` module should only contain docstrings and re-exports
   'S404', # `subprocess` module is possibly insecure
   'S602', # `subprocess` call with `shell=True` identified, security issue
   'S604', # Function call with `shell=True` parameter identified, security issue

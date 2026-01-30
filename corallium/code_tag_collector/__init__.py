@@ -4,7 +4,7 @@ Migrated from calcipy.code_tag_collector.
 
 """
 
-try:  # noqa: RUF067
+try:
     from ._collector import CODE_TAG_RE, COMMON_CODE_TAGS, SKIP_PHRASE, write_code_tag_file
 except ImportError as exc:
     msg = "The 'arrow' package is required for code_tag_collector. Install with: pip install arrow"

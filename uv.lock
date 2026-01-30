@@ -285,7 +285,7 @@ wheels = [
 
 [[package]]
 name = "corallium"
-version = "2.3.0rc0"
+version = "2.3.0rc1"
 source = { editable = "." }
 dependencies = [
     { name = "beartype" },
