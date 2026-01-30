@@ -9,7 +9,6 @@ from corallium.file_search import (
     _get_all_files,
     _get_default_ignore_patterns,
     _walk_files,
-    _zsplit,
     find_project_files,
     find_project_files_by_suffix,
 )
@@ -17,20 +16,6 @@ from corallium.file_search import (
 from .configuration import TEST_DATA_DIR
 
 SAMPLE_README_DIR = TEST_DATA_DIR / 'sample_doc_files'
-
-
-@pytest.mark.parametrize(
-    ('stdout', 'expected'),
-    [
-        ('a\0b\0c\0', ['a', 'b', 'c']),
-        ('single\0', ['single']),
-        ('', []),
-        ('\0\0', []),
-        ('no-null', ['no-null']),
-    ],
-)
-def test_zsplit_splits_on_null_bytes(stdout: str, expected: list[str]) -> None:
-    assert _zsplit(stdout) == expected
 
 
 def test_filter_files_no_patterns_returns_all() -> None:

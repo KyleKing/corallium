@@ -4,19 +4,18 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
-from contextlib import suppress
 from dataclasses import dataclass
-from functools import lru_cache
 from pathlib import Path
 from subprocess import CalledProcessError  # nosec
 
 import arrow
-from beartype.typing import Dict, List, Pattern, Sequence, Tuple
+from beartype.typing import Dict, List, Pattern, Sequence
 
-from corallium.file_helpers import find_repo_root, read_lines
+from corallium.file_helpers import read_lines
 from corallium.log import LOGGER
 from corallium.markup_table import format_table
 from corallium.shell import capture_shell
+from corallium.vcs import RepoMetadata, forge_blame_url, get_repo_metadata
 
 SKIP_PHRASE = 'corallium_skip_tags'
 """String that indicates the file should be excluded from the tag search.
@@ -119,57 +118,6 @@ def _search_files(paths_source: Sequence[Path], regex_compiled: Pattern[str]) ->
     return matches
 
 
-_GITHUB_ORIGIN = r'^.+github.com[:/](?P<owner>[^/]+)/(?P<repository>[^.]+)(?:\.git)?$'
-"""Match owner and repository from a GitHub git origin URI."""
-
-
-def github_blame_url(clone_uri: str) -> str:
-    """Format the blame URL.
-
-    Args:
-        clone_uri: git remote URI
-
-    Returns:
-       str: `repo_url`
-
-    """
-    # Could be ssh or http (with or without .git)
-    # > git@github.com:KyleKing/calcipy.git
-    # > https://github.com/KyleKing/calcipy.git
-    if matches := re.compile(_GITHUB_ORIGIN).match(clone_uri):
-        github_url = 'https://github.com/'
-        return f'{github_url}{matches["owner"]}/{matches["repository"]}'
-    return ''
-
-
-@lru_cache(maxsize=128)
-def _git_info(cwd: Path) -> Tuple[Path, str]:
-    """Collect information about the local git repository.
-
-    Based on snippets from: https://gist.github.com/abackstrom/4034721#gistcomment-3982270
-    and: https://github.com/rscherf/GitLink/blob/e2e7c412630246efc86de4fe71192f15bf11209e/GitLink.py
-
-    Args:
-        cwd: Path to the current working directory (typically file_path.parent)
-
-    Returns:
-        tuple of (git_dir, repo_url). Falls back to find_repo_root() for jj repos,
-        then to cwd if no VCS found.
-
-    """
-    with suppress(CalledProcessError):
-        git_dir = Path(capture_shell('git rev-parse --show-toplevel', cwd=cwd))
-        clone_uri = ''
-        with suppress(CalledProcessError):
-            clone_uri = capture_shell('git remote get-url origin', cwd=cwd)
-        return git_dir, github_blame_url(clone_uri)
-
-    if repo_root := find_repo_root(cwd):
-        return repo_root, ''
-
-    return cwd, ''
-
-
 @dataclass(frozen=True)
 class _CollectorRow:
     """Each row of the Code Tag table."""
@@ -193,7 +141,7 @@ def _format_from_blame(
     *,
     collector_row: _CollectorRow,
     blame: str,
-    repo_url: str,
+    metadata: RepoMetadata | None,
     cwd: Path,
     rel_path: Path,
 ) -> _CollectorRow:
@@ -203,27 +151,29 @@ def _format_from_blame(
         new _CollectorRow with updated timestamps and source file link.
 
     """
-    # Note: line number may be different in older blame (and relative path)
     revision, old_line_number = blame.split('\n', maxsplit=1)[0].split(' ')[:2]
-    # If the change has not yet been committed, use the branch name as best guess
     if all(c_ == '0' for c_ in revision):
         revision = capture_shell('git branch --show-current', cwd=cwd)
-    # Format a nice timestamp of the last edit to the line
     blame_dict = {line.split(' ')[0]: ' '.join(line.split(' ')[1:]) for line in blame.split('\n')}
 
-    # Handle uncommitted files that only have author-time and author-tz
     user = 'committer' if 'committer-tz' in blame_dict else 'author'
     dt = arrow.get(int(blame_dict[f'{user}-time']))
     tz = blame_dict[f'{user}-tz'][:3] + ':' + blame_dict[f'{user}-tz'][-2:]
     last_edit = arrow.get(dt.isoformat()[:-6] + tz).format('YYYY-MM-DD')
 
     source_file = collector_row.source_file
-    if repo_url:
-        # Filename may not be present if uncommitted. Use local path as fallback
+    if metadata and metadata.owner and metadata.repo_name:
         remote_file_path = blame_dict.get('filename', rel_path.as_posix())
-        # Assumes Github format
-        git_url = f'{repo_url}/blame/{revision}/{remote_file_path}#L{old_line_number}'
-        source_file = f'[{source_file}]({git_url})'
+        git_url = forge_blame_url(
+            forge=metadata.forge,
+            owner=metadata.owner,
+            repo=metadata.repo_name,
+            rev=revision,
+            path=remote_file_path,
+            line=int(old_line_number),
+        )
+        if git_url:
+            source_file = f'[{source_file}]({git_url})'
 
     return _CollectorRow(
         tag_name=collector_row.tag_name,
@@ -246,9 +196,8 @@ def _format_record(base_dir: Path, file_path: Path, comment: _CodeTag) -> _Colle
 
     """
     cwd = file_path.parent
-    _git_dir, repo_url = _git_info(cwd=cwd)
+    metadata = get_repo_metadata(cwd=cwd)
 
-    # Set fallback values if git logic doesn't work
     rel_path = file_path.relative_to(base_dir)
     collector_row = _CollectorRow.from_code_tag(
         code_tag=comment,
@@ -261,7 +210,7 @@ def _format_record(base_dir: Path, file_path: Path, comment: _CodeTag) -> _Colle
         collector_row = _format_from_blame(
             collector_row=collector_row,
             blame=blame,
-            repo_url=repo_url,
+            metadata=metadata,
             cwd=cwd,
             rel_path=rel_path,
         )

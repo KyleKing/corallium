@@ -6,25 +6,10 @@ Migrated from calcipy.file_search for git-based file discovery.
 from __future__ import annotations
 
 from collections import defaultdict
-from contextlib import suppress
 from pathlib import Path
-from subprocess import CalledProcessError
 
 from corallium.log import LOGGER
-from corallium.shell import capture_shell
-
-
-def _zsplit(stdout: str) -> list[str]:
-    """Split output from git when used with `-z`.
-
-    Args:
-        stdout: Output from git command with null-byte separators
-
-    Returns:
-        List of non-empty strings split on null bytes
-
-    """
-    return [item for item in stdout.split('\0') if item]
+from corallium.vcs._git_commands import git_ls_files
 
 
 def _walk_files(*, cwd: Path) -> list[str]:
@@ -81,8 +66,8 @@ def _get_all_files(*, cwd: Path) -> tuple[list[str], bool]:
         Tuple of (file paths, used_git)
 
     """
-    with suppress(CalledProcessError):
-        return _zsplit(capture_shell('git ls-files -z', cwd=cwd)), True
+    if (files := git_ls_files(cwd=cwd)) is not None:
+        return files, True
 
     LOGGER.debug('Git not available, using filesystem walk', cwd=cwd)
     return _walk_files(cwd=cwd), False

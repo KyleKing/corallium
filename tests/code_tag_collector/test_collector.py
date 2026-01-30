@@ -9,24 +9,10 @@ from corallium.code_tag_collector._collector import (
     _format_report,
     _search_lines,
     _Tags,
-    github_blame_url,
 )
 from tests.configuration import TEST_DATA_DIR
 
 TEST_PROJECT = TEST_DATA_DIR / 'test_project'
-
-
-@pytest.mark.parametrize(
-    ('clone_uri', 'expected'),
-    [
-        ('https://github.com/KyleKing/calcipy.git', 'https://github.com/KyleKing/calcipy'),
-        ('git@github.com:KyleKing/calcipy.git', 'https://github.com/KyleKing/calcipy'),
-        ('unknown/repo.svn', ''),
-        ('', ''),
-    ],
-)
-def test_github_blame_url(clone_uri: str, expected: str):
-    assert github_blame_url(clone_uri) == expected
 
 
 def test_search_lines(snapshot):
