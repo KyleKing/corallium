@@ -81,10 +81,10 @@ uv publish
 | `corallium/log.py`                                        | 47         | 1       | 0        | 96.1%    |
 | `corallium/loggers/__init__.py`                           | 0          | 0       | 0        | 100.0%   |
 | `corallium/loggers/plain_printer.py`                      | 5          | 0       | 0        | 100.0%   |
-| `corallium/loggers/rich_printer.py`                       | 37         | 27      | 0        | 19.6%    |
+| `corallium/loggers/rich_printer.py`                       | 37         | 8       | 0        | 72.5%    |
 | `corallium/loggers/structlog_logger/__init__.py`          | 3          | 0       | 3        | 100.0%   |
 | `corallium/loggers/structlog_logger/_structlog_logger.py` | 8          | 0       | 0        | 100.0%   |
-| `corallium/loggers/styles.py`                             | 32         | 5       | 0        | 75.0%    |
+| `corallium/loggers/styles.py`                             | 32         | 3       | 0        | 86.1%    |
 | `corallium/markup_table.py`                               | 31         | 0       | 0        | 100.0%   |
 | `corallium/pretty_process.py`                             | 58         | 13      | 0        | 77.8%    |
 | `corallium/shell.py`                                      | 69         | 13      | 0        | 74.7%    |
@@ -96,7 +96,7 @@ uv publish
 | `corallium/vcs/_jj_commands.py`                           | 23         | 0       | 0        | 100.0%   |
 | `corallium/vcs/_repo.py`                                  | 67         | 2       | 0        | 94.6%    |
 | `corallium/vcs/_types.py`                                 | 21         | 0       | 0        | 100.0%   |
-| **Totals**                                                | 1030       | 148     | 55       | 82.4%    |
+| **Totals**                                                | 1030       | 127     | 55       | 84.7%    |
 
 Generated on: 2026-03-24
 <!-- {cte} -->
