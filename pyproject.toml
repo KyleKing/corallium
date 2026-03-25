@@ -4,7 +4,7 @@ requires = ["uv_build>=0.9.26,<2.0"]
 
 [dependency-groups]
 dev = [
-  'calcipy[recommended]>=6.0.0',
+  'calcipy[recommended]>=6.0.1',
   'pytest-asyncio>=0.24.0',
   'pytest-structlog>=1.1',
   'pytest-subprocess>=1.5.2',
@@ -51,7 +51,7 @@ version = "2.3.0rc1"
 
 [tool.commitizen]
 version = "2.3.0rc1"
-version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version", "uv.lock:^version"]
+version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
 
 [tool.mypy]
 check_untyped_defs = true

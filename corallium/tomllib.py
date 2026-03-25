@@ -3,7 +3,7 @@
 # TODO: Remove when dropping 3.10!
 
 try:
-    import tomllib  # type: ignore[import-not-found] # pyright: ignore[reportAttributeAccessIssue]
+    import tomllib  # type: ignore[import-not-found] # pyright: ignore[reportAttributeAccessIssue]  # ty: ignore[unresolved-import]
 except ModuleNotFoundError:  # pragma: no cover
     import tomli as tomllib  # type: ignore[import-not-found,attr-defined,unused-ignore] # pyright: ignore[reportAttributeAccessIssue]
 

@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Fix
+
+- upgrade calcipy to v6 stable release
+
 ## 2.3.0rc1 (2026-01-30)
 
 ### Feat

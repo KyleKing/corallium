@@ -89,16 +89,16 @@ wheels = [
 
 [[package]]
 name = "calcipy"
-version = "6.0.0"
+version = "6.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beartype" },
     { name = "corallium" },
     { name = "invoke" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7f/94/c963026c825558bc821aa3d341050536cc71b06b250287ee502052d547a8/calcipy-6.0.0.tar.gz", hash = "sha256:2fe2d53b4c78fb52da154bcd93cc27a82047caf9e26776d5de9bc87118d4e178", size = 31062, upload-time = "2026-03-25T02:53:46.821Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/56/56/4a3c85acffe2081ed34d9f8ce4cf43354ea8e3c3879b3479e785b8226ee5/calcipy-6.0.1.tar.gz", hash = "sha256:8703018aaf6d7e2f93aeedbf38d80005dcc654256c74d6d59090a345c2f5c06a", size = 31072, upload-time = "2026-03-25T03:13:26.74Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/61/40/d4d8ad8c6378d219eb1fc8422471c1d53fc8c9162b33c49170cab333b581/calcipy-6.0.0-py3-none-any.whl", hash = "sha256:7af2a7dfcefc8bd3936626d7319ebeb5bdebc8021f7f0456e815d55abb623b00", size = 38020, upload-time = "2026-03-25T02:53:45.347Z" },
+    { url = "https://files.pythonhosted.org/packages/df/ab/44dac6c8923749439fc73b1a05c80b2b4eec7313443a008270d86ff2e329/calcipy-6.0.1-py3-none-any.whl", hash = "sha256:2be84137017aeece7e1ae8d1c99f711559b521d7b217f1475674a71c237a1d23", size = 38057, upload-time = "2026-03-25T03:13:25.257Z" },
 ]
 
 [package.optional-dependencies]
@@ -334,7 +334,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "calcipy", extras = ["recommended"], specifier = ">=6.0.0" },
+    { name = "calcipy", extras = ["recommended"], specifier = ">=6.0.1" },
     { name = "pytest-asyncio", specifier = ">=0.24.0" },
     { name = "pytest-structlog", specifier = ">=1.1" },
     { name = "pytest-subprocess", specifier = ">=1.5.2" },
