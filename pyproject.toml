@@ -50,6 +50,7 @@ version = "2.3.0"
 "Repository" = "https://github.com/kyleking/corallium"
 
 [tool.commitizen]
+pre_bump_hooks = ["uv lock"]
 version = "2.3.0"
 version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
 
