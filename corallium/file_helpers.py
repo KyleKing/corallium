@@ -252,7 +252,7 @@ def read_yaml_file(path_yaml: Path) -> Any:
     try:
         return yaml.safe_load(path_yaml.read_text(encoding='utf-8'))
     except (FileNotFoundError, KeyError) as exc:  # pragma: no cover
-        LOGGER.warning('Unexpected read error', path_yaml=path_yaml, error=str(exc))
+        LOGGER.info('Read error', path_yaml=path_yaml, error=str(exc))
         return {}
     except yaml.constructor.ConstructorError:
         LOGGER.exception('Warning: burying poorly handled yaml error')
