@@ -110,6 +110,7 @@ ignore = [
   'FIX004', # Line contains HACK
   'PLR0913', # Too many arguments in function definition (6 > 5)
   'RUF067', # `__init__` module should only contain docstrings and re-exports
+  'RUF105', # Prefer `ruff: ignore` over `noqa`; `noqa` stays for cross-tool compatibility
   'S404', # `subprocess` module is possibly insecure
   'S602', # `subprocess` call with `shell=True` identified, security issue
   'S604', # Function call with `shell=True` parameter identified, security issue
