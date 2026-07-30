@@ -484,6 +484,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#known-follow-ups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known follow-ups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#initial-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1104,6 +1115,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#known-follow-ups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known follow-ups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#initial-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1186,13 +1208,19 @@
 <h2 id="publishing">Publishing<a class="headerlink" href="#publishing" title="Permanent link">⚓︎</a></h2>
 <p>Publishing is automated via GitHub Actions using PyPI Trusted Publishing. Pushing the tag triggers it.</p>
 <p><code>./run release</code> stops at the local tag. Nothing reaches PyPI until you push, which keeps the irreversible step a deliberate one.</p>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>./run<span class="w"> </span>release<span class="w">                       </span><span class="c1"># Bumps version, tags, regenerates the changelog</span>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>./run<span class="w"> </span>release<span class="w">                       </span><span class="c1"># Bumps the version and tags it</span>
 <span class="linenos" data-linenos="2 "></span>./run<span class="w"> </span>release<span class="w"> </span>--suffix<span class="o">=</span>rc<span class="w">           </span><span class="c1"># For pre-releases</span>
-<span class="linenos" data-linenos="3 "></span>git<span class="w"> </span>add<span class="w"> </span>docs/docs/CHANGELOG.md<span class="w">      </span><span class="c1"># Written after the tag, so it needs its own commit</span>
-<span class="linenos" data-linenos="4 "></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;docs: update changelog&#39;</span>
-<span class="linenos" data-linenos="5 "></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>--follow-tags<span class="w">  </span><span class="c1"># Triggers the publish</span>
+<span class="linenos" data-linenos="3 "></span>python<span class="w"> </span>-m<span class="w"> </span>commitizen<span class="w"> </span>changelog<span class="w">      </span><span class="c1"># See the follow-up below; not yet automatic here</span>
+<span class="linenos" data-linenos="4 "></span>mv<span class="w"> </span>CHANGELOG.md<span class="w"> </span>docs/docs/CHANGELOG.md
+<span class="linenos" data-linenos="5 "></span>git<span class="w"> </span>add<span class="w"> </span>docs/docs/CHANGELOG.md
+<span class="linenos" data-linenos="6 "></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;docs: update changelog&#39;</span>
+<span class="linenos" data-linenos="7 "></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>--follow-tags<span class="w">  </span><span class="c1"># Triggers the publish</span>
 </code></pre></div>
-<p>Confirm the version actually landed with <code>curl -s https://pypi.org/pypi/corallium/json | jq -r .info.version</code>.</p>
+<p>Confirm the version landed by checking the index, which is not cached the way the JSON endpoint is:</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Accept: application/vnd.pypi.simple.v1+json&#39;</span><span class="w"> </span>https://pypi.org/simple/corallium/<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.versions[-1]&#39;</span>
+</code></pre></div>
+<h3 id="known-follow-ups">Known follow-ups<a class="headerlink" href="#known-follow-ups" title="Permanent link">⚓︎</a></h3>
+<p>The changelog steps above are manual only because this project pins <code>calcipy&gt;=6.0.1</code>. calcipy 6.1.0rc0 regenerates the changelog as part of <code>./run release</code>, writing it straight to <code>docs/docs/CHANGELOG.md</code> after the tag exists so the entry carries the new version instead of filing it under <code>Unreleased</code>. uv skips prereleases by default, so picking that up means allowing the prerelease or waiting for 6.1.0 final. Once it lands, drop the <code>commitizen changelog</code> and <code>mv</code> lines and keep the commit.</p>
 <h3 id="initial-setup">Initial Setup<a class="headerlink" href="#initial-setup" title="Permanent link">⚓︎</a></h3>
 <p>One-time setup to enable PyPI Trusted Publishing:</p>
 <p><strong>Configure GitHub Environments</strong></p>
