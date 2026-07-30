@@ -41,7 +41,7 @@ maintainers = []
 name = "corallium"
 readme = "docs/README.md"
 requires-python = ">=3.10.11"
-version = "2.3.0"
+version = "2.4.0"
 
 [project.urls]
 "Bug Tracker" = "https://github.com/kyleking/corallium/issues"
@@ -51,7 +51,7 @@ version = "2.3.0"
 
 [tool.commitizen]
 pre_bump_hooks = ["uv lock"]
-version = "2.3.0"
+version = "2.4.0"
 version_files = ["corallium/__init__.py:^__version", "pyproject.toml:^version"]
 
 [tool.mypy]
