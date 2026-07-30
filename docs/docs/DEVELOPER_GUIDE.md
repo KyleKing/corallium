@@ -30,12 +30,19 @@ uv sync --all-extras
 
 ## Publishing
 
-Publishing is automated via GitHub Actions using PyPI Trusted Publishing. Tag creation triggers automated publishing.
+Publishing is automated via GitHub Actions using PyPI Trusted Publishing. Pushing the tag triggers it.
+
+`./run release` stops at the local tag. Nothing reaches PyPI until you push, which keeps the irreversible step a deliberate one.
 
 ```sh
-./run release              # Bumps version, creates tag, pushes → triggers publish
-./run release --suffix=rc  # For pre-releases
+./run release                       # Bumps version, tags, regenerates the changelog
+./run release --suffix=rc           # For pre-releases
+git add docs/docs/CHANGELOG.md      # Written after the tag, so it needs its own commit
+git commit -m 'docs: update changelog'
+git push origin main --follow-tags  # Triggers the publish
 ```
+
+Confirm the version actually landed with `curl -s https://pypi.org/pypi/corallium/json | jq -r .info.version`.
 
 ### Initial Setup
 
