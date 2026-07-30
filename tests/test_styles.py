@@ -2,7 +2,7 @@ import logging
 
 import pytest
 
-from corallium.loggers.styles import NOTICE, STYLES, TRACE, Colors, get_level, get_name
+from corallium.loggers.styles import LEVELS, NOTICE, STYLES, TRACE, Colors, get_level, get_name
 
 
 @pytest.mark.parametrize(
@@ -25,6 +25,11 @@ from corallium.loggers.styles import NOTICE, STYLES, TRACE, Colors, get_level, g
 )
 def test_get_level(name, expected):
     assert get_level(name=name) == expected
+
+
+def test_levels_are_upper_case_and_resolvable():
+    assert all(name == name.upper() for name in LEVELS)
+    assert all(get_level(name=name) == level for name, level in LEVELS.items())
 
 
 def test_get_level_orders_severity():

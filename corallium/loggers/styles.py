@@ -67,25 +67,28 @@ class Styles:
         }.get(level, self.colors.level_fallback)
 
 
+LEVELS = {
+    'CRITICAL': logging.CRITICAL,
+    'DEBUG': logging.DEBUG,
+    'ERROR': logging.ERROR,
+    'EXCEPTION': logging.CRITICAL,
+    'FATAL': logging.CRITICAL,
+    'INFO': logging.INFO,
+    'NOTICE': NOTICE,
+    'TRACE': TRACE,
+    'WARN': logging.WARNING,
+    'WARNING': logging.WARNING,
+}
+"""Every recognized level name, for callers that need to enumerate or validate them.
+
+Covers the names emitted by common structured loggers, not only the `logging` ones, so that callers
+filtering by level and callers coloring by level agree on what a level is.
+"""
+
+
 def get_level(*, name: str) -> int:
-    """Return the logging level based on the provided name.
-
-    Covers the names emitted by common structured loggers, not only the `logging` ones, so that
-    callers filtering by level and callers coloring by level agree on what a level is.
-
-    """
-    return {
-        'CRITICAL': logging.CRITICAL,
-        'DEBUG': logging.DEBUG,
-        'ERROR': logging.ERROR,
-        'EXCEPTION': logging.CRITICAL,
-        'FATAL': logging.CRITICAL,
-        'INFO': logging.INFO,
-        'NOTICE': NOTICE,
-        'TRACE': TRACE,
-        'WARN': logging.WARNING,
-        'WARNING': logging.WARNING,
-    }.get(name.upper(), logging.NOTSET)
+    """Return the logging level based on the provided name, or `NOTSET` when unrecognized."""
+    return LEVELS.get(name.upper(), logging.NOTSET)
 
 
 def get_name(*, level: int) -> str:
