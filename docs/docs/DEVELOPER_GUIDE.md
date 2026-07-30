@@ -35,14 +35,24 @@ Publishing is automated via GitHub Actions using PyPI Trusted Publishing. Pushin
 `./run release` stops at the local tag. Nothing reaches PyPI until you push, which keeps the irreversible step a deliberate one.
 
 ```sh
-./run release                       # Bumps version, tags, regenerates the changelog
+./run release                       # Bumps the version and tags it
 ./run release --suffix=rc           # For pre-releases
-git add docs/docs/CHANGELOG.md      # Written after the tag, so it needs its own commit
+python -m commitizen changelog      # See the follow-up below; not yet automatic here
+mv CHANGELOG.md docs/docs/CHANGELOG.md
+git add docs/docs/CHANGELOG.md
 git commit -m 'docs: update changelog'
 git push origin main --follow-tags  # Triggers the publish
 ```
 
-Confirm the version actually landed with `curl -s https://pypi.org/pypi/corallium/json | jq -r .info.version`.
+Confirm the version landed by checking the index, which is not cached the way the JSON endpoint is:
+
+```sh
+curl -s -H 'Accept: application/vnd.pypi.simple.v1+json' https://pypi.org/simple/corallium/ | jq -r '.versions[-1]'
+```
+
+### Known follow-ups
+
+The changelog steps above are manual only because this project pins `calcipy>=6.0.1`. calcipy 6.1.0rc0 regenerates the changelog as part of `./run release`, writing it straight to `docs/docs/CHANGELOG.md` after the tag exists so the entry carries the new version instead of filing it under `Unreleased`. uv skips prereleases by default, so picking that up means allowing the prerelease or waiting for 6.1.0 final. Once it lands, drop the `commitizen changelog` and `mv` lines and keep the commit.
 
 ### Initial Setup
 
