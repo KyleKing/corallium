@@ -61,6 +61,7 @@ def test_critical_without_an_active_exception(printer):
 
 
 def test_critical_with_an_active_exception(printer):
+    result = ''
     try:
         _ = 1 // 0
     except ZeroDivisionError:
