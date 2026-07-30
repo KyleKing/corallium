@@ -5,6 +5,12 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 
+TRACE = 5
+"""Finer-grained than `DEBUG`. Not a `logging` level, but emitted by loguru, pino, and zap."""
+
+NOTICE = 25
+"""Between `INFO` and `WARNING`. Not a `logging` level, but emitted by syslog and LogTape."""
+
 
 @dataclass
 class Colors:
@@ -54,19 +60,31 @@ class Styles:
             logging.CRITICAL: self.colors.level_error,
             logging.ERROR: self.colors.level_error,
             logging.WARNING: self.colors.level_warn,
+            NOTICE: self.colors.level_info,
             logging.INFO: self.colors.level_info,
             logging.DEBUG: self.colors.level_debug,
+            TRACE: self.colors.level_debug,
         }.get(level, self.colors.level_fallback)
 
 
 def get_level(*, name: str) -> int:
-    """Return the logging level based on the provided name."""
+    """Return the logging level based on the provided name.
+
+    Covers the names emitted by common structured loggers, not only the `logging` ones, so that
+    callers filtering by level and callers coloring by level agree on what a level is.
+
+    """
     return {
-        'ERROR': logging.ERROR,
-        'WARNING': logging.WARNING,
-        'WARN': logging.WARNING,
-        'INFO': logging.INFO,
+        'CRITICAL': logging.CRITICAL,
         'DEBUG': logging.DEBUG,
+        'ERROR': logging.ERROR,
+        'EXCEPTION': logging.CRITICAL,
+        'FATAL': logging.CRITICAL,
+        'INFO': logging.INFO,
+        'NOTICE': NOTICE,
+        'TRACE': TRACE,
+        'WARN': logging.WARNING,
+        'WARNING': logging.WARNING,
     }.get(name.upper(), logging.NOTSET)
 
 
@@ -80,8 +98,10 @@ def get_name(*, level: int) -> str:
         logging.CRITICAL: 'EXCEPTION',
         logging.ERROR: 'ERROR',
         logging.WARNING: 'WARNING',
+        NOTICE: 'NOTICE',
         logging.INFO: 'INFO',
         logging.DEBUG: 'DEBUG',
+        TRACE: 'TRACE',
         logging.NOTSET: 'NOTSET',
     }.get(level, '')
 
