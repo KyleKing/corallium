@@ -1,4 +1,28 @@
-## Unreleased
+## 2.4.0 (2026-07-29)
+
+### Feat
+
+- **styles**: export LEVELS so callers can enumerate level names
+- **rich_printer**: display the level name a caller provides
+- **styles**: recognize critical, fatal, notice, and trace levels
+- **docs**: support Zensical migration via calcipy_template
+
+### Fix
+
+- **deps**: bump urllib3
+- **deps**: bump soupsieve
+- **deps**: bump requests
+- **deps**: bump pytest
+- **deps**: bump pymdown-extensions
+- **deps**: bump pygments
+- **deps**: bump idna
+- **deps**: bump gitpython to 3.1.57
+
+### Refactor
+
+- minor nits
+
+## 2.3.0 (2026-03-24)
 
 ### Fix
 
