@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import shutil
+import sys
 from datetime import datetime
 from typing import Any
 
@@ -11,6 +12,19 @@ from rich.console import Console
 from rich.text import Text
 
 from .styles import Styles, get_name
+
+_LEVEL_WIDTH = 7
+
+
+def _format_level(name: str) -> str:
+    """Return an upper-case level name that fits the level column.
+
+    Over-long names keep their final character, so `EXCEPTION` reads as `EXCEPTN`.
+    """
+    name = name.upper()
+    if len(name) > _LEVEL_WIDTH:
+        name = name[: _LEVEL_WIDTH - 1] + name[-1]
+    return f'{name: <{_LEVEL_WIDTH}}'
 
 
 def rich_printer(
@@ -23,9 +37,14 @@ def rich_printer(
     _console: Console,
     _styles: Styles,
     _keys_on_own_line: list[str] | None = None,
+    _level_name: str | None = None,
     **kwargs: Any,
 ) -> None:
-    """Print log message with rich formatting."""
+    """Print log message with rich formatting.
+
+    `_level_name` overrides the displayed level name, for callers echoing a level that was written
+    by another logger. `_this_level` still selects the color.
+    """
     text = Text()
     if _is_text:
         if is_header:
@@ -36,7 +55,7 @@ def rich_printer(
         text.append(f'{timestamp: <28} ', style=_styles.timestamp)
         text.append('[', style=_styles.timestamp)
         level_style = _styles.get_style(level=_this_level)
-        text.append(f'{get_name(level=_this_level): <7}', style=level_style)
+        text.append(_format_level(_level_name or get_name(level=_this_level)), style=level_style)
         text.append(']', style=_styles.timestamp)
         text.append(f' {message}', style=_styles.message)
 
@@ -54,7 +73,7 @@ def rich_printer(
         new_text.append(f': {line}', style=_styles.value_own_line)
         _console.print(new_text)
 
-    if _this_level == logging.CRITICAL:
+    if _this_level == logging.CRITICAL and sys.exc_info()[0] is not None:
         term_width, _height = shutil.get_terminal_size((100, 50))
         _console.print_exception(
             extra_lines=1,
