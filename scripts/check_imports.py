@@ -35,4 +35,4 @@ LOGGER.text('logger   .', time=time_import)
 # > get_logger time=0.0038560839893762022
 # > logger   . time=0.0030106669873930514
 
-pprint(locals())  # noqa: T203
+pprint(locals())  # ruff:ignore[p-print]
