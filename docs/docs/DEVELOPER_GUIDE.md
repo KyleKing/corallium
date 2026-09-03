@@ -115,5 +115,5 @@ uv publish
 | `corallium/vcs/_types.py`                                 | 21         | 0       | 0        | 100.0%   |
 | **Totals**                                                | 1043       | 126     | 55       | 85.0%    |
 
-Generated on: 2026-08-31
+Generated on: 2026-09-02
 <!-- {cte} -->
