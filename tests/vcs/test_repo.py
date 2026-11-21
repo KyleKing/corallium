@@ -2,8 +2,12 @@
 
 from pathlib import Path
 from subprocess import CalledProcessError
+from typing import Any
 from unittest.mock import patch
 
+import pytest
+
+from corallium.shell import capture_shell
 from corallium.vcs._repo import (
     _get_jj_bookmark,
     _get_jj_remote_url,
@@ -14,109 +18,82 @@ from corallium.vcs._repo import (
 from corallium.vcs._types import ForgeKind, VcsKind
 
 
-def test_find_repo_root_git(tmp_path: Path):
+@pytest.mark.parametrize(
+    ('marker', 'start', 'expected_kind'),
+    [
+        ('.git', '.', VcsKind.GIT),
+        ('.jj', '.', VcsKind.JUJUTSU),
+        ('.git', 'src/pkg', VcsKind.GIT),
+        (None, '.', None),
+    ],
+)
+def test_find_repo_root_and_kind(tmp_path: Path, marker: str | None, start: str, expected_kind: VcsKind | None):
     repo_dir = tmp_path / 'project'
-    repo_dir.mkdir()
-    (repo_dir / '.git').mkdir()
+    (repo_dir / start).mkdir(parents=True)
+    if marker:
+        (repo_dir / marker).mkdir()
 
-    assert find_repo_root(repo_dir) == repo_dir
+    root = find_repo_root(repo_dir / start)
 
-
-def test_find_repo_root_jj(tmp_path: Path):
-    repo_dir = tmp_path / 'project'
-    repo_dir.mkdir()
-    (repo_dir / '.jj').mkdir()
-
-    assert find_repo_root(repo_dir) == repo_dir
+    assert root == (repo_dir if marker else None)
+    assert detect_vcs_kind(repo_dir) == expected_kind
 
 
-def test_find_repo_root_from_nested_subdirectory(tmp_path: Path):
-    repo_dir = tmp_path / 'project'
-    nested = repo_dir / 'src' / 'pkg'
-    nested.mkdir(parents=True)
-    (repo_dir / '.git').mkdir()
+def test_get_repo_metadata_reads_a_real_git_repo(tmp_path: Path):
+    capture_shell('git init -q -b trunk', cwd=tmp_path)
+    capture_shell('git remote add origin https://github.com/user/repo.git', cwd=tmp_path)
+    (tmp_path / 'nested').mkdir()
+    get_repo_metadata.cache_clear()
 
-    assert find_repo_root(nested) == repo_dir
-
-
-def test_find_repo_root_returns_none_outside_repo(tmp_path: Path):
-    isolated = tmp_path / 'no_repo'
-    isolated.mkdir()
-
-    assert find_repo_root(isolated) is None
-
-
-def test_detect_vcs_kind_git(tmp_path: Path):
-    (tmp_path / '.git').mkdir()
-    assert detect_vcs_kind(tmp_path) == VcsKind.GIT
-
-
-def test_detect_vcs_kind_jj(tmp_path: Path):
-    (tmp_path / '.jj').mkdir()
-    assert detect_vcs_kind(tmp_path) == VcsKind.JUJUTSU
-
-
-def test_detect_vcs_kind_none(tmp_path: Path):
-    assert detect_vcs_kind(tmp_path) is None
-
-
-def test_get_repo_metadata_in_repo():
-    project_root = Path(__file__).parent.parent.parent
-    result = get_repo_metadata(project_root)
+    result = get_repo_metadata(tmp_path / 'nested')
 
     assert result is not None
-    assert result.root.is_dir()
-    assert result.vcs == VcsKind.GIT
+    assert (result.root, result.vcs, result.branch) == (tmp_path, VcsKind.GIT, 'trunk')
+    assert result.remote_url == 'https://github.com/user/repo.git'
+    assert result.forge == ForgeKind.GITHUB
+    get_repo_metadata.cache_clear()
+
+
+def test_get_repo_metadata_without_a_remote_has_empty_url(tmp_path: Path):
+    capture_shell('git init -q', cwd=tmp_path)
+    get_repo_metadata.cache_clear()
+
+    result = get_repo_metadata(tmp_path)
+
+    assert result is not None
+    assert result.remote_url == ''  # noqa: PLC1901 (the empty string, not None)
+    get_repo_metadata.cache_clear()
 
 
 def test_get_repo_metadata_returns_none_outside_repo(tmp_path: Path):
     assert get_repo_metadata(tmp_path) is None
 
 
-def test_get_repo_metadata_has_forge_info():
-    project_root = Path(__file__).parent.parent.parent
-    result = get_repo_metadata(project_root)
-
-    assert result is not None
-    assert result.forge in {ForgeKind.GITHUB, ForgeKind.GITLAB, ForgeKind.BITBUCKET, ForgeKind.UNKNOWN}
-
-
-def test_get_jj_remote_url_parses_origin():
-    raw = 'origin https://github.com/user/repo\nupstream https://github.com/other/repo\n'
+@pytest.mark.parametrize(
+    ('raw', 'expected'),
+    [
+        ('origin https://github.com/user/repo\nupstream https://github.com/other/repo\n', 'https://github.com/user/repo'),
+        ('upstream https://github.com/other/repo\norigin https://gitlab.com/u/r\n', 'https://gitlab.com/u/r'),
+        ('upstream https://github.com/other/repo\n', ''),
+        (None, ''),
+    ],
+)
+def test_get_jj_remote_url(raw: str | None, expected: str):
     with patch('corallium.vcs._repo.jj_git_remote_list', return_value=raw):
-        result = _get_jj_remote_url(cwd=Path('/fake'))
-
-    assert result == 'https://github.com/user/repo'
+        assert _get_jj_remote_url(cwd=Path('/fake')) == expected
 
 
-def test_get_jj_remote_url_no_origin_returns_empty():
-    raw = 'upstream https://github.com/other/repo\n'
-    with patch('corallium.vcs._repo.jj_git_remote_list', return_value=raw):
-        result = _get_jj_remote_url(cwd=Path('/fake'))
-
-    assert not result
-
-
-def test_get_jj_remote_url_returns_empty_on_none():
-    with patch('corallium.vcs._repo.jj_git_remote_list', return_value=None):
-        result = _get_jj_remote_url(cwd=Path('/fake'))
-
-    assert not result
-
-
-def test_get_jj_bookmark_returns_first():
-    raw = 'main: qpvuntsm abc123\ndev: rlvkpnrz def456\n'
-    with patch('corallium.vcs._repo.capture_shell', return_value=raw):
-        result = _get_jj_bookmark(cwd=Path('/fake'))
-
-    assert result == 'main'
-
-
-def test_get_jj_bookmark_returns_empty_on_failure():
-    with patch('corallium.vcs._repo.capture_shell', side_effect=CalledProcessError(1, 'jj')):
-        result = _get_jj_bookmark(cwd=Path('/fake'))
-
-    assert not result
+@pytest.mark.parametrize(
+    ('shell', 'expected'),
+    [
+        ({'return_value': 'main: qpvuntsm abc123\ndev: rlvkpnrz def456\n'}, 'main'),
+        ({'return_value': '\n: orphan\nfeature: abc\n'}, 'feature'),
+        ({'side_effect': CalledProcessError(1, 'jj')}, ''),
+    ],
+)
+def test_get_jj_bookmark(shell: dict[str, Any], expected: str):
+    with patch('corallium.vcs._repo.capture_shell', **shell):
+        assert _get_jj_bookmark(cwd=Path('/fake')) == expected
 
 
 def test_get_repo_metadata_jj_repo(tmp_path: Path):
@@ -138,4 +115,5 @@ def test_get_repo_metadata_jj_repo(tmp_path: Path):
     assert result.root == jj_root_path
     assert result.branch == 'main'
     assert result.remote_url == 'https://github.com/user/repo'
+    assert result.forge == ForgeKind.GITHUB
     get_repo_metadata.cache_clear()

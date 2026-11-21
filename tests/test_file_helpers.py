@@ -1,5 +1,7 @@
 """Test file_helpers (referenced in below test)."""
 
+import os
+import time
 from pathlib import Path
 
 import pytest
@@ -9,12 +11,15 @@ from corallium.file_helpers import (
     _parse_mise_toml,
     _parse_tool_versions,
     delete_dir,
+    delete_old_files,
     ensure_dir,
     get_tool_versions,
     if_found_unlink,
     read_lines,
+    read_package_name,
     sanitize_filename,
     tail_lines,
+    trim_trailing_whitespace,
 )
 
 
@@ -33,15 +38,23 @@ def test_read_lines():
     assert len(read_lines(Path.cwd() / 'not a file.tbd')) == 0
 
 
-def test_tail_lines(fix_test_cache):
-    path_file = fix_test_cache / 'tmp.txt'
-    path_file.write_text('line 1\nline 2\n')
+@pytest.mark.parametrize(
+    ('content', 'count', 'expected'),
+    [
+        ('line 1\nline 2\n', 1, ['']),
+        ('line 1\nline 2\n', 2, ['line 2', '']),
+        ('line 1\nline 2\n', 10, ['line 1', 'line 2', '']),
+        ('', 3, []),
+        # Longer than one 8 KB read, so the lines are stitched across chunks
+        (''.join(f'row {i:05d}\n' for i in range(2000)), 3, ['row 01998', 'row 01999', '']),
+        (''.join(f'row {i:05d}\n' for i in range(2000)), 2001, [*(f'row {i:05d}' for i in range(2000)), '']),
+    ],
+)
+def test_tail_lines(tmp_path, content: str, count: int, expected: list[str]):
+    path_file = tmp_path / 'tmp.txt'
+    path_file.write_text(content)
 
-    result = tail_lines(path_file, count=1)
-
-    assert result == ['']
-    assert tail_lines(path_file, count=2) == ['line 2', '']
-    assert tail_lines(path_file, count=10) == ['line 1', 'line 2', '']
+    assert tail_lines(path_file, count=count) == expected
 
 
 def test_if_found_unlink(fix_test_cache):
@@ -58,7 +71,7 @@ def test_dir_tools(fix_test_cache):
     tmp_dir = fix_test_cache / '.tmp-test_delete_dir'
     tmp_dir.mkdir(exist_ok=True)
     (tmp_dir / 'tmp.txt').write_text('Placeholder\n')
-    tmp_subdir = tmp_dir / 'subdir'
+    tmp_subdir = tmp_dir / 'subdir' / 'nested'
 
     ensure_dir(tmp_subdir)
 
@@ -116,23 +129,31 @@ def test_parse_tool_versions(fix_test_cache):
     assert result == {'python': ['3.10.16', '3.11.11'], 'node': ['20.10.0']}
 
 
-def test_get_tool_versions_prefers_mise_lock(fix_test_cache):
-    (fix_test_cache / 'mise.lock').write_text('[tools.python]\nversion = "3.11.11"\n')
-    (fix_test_cache / 'mise.toml').write_text('[tools]\npython = "3.10"\n')
-    (fix_test_cache / '.tool-versions').write_text('python 3.9.0\n')
+@pytest.mark.parametrize(
+    ('files', 'expected'),
+    [
+        pytest.param(
+            {
+                'mise.lock': '[tools.python]\nversion = "3.11.11"\n',
+                'mise.toml': '[tools]\npython = "3.10"\n',
+                '.tool-versions': 'python 3.9.0\n',
+            },
+            {'python': ['3.11.11']},
+            id='mise.lock first',
+        ),
+        pytest.param(
+            {'mise.toml': '[tools]\npython = "3.10"\n', '.tool-versions': 'python 3.9.0\n'},
+            {'python': ['3.10']},
+            id='then mise.toml',
+        ),
+        pytest.param({'.tool-versions': 'python 3.9.0\n'}, {'python': ['3.9.0']}, id='then .tool-versions'),
+    ],
+)
+def test_get_tool_versions_by_precedence(tmp_path, files: dict[str, str], expected: dict[str, list[str]]):
+    for name, text in files.items():
+        (tmp_path / name).write_text(text)
 
-    result = get_tool_versions(cwd=fix_test_cache)
-
-    assert result == {'python': ['3.11.11']}
-
-
-def test_get_tool_versions_falls_back_to_mise_toml(fix_test_cache):
-    (fix_test_cache / 'mise.toml').write_text('[tools]\npython = "3.10"\n')
-    (fix_test_cache / '.tool-versions').write_text('python 3.9.0\n')
-
-    result = get_tool_versions(cwd=fix_test_cache)
-
-    assert result == {'python': ['3.10']}
+    assert get_tool_versions(cwd=tmp_path) == expected
 
 
 def test_get_tool_versions_raises_when_no_file(tmp_path):
@@ -140,3 +161,58 @@ def test_get_tool_versions_raises_when_no_file(tmp_path):
     isolated_dir.mkdir()
     with pytest.raises(FileNotFoundError):
         get_tool_versions(cwd=isolated_dir)
+
+
+@pytest.mark.parametrize(
+    ('text', 'expected'),
+    [
+        ('a  \nb\t \n  c\n', 'a\nb\t\n  c\n'),
+        pytest.param(
+            'a  \r\nb \r\n',
+            'a\r\nb\r\n',
+            marks=pytest.mark.xfail(
+                strict=True,
+                reason='read_text translates CRLF to LF, so the documented CRLF preservation never happens',
+            ),
+        ),
+    ],
+)
+def test_trim_trailing_whitespace_keeps_line_endings_and_tabs(tmp_path, text: str, expected: str):
+    pth = tmp_path / 'f.txt'
+    pth.write_bytes(text.encode())
+
+    trim_trailing_whitespace(pth)
+
+    assert pth.read_bytes() == expected.encode()
+
+
+def test_delete_old_files_removes_only_stale_files_and_never_follows_links(tmp_path):
+    outside = tmp_path / 'outside.txt'
+    outside.write_text('keep')
+    cache = tmp_path / 'cache'
+    (cache / 'sub').mkdir(parents=True)
+    for name in ('old.txt', 'sub/old.txt', 'fresh.txt'):
+        (cache / name).write_text(name)
+    stale = time.time() - 3600
+    for pth in (cache / 'old.txt', cache / 'sub' / 'old.txt', outside):
+        os.utime(pth, (stale, stale))
+    (cache / 'link.txt').symlink_to(outside)
+
+    delete_old_files(cache, ttl_seconds=60)
+
+    assert sorted(p.relative_to(cache).as_posix() for p in cache.rglob('*')) == ['fresh.txt', 'link.txt', 'sub']
+    assert outside.is_file()
+
+
+@pytest.mark.parametrize(
+    ('pyproject', 'expected'),
+    [
+        ('[project]\nname = "uv-pkg"\n', 'uv-pkg'),
+        ('[tool.poetry]\nname = "poetry-pkg"\n', 'poetry-pkg'),
+        ('[project]\nname = "both"\n[tool.poetry]\nname = "ignored"\n', 'both'),
+    ],
+)
+def test_read_package_name(tmp_path, pyproject: str, expected: str):
+    (tmp_path / 'pyproject.toml').write_text(pyproject)
+
+    assert read_package_name(cwd=tmp_path) == expected

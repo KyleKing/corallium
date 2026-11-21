@@ -247,6 +247,30 @@ def test_replace_pyproject_versions(
     assert new_text == snapshot
 
 
+@pytest.mark.parametrize(
+    'pyproject_text',
+    [
+        pytest.param('[tool.ruff]\nrequests = "2.0.0"\n', id='not a dependency section'),
+        pytest.param('[tool.poetry.dependencies]\n# requests = "2.0.0"\n', id='commented out'),
+        pytest.param(
+            '[project.urls]\nhomepage = "https://example.com/requests>=2.0.0"\n',
+            id='project table that holds no dependencies',
+        ),
+        pytest.param('[project]\ndependencies = [\n    "requests>=2.1.0",\n]\n', id='already at the locked version'),
+    ],
+)
+def test_replace_pyproject_versions_leaves_other_lines_alone(pyproject_text: str):
+    assert _replace_pyproject_versions({'requests': '2.1.0'}, {'requests': '2.0.0'}, pyproject_text) == pyproject_text
+
+
+def test_replace_pyproject_versions_skips_a_package_pyproject_does_not_pin():
+    text = '[tool.poetry.dependencies]\nrequests = "2.0.0"\nflask = "2.0.0"\n'
+
+    new_text = _replace_pyproject_versions({'requests': '2.1.0', 'flask': '2.1.0'}, {'flask': '2.0.0'}, text)
+
+    assert new_text == '[tool.poetry.dependencies]\nrequests = "2.0.0"\nflask = "2.1.0"\n'
+
+
 @pytest.fixture
 def lock_content() -> str:
     """Common lock file content."""
