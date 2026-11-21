@@ -2,43 +2,24 @@
 
 from multiprocessing.managers import DictProxy
 
+import pytest
+
 from corallium.pretty_process import _chunked, pretty_process
 
 
-def test_chunked_empty_list():
-    result = _chunked(list[int](), 3)
-
-    assert result == []
-
-
-def test_chunked_zero_count():
-    result = _chunked([1, 2, 3], 0)
-
-    assert result == [[1, 2, 3]]
-
-
-def test_chunked_negative_count():
-    result = _chunked([1, 2, 3], -1)
-
-    assert result == [[1, 2, 3]]
-
-
-def test_chunked_normal_split():
-    result = _chunked([1, 2, 3, 4, 5, 6], 3)
-
-    assert result == [[1, 2], [3, 4], [5, 6]]
-
-
-def test_chunked_uneven_split():
-    result = _chunked([1, 2, 3, 4, 5], 3)
-
-    assert result == [[1, 2], [3, 4], [5]]
-
-
-def test_chunked_more_chunks_than_items():
-    result = _chunked([1, 2], 5)
-
-    assert result == [[1], [2]]
+@pytest.mark.parametrize(
+    ('data', 'count', 'expected'),
+    [
+        ([], 3, []),
+        ([1, 2, 3], 0, [[1, 2, 3]]),
+        ([1, 2, 3], -1, [[1, 2, 3]]),
+        ([1, 2, 3, 4, 5, 6], 3, [[1, 2], [3, 4], [5, 6]]),
+        ([1, 2, 3, 4, 5], 3, [[1, 2], [3, 4], [5]]),
+        ([1, 2], 5, [[1], [2]]),
+    ],
+)
+def test_chunked(data, count, expected):
+    assert _chunked(data, count) == expected
 
 
 def _increment_task(task_id: int, shared_progress: DictProxy, data: list[int]) -> int:  # type: ignore[type-arg]
@@ -49,8 +30,7 @@ def _increment_task(task_id: int, shared_progress: DictProxy, data: list[int]) -
     return total
 
 
-def test_pretty_process_runs_without_error():
-    data = [1, 2, 3]
-    result = pretty_process(_increment_task, data=data, num_workers=2, num_cpus=2)
+def test_pretty_process_returns_each_chunks_result_in_order():
+    result = pretty_process(_increment_task, data=[1, 2, 3, 4, 5, 6], num_workers=2, num_cpus=3)
 
-    assert sum(result) == sum(data)
+    assert result == [3, 7, 11]

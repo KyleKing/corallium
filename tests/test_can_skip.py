@@ -1,6 +1,6 @@
 """Test can_skip."""
 
-import time
+import os
 from pathlib import Path
 
 import pytest
@@ -8,71 +8,42 @@ import pytest
 from corallium.can_skip import can_skip, dont_skip
 
 
-def test_can_skip_when_targets_newer(fix_test_cache: Path) -> None:
-    prereq = fix_test_cache / 'source.py'
-    target = fix_test_cache / 'output.txt'
-
-    prereq.write_text('source')
-    time.sleep(0.01)  # ensure different mtime
-    target.write_text('output')
-
-    assert can_skip(prerequisites=[prereq], targets=[target]) is True
+def _touch(path: Path, mtime: int) -> Path:
+    path.write_text(path.name, encoding='utf-8')
+    os.utime(path, (mtime, mtime))
+    return path
 
 
-def test_can_skip_when_prerequisites_newer(fix_test_cache: Path) -> None:
-    prereq = fix_test_cache / 'source.py'
-    target = fix_test_cache / 'output.txt'
+@pytest.mark.parametrize(
+    ('prereq_mtimes', 'target_mtimes', 'expected'),
+    [
+        pytest.param([100], [200], True, id='target newer'),
+        pytest.param([200], [100], False, id='prerequisite newer'),
+        pytest.param([100], [None], False, id='target missing'),
+        pytest.param([100, 150, 120], [200, 300], True, id='every target newer than every prerequisite'),
+        pytest.param([100, 250], [200, 300], False, id='one prerequisite newer than the oldest target'),
+    ],
+)
+def test_can_skip(tmp_path: Path, prereq_mtimes: list[int], target_mtimes: list[int | None], *, expected: bool):
+    prereqs = [_touch(tmp_path / f'src{i}.py', m) for i, m in enumerate(prereq_mtimes)]
+    targets = [
+        _touch(tmp_path / f'out{i}.txt', m) if m is not None else tmp_path / f'missing{i}.txt'
+        for i, m in enumerate(target_mtimes)
+    ]
 
-    target.write_text('output')
-    time.sleep(0.01)
-    prereq.write_text('source')
-
-    assert can_skip(prerequisites=[prereq], targets=[target]) is False
-
-
-def test_can_skip_when_target_missing(fix_test_cache: Path) -> None:
-    prereq = fix_test_cache / 'source.py'
-    prereq.write_text('source')
-    missing_target = fix_test_cache / 'missing.txt'
-
-    assert can_skip(prerequisites=[prereq], targets=[missing_target]) is False
-
-
-def test_can_skip_raises_when_prerequisite_missing(fix_test_cache: Path) -> None:
-    missing = fix_test_cache / 'missing.py'
-    target = fix_test_cache / 'output.txt'
-    target.write_text('output')
-
-    with pytest.raises(FileNotFoundError):
-        can_skip(prerequisites=[missing], targets=[target])
+    assert can_skip(prerequisites=prereqs, targets=targets) is expected
+    assert dont_skip(prerequisites=prereqs, targets=targets) is False
 
 
-def test_can_skip_with_empty_prerequisites_raises(fix_test_cache: Path) -> None:
-    target = fix_test_cache / 'output.txt'
-    target.write_text('output')
+@pytest.mark.parametrize(
+    ('prereq_names', 'error'),
+    [
+        (['missing.py'], FileNotFoundError),
+        ([], ValueError),
+    ],
+)
+def test_can_skip_refuses_missing_prerequisites(tmp_path: Path, prereq_names: list[str], error: type[Exception]):
+    target = _touch(tmp_path / 'output.txt', 100)
 
-    with pytest.raises(ValueError, match='Required files do not exist'):
-        can_skip(prerequisites=[], targets=[target])
-
-
-def test_can_skip_with_multiple_prerequisites_and_targets(fix_test_cache: Path) -> None:
-    prereqs = [fix_test_cache / f'src{i}.py' for i in range(3)]
-    targets = [fix_test_cache / f'out{i}.txt' for i in range(2)]
-
-    for p in prereqs:
-        p.write_text('source')
-    time.sleep(0.01)
-    for t in targets:
-        t.write_text('output')
-
-    assert can_skip(prerequisites=prereqs, targets=targets) is True
-
-
-def test_dont_skip_always_returns_false(fix_test_cache: Path) -> None:
-    prereq = fix_test_cache / 'source.py'
-    target = fix_test_cache / 'output.txt'
-    prereq.write_text('source')
-    time.sleep(0.01)
-    target.write_text('output')
-
-    assert dont_skip(prerequisites=[prereq], targets=[target]) is False
+    with pytest.raises(error):
+        can_skip(prerequisites=[tmp_path / n for n in prereq_names], targets=[target])
